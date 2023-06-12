@@ -11,19 +11,21 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { NavComponent } from './components/nav/nav/nav.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FirebaseAuthService } from './services/angularFire/angular-fire.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    HttpClientModule,
   ],
   providers: [FirebaseAuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]

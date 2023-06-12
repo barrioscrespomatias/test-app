@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EspecialidadProfesionalMtm } from 'src/app/clases/manyToMany/especialidadProfesionalMtm/especialidad-profesional-mtm';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
+import { ImagenService } from 'src/app/services/imagen/imagen.service';
+import { PacienteService } from 'src/app/services/paciente/paciente.service';
+import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
 
 @Component({
   selector: 'app-registro',
@@ -9,8 +14,12 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 })
 export class RegistroComponent {
   form!: FormGroup;
+  @Input() valueFromDirective: any;
+  attributeValue: string = '';
 
-  constructor(public firebaseService: FirebaseAuthService) {}
+  constructor(
+    private firebaseService: FirebaseAuthService
+  ) {}
   ngOnInit(): void {
     this.form = new FormGroup({
       // usuario : new FormControl('',)
@@ -31,5 +40,9 @@ export class RegistroComponent {
 
   SignUp() {
     this.firebaseService.SignUp(this.email?.value, this.password?.value);
+  }
+
+  recibirItemDesdeHijo(valorAtributo: string): void {
+    this.attributeValue = valorAtributo;
   }
 }

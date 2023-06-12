@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseAuthService } from '../../services/angularFire/angular-fire.service';
-import { FirestoreService } from '../../services/firestore/firestore.service';
+// import { FirestoreService } from '../../services/firestore/firestore.service';
+
+//TODO Revisar login. Es raro que loguee cuando no esta llamando al servicio adecuado.
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,7 @@ export class LoginComponent {
 
   constructor(
     public firebaseService: FirebaseAuthService,
-    private firestoreService: FirestoreService
+    // public firestoreService: FirestoreService
   ) {}
 
   public isLogged: boolean = this.firebaseService.isLoggedIn;
@@ -37,7 +40,8 @@ export class LoginComponent {
   SignIn() {
     console.log(this.email?.value, this.password?.value)
     this.firebaseService.SignIn(this.email?.value, this.password?.value);
-    this.firestoreService.guardar(this.email?.value);
+    //TODO especificamente aca utiliza el serivicio
+    // this.firestoreService.guardar(this.email?.value);
   }
 
   GoogleAuth() {
