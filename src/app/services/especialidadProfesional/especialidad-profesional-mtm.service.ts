@@ -37,6 +37,7 @@ export class EspecialidadProfesionalMtmService {
       borrado: especialidadProfesional.borrado,
       descripcion: especialidadProfesional.descripcion,
     });
+    alert('especialidad profesional creado')
   }
 
   async traer() {

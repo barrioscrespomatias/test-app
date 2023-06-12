@@ -147,23 +147,33 @@ export class FormularioRegistroComponent {
       const documentoNuevo = doc(coleccion);
       const profesionalId = documentoNuevo.id;
 
-      //Crear registro de profesional
-      this.profesionalService.guardar(profesional, profesionalId);
-     
-      console.log(profesional.especialidadesIds)
+      try {
+        //Crear registros en manyToMany.
+        if(profesional.especialidadesIds){
+          profesional.especialidadesIds.forEach((item) => {
+            if (item != '') {
+              var especialidadProfesional = new EspecialidadProfesionalMtm();
+              especialidadProfesional.profesionalId = profesionalId;
+              especialidadProfesional.especialidadId = item;
+              debugger
+              this.especialidadProfesionalMtmService.guardar(
+                especialidadProfesional
+              );
+            }
+          });
+    
+           //Crear registro de profesional
+           this.profesionalService.guardar(profesional, profesionalId);     
+           console.log(profesional.especialidadesIds)     
 
-      //Crear registros en manyToMany.
-      profesional.especialidadesIds.forEach((item) => {
-        if (item != '') {
-          var especialidadProfesional = new EspecialidadProfesionalMtm();
-          especialidadProfesional.profesionalId = profesionalId;
-          especialidadProfesional.especialidadId = item;
-          debugger
-          this.especialidadProfesionalMtmService.guardar(
-            especialidadProfesional
-          );
         }
-      });
+      
+        
+      } catch (error) {
+        console.error(error);
+      }
+
+     
 
 
     }

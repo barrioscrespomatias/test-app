@@ -8,5 +8,5 @@ export class Usuario extends Entity {
     mail: string = "";
     contrasena: string = "";
     perfil: PerfilEnum = 0; //inicializo a todos sin inicializar 0.
-    listadoImagenes: Imagen[] = new Array(); //para navegar. 
+    listadoImagenes?: Imagen[] = new Array(); //para navegar. 
 }

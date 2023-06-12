@@ -71,7 +71,7 @@ export class ProfesionalService {
       calificacionPromedio: profesional.calificacionPromedio,
     });
 
-    return nuevoId;
+    alert('profesioanl creado')
   }
 
   async TraerPorDni(dni: string) {
@@ -98,5 +98,13 @@ export class ProfesionalService {
     const coleccion = collection(this.firestore, 'profesionales');
     const documento = doc(coleccion, '031a7d54-3187-4aad-aa6f-1ee2ed65f00f');
     updateDoc(documento, { ...usuario });
+  }
+
+  async TraerTodo() {
+    var fecha : Date = new Date()
+    const coleccion = collection(this.firestore, 'profesionales');
+    // const consulta = query(coleccion, where('borrado', '!=', false));
+    const consulta = query(coleccion, where('fechaCreacion', '<', fecha));
+    return collectionData(consulta);
   }
 }

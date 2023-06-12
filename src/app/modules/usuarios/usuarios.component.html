@@ -1,0 +1,18 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha creacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profesional of profesionales | async" >
+                <td>{{profesional.nombre}}</td>
+                <td>{{profesional.fechaCreacion}}</td>
+                <!-- <td><button class="btn btn-primary" (click)="enviarItemHaciaPadre(pelicula)">Ver mas</button></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+

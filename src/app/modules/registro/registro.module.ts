@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
+import { FormularioCrearEspecialidadComponent } from '../../components/formulario/formulario-crear-especialidad/formulario-crear-especialidad/formulario-crear-especialidad.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProfesionalService } from 'src/app/services/profesional/profesional.ser
     FormularioRegistroComponent,
     MostrarElementDirective,
     OcultarElementosDirective,
+    FormularioCrearEspecialidadComponent
   ],
   imports: [
     CommonModule,

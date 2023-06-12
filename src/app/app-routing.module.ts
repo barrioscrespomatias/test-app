@@ -19,7 +19,9 @@ const routes: Routes = [
   },
 
   //normal loading
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },    
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  
+  { path: 'usuarios', loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule) },    
   
 ];
 
