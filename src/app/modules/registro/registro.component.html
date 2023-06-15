@@ -1,3 +1,5 @@
+<app-pre-registro (onEnviarItemHaciaPadre)="recibirItemDeHijo($event)"></app-pre-registro>
+
 <div class="container">
   <div class="row" appOcultarElementos>
     <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
@@ -9,4 +11,6 @@
   </div>
 </div>
 
-<app-formulario-registro [perfilRecibido]="attributeValue"></app-formulario-registro>
+<!-- <h1>{{emailRecibido}}</h1> -->
+
+<app-formulario-registro [perfilRecibido]="attributeValue" [emailRecibido]="emailRecibido"></app-formulario-registro>

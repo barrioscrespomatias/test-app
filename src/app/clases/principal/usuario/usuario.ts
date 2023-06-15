@@ -9,4 +9,5 @@ export class Usuario extends Entity {
     contrasena: string = "";
     perfil: PerfilEnum = 0; //inicializo a todos sin inicializar 0.
     listadoImagenes?: Imagen[] = new Array(); //para navegar. 
+    habilitado: boolean = false;
 }

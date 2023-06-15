@@ -11,12 +11,14 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Profesional } from '../../clases/personas/profesional/profesional';
+import { FirebaseAuthService } from '../angularFire/angular-fire.service';
+import { PerfilEnum } from 'src/app/enum/perfilEnum/perfil-enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfesionalService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore,  private firebaseService: FirebaseAuthService) {}
 
   public async guardar(profesional: Profesional, nuevoId : string) {
     
@@ -72,6 +74,10 @@ export class ProfesionalService {
     });
 
     alert('profesioanl creado')
+
+    this.firebaseService.SignUp(profesional.mail, profesional.contrasena);
+    alert('user creado')
+    
   }
 
   async TraerPorDni(dni: string) {
@@ -81,17 +87,19 @@ export class ProfesionalService {
     return collectionData(consulta);
   }
 
-  async traerUno() {
+  async traerUno(usuarioId:string) {
     // Traer uno especifico
-    const docRef = doc(this.firestore, 'profesionales', 'SF'); //--> obtener uno especifico
-    const docSnap = await getDoc(docRef);
+    const coleccion = collection(this.firestore, 'profesionales');
+    const documento = doc(coleccion, usuarioId);
+    console.log("profeisonal en DB")
+    console.log(documento)
 
-    if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log('No such document!');
-    }
+    // if (docSnap.exists()) {
+    //   console.log('Document data:', docSnap.data());
+    // } else {
+    //   // docSnap.data() will be undefined in this case
+    //   console.log('No such document!');
+    // }
   }
 
   modificar(usuario: Profesional) {

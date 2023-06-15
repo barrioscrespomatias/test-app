@@ -15,7 +15,9 @@ import { ProfesionalService } from 'src/app/services/profesional/profesional.ser
 export class RegistroComponent {
   form!: FormGroup;
   @Input() valueFromDirective: any;
+  @Input() emailRegistrado:any;
   attributeValue: string = '';
+  emailRecibido: string = '';
 
   constructor(
     private firebaseService: FirebaseAuthService
@@ -44,5 +46,9 @@ export class RegistroComponent {
 
   recibirItemDesdeHijo(valorAtributo: string): void {
     this.attributeValue = valorAtributo;
+  }
+
+  recibirItemDeHijo(email : string){
+    this.emailRecibido = email;
   }
 }

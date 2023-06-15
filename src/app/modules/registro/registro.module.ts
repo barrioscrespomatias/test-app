@@ -12,9 +12,14 @@ import { EspecialidadProfesionalMtmService } from '../../services/especialidadPr
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
-import { NgSelectModule } from "@ng-select/ng-select";
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
 import { FormularioCrearEspecialidadComponent } from '../../components/formulario/formulario-crear-especialidad/formulario-crear-especialidad/formulario-crear-especialidad.component';
+import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
+import { PreRegistroComponent } from 'src/app/components/preRegistro/pre-registro/pre-registro.component';
+import { UsuarioFirebaseService } from 'src/app/services/usuarioFirebase/usuario-firebase.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,8 @@ import { FormularioCrearEspecialidadComponent } from '../../components/formulari
     FormularioRegistroComponent,
     MostrarElementDirective,
     OcultarElementosDirective,
-    FormularioCrearEspecialidadComponent
+    FormularioCrearEspecialidadComponent,
+    PreRegistroComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +38,15 @@ import { FormularioCrearEspecialidadComponent } from '../../components/formulari
     ReactiveFormsModule,
     NgSelectModule,
   ],
-  providers: [EspecialidadService, ProfesionalService, EspecialidadProfesionalMtmService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [
+    EspecialidadService,
+    ProfesionalService,
+    EspecialidadProfesionalMtmService,
+    FirebaseAuthService,
+    UsuarioPerfilService,
+    UsuarioFirebaseService,
+    AuthService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+  ],
 })
 export class RegistroModule {}

@@ -7,25 +7,22 @@ import { ProfesionalService } from 'src/app/services/profesional/profesional.ser
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent {
   constructor(
     private profesionalService: ProfesionalService,
-    private firestore: Firestore,
+    private firestore: Firestore
   ) {}
-
 
   suscripcionProfesionalService!: Subscription;
   profesionales: any;
 
   async ngOnInit() {
-
     this.profesionales = (await this.profesionalService.TraerTodo()).pipe(
       map((response: any[]) =>
         response.map((profesionaldDb) => {
           const profesionalClass: Profesional = {
-
             // entity
             id: profesionaldDb.id,
             nombre: profesionaldDb.nombre,
@@ -40,13 +37,13 @@ export class UsuariosComponent {
             mail: profesionaldDb.mail,
             contrasena: profesionaldDb.contrasena,
             perfil: profesionaldDb.perfil,
+            habilitado: profesionaldDb.habilitado,
 
             //Empleado
             horarioTrabajo: profesionaldDb.horarioTrabajo,
 
             // Profesional
             calificacionPromedio: profesionaldDb.calificacionPromedio,
-
           };
           return profesionalClass;
         })
@@ -56,6 +53,10 @@ export class UsuariosComponent {
     // END NG ON INIT
   }
 
-  
-
+  CambiarEstado(activo: boolean) {
+    if (activo)
+     alert('Desactivado');
+    else
+      alert('Activado');
+  }
 }
