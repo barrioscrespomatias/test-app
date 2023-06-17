@@ -149,13 +149,14 @@ export class FormularioRegistroComponent {
 
   //#endregion
 
-  async CrearUsuario() {
+  CrearUsuario() {
     var paciente = new Paciente();
     var profesional = new Profesional();
 
-    this.authService.SignUp('matiprueba@yopmail.com', '123456');
+    // this.authService.SignUp(this.emailRecibido, '123456');
 
-    if (this.perfil?.value == 'Paciente') {
+
+    if (this.perfilRecibido == 'Paciente') {
       paciente.nombre = this.nombre?.value;
       paciente.segundoNombre = this.apellido?.value;
       paciente.edad = this.edad?.value;
@@ -178,7 +179,6 @@ export class FormularioRegistroComponent {
       // profesional.imagenesPerfil = this.img_perfil?.value;
       profesional.especialidadesIds = this.especialidad?.value;
       profesional.perfil = 3;
-
 
       //Creo un registro para guardar en la coleccion.
       const coleccion = collection(this.firestore, 'profesionales');
@@ -211,7 +211,13 @@ export class FormularioRegistroComponent {
           });
 
           //Crear registro de profesional
-          this.profesionalService.guardar(profesional, profesionalId);
+          try{
+            this.profesionalService.guardar(profesional, profesionalId);
+
+          }
+          catch(error){
+            console.log(error);
+          }
         }
       } catch (error) {
         console.error(error);

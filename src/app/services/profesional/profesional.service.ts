@@ -75,8 +75,8 @@ export class ProfesionalService {
 
     alert('profesioanl creado')
 
-    this.firebaseService.SignUp(profesional.mail, profesional.contrasena);
-    alert('user creado')
+    // this.firebaseService.SignUp(profesional.mail, profesional.contrasena);
+    // alert('user creado')
     
   }
 

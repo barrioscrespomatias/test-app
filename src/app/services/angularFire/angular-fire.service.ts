@@ -81,9 +81,9 @@ export class FirebaseAuthService {
       this.afAuth.currentUser
         //TODO enviar email para verificar cuenta
         .then((u: any) => u.sendEmailVerification())
-        .then(() => {
-          this.router.navigate(['registro']);
-        })
+        // .then(() => {
+        //   this.router.navigate(['registro']);
+        // })
     );
   }
   // Reset Forggot password

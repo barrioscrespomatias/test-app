@@ -78,7 +78,8 @@ export class AuthService {
         //TODO enviar email para verificar cuenta
         .then((u: any) => u.sendEmailVerification())
         .then(() => {
-          this.router.navigate(['registro']);
+          // this.router.navigate(['']);
+          alert('Email enviado')
         })
     );
   }

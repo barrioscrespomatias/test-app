@@ -1,3 +1,5 @@
+{{perfilRecibido}}
+
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
    <section class="get-in-touch">
       <h1 class="title">Alta Paciente</h1>
@@ -36,7 +38,7 @@
          </div>
          <!-- hidden -->
          <div class="form-field col-lg-6 d-none">
-            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfil}}"
+            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfilRecibido}}"
                readonly>
          </div>
 
@@ -90,9 +92,15 @@
             <option *ngFor="let item of especialidades | async" value={{item?.id}}>{{item?.nombre}}</option>
          </select>
 
+         <!-- <div class="form-field col-lg-6 ">
+            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" required value="{{perfilRecibido}}">
+            <label class="label" for="perfil">Perfil</label>
+         </div> -->
+
+
          <!-- hidden -->
          <div class="form-field col-lg-6 d-none">
-            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfil}}"
+            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfilRecibido}}"
                readonly>
          </div>
 

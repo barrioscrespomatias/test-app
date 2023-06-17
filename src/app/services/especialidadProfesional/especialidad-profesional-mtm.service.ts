@@ -27,7 +27,6 @@ export class EspecialidadProfesionalMtmService {
       'MTM_especialidadProfesional'
     );
 
-      debugger
     await setDoc(doc(usuariosRef), {
       id: nuevoId,
       escialidadId: especialidadProfesional.especialidadId,

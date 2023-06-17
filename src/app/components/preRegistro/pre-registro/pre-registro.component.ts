@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-pre-registro',
@@ -13,7 +14,7 @@ export class PreRegistroComponent {
   @Output() onEnviarItemHaciaPadre = new EventEmitter<string>();
 
   
-  constructor(public firebaseService: FirebaseAuthService) {}
+  constructor(public firebaseService: FirebaseAuthService, private authService: AuthService) {}
   ngOnInit(): void {
     this.form = new FormGroup({
       // usuario : new FormControl('',)
@@ -33,12 +34,14 @@ export class PreRegistroComponent {
   }
 
   SignUp() {
+    // alert('registro nuevo usuario firestore')
     // this.nuevoEmailRegistrado = this.email?.value;
-    this.firebaseService.SignUp(this.email?.value, this.password?.value);
+    // this.firebaseService.SignUp(this.email?.value, this.password?.value);
+    // this.authService.SignUp(this.email?.value, this.password?.value);
+    
   }
 
   enviarItemHaciaPadre(emailRegister: string){
-    debugger
     this.onEnviarItemHaciaPadre.emit(emailRegister)
   }  
 
