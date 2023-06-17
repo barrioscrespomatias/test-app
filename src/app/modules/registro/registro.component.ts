@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EspecialidadProfesionalMtm } from 'src/app/clases/manyToMany/especialidadProfesionalMtm/especialidad-profesional-mtm';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { ImagenService } from 'src/app/services/imagen/imagen.service';

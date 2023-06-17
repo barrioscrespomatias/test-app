@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Subscription, map } from 'rxjs';
-import { Profesional } from 'src/app/clases/personas/profesional/profesional';
-import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,42 +10,25 @@ import { ProfesionalService } from 'src/app/services/profesional/profesional.ser
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent {
-  constructor(
-    private profesionalService: ProfesionalService,
-    private firestore: Firestore
-  ) {}
+  constructor(private usuarioService: UsuarioService) {}
 
-  suscripcionProfesionalService!: Subscription;
-  profesionales: any;
+  suscripcionUsuariosService!: Subscription;
+  usuarios: any;
 
   async ngOnInit() {
-    this.profesionales = (await this.profesionalService.TraerTodo()).pipe(
+    this.usuarios = (await this.usuarioService.TraerTodos()).pipe(
       map((response: any[]) =>
-        response.map((profesionaldDb) => {
-          const profesionalClass: Profesional = {
-            // entity
-            id: profesionaldDb.id,
-            nombre: profesionaldDb.nombre,
-            segundoNombre: profesionaldDb.segundoNombre,
-            borrado: profesionaldDb.borrado,
-            fechaCreacion: profesionaldDb.fechaCreacion,
-            ultimaModificacion: profesionaldDb.ultimaModificacion,
-
-            // Usuario
-            edad: profesionaldDb.edad,
-            dni: profesionaldDb.dni,
-            mail: profesionaldDb.mail,
-            contrasena: profesionaldDb.contrasena,
-            perfil: profesionaldDb.perfil,
-            habilitado: profesionaldDb.habilitado,
-
-            //Empleado
-            horarioTrabajo: profesionaldDb.horarioTrabajo,
-
-            // Profesional
-            calificacionPromedio: profesionaldDb.calificacionPromedio,
+        response.map((usuarioDb) => {
+          const especialidadClass: any = {
+            docRefUsuarioId: usuarioDb.docRefUsuarioId,
+            dni: usuarioDb.dni,
+            nombre: usuarioDb.nombre,
+            apellido: usuarioDb.apellido,
+            perfil: usuarioDb.perfil,
+            habilitado: usuarioDb.habilitado,
+            mail: usuarioDb.mail,
           };
-          return profesionalClass;
+          return especialidadClass;
         })
       )
     );
@@ -53,10 +36,13 @@ export class UsuariosComponent {
     // END NG ON INIT
   }
 
-  CambiarEstado(activo: boolean) {
-    if (activo)
-     alert('Desactivado');
+  CambiarEstado(usuario: Usuario) {
+    if (usuario.habilitado)
+      usuario.habilitado = false;
     else
-      alert('Activado');
+      usuario.habilitado = true;
+
+    if (usuario.docRefUsuarioId != null)
+      this.usuarioService.Modificar(usuario.docRefUsuarioId, usuario);
   }
 }

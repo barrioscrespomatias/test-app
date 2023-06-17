@@ -1,12 +1,12 @@
-<app-pre-registro (onEnviarItemHaciaPadre)="recibirItemDeHijo($event)"></app-pre-registro>
+<!-- <app-pre-registro (onEnviarItemHaciaPadre)="recibirItemDeHijo($event)"></app-pre-registro> -->
 
 <div class="container">
   <div class="row" appOcultarElementos>
     <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
-      imageValue="https://source.unsplash.com/Mv9hjnEUHR4/600x800" atributeValue="Profesional"
+      imageValue="doctor.png" atributeValue="Profesional"
       style="width: 50%;"></app-image-component>
     <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
-      imageValue="https://source.unsplash.com/Mv9hjnEUHR4/600x800" atributeValue="Paciente"
+      imageValue="patient.png" atributeValue="Paciente"
       style="width: 50%;"></app-image-component>
   </div>
 </div>

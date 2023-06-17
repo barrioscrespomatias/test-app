@@ -2,24 +2,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Fecha creacion</th>
                 <th scope="col">Dni</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
                 <th scope="col">Mail</th>
                 <th scope="col">Perfil</th>
                 <th scope="col">Habilitado</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let profesional of profesionales | async" >
-                <td>{{profesional.nombre}}</td>
-                <td>{{profesional.fechaCreacion}}</td>
-                <td>{{profesional.dni}}</td>
-                <td>{{profesional.mail}}</td>
-                <td>{{profesional.perfil}}</td>
-                <td>{{profesional.habilitado}}</td>
+            <tr *ngFor="let usuario of usuarios | async" >
+                <td>{{usuario.dni}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.mail}}</td>
+                <td>{{usuario.perfil}}</td>
+                <td>{{usuario.habilitado}}</td>
                 <!-- <td><button class="btn btn-primary" (click)="enviarItemHaciaPadre(pelicula)">Ver mas</button></td> -->
-                <td><button class="btn {{profesional.habilitado == true ? 'btn-danger' : 'btn-primary'}}" (click)="CambiarEstado(profesional.habilitado)">{{profesional.habilitado ? "Desactivar" : "Activar"}}</button></td>
+                <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}" (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" : "Activar"}}</button></td>
             </tr>
         </tbody>
     </table>

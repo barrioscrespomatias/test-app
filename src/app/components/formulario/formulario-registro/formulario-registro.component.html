@@ -1,5 +1,3 @@
-{{perfilRecibido}}
-
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
    <section class="get-in-touch">
       <h1 class="title">Alta Paciente</h1>
@@ -24,22 +22,28 @@
             <input id="obra_social" formControlName="obra_social" class="input-text js-input" type="text" required>
             <label class="label" for="obra_social">Obra social</label>
          </div>
-         <!-- <div class="form-field col-lg-6 ">
-            <input id="mail" formControlName="mail" class="input-text js-input" type="email" readonly value={{emailRecibido}}>
+         <div class="form-field col-lg-6 ">
+            <input id="mail" formControlName="mail" class="input-text js-input" type="email">
             <label class="label" for="mail">Mail</label>
-         </div> -->
+         </div>
          <div class="form-field col-lg-6 ">
             <input id="contrasena" formControlName="contrasena" class="input-text js-input" type="contrasena" required>
             <label class="label" for="contrasena">Contrasena</label>
          </div>
          <div class="form-field col-lg-6 ">
-            <input id="img_perfil" formControlName="img_perfil" class="input-text js-input" type="text" required>
-            <label class="label" for="img_perfil">Imagen perfil</label>
+            <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
+               class="input-text js-input">
+            <label class="label" for="imagenPerfil1">Imagen perfil 1</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input type="file" (change)="SubirArchivo($event, 2)" formControlName="imagenPerfil2"
+               class="input-text js-input">
+            <label class="label" for="imagenPerfil2">Imagen perfil 2</label>
          </div>
          <!-- hidden -->
          <div class="form-field col-lg-6 d-none">
-            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfilRecibido}}"
-               readonly>
+            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text"
+               value="{{perfilRecibido}}" readonly>
          </div>
 
 
@@ -70,43 +74,35 @@
             <input id="dni" formControlName="dni" class="input-text js-input" type="text" required>
             <label class="label" for="dni">Dni</label>
          </div>
-         <!-- <div class="form-field col-lg-6 ">
-            <input id="mail" formControlName="mail" class="input-text js-input" type="email" readonly value="{{emailRecibido}}" required>
+         <div class="form-field col-lg-6 ">
+            <input id="mail" formControlName="mail" class="input-text js-input" type="email">
             <label class="label" for="mail">Mail</label>
-         </div> -->
+         </div>
          <div class="form-field col-lg-6 ">
             <input id="contrasena" formControlName="contrasena" class="input-text js-input" type="contrasena" required>
             <label class="label" for="mail">Contrasena</label>
          </div>
          <div class="form-field col-lg-6 ">
-            <input id="img_perfil" formControlName="img_perfil" class="input-text js-input" type="text" required>
-            <label class="label" for="img_perfil">Imagen perfil</label>
+            <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
+               class="input-text js-input">
+            <label class="label" for="imagenPerfil1">Imagen perfil 1</label>
          </div>
 
          <label class="form-label select-label">Seleccione su especialidad</label>
-         <!-- <select class="select" multiple [(ngModel)]="selectedOptions">
-            <option *ngFor="let item of especialidades | async" value={{item?.id}}>{{item?.nombre}}</option>            
-          </select>     -->
-
-         <select class="select" multiple data-mdb-placeholder="Example placeholder" formControlName="especialidad" id="especialidad">
-            <option *ngFor="let item of especialidades | async" value={{item?.id}}>{{item?.nombre}}</option>
+         <select class="select" multiple data-mdb-placeholder="Example placeholder" formControlName="especialidad"
+            id="especialidad">
+            <option *ngFor="let item of especialidades | async" value={{item?.docRef}}>{{item?.nombre}}</option>
          </select>
-
-         <!-- <div class="form-field col-lg-6 ">
-            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" required value="{{perfilRecibido}}">
-            <label class="label" for="perfil">Perfil</label>
-         </div> -->
-
-
-         <!-- hidden -->
-         <div class="form-field col-lg-6 d-none">
-            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text" value="{{perfilRecibido}}"
-               readonly>
+         <div class="form-field col-lg-6 ">
+            <label class="label" for="agregar-especialidad">Agregar especialidad</label>
+            <input type="button" (click)="AgregarEspecialidad()" class="js-input mb-2" id="agregar-especialidad"
+               value="Agregar especialidad">
+            <input id="especialidad_agregada" formControlName="especialidad_agregada" class="input-text js-input mt-4"
+               type="text">
          </div>
-
          <div class="form-field col-lg-12">
             <input class="submit-btn" (click)="CrearUsuario()" value="Submit">
          </div>
       </form>
-   </section>  
+   </section>
 </div>

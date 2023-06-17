@@ -1,29 +1,22 @@
+//#region Imports
 import { Component, Input } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
 import { Firestore, collection, doc } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { disableDebugTools } from '@angular/platform-browser';
 import { Observable, Subscription, map } from 'rxjs';
-import { Especialidad } from 'src/app/clases/funcional/especialidad/especialidad';
-import { EspecialidadProfesionalMtm } from 'src/app/clases/manyToMany/especialidadProfesionalMtm/especialidad-profesional-mtm';
-import { Paciente } from 'src/app/clases/personas/paciente/paciente';
-import { Profesional } from 'src/app/clases/personas/profesional/profesional';
-import { User } from 'src/app/clases/user/user';
-import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
-import { EspecialidadProfesionalMtmService } from 'src/app/services/especialidadProfesional/especialidad-profesional-mtm.service';
-import { ImagenService } from 'src/app/services/imagen/imagen.service';
-import { PacienteService } from 'src/app/services/paciente/paciente.service';
-import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
-import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { Especialidad } from 'src/app/interfaces/especialidad';
 
+//#endregion
 @Component({
   selector: 'app-formulario-registro',
   templateUrl: './formulario-registro.component.html',
   styleUrls: ['./formulario-registro.component.css'],
 })
 export class FormularioRegistroComponent {
+  //#region Propiedades
   form!: FormGroup;
   @Input() perfilRecibido: string = '';
   @Input() emailRecibido: any;
@@ -32,75 +25,51 @@ export class FormularioRegistroComponent {
   especialidades!: any;
   selectedOptions: any[] = [];
   profesionalCreado: any;
+  fotoUno: string = '';
+  fotoDos: string = '';
+  nuevaEspecialidad: string = '';
 
+  //#endregion
+
+  //#region Constructor
   constructor(
-    private firebaseService: FirebaseAuthService,
-    // private pacienteService: PacienteService,
-    private profesionalService: ProfesionalService,
     private especialidadService: EspecialidadService,
-    // private imagenService: ImagenService,
-    private usuarioPerfilService: UsuarioPerfilService,
-    private especialidadProfesionalMtmService: EspecialidadProfesionalMtmService,
     private firestore: Firestore,
-    private authService: AuthService,
+    private usuarioServicio: UsuarioService
   ) {}
+
+  //#endregion
 
   //#region NG Hooks
 
   async ngOnInit() {
-    this.especialidades = (await this.especialidadService.TraerTodo()).pipe(
+    this.especialidades = (await this.especialidadService.TraerTodos()).pipe(
       map((response: any[]) =>
         response.map((especialidadDb) => {
-          const especialidadClass: Especialidad = {
-            id: especialidadDb.id,
+          const especialidadClass: any = {
+            docRef: especialidadDb.docRef,
             nombre: especialidadDb.nombre,
-            segundoNombre: especialidadDb.segundoNombre,
-            borrado: especialidadDb.borrado,
-            fechaCreacion: especialidadDb.fechaCreacion,
-            ultimaModificacion: especialidadDb.ultimaModificacion,
           };
           return especialidadClass;
         })
       )
     );
 
-    /*
-    this.usuarioFirebase = (await this.usuarioFirebaseService.TraerPorEmail('probando1@yopmail.com')).pipe(
-        map((response: any[]) =>
-          response.map((userFirebasedDb) => {
-
-            // public uid: string = '';
-            // public email: string = '';
-            // public displayName: string = '';
-            // public photoURL: string = '';
-            // public emailVerified: boolean = false;
-
-            const usuarioFirebaseClass: User = {
-              // entity
-              uid: userFirebasedDb.uid,
-              email: userFirebasedDb.email,
-              displayName: userFirebasedDb.displayName,
-              photoURL: userFirebasedDb.photoURL,
-              emailVerified: userFirebasedDb.emailVerified,
-            };
-            return usuarioFirebaseClass;
-          })
-        )
-      );
-
-    */
-
     this.form = new FormGroup({
       nombre: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       apellido: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       edad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      obra_social: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       dni: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      // mail: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      mail: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      img_perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      imagenPerfil1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      imagenPerfil2: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      obra_social: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      especialidad_agregada: new FormControl('', [
+        Validators.pattern('^[a-zA-Z]+$'),
+      ]),
     });
   }
 
@@ -119,24 +88,26 @@ export class FormularioRegistroComponent {
     return this.form.get('edad');
   }
 
-  get obra_social() {
-    return this.form.get('obra_social');
-  }
-
   get dni() {
     return this.form.get('dni');
   }
 
-  // get mail() {
-  //   return this.form.get('mail');
-  // }
+  get mail() {
+    return this.form.get('mail');
+  }
 
   get contrasena() {
     return this.form.get('contrasena');
   }
+  get imagenPerfil1() {
+    return this.form.get('imagenPerfil1');
+  }
+  get imagenPerfil2() {
+    return this.form.get('imagenPerfil2');
+  }
 
-  get img_perfil() {
-    return this.form.get('img_perfil');
+  get obra_social() {
+    return this.form.get('obra_social');
   }
 
   get especialidad() {
@@ -147,84 +118,79 @@ export class FormularioRegistroComponent {
     return this.form.get('perfil');
   }
 
+  get especialidad_agregada() {
+    return this.form.get('especialidad_agregada');
+  }
+
   //#endregion
 
+  //#region Métodos
   CrearUsuario() {
-    var paciente = new Paciente();
-    var profesional = new Profesional();
+    const usuario: Usuario = {
+      nombre: this.nombre?.value,
+      apellido: this.apellido?.value,
+      edad: this.edad?.value,
+      dni: this.dni?.value,
+      mail: this.mail?.value,
+      contrasena: this.contrasena?.value,
+      imagenPerfil1: this.fotoUno,
+      imagenPerfil2: this.fotoDos,
+      habilitado: this.perfilRecibido == 'Profesional' ? false : true,
+      perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : 'paciente',
+      obraSocial: this.obra_social?.value,
+      especialidades: this.especialidad?.value,
+    };
 
-    // this.authService.SignUp(this.emailRecibido, '123456');
-
-
-    if (this.perfilRecibido == 'Paciente') {
-      paciente.nombre = this.nombre?.value;
-      paciente.segundoNombre = this.apellido?.value;
-      paciente.edad = this.edad?.value;
-      paciente.obraSocial = this.obra_social?.value;
-      paciente.dni = this.dni?.value;
-      paciente.mail = this.emailRecibido;
-      paciente.contrasena = this.contrasena?.value;
-      //TODO la imagen de perfil tiene que estar cargada en una coleccion distinta.
-      // paciente.imagenesPerfil = this.img_perfil?.value;
-      paciente.perfil = 2;
-    } else {
-      profesional.nombre = this.nombre?.value;
-      profesional.segundoNombre = this.apellido?.value;
-      profesional.edad = this.edad?.value;
-      //TODO no se deberia poder agregar un dni ya existente en la db.
-      profesional.dni = this.dni?.value;
-      profesional.mail = this.emailRecibido;
-      profesional.contrasena = this.contrasena?.value;
-      //TODO la imagen de perfil tiene que estar cargada en una coleccion distinta.
-      // profesional.imagenesPerfil = this.img_perfil?.value;
-      profesional.especialidadesIds = this.especialidad?.value;
-      profesional.perfil = 3;
-
-      //Creo un registro para guardar en la coleccion.
-      const coleccion = collection(this.firestore, 'profesionales');
-      const documentoNuevo = doc(coleccion);
-      const profesionalId = documentoNuevo.id;
-
-       
-
-      //Guardo la relacion usuario perfil.
-      // var usuarioPerfil = new UsuarioPerfil();
-      // usuarioPerfil.firebaseUserEmail = this.emailRecibido;
-      // usuarioPerfil.profesionalId = profesional.id;
-
-      // if(usuarioPerfil.firebaseUserEmail != '' && usuarioPerfil.profesionalId != ''){
-      //   this.usuarioPerfilService.guardar(usuarioPerfil);
-      // }      
-
-      try {
-        //Crear registros en manyToMany.
-        if (profesional.especialidadesIds) {
-          profesional.especialidadesIds.forEach((item) => {
-            if (item != '') {
-              var especialidadProfesional = new EspecialidadProfesionalMtm();
-              especialidadProfesional.profesionalId = profesionalId;
-              especialidadProfesional.especialidadId = item;
-              this.especialidadProfesionalMtmService.guardar(
-                especialidadProfesional
-              );
-            }
-          });
-
-          //Crear registro de profesional
-          try{
-            this.profesionalService.guardar(profesional, profesionalId);
-
-          }
-          catch(error){
-            console.log(error);
-          }
-        }
-      } catch (error) {
-        console.error(error);
+    let respuesta = this.usuarioServicio.Crear(usuario);
+    respuesta.then((response) => {
+      if (response.valido) {
+        // this.alertaMensajeSucces(response.mensaje);
+        // this._usuarioService.setUserToLocalStorage(user);
+        // this._router.navigate(['usuario/login']);
+      } else {
+        // this.alertaMensajeError(response.mensaje);
       }
+      alert(response.valido);
+    });
+  }
+
+  SubirArchivo(e: any, imgNum: number) {
+    if (imgNum == 1) {
+      this.fotoUno = `${this.getFecha()}_${1}`;
+    } else if (imgNum == 2) {
+      this.fotoDos = `${this.getFecha()}_${2}`;
     }
 
+    const storage = getStorage();
+    const storageRef = ref(storage, imgNum == 1 ? this.fotoUno : this.fotoDos);
 
-
+    uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
+      alert('Uploaded a blob or file!');
+    });
   }
+
+  getFecha(): string {
+    var fecha = new Date();
+    let d, m, y, h, min, s, mls;
+    d = fecha.getDate();
+    m = fecha.getUTCMonth();
+    y = fecha.getFullYear();
+    h = fecha.getHours().toString();
+    min = fecha.getMinutes().toString();
+    s = fecha.getSeconds().toString();
+    mls = fecha.getMilliseconds().toString();
+
+    return y + '-' + m + '-' + d + '_' + h + '-' + min + '-' + s + '-' + mls;
+  }
+
+  AgregarEspecialidad() {
+    const especialidad: Especialidad = {
+      nombre: this.especialidad_agregada?.value,
+    };
+
+    if (especialidad.nombre?.length > 0) {
+      this.especialidadService.Crear(especialidad);
+    }
+  }
+  //#endregion
 }
