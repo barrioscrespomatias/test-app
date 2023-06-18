@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/guard.guard';
 import { HomeComponent } from './components/home/home/home.component';
 const routes: Routes = [
-  
   // lazy loading
   {
     path: '',
@@ -20,9 +19,14 @@ const routes: Routes = [
 
   //normal loading
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  
-  { path: 'usuarios', loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule) },    
-  
+
+  {
+    path: 'usuarios',
+    loadChildren: () =>
+      import('./modules/usuarios/usuarios.module').then(
+        (m) => m.UsuariosModule
+      ),
+  },
 ];
 
 @NgModule({

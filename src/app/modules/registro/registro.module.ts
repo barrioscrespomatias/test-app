@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
-import { FormularioCrearEspecialidadComponent } from '../../components/formulario/formulario-crear-especialidad/formulario-crear-especialidad/formulario-crear-especialidad.component';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
 import { PreRegistroComponent } from 'src/app/components/preRegistro/pre-registro/pre-registro.component';
@@ -28,7 +27,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     FormularioRegistroComponent,
     MostrarElementDirective,
     OcultarElementosDirective,
-    FormularioCrearEspecialidadComponent,
     PreRegistroComponent,
   ],
   imports: [

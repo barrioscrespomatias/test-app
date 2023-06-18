@@ -135,8 +135,8 @@ export class FormularioRegistroComponent {
       contrasena: this.contrasena?.value,
       imagenPerfil1: this.fotoUno,
       imagenPerfil2: this.fotoDos,
-      habilitado: this.perfilRecibido == 'Profesional' ? false : true,
-      perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : 'paciente',
+      habilitado: this.perfilRecibido == 'Paciente' || this.perfilRecibido == 'Administrador' ? true : true,
+      perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : this.perfilRecibido == 'Paciente' ? 'paciente' : 'administrador',
       obraSocial: this.obra_social?.value,
       especialidades: this.especialidad?.value,
     };

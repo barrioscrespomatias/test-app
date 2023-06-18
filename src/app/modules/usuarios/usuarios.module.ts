@@ -5,13 +5,14 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UsuariosComponent } from './usuarios.component';
 
 
+
 @NgModule({
   declarations: [
-    UsuariosComponent
+    UsuariosComponent,
   ],
   imports: [
     CommonModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
   ]
 })
 export class UsuariosModule { }

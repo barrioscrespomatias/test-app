@@ -106,3 +106,43 @@
       </form>
    </section>
 </div>
+
+<div class="row" *ngIf="perfilRecibido == 'Administrador' ">
+   <section class="get-in-touch">
+      <h1 class="title">Alta Administrador</h1>
+      <form class="contact-form row" [formGroup]="form">
+         <div class="form-field col-lg-6">
+            <input id="nombre" formControlName="nombre" class="input-text js-input" type="text" required>
+            <label class="label" for="nombre">Nombre</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input id="apellido" formControlName="apellido" class="input-text js-input" type="text" required>
+            <label class="label" for="apellido">Apellido</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input id="edad" formControlName="edad" class="input-text js-input" type="number" required>
+            <label class="label" for="edad">Edad</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input id="dni" formControlName="dni" class="input-text js-input" type="text" required>
+            <label class="label" for="dni">Dni</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input id="mail" formControlName="mail" class="input-text js-input" type="email">
+            <label class="label" for="mail">Mail</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input id="contrasena" formControlName="contrasena" class="input-text js-input" type="contrasena" required>
+            <label class="label" for="mail">Contrasena</label>
+         </div>
+         <div class="form-field col-lg-6 ">
+            <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
+               class="input-text js-input">
+            <label class="label" for="imagenPerfil1">Imagen perfil 1</label>
+         </div>         
+         <div class="form-field col-lg-12">
+            <input class="submit-btn" (click)="CrearUsuario()" value="Submit">
+         </div>
+      </form>
+   </section>
+</div>

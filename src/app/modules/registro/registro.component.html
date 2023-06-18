@@ -1,16 +1,16 @@
-<!-- <app-pre-registro (onEnviarItemHaciaPadre)="recibirItemDeHijo($event)"></app-pre-registro> -->
-
-<div class="container">
-  <div class="row" appOcultarElementos>
-    <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
-      imageValue="doctor.png" atributeValue="Profesional"
-      style="width: 50%;"></app-image-component>
-    <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
-      imageValue="patient.png" atributeValue="Paciente"
-      style="width: 50%;"></app-image-component>
+<!-- <div *ngIf="attributeValue == 'Profesional' || attributeValue == 'Paciente' "> -->
+  <div class="container">
+    <div class="row" appOcultarElementos>
+      <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
+        imageValue="doctor.png" atributeValue="Profesional"
+        style="width: 33%;"></app-image-component>
+      <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
+        imageValue="patient.png" atributeValue="Paciente"
+        style="width: 33%;"></app-image-component>
+      <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)"
+        imageValue="recepcion.png" atributeValue="Administrador"
+        style="width: 33%;"></app-image-component>
+    </div>
   </div>
-</div>
-
-<!-- <h1>{{emailRecibido}}</h1> -->
-
-<app-formulario-registro [perfilRecibido]="attributeValue" [emailRecibido]="emailRecibido"></app-formulario-registro>
+  <app-formulario-registro [perfilRecibido]="attributeValue" [emailRecibido]="emailRecibido"></app-formulario-registro>
+<!-- </div> -->
