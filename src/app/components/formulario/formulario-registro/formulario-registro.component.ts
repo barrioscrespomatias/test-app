@@ -192,5 +192,5 @@ export class FormularioRegistroComponent {
       this.especialidadService.Crear(especialidad);
     }
   }
-  //#endregion
 }
+  //#endregion

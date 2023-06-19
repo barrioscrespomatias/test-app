@@ -89,7 +89,7 @@
          </div>
 
          <label class="form-label select-label">Seleccione su especialidad</label>
-         <select class="select" multiple data-mdb-placeholder="Example placeholder" formControlName="especialidad"
+         <select class="select" size="2"  multiple data-mdb-placeholder="Example placeholder" formControlName="especialidad"
             id="especialidad">
             <option *ngFor="let item of especialidades | async" value={{item?.docRef}}>{{item?.nombre}}</option>
          </select>

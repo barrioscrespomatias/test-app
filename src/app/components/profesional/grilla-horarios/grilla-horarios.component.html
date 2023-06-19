@@ -1,0 +1,27 @@
+<h1>Confirmar turnos</h1>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Dia</th>
+        <th scope="col">Hora inicio</th>
+        <th scope="col">Hora fin</th>
+        <th scope="col">Duracion</th>
+        <th scope="col">Especialidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let horario of usuario?.horarioEspecialidad?.diasHorarios">
+        <td>{{horario.dia}}</td>
+        <td>{{horario.hora_inicio}}</td>
+        <td>{{horario.hora_fin}}</td>
+        <td>{{horario.duracion}}</td>
+        <td>{{horario.especialidad}}</td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
+
+
+<button (click)="CrearTurnos()" class="btn btn-primary" >Confirmar turnos</button>

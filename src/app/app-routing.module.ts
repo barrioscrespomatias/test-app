@@ -27,6 +27,13 @@ const routes: Routes = [
         (m) => m.UsuariosModule
       ),
   },
+  {
+    path: 'gestionUsuarios',
+    loadChildren: () =>
+      import('./modules/gestion-usuarios/gestion-usuarios.module').then(
+        (m) => m.GestionUsuariosModule
+      ),
+  },
 ];
 
 @NgModule({

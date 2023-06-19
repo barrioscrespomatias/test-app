@@ -12,6 +12,7 @@ import { UsuarioRepositorioService } from '../../repositorio/usuario/usuario-rep
 import { FirebaseError } from '@angular/fire/app';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class UsuarioService {
   constructor(
     private afAuth: Auth,
     private usuariosRepository: UsuarioRepositorioService,
-    private _router: Router
+    private _router: Router,
+    private db: AngularFirestore
   ) {
     if (!this.subscription) {
       this.subscription = this.usuariosRepository.listadoUsuarios$.subscribe(
@@ -49,7 +51,8 @@ export class UsuarioService {
 
       let userDocRef = this.usuariosRepository.create(
         usuarioRegistro,
-        userCredential.user.uid
+        // userCredential.user.uid,
+        usuarioRegistro.mail
       );
 
       await sendEmailVerification(userCredential.user);
@@ -76,6 +79,33 @@ export class UsuarioService {
 
   async Modificar(docRefusuarioId: string, usuario: Usuario) {
     return this.usuariosRepository.update(docRefusuarioId, usuario);
+  }
+
+  async ModificarPropiedad(
+    docRefusuarioId: string,
+    clave: string,
+    nuevoValor: string
+  ) {
+    return this.usuariosRepository.updateProp(
+      docRefusuarioId,
+      clave,
+      nuevoValor
+    );
+  }
+
+  async getProfesional(mail: string) {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('usuarios')
+        .doc(mail)
+        .valueChanges()
+        .subscribe(
+          (datos) => {
+            resolve(datos);
+          },
+          (error) => reject(error)
+        );
+    });
   }
   // // metodo encargado de inicar sesion
   // async login(

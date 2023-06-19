@@ -34,14 +34,17 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
     return this.listadoUsuarios$;
   }
 
-  create(entity: Usuario, userFirebaseAuthId: string): string {
+  // create(entity: Usuario, userFirebaseAuthId: string): string {
+  create(entity: Usuario, mail: string): string {
     if (this.listadoUsuarios) {
       // obtengo referencia al id del doucmento para asignarlo a un campo del usuario.
-      let docRef: DocumentReference<DocumentData> = doc(this.listadoUsuarios);
+      let docRef: DocumentReference<DocumentData> = doc(this.listadoUsuarios,mail);
       const newItem: any = {
         ...entity,
-        docRefUsuarioId: docRef.id,
-        userFirebaseAuthId: userFirebaseAuthId,
+        // docRefUsuarioId: docRef.id,
+        // docRefUsuarioId: mail,
+        docRef: mail,
+        // userFirebaseAuthId: userFirebaseAuthId,
       };
 
       setDoc(docRef, newItem);
@@ -58,12 +61,33 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
         habilitado: (args[0] as any).habilitado,
         mail: (args[0] as any).mail,
         perfil: (args[0] as any).perfil,
+        horarioEspecialidad: (args[0] as any).horarioEspecialidad,
+        turnosDisponibles: (args[0] as any).turnosDisponibles,
       });
     } catch (e) {
       console.log(e);
     }
     return false;
   }
+
+  updateProp(docRef: string, clave:string, ...args: unknown[]): boolean {
+    try {
+      const documentReference = doc(this.listadoUsuarios, docRef);
+
+      console.log(docRef)
+      console.log(clave)
+      console.log(args)
+
+      // updateDoc(documentReference, {
+      //   nombre: args[0],
+        
+      // });
+    } catch (e) {
+      console.log(e);
+    }
+    return false;
+  }
+
   delete(docRef: string): boolean {
     try {
       console.log(docRef);

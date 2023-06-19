@@ -1,0 +1,52 @@
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+  <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+    aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+    <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+      <use href="#circle-half"></use>
+    </svg>
+    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+  </button>
+</div>
+
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
+    aria-label="Search">
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="#">Sign out</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
+      <div class="position-sticky pt-3 sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <button class="nav-link active" appMostrarElement componentToggle="grilla-horarios" (click)="componenteVisible = 'grilla-horarios'">
+              <span class="align-text-bottom"></span>
+              Confirmar turnos
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" appMostrarElement componentToggle="generar-turnos" (click)="componenteVisible = 'generar-turnos'">
+              <span class="align-text-bottom"></span>
+              Gestionar mis horarios
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <app-asignar-horario id="generar-turnos" *ngIf="componenteVisible === 'generar-turnos'"></app-asignar-horario>
+      <app-grilla-horarios id="grilla-horarios" *ngIf="componenteVisible === 'grilla-horarios'"></app-grilla-horarios>
+    </main>
+  </div>
+</div>

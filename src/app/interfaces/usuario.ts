@@ -1,4 +1,9 @@
+import { HorarioEspecialidad } from "./horarioEspecialidad";
+import { Turno } from "./turno";
+
 export interface Usuario {    
+    docRefUsuarioId?: string;
+    userFirebaseAuthId?: string;
     nombre: string;
     apellido: string;
     edad: string;
@@ -11,6 +16,6 @@ export interface Usuario {
     habilitado: boolean;
     obraSocial:string;
     especialidades: string[];
-    docRefUsuarioId?: string;
-    userFirebaseAuthId?: string;
+    horarioEspecialidad? : HorarioEspecialidad[];
+    turnosDisponibles? : Turno[];
 }

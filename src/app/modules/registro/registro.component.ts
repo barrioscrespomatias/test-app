@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
-import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { ImagenService } from 'src/app/services/imagen/imagen.service';
 import { PacienteService } from 'src/app/services/paciente/paciente.service';
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';

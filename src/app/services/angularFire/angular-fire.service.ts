@@ -39,7 +39,7 @@ export class FirebaseAuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['home']);
@@ -64,7 +64,7 @@ export class FirebaseAuthService {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         // this.swal.SwalMensajeError('Error',error.message);
@@ -117,6 +117,11 @@ export class FirebaseAuthService {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user !== null ? user.email : '';
   }
+
+  get userId(): string {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null ? user.uid : '';
+  }
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
@@ -129,7 +134,7 @@ export class FirebaseAuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['home']);
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         // this.swal.SwalMensajeError('Error',error);
