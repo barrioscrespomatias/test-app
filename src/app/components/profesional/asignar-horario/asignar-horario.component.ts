@@ -61,8 +61,8 @@ export class AsignarHorarioComponent {
     );
 
     // this.usuarios = this.usuarioService.TraerTodos();
-
     this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+      console.log(usuario)
       this.usuario = usuario;
     });
 
@@ -125,9 +125,8 @@ export class AsignarHorarioComponent {
     
       horarioEspecialidad.diasHorarios?.push(diaHora);
     });
-
     this.usuario.horarioEspecialidad = horarioEspecialidad;
-
+    
     this.usuarioService.Modificar(this.mail,this.usuario);
 
     //   let respuesta = this.usuarioServicio.Crear(usuario);

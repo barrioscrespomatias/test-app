@@ -1,0 +1,10 @@
+<ul>
+    <li>Fecha: {{ConvertirFecha(turnoRecibido?.fecha) | date:'medium' }} </li>
+    <li>Especialidad: {{turnoRecibido?.especialidad}}</li>
+    <li>Paciente: {{turnoRecibido?.paciente}}</li>
+</ul>
+
+<p>Realmente desea aceptar el turno?</p>
+
+<button class="btn btn-primary" (click)="AceptarTurno()">Si</button>
+<button class="btn btn-secondary">No</button>

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Encuesta } from 'src/app/interfaces/encuesta';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
+import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class GrillaHorariosComponent {
   constructor(
     private especialidadService: EspecialidadService,
     private usuarioService: UsuarioService,
+    private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService
   ) {}
 
@@ -22,13 +25,14 @@ export class GrillaHorariosComponent {
 
   //#region Propiedades
   form!: FormGroup;
-  // usuarioDbLogueado!: Usuario;
   usuario: any;
   isLogged: boolean = this.firebaseService.isLoggedIn;
   mail: string = this.firebaseService.userName;
   proximasDosSemanas: Date[] = [];
   // horariosParaTurnos: Date[] = [];
   horariosParaTurnosEspecialidad: { fecha: Date; especialidad: string }[] = [];
+  turnos: any;
+  especialidades: any;
   // horariosParaTurnosEspecialidad
   //#endregion
 
@@ -37,6 +41,14 @@ export class GrillaHorariosComponent {
   async ngOnInit() {
     this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
       this.usuario = usuario;
+    });
+
+    this.turnoService.TraerTodos().then((turnos: any) => {
+      this.turnos = turnos;
+    });
+
+    this.especialidadService.TraerTodos().then((especialidades: any) => {
+      this.especialidades = especialidades;
     });
 
     this.form = new FormGroup({
@@ -86,6 +98,7 @@ export class GrillaHorariosComponent {
     this.FechasTurnos();    
 
     let turnosDisponibles: Turno[] = [];
+    const encuesta: Encuesta = {};
 
     this.horariosParaTurnosEspecialidad?.forEach(
       (horarioTurnoEspecialidad: any) => {
@@ -93,14 +106,21 @@ export class GrillaHorariosComponent {
           fecha: horarioTurnoEspecialidad.fecha,
           especialidad: horarioTurnoEspecialidad.especialidad,
           estado: 0,
+          profesional: this.mail,
+          rating: 0,
+          encuesta: encuesta,
+          diagnostico:'',
         };
 
         turnosDisponibles?.push(turno);
       }
     );
 
-    this.usuario.turnosDisponibles = turnosDisponibles;
-    this.usuarioService.Modificar(this.mail, this.usuario);
+    // this.usuario.turnosDisponibles = turnosDisponibles;
+    turnosDisponibles.forEach(turno => {
+      this.turnoService.Crear(turno);
+    });
+    
   }
 
   /**

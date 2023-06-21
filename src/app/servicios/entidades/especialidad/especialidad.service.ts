@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Especialidad } from 'src/app/interfaces/especialidad';
 import { EspecialidadRepositorioService } from '../../repositorio/especialidad/especialidad-repositorio.service';
 import { FirebaseError } from '@angular/fire/app';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class EspecialidadService {
 
   //#region Constructor
   constructor(
-    private especialidadRepositorioService: EspecialidadRepositorioService
+    private especialidadRepositorioService: EspecialidadRepositorioService,
+    private db: AngularFirestore
   ) {
     if (!this.subscription) {
       this.subscription =
@@ -24,6 +26,7 @@ export class EspecialidadService {
             this.listadoEspecialidadesModelo = data;
           }
         );
+        this.subscription.unsubscribe();
     }
 
     // End constructor
@@ -56,6 +59,20 @@ export class EspecialidadService {
 
   async TraerTodos() {
     return this.especialidadRepositorioService.getAll();
+  }
+
+  async TraerTodas() {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('especialidades')
+        .valueChanges()
+        .subscribe(
+          (datos) => {
+            resolve(datos);
+          },
+          (error) => reject(error)
+        );
+    });
   }
   //#endregion
 }

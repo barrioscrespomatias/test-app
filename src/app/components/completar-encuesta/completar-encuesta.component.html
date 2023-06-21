@@ -1,0 +1,68 @@
+<form>
+    <div class="facilidad">
+        <p>¿Como calificas el sistema de la clínica online en cuanto a su facilidad uso?</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="facilidad_uso" (change)="facilidad_uso = 'Mal' ">
+            <label class="form-check-label">
+                Mal :(
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="facilidad_uso" (change)="facilidad_uso = 'Normal' ">
+            <label class="form-check-label">
+                Normal
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="facilidad_uso" (change)="facilidad_uso = 'Bien' " checked>
+            <label class="form-check-label">
+                Bien :)
+            </label>
+        </div>
+    </div>
+
+    <div class="eficiencia">
+        <p>¿Cómo evaluarías la eficiencia del sistema de la clínica online para obtener un turno con el profesional de tu elección?</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eficiencia_obtener_turno" (change)="eficiencia_obtener_turno = 'Mal' ">
+            <label class="form-check-label">
+                Mal :(
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eficiencia_obtener_turno" (change)="eficiencia_obtener_turno = 'Normal' ">
+            <label class="form-check-label">
+                Normal
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eficiencia_obtener_turno" (change)="eficiencia_obtener_turno = 'Bien' " checked>
+            <label class="form-check-label">
+                Bien :)
+            </label>
+        </div>
+    </div>
+
+    <div class="nivel_recomendacion">
+        <p>¿Recomendarías el sistema de la clínica online a otros pacientes?</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="nivel_recomendacion" (change)="nivel_recomendacion = 'Mal' ">
+            <label class="form-check-label">
+                Mal :(
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="nivel_recomendacion" (change)="nivel_recomendacion = 'Normal' ">
+            <label class="form-check-label">
+                Normal
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="nivel_recomendacion" (change)="nivel_recomendacion = 'Bien' " checked>
+            <label class="form-check-label">
+                Bien :)
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-primary" (click)="CompletarEncuesta()">Calificar</button>
+</form>

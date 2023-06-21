@@ -1,0 +1,20 @@
+<!-- Botón para abrir el modal -->
+<button type="button" class="btn btn-primary" (click)="AbrirModal()">Abrir Modal</button>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Formulario Modal</h5>
+        <button type="button" class="close" aria-label="Close" (click)="CerrarModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí puedes colocar cualquier formulario que desees -->
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

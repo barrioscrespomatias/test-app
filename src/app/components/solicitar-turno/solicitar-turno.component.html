@@ -1,0 +1,51 @@
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <button class="nav-link active">Especialidad</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link">Profesional</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link">Horario</button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="card col-sm-3" *ngFor="let especialidad of especialidades"
+                (click)="ObtenerValorEspecialidad(especialidad.nombre)">
+                <h5 class="card-title">{{especialidad.nombre}}</h5>
+                <img class="card-img-top" src="../../../assets/img/undefined.png" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="especialidadSeleccionada != '' ">
+        <div class="card-body">
+            <div class="row">
+                <div class="card col-sm-3" *ngFor="let usuario of usuarios | async | filtroUsuarios: especialidadSeleccionada "
+                    (click)="ObtenerValorProfesional(usuario.mail)">
+                    <h5 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h5>
+                    <img class="card-img-top" src="../../../assets/img/doctor.png" alt="Card image cap">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="profesionalSeleccionado != '' ">
+        <div class="card-body">
+            <div class="row">
+                
+                <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' "
+                    (click)="ObtenerTurnoSeleccionado(item)">
+                    <h5 class="card-title">{{item.fecha}}</h5>
+                    <img class="card-img-top" src="../../../assets/img/doctor.png" alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
