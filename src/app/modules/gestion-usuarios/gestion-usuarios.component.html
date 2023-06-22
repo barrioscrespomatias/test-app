@@ -29,36 +29,57 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
+          
+          <!-- Acceso: Todos -->
           <li class="nav-item">
-            <button class="nav-link active" appMostrarElement componentToggle="grilla-horarios" (click)="componenteVisible = 'grilla-horarios'">
-              <span class="align-text-bottom"></span>
-              Confirmar turnos
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" appMostrarElement componentToggle="generar-turnos" (click)="componenteVisible = 'generar-turnos'">
-              <span class="align-text-bottom"></span>
-              Gestionar mis horarios
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" appMostrarElement componentToggle="solicitar-turno" (click)="componenteVisible = 'solicitar-turno'">
-              <span class="align-text-bottom"></span>
-              Solicitar turno
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" appMostrarElement componentToggle="taba-turnos" (click)="componenteVisible = 'taba-turnos'">
+            <button class="nav-link" appMostrarElement componentToggle="tabla-turnos" (click)="componenteVisible = 'tabla-turnos'">
               <span class="align-text-bottom"></span>
               Turnos
             </button>
           </li>
+          <!-- Fin Acceso: Todos -->
+
+          <!-- Acceso: Profesional -->
           <li class="nav-item">
-            <button class="nav-link" routerLink="/home" appMostrarElement componentToggle="taba-turnos" (click)="componenteVisible = 'taba-turnos'">
+            <button class="nav-link active" *ngIf="usuario?.perfil == 'profesional' " appMostrarElement componentToggle="grilla-horarios" (click)="componenteVisible = 'grilla-horarios'">
+              <span class="align-text-bottom"></span>
+              Generar turnos disponibles
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" *ngIf="usuario?.perfil == 'profesional' " appMostrarElement componentToggle="generar-turnos" (click)="componenteVisible = 'generar-turnos'">
+              <span class="align-text-bottom"></span>
+              Gestionar horarios
+            </button>
+          </li>
+          <!-- Fin Acceso: Profesional -->
+
+          <!-- Acceso: Paciente -->
+          <li class="nav-item">
+            <button class="nav-link" *ngIf="usuario?.perfil == 'paciente' " appMostrarElement componentToggle="solicitar-turno" (click)="componenteVisible = 'solicitar-turno'">
+              <span class="align-text-bottom"></span>
+              Solicitar turno
+            </button>
+          </li>
+          <!-- Fin Acceso: Paciente -->
+
+          <!-- Acceso: Admin -->
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/usuarios" appMostrarElement *ngIf="usuario?.perfil == 'administrador'">
+              <span class="align-text-bottom"></span>
+              Usuarios
+            </button>
+          </li>
+          <!-- Fin Acceso: Admin -->
+
+           <!-- Acceso: Todos -->
+          <li class="nav-item">
+            <button class="nav-link" routerLink="/home" appMostrarElement>
               <span class="align-text-bottom"></span>
               Ir al home
             </button>
           </li>
+           <!-- Fin Acceso: Todos -->
         </ul>
       </div>
     </nav>
@@ -66,7 +87,8 @@
       <app-asignar-horario id="generar-turnos" *ngIf="componenteVisible === 'generar-turnos'"></app-asignar-horario>
       <app-grilla-horarios id="grilla-horarios" *ngIf="componenteVisible === 'grilla-horarios'"></app-grilla-horarios>
       <app-solicitar-turno id="solicitar-turno" *ngIf="componenteVisible === 'solicitar-turno'"></app-solicitar-turno>
-      <app-tabla-turnos id="taba-turnos" *ngIf="componenteVisible === 'taba-turnos'"></app-tabla-turnos>
+      <app-tabla-turnos id="tabla-turnos" *ngIf="componenteVisible === 'tabla-turnos'"></app-tabla-turnos>
+      <app-tabla-turnos id="usuarios" *ngIf="componenteVisible === 'usuarios'"></app-tabla-turnos>
     </main>
   </div>
 </div>

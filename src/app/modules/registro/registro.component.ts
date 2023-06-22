@@ -4,6 +4,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { ImagenService } from 'src/app/services/imagen/imagen.service';
 import { PacienteService } from 'src/app/services/paciente/paciente.service';
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
+import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,14 +18,21 @@ export class RegistroComponent {
   attributeValue: string = '';
   emailRecibido: string = '';
 
+  usuario: any;
+  mail: string = this.firebaseService.userName;
+
   constructor(
-    private firebaseService: FirebaseAuthService
+    private firebaseService: FirebaseAuthService,
+    private usuarioService: UsuarioService,
   ) {}
   ngOnInit(): void {
     this.form = new FormGroup({
-      // usuario : new FormControl('',)
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+    });
+
+    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+      this.usuario = usuario;
     });
   }
 

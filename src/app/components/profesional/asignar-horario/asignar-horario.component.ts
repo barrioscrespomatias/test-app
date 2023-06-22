@@ -60,9 +60,7 @@ export class AsignarHorarioComponent {
       )
     );
 
-    // this.usuarios = this.usuarioService.TraerTodos();
     this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
-      console.log(usuario)
       this.usuario = usuario;
     });
 

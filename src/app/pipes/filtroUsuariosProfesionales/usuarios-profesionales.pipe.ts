@@ -1,15 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filtroUsuarios',
+  name: 'usuariosProfesionales'
 })
-export class FiltroUsuariosPipe implements PipeTransform {
+export class UsuariosProfesionalesPipe implements PipeTransform {
+
   filtrados: any[] = [];
 
-  transform(usuarios: any, especialidad: string): any[] {
+  transform(usuarios: any): any[] {
     if (usuarios != null) {
       for (let item of usuarios) {
-        if (item.perfil == 'profesional' && item.especialidades.includes(especialidad)) {          
+        if (item.perfil == 'profesional') {          
           this.filtrados.push(item);
         }
       }
@@ -17,4 +18,5 @@ export class FiltroUsuariosPipe implements PipeTransform {
 
     return this.filtrados;
   }
+
 }

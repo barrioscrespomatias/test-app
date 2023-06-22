@@ -12,36 +12,36 @@
             </li>
         </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="visualizarEspecialidades">
         <div class="row">
             <div class="card col-sm-3" *ngFor="let especialidad of especialidades"
                 (click)="ObtenerValorEspecialidad(especialidad.nombre)">
                 <h5 class="card-title">{{especialidad.nombre}}</h5>
-                <img class="card-img-top" src="../../../assets/img/undefined.png" alt="Card image cap">
+                <img class="mx-auto d-block rounded-circle" src="../../../assets/img/especialidades-medicas.jpg" alt="Card image cap" width="300" height="300">
             </div>
         </div>
     </div>
 
-    <div *ngIf="especialidadSeleccionada != '' ">
+    <div *ngIf="especialidadSeleccionada != '' && visualizarProfesionales ">
         <div class="card-body">
             <div class="row">
                 <div class="card col-sm-3" *ngFor="let usuario of usuarios | async | filtroUsuarios: especialidadSeleccionada "
                     (click)="ObtenerValorProfesional(usuario.mail)">
-                    <h5 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h5>
-                    <img class="card-img-top" src="../../../assets/img/doctor.png" alt="Card image cap">
+                    <h5 class="card-title">{{usuario?.nombre}} {{usuario.apellido}}</h5>
+                    <img class="mx-auto d-block rounded-circle" src="../../../assets/img/doctor.png" alt="Card image cap" width="300" height="300">
                 </div>
             </div>
         </div>
     </div>
     
-    <div *ngIf="profesionalSeleccionado != '' ">
+    <div *ngIf="profesionalSeleccionado != '' && visualizarTurnos">
         <div class="card-body">
             <div class="row">
                 
                 <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' "
                     (click)="ObtenerTurnoSeleccionado(item)">
-                    <h5 class="card-title">{{item.fecha}}</h5>
-                    <img class="card-img-top" src="../../../assets/img/doctor.png" alt="Card image cap">
+                    <h5 class="card-title">{{ConvertirFecha(item?.fecha) | date:'medium'}}</h5>
+                    <img class="card-img-top" src="../../../assets/img/turno-medico.jpg" alt="Card image cap">
                 </div>
 
             </div>

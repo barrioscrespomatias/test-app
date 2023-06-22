@@ -39,6 +39,11 @@ export class SolicitarTurnoComponent {
   profesionalSeleccionadoParaTurno: any;
   turnos:any;
 
+  //visualizador
+  visualizarEspecialidades: boolean = true;
+  visualizarProfesionales: boolean = false;
+  visualizarTurnos: boolean = false;
+
   //#endregion
 
   //#region Hooks
@@ -73,10 +78,14 @@ export class SolicitarTurnoComponent {
 
   //#region Metodos
   ObtenerValorEspecialidad(nombreEspecialidad: string) {
+    this.visualizarEspecialidades = false;
+    this.visualizarProfesionales = true;
     this.especialidadSeleccionada = nombreEspecialidad;
   }
 
   ObtenerValorProfesional(nombreProfesional: string) {
+    this.visualizarProfesionales = false;
+    this.visualizarTurnos = true;
     this.profesionalSeleccionado = nombreProfesional;
 
     // this.usuarioService.getProfesional(this.mail).then((profesional: any) => {
@@ -85,6 +94,7 @@ export class SolicitarTurnoComponent {
   }
 
   ObtenerTurnoSeleccionado(turnoSeleccionado: any) {
+    this.visualizarTurnos = false;
     const encuesta: Encuesta={}
     this.turnoSeleccionado = turnoSeleccionado;
     this.turnoSeleccionado.paciente = this.mail;
@@ -95,6 +105,10 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.diagnostico = '';
 
     this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
+  }
+
+  ConvertirFecha(fecha:any){
+    return new Date(fecha.seconds * 1000);
   }
 
   //#endregion

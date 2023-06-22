@@ -13,6 +13,7 @@ import { FiltroUsuariosPipe } from '../../pipes/filtroUsuarios/fitro-usuarios.pi
 import { FiltroTurnosPipe } from '../../pipes/filtroTurnos/filtro-turnos.pipe';
 import { FiltroTurnosPacientePipe } from '../../pipes/filtroTurnosPaciente/filtro-turnos-paciente.pipe';
 import { EstadoTurnosPipe } from '../../pipes/estadoTurnos/estado-turnos.pipe';
+import { DiaSemanaPipe } from '../../pipes/diaSemana/dia-semana.pipe';
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
 import { CompletarEncuestaComponent } from '../../components/completar-encuesta/completar-encuesta.component';
@@ -34,6 +35,7 @@ import { FinalizarTurnoComponent } from '../../components/finalizar-turno/finali
     FiltroTurnosPipe,
     FiltroTurnosPacientePipe,
     EstadoTurnosPipe,
+    DiaSemanaPipe,
     CancelarTurnoComponent,
     VerResenaComponent,
     CompletarEncuestaComponent,
