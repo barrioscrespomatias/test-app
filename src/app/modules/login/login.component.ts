@@ -48,8 +48,8 @@ export class LoginComponent {
     this.firebaseService.GoogleAuth();
   }
 
-  AccesoRapido() {
-    this.email?.setValue('matisfd@gmail.com');
-    this.password?.setValue('123456');
+  AccesoRapido(mail: string, password: string) {
+    this.email?.setValue(mail);
+    this.password?.setValue(password);
   }
 }

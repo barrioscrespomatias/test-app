@@ -90,15 +90,16 @@
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" (click)="SignIn()">Iniciar sesion</button>
-            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido()">Acceso
-                rapido</button>
-            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" routerLink="/registro">Registrar
-                cuenta</button>
-            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="GoogleAuth()">
-                <i class="fab fa-google-plus-g"></i>
-                Ingresar con Google
+            <button type="button" class="w-100 btn btn-lg btn-primary mb-3" routerLink="/registro">Registrar
+                cuenta
             </button>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('profesionaltest02@yopmail.com','123456')">Profesional 1</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('profesionaltest03@yopmail.com','123456')">Profesional 2</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('pacientetest02@yopmail.com','123456')">Paciente 1</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('pacientetest03@yopmail.com','123456')">Paciente 2</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('administrativotest02@yopmail.com','123456')">Administrativo 1</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary mb-3" (click)="AccesoRapido('administrativotest03@yopmail.com','123456')">Administrativo 2</button>
+            <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
         </form>
     </main>
 </div>
