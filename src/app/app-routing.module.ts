@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/guard.guard';
 import { HomeComponent } from './components/home/home/home.component';
 const routes: Routes = [
-  // lazy loading
+  //normal loading (componentes)
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+
+  // lazy loading (modulos)
   {
     path: '',
     loadChildren: () =>
@@ -16,10 +19,6 @@ const routes: Routes = [
         (m) => m.RegistroModule
       ),
   },
-
-  //normal loading
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-
   {
     path: 'usuarios',
     loadChildren: () =>

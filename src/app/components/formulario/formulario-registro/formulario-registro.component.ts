@@ -29,6 +29,9 @@ export class FormularioRegistroComponent {
   fotoDos: string = '';
   nuevaEspecialidad: string = '';
 
+
+  resultado!: string;
+
   //#endregion
 
   //#region Constructor
@@ -56,11 +59,11 @@ export class FormularioRegistroComponent {
     );
 
     this.form = new FormGroup({
-      nombre: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      nombre: new FormControl('', [Validators.required, Validators.minLength(10)]),
       apellido: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       edad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      dni: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      mail: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      dni: new FormControl('', [Validators.min(0)]),
+      mail: new FormControl('', [Validators.required, Validators.email]),
       contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       imagenPerfil1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       imagenPerfil2: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -71,6 +74,13 @@ export class FormularioRegistroComponent {
         Validators.pattern('^[a-zA-Z]+$'),
       ]),
     });
+
+    // submit() {
+    //   if (this.form.valid)
+    //   this.resultado = "Todos los datos son válidos";
+    // else
+    //   this.resultado = "Hay datos inválidos en el formulario";
+    // }
   }
 
   //#endregion
@@ -165,7 +175,7 @@ export class FormularioRegistroComponent {
     const storageRef = ref(storage, imgNum == 1 ? this.fotoUno : this.fotoDos);
 
     uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
-      alert('Uploaded a blob or file!');
+      
     });
   }
 

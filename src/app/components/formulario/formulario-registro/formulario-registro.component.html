@@ -1,4 +1,93 @@
+
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
+   <section class="get-in-touch">
+      <h1 class="title">Alta Paciente</h1>
+      <form class="contact-form row" [formGroup]="form">
+
+         <div class="row">
+            <div class="form-field col-md-6">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" formControlName="nombre" type="text" class="input-text js-input"  required>
+            <span *ngIf="this.form.get('nombre')?.errors?.['required']"> </span>
+            </div>
+
+             <div class="form-field col-md-6">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" formControlName="apellido" type="text" class="input-text js-input"  required>
+              <span *ngIf="this.form.get('apellido')?.errors?.['required']"> </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-field col-md-6">
+              <label for="edad">Edad</label>
+              <input id="edad" formControlName="edad" type="number" class="input-text js-input"  required>
+              <span *ngIf="this.form.get('edad')?.errors?.['required']"> </span>
+            </div>
+
+             <div class="form-field col-md-6">
+              <label for="dni">DNI</label>
+              <input id="dni" formControlName="dni" type="number" min="0"class="input-text js-input"  required>
+              <span *ngIf="this.form.get('dni')?.errors?.['required']"> </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-field col-md-6">
+              <label for="obra_social">Obra Social</label>
+              <input id="obra_social" formControlName="obra_social" type="text" class="input-text js-input"  required>
+              <span *ngIf="this.form.get('obra_social')?.errors?.['required']"> </span>
+            </div>
+
+             <div class="form-field col-md-6">
+              <label for="mail">E-Mail</label>
+              <input id="mail" formControlName="mail" type="email" class="input-text js-input"  required>
+            </div>
+          </div>
+
+          <div class="row">
+          <div class="form-field col-md-6">
+            <label for="contrasena">Contraseña</label>
+            <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input"  required>
+          </div>
+         </div>
+
+          
+          <div class="row">
+          <div class="form-field col-md-6">
+            <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil 1</label>
+            <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
+            class="form-control" >
+            </div>
+          <div class="form-field col-md-6">
+            <label class="form-label mb-4" for="imagenPerfil2" >Imagen de perfil 2</label>
+            <input id="imagenPerfil2" type="file" (change)="SubirArchivo($event, 2)" formControlName="imagenPerfil2"
+            class="form-control" >
+            </div>
+         </div>
+         
+               
+         <div class="form-field col-lg-6 d-none">
+            <input id="perfil" formControlName="perfil" class="input-text js-input" type="text"
+               value="{{perfilRecibido}}" readonly>
+         </div>
+
+
+         <div class="form-field col-lg-12">
+            <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+         </div>
+          
+          
+            </form>
+</section>
+</div>
+
+
+
+
+
+
+<!-- <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
    <section class="get-in-touch">
       <h1 class="title">Alta Paciente</h1>
       <form class="contact-form row" [formGroup]="form">
@@ -40,7 +129,7 @@
                class="input-text js-input">
             <label class="label" for="imagenPerfil2">Imagen perfil 2</label>
          </div>
-         <!-- hidden -->
+     
          <div class="form-field col-lg-6 d-none">
             <input id="perfil" formControlName="perfil" class="input-text js-input" type="text"
                value="{{perfilRecibido}}" readonly>
@@ -145,4 +234,4 @@
          </div>
       </form>
    </section>
-</div>
+</div> -->
