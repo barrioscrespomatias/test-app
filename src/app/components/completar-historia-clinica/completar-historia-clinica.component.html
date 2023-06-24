@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <ul>
+        <li>Fecha: {{ConvertirFecha(turnoRecibido?.fecha) | date:'medium' }} </li>
+        <li>Especialidad: {{turnoRecibido?.especialidad}}</li>
+        <li>Paciente: {{turnoRecibido?.paciente}}</li>
+    </ul>
+
+    <div class="form-group mb-3 mt-3">
+        <label for="resena">Historia clinica</label>
+        <textarea class="form-control" id="resena" formControlName="resena" rows="3" required></textarea>
+    </div>    
+
+    <p>Desea finalizar la carga de la historia clinica?</p>
+
+    <button class="btn btn-primary" (click)="CargarHistoriaClinica()">Si</button>
+    <button class="btn btn-secondary">No</button>
+</form>

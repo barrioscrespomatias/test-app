@@ -15,6 +15,63 @@
         <textarea class="form-control" id="resena" formControlName="diagnostico" rows="3" required></textarea>
     </div>
 
+    <div class="row mb-2">
+        <div class="col-4">
+            <label for="">Altura</label>
+            <input type="number" class="form-control" formControlName="altura" required>
+        </div>
+        <div class="col-4">
+            <label for="">Peso</label>
+            <input type="number" class="form-control" formControlName="peso" required>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <label for="">Temperatura</label>
+            <input type="number" class="form-control" formControlName="temperatura" required>
+        </div>
+        <div class="col-4">
+            <label for="">Presion</label>
+            <input type="text" class="form-control" formControlName="presion" required>
+        </div>
+    </div>
+
+    <button class="btn btn-primary mb-2" (click)="AgregarParametro()">Agregar parametro</button>
+
+    <div class="row mb-2" *ngIf="mostrarParametroUno">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_1">
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_1">
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroDos">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_2">
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_2">
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroTres">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_3">
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_3">
+        </div>
+    </div>
+
     <p>Realmente desea finalizar el turno?</p>
 
     <button class="btn btn-primary" (click)="FinalizarTurno()">Si</button>

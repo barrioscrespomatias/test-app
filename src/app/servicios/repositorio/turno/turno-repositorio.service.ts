@@ -62,6 +62,11 @@ export class TurnoRepositorioService implements Repository<Turno> {
         encuesta: (args[0] as any).encuesta,        
         resena: (args[0] as any).resena,        
         diagnostico: (args[0] as any).diagnostico,        
+        historia_clinica: (args[0] as any).historia_clinica,        
+        altura: (args[0] as any).altura,        
+        peso: (args[0] as any).peso,        
+        temperatura: (args[0] as any).temperatura,        
+        presion: (args[0] as any).presion,        
       });
       console.log(args)
     } catch (e) {

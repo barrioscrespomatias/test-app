@@ -1,3 +1,25 @@
+<label class="form-label select-label">Seleccione paciente</label>
+<select class="select" formControlName="pacienteSeleccionado" id="pacienteSeleccionado">
+   <option *ngFor="let paciente of turnos | async | obtenerPacientes" value={{paciente}}>{{paciente}}</option>
+</select>
+
+<label class="form-label select-label">Seleccione especialidad</label>
+<select class="select" formControlName="especialidadSeleccionada" id="especialidadSeleccionada">
+   <option *ngFor="let especialidad of especialidades | async" obtenerEspecialidadSegunProfesional value={{especialidad?.nombre}}>{{especialidad?.nombre}}</option>
+</select>
+
+<label class="form-label select-label">Seleccione palabra clave</label>
+<select class="select" formControlName="palabra_clave" id="palabra_clave">
+   <option *ngFor="let palabra_clave of turnos | async | obtenerPalabrasClaves: usuario?.especialidades" value={{palabra_clave}}>{{palabra_clave}}</option>
+</select>
+
+<!-- <button (click)="ObtenerDatos()"></button> -->
+
+<!-- <label class="form-label select-label">Seleccione su especialidad</label>
+<select class="select" formControlName="especialidad" id="especialidad">
+    <option *ngFor="let paciente of turnos | async | obtenerPacientes" value={{paciente}}>{{paciente}}</option>
+</select> -->
+
 <h1>Turnos {{usuario?.nombre}}</h1>
 <div class="table-responsive">
     <table class="table table-striped table-sm">

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { Encuesta } from 'src/app/interfaces/encuesta';
-import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
@@ -95,7 +94,15 @@ export class SolicitarTurnoComponent {
 
   ObtenerTurnoSeleccionado(turnoSeleccionado: any) {
     this.visualizarTurnos = false;
-    const encuesta: Encuesta={}
+    const encuesta: Encuesta={};
+    var historia_clinica: { clave: string; valor: string }[] = [];
+    
+    // historia_clinica = [
+    //   { clave: 'Caries', valor: '4' },
+    //   { clave: 'Cantidad dientes', valor: '22' },
+    //   { clave: 'Limpieza', valor: 'Si' },
+    // ];
+    
     this.turnoSeleccionado = turnoSeleccionado;
     this.turnoSeleccionado.paciente = this.mail;
     this.turnoSeleccionado.estado = EstadoEnum.PendienteAprobacion;
@@ -103,6 +110,11 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.rating = 0;
     this.turnoSeleccionado.resena = '';
     this.turnoSeleccionado.diagnostico = '';
+    this.turnoSeleccionado.historia_clinica = historia_clinica;
+    this.turnoSeleccionado.altura = 0;
+    this.turnoSeleccionado.peso = 0;
+    this.turnoSeleccionado.temperatura = '0';
+    this.turnoSeleccionado.preison = '';
 
     this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
   }

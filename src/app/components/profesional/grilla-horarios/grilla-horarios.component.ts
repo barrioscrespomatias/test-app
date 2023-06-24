@@ -8,6 +8,7 @@ import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
+import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
 
 @Component({
   selector: 'app-grilla-horarios',
@@ -103,22 +104,32 @@ export class GrillaHorariosComponent {
 
     let turnosDisponibles: Turno[] = [];
     const encuesta: Encuesta = {};
+    // const historia_clinica: HistoriaClinica = {};
+    var historia_clinica: HistoriaClinica[] = [];
 
     this.horariosParaTurnosEspecialidad?.forEach(
       (horarioTurnoEspecialidad: any) => {
         const turno: Turno = {
           fecha: horarioTurnoEspecialidad.fecha,
           especialidad: horarioTurnoEspecialidad.especialidad,
-          estado: 0,
+          paciente: '',
           profesional: this.mail,
-          rating: 0,
+          estado: 0,
           encuesta: encuesta,
+          rating: 0,
+          resena: '',
           diagnostico:'',
+          historia_clinica: historia_clinica,
+          altura: 0,
+          peso: 0,
+          temperatura: 0,
+          presion: '',
         };
 
         turnosDisponibles?.push(turno);
       }
     );
+    
 
     let generacionSinErrores = true;
     turnosDisponibles.forEach(turno => {

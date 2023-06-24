@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/guard.guard';
 import { HomeComponent } from './components/home/home/home.component';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 const routes: Routes = [
+  //normal loading
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'perfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
+
   // lazy loading
   {
     path: '',
@@ -16,10 +21,6 @@ const routes: Routes = [
         (m) => m.RegistroModule
       ),
   },
-
-  //normal loading
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-
   {
     path: 'usuarios',
     loadChildren: () =>

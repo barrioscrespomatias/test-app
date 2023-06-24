@@ -73,6 +73,12 @@
           <!-- Fin Acceso: Admin -->
 
            <!-- Acceso: Todos -->
+           <li class="nav-item">
+            <button class="nav-link" appMostrarElement componentToggle="mi-perfil" (click)="componenteVisible = 'mi-perfil'">
+              <span class="align-text-bottom"></span>
+              Mi perfil
+            </button>
+          </li>
           <li class="nav-item">
             <button class="nav-link" routerLink="/home" appMostrarElement>
               <span class="align-text-bottom"></span>
@@ -88,7 +94,7 @@
       <app-grilla-horarios id="grilla-horarios" *ngIf="componenteVisible === 'grilla-horarios'"></app-grilla-horarios>
       <app-solicitar-turno id="solicitar-turno" *ngIf="componenteVisible === 'solicitar-turno'"></app-solicitar-turno>
       <app-tabla-turnos id="tabla-turnos" *ngIf="componenteVisible === 'tabla-turnos'"></app-tabla-turnos>
-      <app-tabla-turnos id="usuarios" *ngIf="componenteVisible === 'usuarios'"></app-tabla-turnos>
+      <app-mi-perfil id="mi-perfil" *ngIf="componenteVisible === 'mi-perfil'"></app-mi-perfil>
     </main>
   </div>
 </div>
