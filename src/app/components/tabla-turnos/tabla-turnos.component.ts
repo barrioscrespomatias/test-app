@@ -25,6 +25,7 @@ export class TablaTurnosComponent {
   usuario: any;
   mail: string = this.firebaseService.userName;
   turnos: any;
+  parametrosDinamicos: any;
   especialidades: any;
   formularioSeleccionado:string = '';
   turno:any;
@@ -40,6 +41,7 @@ export class TablaTurnosComponent {
 
     this.turnoService.TraerTodos().then((turnos: any) => {
       this.turnos = turnos;
+      console.log(turnos)
     });
 
     this.especialidadService.TraerTodos().then((especialidades: any) => {
