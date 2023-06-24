@@ -4,8 +4,6 @@ import { FirebaseAuthService } from '../../services/angularFire/angular-fire.ser
 // import { FirestoreService } from '../../services/firestore/firestore.service';
 
 //TODO Revisar login. Es raro que loguee cuando no esta llamando al servicio adecuado.
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

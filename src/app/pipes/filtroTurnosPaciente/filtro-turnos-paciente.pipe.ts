@@ -31,6 +31,10 @@ export class FiltroTurnosPacientePipe implements PipeTransform {
             this.filtrados.push(item);
           }
         }
+
+        // if (item.paciente == paciente && item.estado != estado) {
+        //   this.filtrados.push(item);
+        // }
       }
     }
 

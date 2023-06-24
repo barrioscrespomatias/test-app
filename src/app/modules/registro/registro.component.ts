@@ -12,19 +12,26 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
+  //#region Propiedades
   form!: FormGroup;
   @Input() valueFromDirective: any;
   @Input() emailRegistrado:any;
   attributeValue: string = '';
   emailRecibido: string = '';
-
   usuario: any;
   mail: string = this.firebaseService.userName;
+  isLogged: boolean = this.firebaseService.isLoggedIn;
+  //#endregion
 
+  //#region Constructor
   constructor(
     private firebaseService: FirebaseAuthService,
     private usuarioService: UsuarioService,
   ) {}
+
+  //#endregion
+  
+  //#region Hooks
   ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -35,9 +42,9 @@ export class RegistroComponent {
       this.usuario = usuario;
     });
   }
+  //#endregion
 
-  public isLogged: boolean = this.firebaseService.isLoggedIn;
-
+  //#region Getters
   get email() {
     return this.form.get('email');
   }
@@ -46,6 +53,9 @@ export class RegistroComponent {
     return this.form.get('password');
   }
 
+  //#endregion
+
+  //#region Métodos
   SignUp() {
     this.firebaseService.SignUp(this.email?.value, this.password?.value);
   }
@@ -57,4 +67,5 @@ export class RegistroComponent {
   recibirItemDeHijo(email : string){
     this.emailRecibido = email;
   }
+  //#endregion
 }
