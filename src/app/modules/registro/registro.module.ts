@@ -14,7 +14,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
-import { PreRegistroComponent } from 'src/app/components/preRegistro/pre-registro/pre-registro.component';
 import { UsuarioFirebaseService } from 'src/app/services/usuarioFirebase/usuario-firebase.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -24,7 +23,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     ImageComponentComponent,
     FormularioRegistroComponent,
     OcultarElementosDirective,
-    PreRegistroComponent,
   ],
   imports: [
     CommonModule,
