@@ -29,6 +29,8 @@ export class FormularioRegistroComponent {
   fotoUno: string = '';
   fotoDos: string = '';
   nuevaEspecialidad: string = '';
+  especialidadHabilitada: boolean = false;
+
 
 
   resultado!: string;
@@ -214,6 +216,7 @@ export class FormularioRegistroComponent {
   }
 
   AgregarEspecialidad() {
+    this.especialidadHabilitada = !this.especialidadHabilitada
     const especialidad: Especialidad = {
       nombre: this.especialidad_agregada?.value,
     };

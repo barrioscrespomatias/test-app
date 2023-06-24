@@ -115,38 +115,37 @@
             </div>
          </div>
 
-<!-- 
-         <div class="row">
-            <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil</label>
-               <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
-                  class="form-control">
-            </div>
-         </div> -->
-
-         <div class="row">
+            <div class="row">
             <div class="form-field col-md-6">
                <label class="col " for="inlineFormCustomSelectPref">Especialidad</label>
                <div class="row mt-4">
-                  <select  class="custom-select col-mb-4" id="especialidad" formControlName="especialidad" id="especialidad">
-                     <option selected >Seleccionar...</option>
-                     <option *ngFor="let item of especialidades | async" value={{item?.nombre}}>{{item?.nombre}}</option>
+                  <select class="custom-select col-mb-4" id="especialidad" formControlName="especialidad"
+                     id="especialidad">
+
+                     <option *ngFor="let item of especialidades | async" value={{item?.nombre}}>{{item?.nombre}}
+                     </option>
                   </select>
                </div>
             </div>
-         </div>
-         <div class="row">
+
             <div class="form-field col-md-6 ">
-               <input type="button" (click)="AgregarEspecialidad()" class="js-input mb-2" id="agregar-especialidad"
-                  value="Agregar especialidad">
-         
-               <input id="especialidad_agregada" formControlName="especialidad_agregada" class="input-text js-input mt-4"
-                  type="text">
-               <label for="agregar-especialidad"></label>
-         
+
+               <button class="submit-btn" (click)="AgregarEspecialidad()" id="agregar-especialidad"
+                  value="Agregar especialidad">Agregar especialidad</button>
             </div>
          </div>
-        
+
+
+      
+
+            <div class="row mb-2" *ngIf="especialidadHabilitada">
+               <input id="especialidad_agregada" formControlName="especialidad_agregada"
+                  class="input-text js-input mt-4" type="text">
+               <label for="agregar-especialidad"></label>
+
+            </div>
+
+
 
             <div class="row">
                <div class="form-field col-md-6">
@@ -170,15 +169,12 @@
             </div>
 
 
-         
 
-         <div class="form-field col-sm-12">
-            <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
-         </div>
 
-         <div class="form-field col-lg-12">
-            <input class="submit-btn" (click)="CrearUsuario()" value="Submit">
-         </div>
+            <div class="form-field col-sm-12">
+               <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+            </div>
+
       </form>
    </section>
 </div>
