@@ -6,6 +6,8 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { Router } from '@angular/router';
+import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 
 @Component({
   selector: 'app-grilla-horarios',
@@ -18,7 +20,9 @@ export class GrillaHorariosComponent {
     private especialidadService: EspecialidadService,
     private usuarioService: UsuarioService,
     private turnoService: TurnoService,
-    private firebaseService: FirebaseAuthService
+    private firebaseService: FirebaseAuthService,
+    private router: Router,
+    private sweetAlert: SweetAlertService
   ) {}
 
   //#endregion
@@ -116,11 +120,31 @@ export class GrillaHorariosComponent {
       }
     );
 
-    // this.usuario.turnosDisponibles = turnosDisponibles;
+    let generacionSinErrores = true;
     turnosDisponibles.forEach(turno => {
-      this.turnoService.Crear(turno);
+      let respuestaTurno = this.turnoService.Crear(turno);
+      // respuestaTurno.then((response) => {
+      //   if (response.valido) {
+      //     this.alertaMensajeSucces(response.mensaje);
+      //     this._usuarioService.setUserToLocalStorage(user);
+      //     this.router.navigate(['usuario/login']);
+      //   } else {
+      //     this.alertaMensajeError(response.mensaje);
+      //   }
+      //   alert(response.valido);
+      // });
+
+      respuestaTurno.then((response) => {
+        if (!response.valido) {          
+          generacionSinErrores = false;
+        }       
+      });
     });
-    
+
+    if(generacionSinErrores)
+      this.sweetAlert.MensajeExitoso('Turnos generados correctamente!');
+    else
+      this.sweetAlert.MensajeError('Ha ocurrido un error, intente nuevamente!');
   }
 
   /**

@@ -6,10 +6,9 @@ import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseError } from 'firebase/app';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TurnoService {
-  
   listadoTurnosModelo?: Turno[];
   subscription?: Subscription;
 
@@ -19,11 +18,9 @@ export class TurnoService {
   ) {
     if (!this.subscription) {
       this.subscription =
-        this.turnosRepositorioService.listadoTurnos$.subscribe(
-          (data) => {
-            this.listadoTurnosModelo = data;
-          }
-        );
+        this.turnosRepositorioService.listadoTurnos$.subscribe((data) => {
+          this.listadoTurnosModelo = data;
+        });
     }
 
     // End constructor
@@ -39,17 +36,12 @@ export class TurnoService {
         this.turnosRepositorioService.create(especialidadRegistro);
 
       return {
-        mensaje: 'Especialidad creada correctamente',
+        mensaje: 'Turnos asignados correctamente',
         valido: true,
       };
     } catch (err) {
       console.log(err);
-      let errorMensaje = 'Hubo un error al intentar registrar la especialidad';
-      if (err instanceof FirebaseError) {
-        // if (err.code == 'auth/email-already-in-use') {
-        //   errorMensaje = 'El email ingresado ya existe, ingrese otro';
-        // }
-      }
+      let errorMensaje = 'Hubo un error al intentar generar los turnos';
       return { mensaje: errorMensaje, valido: false };
     }
   }
