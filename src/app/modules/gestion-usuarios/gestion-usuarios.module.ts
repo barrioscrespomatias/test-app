@@ -16,6 +16,8 @@ import { EstadoTurnosPipe } from '../../pipes/estadoTurnos/estado-turnos.pipe';
 import { DiaSemanaPipe } from '../../pipes/diaSemana/dia-semana.pipe';
 import { ObtenerPacientesPipe } from '../../pipes/obtenerPacientes/obtener-pacientes.pipe';
 import { ObtenerPalabrasClavesPipe } from '../../pipes/obtenerPalabrasClaves/obtener-palabras-claves.pipe';
+import { ObtenerEspecialidadProfesionalPipe } from '../../pipes/obtenerEspecialidadProfesional/obtener-especialidad-profesional.pipe';
+import { ObtenerProfesionalPacientePipe } from '../../pipes/obtenerProfesionalPaciente/obtener-profesional-paciente.pipe';
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
 import { CompletarEncuestaComponent } from '../../components/completar-encuesta/completar-encuesta.component';
@@ -43,6 +45,8 @@ import { TablaHistoriasClinicasComponent } from '../../components/tabla-historia
     DiaSemanaPipe,
     ObtenerPacientesPipe,
     ObtenerPalabrasClavesPipe,
+    ObtenerEspecialidadProfesionalPipe,
+    ObtenerProfesionalPacientePipe,
     CancelarTurnoComponent,
     VerResenaComponent,
     CompletarEncuestaComponent,
