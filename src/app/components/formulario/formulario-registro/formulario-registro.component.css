@@ -69,5 +69,11 @@
     border: none;
     width:200px;
     cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
   }
+  
+
   

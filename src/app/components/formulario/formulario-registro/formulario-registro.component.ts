@@ -8,6 +8,7 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Especialidad } from 'src/app/interfaces/especialidad';
+import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 
 //#endregion
 @Component({
@@ -38,7 +39,10 @@ export class FormularioRegistroComponent {
   constructor(
     private especialidadService: EspecialidadService,
     private firestore: Firestore,
-    private usuarioServicio: UsuarioService
+    private usuarioServicio: UsuarioService,
+    private sweetAlertServicio: SweetAlertService,
+    
+
   ) {}
 
   //#endregion
@@ -59,10 +63,24 @@ export class FormularioRegistroComponent {
     );
 
     this.form = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      apellido: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      edad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      dni: new FormControl('', [Validators.min(0)]),
+      nombre: new FormControl('', [
+        Validators.required, 
+        Validators.minLength(1),
+        Validators.pattern('a-zA-ZñÑá-úÁ-Ú')]),
+      apellido: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.pattern('a-zA-ZñÑá-úÁ-Ú')]),
+      edad: new FormControl('', [
+        Validators.required, 
+        Validators.minLength(1), 
+        Validators.maxLength(3), 
+        Validators.pattern('/^[0-9]\d+$/')]),
+      dni: new FormControl('', [
+        Validators.required, 
+        Validators.minLength(1), 
+        Validators.maxLength(3), 
+        Validators.pattern('/^[0-9]\d+$/')]),
       mail: new FormControl('', [Validators.required, Validators.email]),
       contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       imagenPerfil1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -154,13 +172,15 @@ export class FormularioRegistroComponent {
     let respuesta = this.usuarioServicio.Crear(usuario);
     respuesta.then((response) => {
       if (response.valido) {
+        this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
         // this.alertaMensajeSucces(response.mensaje);
         // this._usuarioService.setUserToLocalStorage(user);
         // this._router.navigate(['usuario/login']);
       } else {
+        this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
         // this.alertaMensajeError(response.mensaje);
       }
-      alert(response.valido);
+      
     });
   }
 
