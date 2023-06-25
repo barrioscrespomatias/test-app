@@ -1,0 +1,80 @@
+<form [formGroup]="form">
+    <ul>
+        <li>Paciente: {{turnoRecibido?.paciente}}</li>
+        <li>Profesional: {{turnoRecibido?.profesional}}</li>
+        <li>Fecha: {{ConvertirFecha(turnoRecibido?.fecha) | date:'medium' }} </li>
+        <li>Especialidad: {{turnoRecibido?.especialidad}}</li>
+    </ul>
+
+    <div class="form-group mb-3 mt-3">
+        <label for="resena">Resena finalizacion</label>
+        <textarea class="form-control" id="resena" formControlName="resena" rows="3" readonly></textarea>
+    </div>
+
+    <div class="form-group mb-3 mt-3">
+        <label for="resena">Diagnostico</label>
+        <textarea class="form-control" id="resena" formControlName="diagnostico" rows="3" readonly></textarea>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <label for="">Altura</label>
+            <input type="number" class="form-control" formControlName="altura" readonly>
+        </div>
+        <div class="col-4">
+            <label for="">Peso</label>
+            <input type="number" class="form-control" formControlName="peso" readonly>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <label for="">Temperatura</label>
+            <input type="number" class="form-control" formControlName="temperatura" readonly>
+        </div>
+        <div class="col-4">
+            <label for="">Presion</label>
+            <input type="text" class="form-control" formControlName="presion" readonly>
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroDinamicoUno">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_1" readonly>
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_1" readonly>
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroDinamicoDos">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_2" readonly>
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_2" readonly>
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroDinamicoTres">
+        <div class="col-4">
+            <label for="">Parametro</label>
+            <input type="text" class="form-control" formControlName="clave_parametro_dinamico_3" readonly>
+        </div>
+        <div class="col-4">
+            <label for="">Valor</label>
+            <input type="text" class="form-control" formControlName="valor_parametro_dinamico_3" readonly>
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="d-flex align-items-end flex-column">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+
+</form>

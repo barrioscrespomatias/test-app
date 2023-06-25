@@ -1,6 +1,6 @@
 <label class="form-label select-label">Seleccione paciente</label>
 <select class="select" formControlName="pacienteSeleccionado" id="pacienteSeleccionado">
-   <option *ngFor="let paciente of turnos | async | obtenerPacientes: usuario?.mail" value={{paciente}}>{{paciente}}</option>
+   <option *ngFor="let paciente of turnos | async | obtenerPacientes: usuario?.mail : '0' : false" value={{paciente}}>{{paciente}}</option>
 </select>
 
 <label class="form-label select-label">Seleccione profesional</label>
@@ -40,7 +40,7 @@
         <tbody>
             <!-- 1 = pendienteAprobacion -->
             <ng-container *ngIf="usuario?.perfil == 'paciente'">
-                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: usuario?.mail : '' : '0' ">
+                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: usuario?.mail : '' : '0' : false ">
                     <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.profesional}}</td>
@@ -55,7 +55,7 @@
 
             <!-- 1 = pendienteAprobacion -->
             <ng-container *ngIf="usuario?.perfil == 'profesional'">
-                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: '' : usuario?.mail: '0' ">
+                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: '' : usuario?.mail: '0' : false ">
                     <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.profesional}}</td>
@@ -71,7 +71,7 @@
 
             <!-- 1 = pendienteAprobacion -->
             <ng-container *ngIf="usuario?.perfil == 'administrador'">
-                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: '' : '' : '0' ">
+                <tr *ngFor="let turno of turnos | async | filtroTurnosPaciente: '' : '' : '0' : false ">
                     <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.profesional}}</td>

@@ -34,7 +34,7 @@
           <li class="nav-item">
             <button class="nav-link" appMostrarElement componentToggle="tabla-turnos" (click)="componenteVisible = 'tabla-turnos'">
               <span class="align-text-bottom"></span>
-              Turnos
+              Mis Turnos
             </button>
           </li>
           <!-- Fin Acceso: Todos -->
@@ -74,6 +74,12 @@
 
            <!-- Acceso: Todos -->
            <li class="nav-item">
+            <button class="nav-link" appMostrarElement componentToggle="tabla-historicas-clinicas" (click)="componenteVisible = 'tabla-historicas-clinicas'">
+              <span class="align-text-bottom"></span>
+              Historia clinica
+            </button>
+          </li>
+           <li class="nav-item">
             <button class="nav-link" appMostrarElement componentToggle="mi-perfil" (click)="componenteVisible = 'mi-perfil'">
               <span class="align-text-bottom"></span>
               Mi perfil
@@ -95,6 +101,7 @@
       <app-solicitar-turno id="solicitar-turno" *ngIf="componenteVisible === 'solicitar-turno'"></app-solicitar-turno>
       <app-tabla-turnos id="tabla-turnos" *ngIf="componenteVisible === 'tabla-turnos'"></app-tabla-turnos>
       <app-mi-perfil id="mi-perfil" *ngIf="componenteVisible === 'mi-perfil'"></app-mi-perfil>
+      <app-tabla-historias-clinicas id="tabla-historicas-clinicas" *ngIf="componenteVisible === 'tabla-historicas-clinicas'"></app-tabla-historias-clinicas>
     </main>
   </div>
 </div>
