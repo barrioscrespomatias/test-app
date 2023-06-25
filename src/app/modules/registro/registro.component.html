@@ -1,5 +1,7 @@
 <!-- <div *ngIf="attributeValue == 'Profesional' || attributeValue == 'Paciente' "> -->
 <div class="container">
+  <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div> 
   <div class="row" appOcultarElementos *ngIf="usuario?.perfil == 'administrador' ">
     <app-image-component (onEnviarItemHaciaPadre)="recibirItemDesdeHijo($event)" imageValue="recepcion.png"
       atributeValue="Administrador" style="width: 100%;"></app-image-component>
