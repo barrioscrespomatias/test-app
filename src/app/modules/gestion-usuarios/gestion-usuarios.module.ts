@@ -18,6 +18,7 @@ import { ObtenerPacientesPipe } from '../../pipes/obtenerPacientes/obtener-pacie
 import { ObtenerPalabrasClavesPipe } from '../../pipes/obtenerPalabrasClaves/obtener-palabras-claves.pipe';
 import { ObtenerEspecialidadProfesionalPipe } from '../../pipes/obtenerEspecialidadProfesional/obtener-especialidad-profesional.pipe';
 import { ObtenerProfesionalPacientePipe } from '../../pipes/obtenerProfesionalPaciente/obtener-profesional-paciente.pipe';
+import { CustomNg2SearchPipe } from '../../pipes/customNg2Search/custom-ng2-search.pipe';
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
 import { CompletarEncuestaComponent } from '../../components/completar-encuesta/completar-encuesta.component';
@@ -26,8 +27,8 @@ import { RechazarTurnoComponent } from '../../components/rechazar-turno/rechazar
 import { AceptarTurnoComponent } from '../../components/aceptar-turno/aceptar-turno.component';
 import { FinalizarTurnoComponent } from '../../components/finalizar-turno/finalizar-turno.component';
 import { MiPerfilComponent } from '../../components/mi-perfil/mi-perfil.component';
-import { CompletarHistoriaClinicaComponent } from '../../components/completar-historia-clinica/completar-historia-clinica.component';
 import { TablaHistoriasClinicasComponent } from '../../components/tabla-historias-clinicas/tabla-historias-clinicas.component';
+import { HistoriaClinicaComponent } from '../../components/historia-clinica/historia-clinica.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { TablaHistoriasClinicasComponent } from '../../components/tabla-historia
     ObtenerPalabrasClavesPipe,
     ObtenerEspecialidadProfesionalPipe,
     ObtenerProfesionalPacientePipe,
+    CustomNg2SearchPipe,
     CancelarTurnoComponent,
     VerResenaComponent,
     CompletarEncuestaComponent,
@@ -55,8 +57,8 @@ import { TablaHistoriasClinicasComponent } from '../../components/tabla-historia
     AceptarTurnoComponent,
     FinalizarTurnoComponent,
     MiPerfilComponent,
-    CompletarHistoriaClinicaComponent,
-    TablaHistoriasClinicasComponent
+    TablaHistoriasClinicasComponent,
+    HistoriaClinicaComponent
   ],
   imports: [
     CommonModule,

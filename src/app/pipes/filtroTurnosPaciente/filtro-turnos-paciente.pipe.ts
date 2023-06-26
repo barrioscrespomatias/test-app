@@ -6,35 +6,90 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FiltroTurnosPacientePipe implements PipeTransform {
   filtrados: any[] = [];
 
-  transform(
-    turnos: any,
-    paciente: string,
-    profesional: string,
-    estado: string
-  ): any[] {
-    if (turnos != null) {
-      for (let item of turnos) {
-
-        if (paciente != '') {
-          if (item.paciente == paciente && item.estado != estado) {
-            this.filtrados.push(item);
+  transform(turnos: any, paciente: string, profesional: string, estado: string, estado_igual : boolean): any[] {
+    if (turnos != null) 
+    {
+    for (let item of turnos) 
+      {
+        //#region Paciente y profesional
+        if (paciente.length > 0 && profesional.length > 0) 
+        {
+          if(estado_igual)
+          {
+            if (item.paciente == paciente && item.profesional == profesional && item.estado == estado) 
+            {
+              this.filtrados.push(item);
+            }
           }
-        } else if (profesional != '') {
-          if (item.profesional == profesional && item.estado != estado) {
-            this.filtrados.push(item);
-          }
-        } 
-        
-        
-        if(profesional == '' && paciente == '') {
-          if (item.estado != estado) {
-            this.filtrados.push(item);
-          }
+          else
+          {
+            if (item.paciente == paciente && item.profesional == profesional && item.estado != estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }          
         }
+        //#endregion
 
-        // if (item.paciente == paciente && item.estado != estado) {
-        //   this.filtrados.push(item);
-        // }
+        //#region No paciente, no profesional
+        else if(profesional.length == 0 && paciente.length == 0) 
+        {
+          if(estado_igual)
+          {
+            if (item.estado == estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }
+          else
+          {
+            if (item.estado != estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }          
+        }
+        //#endregion
+
+        //#region Solo Paciente
+        else if (paciente.length > 0) 
+        {
+          if(estado_igual)
+          {
+            if (item.paciente == paciente && item.estado == estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }
+          else
+          {
+            if (item.paciente == paciente && item.estado != estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }          
+        } 
+        //#endregion
+
+        //#region Solo Profesional
+        else if (profesional.length > 0) 
+        {
+          if(estado_igual)
+          {
+            if (item.profesional == profesional && item.estado == estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }
+          else
+          {
+            if (item.profesional == profesional && item.estado != estado) 
+            {
+              this.filtrados.push(item);
+            }
+          }          
+        }
+        //#endregion
       }
     }
 

@@ -174,7 +174,6 @@ export class FinalizarTurnoComponent {
       this.mostrarParametroDos = true;
     else if(!this.mostrarParametroTres)
       this.mostrarParametroTres = true;
-
   }
   //#endregion
 }
