@@ -6,6 +6,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -18,7 +19,9 @@ export class SolicitarTurnoComponent {
     private especialidadService: EspecialidadService,
     private usuarioService: UsuarioService,
     private turnoService: TurnoService,
-    private firebaseService: FirebaseAuthService
+    private firebaseService: FirebaseAuthService,
+    private sweetAlert: SweetAlertService,
+ 
   ) {}
 
   //#endregion
@@ -86,6 +89,12 @@ export class SolicitarTurnoComponent {
     this.visualizarProfesionales = false;
     this.visualizarTurnos = true;
     this.profesionalSeleccionado = nombreProfesional;
+
+    // if(generacionSinErrores)
+
+    //   else
+    //   this.sweetAlert.MensajeError('No hay turnos para esta especialidad');
+  
 
     // this.usuarioService.getProfesional(this.mail).then((profesional: any) => {
     //   this.profesionalSeleccionadoParaTurno = profesional;

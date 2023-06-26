@@ -14,6 +14,10 @@
       transparent 100%);
 }
 
+.bg-new {
+  background-color:  #6e2499de;
+}
+
 #radius-shape-1 {
   height: 220px;
   width: 220px;

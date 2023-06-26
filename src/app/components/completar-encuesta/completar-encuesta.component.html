@@ -1,5 +1,7 @@
 <form>
+    
     <div class="facilidad">
+        <h2>Encuesta</h2>
         <p>¿Como calificas el sistema de la clínica online en cuanto a su facilidad uso?</p>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="facilidad_uso" (change)="facilidad_uso = 'Mal' ">
@@ -64,5 +66,6 @@
             </label>
         </div>
     </div>
-    <button class="btn btn-primary" (click)="CompletarEncuesta()">Calificar</button>
+<td><button class="btn btn-primary" data-bs-dismiss="modal" (click)="CompletarEncuesta()">Calificar</button></td>
+<td>   <button class="btn btn-secondary" data-bs-dismiss="modal" >Mas tarde</button></td>
 </form>
