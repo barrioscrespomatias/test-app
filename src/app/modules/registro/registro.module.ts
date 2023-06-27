@@ -16,6 +16,19 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
 import { UsuarioFirebaseService } from 'src/app/services/usuarioFirebase/usuario-firebase.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {
+  RecaptchaModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings,
+  RecaptchaFormsModule,
+  RECAPTCHA_V3_SITE_KEY,
+  RecaptchaV3Module,
+  ReCaptchaV3Service
+} from 'ng-recaptcha';
+
+const RECAPTCHA_V3_STACKBLITZ_KEY = '6LeHBK0bAAAAAOQVTvBOWhfb08cQfUpFoSE3FsmP';
+const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +43,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    RecaptchaV3Module
   ],
   providers: [
     ProfesionalService,
@@ -38,7 +54,19 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     UsuarioPerfilService,
     UsuarioFirebaseService,
     AuthService,
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    ReCaptchaV3Service,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },  
+
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: RECAPTCHA_V3_STACKBLITZ_KEY
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: RECAPTCHA_V2_DUMMY_KEY
+      } as RecaptchaSettings
+    }
   ],
   exports: [
     FormularioRegistroComponent // Agrega el componente en la sección de exports

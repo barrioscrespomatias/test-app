@@ -1,5 +1,5 @@
 //#region Imports
-import { Component, Input } from '@angular/core';
+import { Component, Input, VERSION } from '@angular/core';
 import { Firestore, collection, doc } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
@@ -9,6 +9,7 @@ import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/es
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Especialidad } from 'src/app/interfaces/especialidad';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 //#endregion
 @Component({
@@ -32,6 +33,18 @@ export class FormularioRegistroComponent {
   especialidadHabilitada: boolean = false;
 
 
+  //#region Captcha
+  public version = VERSION.full;
+  public recaptchaMode = 'v3';
+  public reactiveForm: FormGroup = new FormGroup({
+    recaptchaReactive: new FormControl(null, Validators.required),
+  });
+  public log: string[] = [];
+  public declarativeFormCaptchaValue: string = '';
+
+  //#endregion
+
+
 
   resultado!: string;
 
@@ -43,6 +56,7 @@ export class FormularioRegistroComponent {
     private firestore: Firestore,
     private usuarioServicio: UsuarioService,
     private sweetAlertServicio: SweetAlertService,
+    private recaptchaV3Service: ReCaptchaV3Service,
     
 
   ) {}
@@ -251,5 +265,42 @@ export class FormularioRegistroComponent {
 
     return this.form.invalid;
   }
+
+  //#region Metodos captcha
+  public executeRecaptchaV3() {
+    this.log.push(`Recaptcha v3 execution requested...`);
+    this.recaptchaV3Service.execute('myAction').subscribe(
+      (token) => {
+        this.addTokenLog('Recaptcha v3 token', token);
+      },
+      (error) => {
+        this.log.push(`Recaptcha v3 error: see console`);
+        console.log(`Recaptcha v3 error:`, error);
+      }
+    );
+  }
+
+  public addTokenLog(message: string, token: string | null) {
+    this.log.push(`${message}: ${this.formatToken(token)}`);
+  }
+
+  public onError() {
+    this.log.push(`reCAHPTCHA errored;`);
+  }
+
+  public formatToken(token: string | null) {
+    return token !== null
+      ? `${token.substring(0, 7)}...${token.substring(token.length - 7)}`
+      : 'null';
+  }
+
+  public printLog() {
+    return this.log
+      .map((logEntry, index) => `${index + 1}. ${logEntry}`)
+      .join('\n');
+  }
+
+  //#endregion
+
 }
   //#endregion

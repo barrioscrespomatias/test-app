@@ -36,14 +36,10 @@ export class UsuariosComponent {
   }
 
   CambiarEstado(usuario: Usuario) {
-    debugger
-    if (usuario.habilitado)
-      usuario.habilitado = false;
-    else
-      usuario.habilitado = true;
+      usuario.habilitado = !usuario.habilitado;
 
     if (usuario.docRef != null)
-      this.usuarioService.Modificar(usuario.docRef, usuario);
+      this.usuarioService.Modificar(usuario?.docRef, usuario);
   }
 
   PreparaParaDescargar(lista:any, name:string, nameData:string){
