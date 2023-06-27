@@ -19,15 +19,15 @@ export class EspecialidadService {
     private especialidadRepositorioService: EspecialidadRepositorioService,
     private db: AngularFirestore
   ) {
-    if (!this.subscription) {
-      this.subscription =
-        this.especialidadRepositorioService.listadoEspecialidades$.subscribe(
-          (data) => {
-            this.listadoEspecialidadesModelo = data;
-          }
-        );
-        this.subscription.unsubscribe();
-    }
+    // if (!this.subscription) {
+    //   this.subscription =
+    //     this.especialidadRepositorioService.listadoEspecialidades$.subscribe(
+    //       (data) => {
+    //         this.listadoEspecialidadesModelo = data;
+    //       }
+    //     );
+    //     this.subscription.unsubscribe();
+    // }
 
     // End constructor
   }

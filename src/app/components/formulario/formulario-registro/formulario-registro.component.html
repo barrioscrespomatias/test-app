@@ -7,12 +7,34 @@
             <div class="form-field col-md-6">
                <label for="nombre">Nombre</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('nombre')?.errors?.['required']"> </span>
+               <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
+                  <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
             <div class="form-field col-md-6">
                <label for="apellido">Apellido</label>
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('apellido')?.errors?.['required']"> Debe contener solo letras </span>
+               <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
+                  <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
          </div>
          <div class="row">
@@ -24,24 +46,67 @@
             <div class="form-field col-md-6">
                <label for="dni">DNI</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
-               <span *ngIf="this.form.get('dni')?.errors?.['required']"> </span>
+               <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
+                  <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
+                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>   
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
                <label for="obra_social">Obra Social</label>
-               <input id="obra_social" formControlName="obra_social" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('obra_social')?.errors?.['required']"> </span>
+               <input id="obra_social" formControlName="obra_social" type="text" class="input-text js-input">
+               <div *ngIf="form.get('obra_social')?.invalid && (form.get('obra_social')?.dirty || form.get('obra_social')?.touched)">
+                  
+                  <div *ngIf="form.get('obra_social')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                </div> 
             </div>
             <div class="form-field col-md-6">
                <label for="mail">E-Mail</label>
                <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
+               
+               <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
+                  <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                </div>
+
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
                <label for="contrasena">Contraseña</label>
                <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input" required>
+
+               <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
+                  <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
+                     El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                  </div>
+                  <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                  </div>
+                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+               </div>
+
             </div>
          </div>
          <div class="row">
@@ -49,19 +114,31 @@
                <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil 1</label>
                <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
                   class="form-control">
+
+                  <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
+                     <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
+                        El campo es requerido.
+                     </div>
+                  </div>
             </div>
             <div class="form-field col-md-6">
                <label class="form-label mb-4" for="imagenPerfil2">Imagen de perfil 2</label>
                <input id="imagenPerfil2" type="file" (change)="SubirArchivo($event, 2)" formControlName="imagenPerfil2"
                   class="form-control">
+
+                  <div *ngIf="form.get('imagenPerfil2')?.invalid && (form.get('imagenPerfil2')?.dirty || form.get('imagenPerfil2')?.touched)">
+                     <div *ngIf="form.get('imagenPerfil2')?.errors?.['required']" class="error-message">
+                        El campo es requerido.
+                     </div>
+                  </div>
             </div>
          </div>
          <div class="form-field col-lg-6 d-none">
             <input id="perfil" formControlName="perfil" class="input-text js-input" type="text"
                value="{{perfilRecibido}}" readonly>
          </div>
-                <div class="form-field col-sm-12">
-            <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+         <div class="form-field col-sm-12">
+            <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
          </div>
 
       </form>
@@ -80,24 +157,57 @@
             <div class="form-field col-md-6">
                <label for="nombre">Nombre</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('nombre')?.errors?.['required']"> </span>
+               <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
+                  <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
             <div class="form-field col-md-6">
                <label for="apellido">Apellido</label>
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('apellido')?.errors?.['required']"> Debe contener solo letras </span>
+               <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
+                  <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
                <label for="edad">Edad</label>
                <input id="edad" formControlName="edad" type="number" class="input-text js-input" required>
-               <span *ngIf="this.form.get('edad')?.errors?.['required']"> </span>
             </div>
             <div class="form-field col-md-6">
                <label for="dni">DNI</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
-               <span *ngIf="this.form.get('dni')?.errors?.['required']"> </span>
+
+               <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
+                  <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
+                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>               
             </div>
          </div>
             <div class="row">
@@ -109,6 +219,11 @@
                      <option *ngFor="let item of especialidades | async" value={{item?.nombre}}>{{item?.nombre}}
                      </option>
                   </select>
+                  <div *ngIf="form.get('especialidad')?.invalid && (form.get('especialidad')?.dirty || form.get('especialidad')?.touched)">
+                     <div *ngIf="form.get('especialidad')?.errors?.['required']" class="error-message">
+                       El campo es requerido.
+                     </div>
+                   </div>
                </div>
             </div>
             <div class="form-field col-md-6 ">
@@ -120,27 +235,75 @@
                <input id="especialidad_agregada" formControlName="especialidad_agregada"
                   class="input-text js-input mt-4" type="text">
                <label for="agregar-especialidad"></label>
+
+               <div *ngIf="form.get('especialidad_agregada')?.invalid && (form.get('especialidad_agregada')?.dirty || form.get('especialidad_agregada')?.touched)">
+                  <div *ngIf="form.get('especialidad_agregada')?.errors?.['required']" class="error-message">
+                    El campo es requerida.
+                  </div>
+                  <div *ngIf="form.get('especialidad_agregada')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('especialidad_agregada')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('especialidad_agregada')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('especialidad_agregada')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('especialidad_agregada')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
+
             </div>
             <div class="row">
                <div class="form-field col-md-6">
                   <label for="mail">E-Mail</label>
                   <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
+
+                  <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
+                     <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
+                       El campo es requerido.
+                     </div>
+                     <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
+                        El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                      </div>
+                      <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
+                        El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                      </div>
+                   </div>
+
                </div>
                <div class="form-field col-md-6">
                   <label for="contrasena">Contraseña</label>
                   <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input"
                      required>
+
+                  <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
+                     <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
+                        El campo es requerido.
+                     </div>
+                     <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
+                        El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                     </div>
+                     <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
+                        El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     </div>
+                     <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                  </div>
+
                </div>
             </div>
             <div class="row">
                <div class="form-field col-md-6">
                   <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil</label>
                   <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
-                     class="form-control">
+                     class="form-control" required>
+
+                     <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
+                        <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
+                           El campo es requerido.
+                        </div>
+                     </div>
+
                </div>
             </div>
             <div class="form-field col-sm-12">
-               <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+               <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
             </div>
   
          </form>
@@ -157,12 +320,34 @@
             <div class="form-field col-md-6">
                <label for="nombre">Nombre</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('nombre')?.errors?.['required']"> </span>
+               <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
+                  <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
             <div class="form-field col-md-6">
                <label for="apellido">Apellido</label>
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
-               <span *ngIf="this.form.get('apellido')?.errors?.['required']"> Debe contener solo letras </span>
+               <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
+                  <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>
             </div>
          </div>
          <div class="row">
@@ -174,18 +359,56 @@
             <div class="form-field col-md-6">
                <label for="dni">DNI</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
-               <span *ngIf="this.form.get('dni')?.errors?.['required']"> </span>
+               <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
+                  <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
+                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                </div>   
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
                <label for="mail">E-Mail</label>
                <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
+
+               <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
+                  <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
+                    El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                   </div>
+                   <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                   </div>
+                </div>
+
             </div>
             <div class="form-field col-md-6">
                <label for="contrasena">Contraseña</label>
                <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input"
                   required>
+
+               <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
+                  <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
+                     El campo es requerido.
+                  </div>
+                  <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
+                     El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                  </div>
+                  <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
+                     El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                  </div>
+                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+               </div>
+
             </div>
          </div>
          <div class="row">
@@ -193,12 +416,18 @@
                <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil</label>
                <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
                   class="form-control">
+
+                  <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
+                     <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
+                        El campo es requerido.
+                     </div>
+                  </div>
+
             </div>
          </div>
          <div class="form-field col-sm-12">
-            <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+            <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
          </div>
-
-         </form>
+      </form>
    </section>
 </div> 

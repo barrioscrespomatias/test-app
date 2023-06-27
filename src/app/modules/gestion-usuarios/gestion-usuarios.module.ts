@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GestionUsuariosRoutingModule } from './gestion-usuarios-routing.module';
@@ -19,6 +19,13 @@ import { ObtenerPalabrasClavesPipe } from '../../pipes/obtenerPalabrasClaves/obt
 import { ObtenerEspecialidadProfesionalPipe } from '../../pipes/obtenerEspecialidadProfesional/obtener-especialidad-profesional.pipe';
 import { ObtenerProfesionalPacientePipe } from '../../pipes/obtenerProfesionalPaciente/obtener-profesional-paciente.pipe';
 import { CustomNg2SearchPipe } from '../../pipes/customNg2Search/custom-ng2-search.pipe';
+import { TurnoPorEstadoPipe } from '../../pipes/turnoPorEstado/turno-por-estado.pipe';
+import { ProfesionalDelTurnoPipe } from '../../pipes/profesionalDelTurno/profesional-del-turno.pipe';
+import { ObtenerFechasTurnosPipe } from '../../pipes/obtenerFechasTurnos/obtener-fechas-turnos.pipe';
+import { ObtenerValoresAtributosPipe } from '../../pipes/obtenerValoresAtributos/obtener-valores-atributos.pipe';
+import { UsuariosProfesionalesPipe } from '../../pipes/filtroUsuariosProfesionales/usuarios-profesionales.pipe';
+
+
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
 import { CompletarEncuestaComponent } from '../../components/completar-encuesta/completar-encuesta.component';
@@ -29,6 +36,11 @@ import { FinalizarTurnoComponent } from '../../components/finalizar-turno/finali
 import { MiPerfilComponent } from '../../components/mi-perfil/mi-perfil.component';
 import { TablaHistoriasClinicasComponent } from '../../components/tabla-historias-clinicas/tabla-historias-clinicas.component';
 import { HistoriaClinicaComponent } from '../../components/historia-clinica/historia-clinica.component';
+import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
+import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
+import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
+import { RegistroModule } from '../registro/registro.module';
+
 
 
 @NgModule({
@@ -39,6 +51,8 @@ import { HistoriaClinicaComponent } from '../../components/historia-clinica/hist
     TablaTurnosComponent,
     MostrarElementDirective,
     SolicitarTurnoComponent,
+    UsuariosComponent,
+
     FiltroUsuariosPipe,
     FiltroTurnosPipe,
     FiltroTurnosPacientePipe,
@@ -49,6 +63,12 @@ import { HistoriaClinicaComponent } from '../../components/historia-clinica/hist
     ObtenerEspecialidadProfesionalPipe,
     ObtenerProfesionalPacientePipe,
     CustomNg2SearchPipe,
+    TurnoPorEstadoPipe,
+    ProfesionalDelTurnoPipe,
+    ObtenerFechasTurnosPipe,
+    ObtenerValoresAtributosPipe,
+    UsuariosProfesionalesPipe,
+
     CancelarTurnoComponent,
     VerResenaComponent,
     CompletarEncuestaComponent,
@@ -58,13 +78,18 @@ import { HistoriaClinicaComponent } from '../../components/historia-clinica/hist
     FinalizarTurnoComponent,
     MiPerfilComponent,
     TablaHistoriasClinicasComponent,
-    HistoriaClinicaComponent
+    HistoriaClinicaComponent,
   ],
   imports: [
     CommonModule,
     GestionUsuariosRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    RegistroModule
   ],
+  providers: [TurnoService, TurnoRepositorioService],
+  exports: [
+    CustomNg2SearchPipe // Agrega el componente en la sección de exports
+  ]
 })
 export class GestionUsuariosModule { }

@@ -27,14 +27,14 @@ export class UsuarioService {
     private _router: Router,
     private db: AngularFirestore
   ) {
-    if (!this.subscription) {
-      this.subscription = this.usuariosRepository.listadoUsuarios$.subscribe(
-        (data) => {
-          this.listadoUsuariosModelo = data;
-        }        
-      );
-      this.subscription.unsubscribe();
-    }
+    // if (!this.subscription) {
+    //   this.subscription = this.usuariosRepository.listadoUsuarios$.subscribe(
+    //     (data) => {
+    //       this.listadoUsuariosModelo = data;
+    //     }        
+    //   );
+    //   this.subscription.unsubscribe();
+    // }
   }
   //#endregion
 

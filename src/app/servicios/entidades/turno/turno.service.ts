@@ -5,6 +5,16 @@ import { Subscription } from 'rxjs';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseError } from 'firebase/app';
 
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  query,
+  setDoc,
+  where,
+} from '@angular/fire/firestore';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,14 +24,15 @@ export class TurnoService {
 
   constructor(
     private turnosRepositorioService: TurnoRepositorioService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private firestore: Firestore,
   ) {
-    if (!this.subscription) {
-      this.subscription =
-        this.turnosRepositorioService.listadoTurnos$.subscribe((data) => {
-          this.listadoTurnosModelo = data;
-        });
-    }
+    // if (!this.subscription) {
+    //   this.subscription =
+    //     this.turnosRepositorioService.listadoTurnos$.subscribe((data) => {
+    //       this.listadoTurnosModelo = data;
+    //     });
+    // }
 
     // End constructor
   }
@@ -46,8 +57,14 @@ export class TurnoService {
     }
   }
 
+  // async TraerTodos() {
+  //   return this.turnosRepositorioService.getAll();
+  // }
+
+
   async TraerTodos() {
-    return this.turnosRepositorioService.getAll();
+    const coleccion = collection(this.firestore, 'turnos');
+    return collectionData(coleccion);
   }
 
   async Modificar(docRef: string, turno: Turno) {

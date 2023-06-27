@@ -8,8 +8,10 @@ export class UsuariosProfesionalesPipe implements PipeTransform {
   filtrados: any[] = [];
 
   transform(usuarios: any): any[] {
+    this.filtrados = [];
     if (usuarios != null) {
-      for (let item of usuarios) {
+      for (let item of usuarios) 
+      {
         if (item.perfil == 'profesional') {          
           this.filtrados.push(item);
         }

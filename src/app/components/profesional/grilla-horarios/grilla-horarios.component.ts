@@ -31,7 +31,6 @@ export class GrillaHorariosComponent {
   //#region Propiedades
   form!: FormGroup;
   usuario: any;
-  isLogged: boolean = this.firebaseService.isLoggedIn;
   mail: string = this.firebaseService.userName;
   proximasDosSemanas: Date[] = [];
   // horariosParaTurnos: Date[] = [];

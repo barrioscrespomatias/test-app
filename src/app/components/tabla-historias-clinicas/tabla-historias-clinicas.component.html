@@ -2,15 +2,54 @@
 <!-- <span class="badge bg-success m-2" *ngFor="let paciente of turnos | async | obtenerPacientes: usuario?.mail" onclick="ObtenerPacienteSeleccionado()">{{paciente}}</span>  -->
 <!-- <span class="badge bg-success m-2" *ngFor="let paciente of turnos | async | obtenerPacientes: usuario?.mail" onclick="ObtenerPacienteSeleccionado()">{{paciente}}</span>  -->
 
-<ng-container *ngIf="usuario?.perfil == 'profesional'">
+<!-- <ng-container *ngIf="usuario?.perfil == 'administrador' ">
     <h1>Seleccione paciente</h1>
-    <button class="badge bg-success m-2" *ngFor="let paciente of turnos | async | obtenerPacientes: usuario?.mail : '0' : false" (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
+    <button class="badge bg-success m-2" *ngFor="let paciente of turnos | async | obtenerPacientes: '' : '0' : false" (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
+</ng-container> -->
+
+<!-- <ng-container *ngIf="usuario?.perfil == 'profesional'">
+    <div class="container">    
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item" *ngFor="let paciente of turnos | async | obtenerPacientes: '' : '0' : false">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Filtrar por pacientes
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <button class="badge bg-primary" (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div> 
 </ng-container>
 
-<ng-container *ngIf="usuario?.perfil == 'paciente'">
+<ng-container *ngIf="usuario?.perfil == 'administrador'">
+    <div class="container">    
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item" *ngFor="let paciente of turnos | async | obtenerPacientes: '' : '0' : false">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Filtrar por pacientes
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <button class="badge bg-primary" (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div> 
+</ng-container> -->
+
+
+<!-- <ng-container *ngIf="usuario?.perfil == 'paciente'">
     <h1>Seleccione profesional</h1>
     <button class="badge bg-success m-2" *ngFor="let profesional of turnos | async | obtenerProfesionalPaciente: usuario?.mail" (click)="ObtenerProfesionalSeleccionado(profesional)">{{profesional}}</button>
-</ng-container>
+</ng-container> -->
 
 
 <!-- NO LO PIDE De los usuarios del sistema, this.usuarios, pasar un perfil. Paciente o profesional -->
@@ -21,6 +60,119 @@
     <button class="badge bg-success m-2" *ngFor="let profesional of usuarios | async | filtroTurnosPaciente: '' : usuario?.mail :'0'" (click)="ObtenerProfesionalSeleccionado(profesional)">{{profesional}}</button>
     <button class="badge bg-success m-2" *ngFor="let paciente of usuarios | async | filtroTurnosPaciente: usuario?.mail : '' : '0' " (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
 </ng-container> -->
+
+<div class="">
+    <!-- FILTROS -->
+    <div class="accordion accordion-flush" id="accordionFiltros">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseFiltros" aria-expanded="false" aria-controls="flush-collapseFiltros">
+            Mostrar filtros
+          </button>
+        </h2>
+        <div id="flush-collapseFiltros" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+          <div class="accordion-body">
+  
+            <div class="">
+              <!-- FILTRO POR PACIENTES -->
+              <div class="accordion accordion-flush" id="accordionPacientes">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapsePacientes" aria-expanded="false"
+                      aria-controls="flush-collapsePacientes">
+                      Filtrar por pacientes
+                    </button>
+                  </h2>
+                  <div id="flush-collapsePacientes" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionPacientes">
+                    <div class="accordion-body">
+                      <button class="badge bg-primary m-2"
+                        *ngFor="let paciente of turnos | obtenerPacientes: '' : '0' : false"
+                        (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END FILTRO POR PACIENTES -->
+  
+  
+              <!-- FILTRO POR ESPECIALIDADES -->
+              <div class="accordion accordion-flush" id="accordionEspecialidades">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseEspecialidades" aria-expanded="false"
+                      aria-controls="flush-collapseEspecialidades">
+                      Filtrar por especialidades
+                    </button>
+                  </h2>
+                  <div id="flush-collapseEspecialidades" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionEspecialidades">
+                    <div class="accordion-body">
+                      <!-- <button class="badge bg-primary m-2"
+                        *ngFor="let especialidad of turnos | async | obtenerEspecialidadProfesional:usuario?.mail"
+                        (click)="ObtenerEspecialidadSeleccionada(especialidad)">{{especialidad}}</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END FILTRO POR ESPECIALIDADES -->
+  
+              <!-- FILTRO POR PROFESIONALES -->
+              <div class="accordion accordion-flush" id="accordionProfesionales">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseProfesionales" aria-expanded="false"
+                      aria-controls="flush-collapseProfesionales">
+                      Filtrar por profesionales
+                    </button>
+                  </h2>
+                  <div id="flush-collapseProfesionales" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionProfesionales">
+                    <div class="accordion-body">
+                      <button class="badge bg-primary m-2"
+                        *ngFor="let profesional of turnos | obtenerProfesionalPaciente: usuario?.mail"
+                        (click)="ObtenerProfesionalSeleccionado(profesional)">{{profesional}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END FILTRO POR PROFESIONALES -->
+  
+              <!-- FILTRO POR ATRIBUTOS DINAMICOS ESPECIALIDAD -->
+              <div class="accordion accordion-flush" id="accordionAtributosDinamicos">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseAtributosDinamicos" aria-expanded="false"
+                      aria-controls="flush-collapseAtributosDinamicos">
+                      Filtrar por atributos dinamicos
+                    </button>
+                  </h2>
+                  <div id="flush-collapseAtributosDinamicos" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionAtributosDinamicos">
+                    <div class="accordion-body">
+                      <!-- <button class="badge bg-primary m-2"
+                        *ngFor="let atributo_dinamico of turnos | async | obtenerPalabrasClaves: usuario?.especialidades"
+                        (click)="ObtenerAtributoDinamico(atributo_dinamico)">{{atributo_dinamico}}</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END FILTRO POR ATRIBUTOS DINAMICOS ESPECIALIDAD -->
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END FILTROS -->
+  </div>
+
+
 
 <div class="container text-center">
     <h1>Historias clinicas</h1>
@@ -42,7 +194,19 @@
         </thead>
         <tbody>
         <ng-container *ngIf="usuario?.perfil == 'profesional' && pacienteSeleccionado!= '' ">
-            <tr *ngFor="let turno of turnos  | async | filtroTurnosPaciente: pacienteSeleccionado : usuario?.mail : '4' : true | customNg2Search:searchText">
+            <tr *ngFor="let turno of turnos | filtroTurnosPaciente:
+              pacienteSeleccionado :
+              '' :
+              '' :
+              '' :
+              0 :
+              0 :
+              0 :
+              '' :
+              '' :
+              -1 :
+              '4' :
+              true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>
@@ -52,8 +216,20 @@
             </tr>
         </ng-container>
 
-        <ng-container *ngIf="usuario?.perfil == 'paciente' && profesionalSeleccionado!= '' ">
-            <tr *ngFor="let turno of turnos  | async | filtroTurnosPaciente: usuario?.mail : profesionalSeleccionado : '4' : true | customNg2Search:searchText">
+        <ng-container *ngIf="usuario?.perfil == 'paciente'">
+            <tr *ngFor="let turno of turnos | filtroTurnosPaciente:
+                 usuario?.mail :
+                 '' :
+                 '' :
+                 '' :
+                 0 :
+                 0 :
+                 0 :
+                 '' :
+                 '' :
+                 -1 :
+                 '4' :
+                 true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>
@@ -63,8 +239,20 @@
             </tr>
         </ng-container>
 
-        <ng-container *ngIf="usuario?.perfil == 'administrador' && (profesionalSeleccionado!= '' || pacienteSeleccionado!= '') ">
-            <tr *ngFor="let turno of turnos  | async | filtroTurnosPaciente: pacienteSeleccionado : profesionalSeleccionado : '4' : true | customNg2Search:searchText">
+        <ng-container *ngIf="usuario?.perfil == 'administrador' && pacienteSeleccionado!= '' ">
+            <tr *ngFor="let turno of turnos | filtroTurnosPaciente: 
+                pacienteSeleccionado :
+                '' :
+                '' :
+                '' :
+                0 :
+                0 :
+                0 :
+                '' :
+                '' :
+                -1 :
+                '4':
+                true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>

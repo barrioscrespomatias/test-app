@@ -12,6 +12,7 @@ import { NavComponent } from './components/nav/nav/nav.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FirebaseAuthService } from './services/angularFire/angular-fire.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ObtenerAtributosPipe } from './pipes/obtener-atributos.pipe';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HomeComponent,
     NavComponent,
+    ObtenerAtributosPipe,
   ],
   imports: [
     BrowserModule,

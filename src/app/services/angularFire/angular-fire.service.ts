@@ -19,7 +19,7 @@ export class FirebaseAuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -107,11 +107,11 @@ export class FirebaseAuthService {
         });
       });
   }
-  // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
+
+async isLoggedIn(): Promise<boolean> {
+  const logueado = await this.GetLogueado();
+  return logueado == true;
+}
 
   get userName(): string {
     const user = JSON.parse(localStorage.getItem('user')!);
@@ -170,6 +170,21 @@ export class FirebaseAuthService {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['']);
+    });
+  }
+
+
+  GetLogueado() { 
+    return new Promise<boolean>((resolve, reject) => {
+      this.afAuth.onAuthStateChanged((user) => {
+        if (user) {
+          // Usuario logueado
+          resolve(true);
+        } else {
+          // Usuario no logueado
+          resolve(false);
+        }
+      });
     });
   }
 }

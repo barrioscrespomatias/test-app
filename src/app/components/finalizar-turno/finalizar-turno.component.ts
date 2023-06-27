@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
+import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
 @Component({
   selector: 'app-finalizar-turno',
@@ -16,11 +17,14 @@ export class FinalizarTurnoComponent {
   mostrarParametroUno : boolean = false;
   mostrarParametroDos : boolean = false;
   mostrarParametroTres : boolean = false;
+  pacienteAtendido : any;
 
   //#endregion
 
   //#region Constructor
-  constructor(private turnoService: TurnoService) {}
+  constructor(private turnoService: TurnoService,
+              private usuarioService: UsuarioService,
+    ) {}
 
   //#endregion
 
@@ -42,6 +46,8 @@ export class FinalizarTurnoComponent {
       temperatura: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
       presion: new FormControl('', [Validators.minLength(0), Validators.maxLength(5)]),      
     });
+
+    this.pacienteAtendido = this.usuarioService.getProfesional(this.turnoRecibido.paciente);
   }
 
   //#endregion
@@ -158,9 +164,17 @@ export class FinalizarTurnoComponent {
     //    { clave: 'Limpieza', valor: 'Si' },
     //  ];
 
-
+    //Turno
+    this.turnoRecibido.altura = this.altura?.value;
+    this.turnoRecibido.peso = this.peso?.value;
     this.turnoRecibido.historia_clinica = historia_clinica;
-     this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
+    this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
+
+    //Paciente
+    this.pacienteAtendido.altura = this.altura?.value;
+    this.pacienteAtendido.peso = this.peso?.value;
+
+    this.usuarioService.Modificar(this.pacienteAtendido?.docRef, this.pacienteAtendido);
   }
 
   ConvertirFecha(fecha: any) {

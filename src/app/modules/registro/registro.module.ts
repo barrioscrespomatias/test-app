@@ -40,5 +40,10 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     AuthService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
   ],
+  exports: [
+    FormularioRegistroComponent // Agrega el componente en la sección de exports
+  ]
+
+  
 })
 export class RegistroModule {}

@@ -53,6 +53,7 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
+    debugger
     try {
       const documentReference = doc(this.listadoUsuarios, docRef);
       updateDoc(documentReference, {
@@ -62,6 +63,8 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
         mail: (args[0] as any).mail,
         perfil: (args[0] as any).perfil,
         horarioEspecialidad: (args[0] as any).horarioEspecialidad,
+        peso: (args[0] as any).peso,
+        altura: (args[0] as any).altura,
       });
       console.log(args)
     } catch (e) {
@@ -101,7 +104,7 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
         (u) => u.userFirebaseAuthId == userFirebaseAuthId
       )!;
 
-      return usuario.docRefUsuarioId;
+      return usuario.docRef;
     } catch (error) {
       console.log(error);
       return;

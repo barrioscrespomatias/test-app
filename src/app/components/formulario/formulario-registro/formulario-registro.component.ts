@@ -67,29 +67,33 @@ export class FormularioRegistroComponent {
     this.form = new FormGroup({
       nombre: new FormControl('', [
         Validators.required, 
-        Validators.minLength(1),
-        Validators.pattern('a-zA-ZñÑá-úÁ-Ú')]),
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern('[a-zA-Z ]*')]),
       apellido: new FormControl('', [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.pattern('a-zA-ZñÑá-úÁ-Ú')]),
+        Validators.required, 
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern('[a-zA-Z ]*')]),
       edad: new FormControl('', [
         Validators.required, 
-        Validators.minLength(1), 
-        Validators.maxLength(3), 
-        Validators.pattern('/^[0-9]\d+$/')]),
+        Validators.min(1), 
+        Validators.max(120), 
+        Validators.pattern('\\d+')]),
       dni: new FormControl('', [
         Validators.required, 
-        Validators.minLength(1), 
-        Validators.maxLength(3), 
-        Validators.pattern('/^[0-9]\d+$/')]),
+        Validators.min(1000), 
+        Validators.max(100000000), 
+        Validators.pattern('\\d+')]),
       mail: new FormControl('', [Validators.required, Validators.email]),
-      contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      imagenPerfil1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      imagenPerfil2: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      obra_social: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+      imagenPerfil1: new FormControl('', Validators.required),
+      imagenPerfil2: new FormControl(''),
+      obra_social: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
+      // especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+      especialidad: new FormControl('',),
+      // perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      perfil: new FormControl('', ),
       especialidad_agregada: new FormControl('', [
         Validators.pattern('^[a-zA-Z]+$'),
       ]),
@@ -169,6 +173,8 @@ export class FormularioRegistroComponent {
       perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : this.perfilRecibido == 'Paciente' ? 'paciente' : 'administrador',
       obraSocial: this.obra_social?.value,
       especialidades: this.especialidad?.value,
+      peso: 0,
+      altura: 0,
     };
 
     let respuesta = this.usuarioServicio.Crear(usuario);
@@ -224,6 +230,26 @@ export class FormularioRegistroComponent {
     if (especialidad.nombre?.length > 0) {
       this.especialidadService.Crear(especialidad);
     }
+  }
+
+  public FormularioConErrores(): boolean {
+    console.log(this.form.invalid)
+
+    console.log(this.form.controls);
+
+    // Recorrer los controles del formulario
+    for (const controlName in this.form.controls) {
+      if (this.form.controls.hasOwnProperty(controlName)) {
+        const control = this.form.controls[controlName];
+        
+        // Verificar si el control tiene errores
+        if (control.errors) {
+          console.log(`Errores en ${controlName}:`, control.errors);
+        }
+      }
+    }
+
+    return this.form.invalid;
   }
 }
   //#endregion

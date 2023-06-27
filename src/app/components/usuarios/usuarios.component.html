@@ -1,4 +1,5 @@
 <div class="container">
+
     <table class="table">
         <thead>
             <tr>
@@ -11,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let usuario of usuarios | async | usuariosProfesionales " >
+            <tr *ngFor="let usuario of usuarios | usuariosProfesionales" >
                 <td>{{usuario.dni}}</td>
                 <td>{{usuario.nombre}}</td>
                 <td>{{usuario.apellido}}</td>
@@ -27,3 +28,9 @@
 <!-- <ng-container *ngIf="usuario?.perfil == 'paciente'"> -->
     <!-- <app-tabla-historias-clinicas></app-tabla-historias-clinicas> -->
 <!-- </ng-container> -->
+
+<button class="btn btn-primary" (click)="DescargarExcel()">Descargar un excel</button>
+<button class="btn btn-primary" (click)="DescargarPDF()">Descargar un PDF</button>
+<button class="btn btn-primary" (click)="RegistrarUsuarioAdministrador()">RegistrarUsuario</button>
+
+<app-formulario-registro *ngIf="formularioRegistrarUsuarioVisible" [perfilRecibido]="'Administrador'"></app-formulario-registro>

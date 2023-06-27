@@ -19,7 +19,7 @@
     aria-label="Search"> -->
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Cerrar Sesión</a>
+      <a class="nav-link px-3" (click)="SignOut()">Cerrar Sesión</a>
     </div>
   </div>
 </header>
@@ -68,7 +68,7 @@
 
           <!-- Acceso: Admin -->
           <li class="nav-item">
-            <button class="nav-link" routerLink="/usuarios" appMostrarElement *ngIf="usuario?.perfil == 'administrador'">
+            <button class="nav-link" *ngIf="usuario?.perfil == 'administrador'" appMostrarElement componentToggle="usuarios"  (click)="componenteVisible = 'usuarios'">
               <span class="align-text-bottom"></span>
               Usuarios
             </button>
@@ -104,6 +104,7 @@
       <app-solicitar-turno id="solicitar-turno" *ngIf="componenteVisible === 'solicitar-turno'"></app-solicitar-turno>
       <app-tabla-turnos id="tabla-turnos" *ngIf="componenteVisible === 'tabla-turnos'"></app-tabla-turnos>
       <app-mi-perfil id="mi-perfil" *ngIf="componenteVisible === 'mi-perfil'"></app-mi-perfil>
+      <app-usuarios id="usuarios" *ngIf="componenteVisible === 'usuarios'"></app-usuarios>
       <app-tabla-historias-clinicas id="tabla-historicas-clinicas" *ngIf="componenteVisible === 'tabla-historicas-clinicas'"></app-tabla-historias-clinicas>
     </main>
   </div>

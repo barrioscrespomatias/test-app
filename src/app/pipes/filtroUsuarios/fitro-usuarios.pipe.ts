@@ -7,6 +7,7 @@ export class FiltroUsuariosPipe implements PipeTransform {
   filtrados: any[] = [];
 
   transform(usuarios: any, especialidad: string): any[] {
+    this.filtrados = [];
     if (usuarios != null) {
       for (let item of usuarios) {
         if (item.perfil == 'profesional' && item.especialidades.includes(especialidad)) {          

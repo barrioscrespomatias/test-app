@@ -7,6 +7,7 @@ export class FiltroTurnosPipe implements PipeTransform {
   filtrados: any[] = [];
 
   transform(turnos: any, especialidad: string, profesional: string, estado: string): any[] {
+    this.filtrados = [];
     if (turnos != null) {
       for (let item of turnos) {
         if (

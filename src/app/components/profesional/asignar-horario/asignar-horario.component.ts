@@ -28,7 +28,6 @@ export class AsignarHorarioComponent {
   form!: FormGroup;
   // usuarioDbLogueado!: Usuario;
   usuario: any;
-  isLogged: boolean = this.firebaseService.isLoggedIn;
   mail: string = this.firebaseService.userName;
 
   valorDias: { clave: string; valor: number }[] = [];

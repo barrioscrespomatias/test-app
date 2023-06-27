@@ -8,23 +8,49 @@ export class ObtenerPacientesPipe implements PipeTransform {
   filtrados: any[] = [];
 
   transform(turnos: any, profesional:string, estado:string, estado_igual:boolean): any[] {
+    this.filtrados = [];
     if (turnos != null) {
       for (let item of turnos) {
-        if(estado_igual)
+
+        //#region Con profesional
+        if(profesional.length > 0)
         {
-          if (item.paciente != '' && item.profesional == profesional && !this.filtrados.includes(item.paciente) && item.estado == estado) 
-          {          
-            this.filtrados.push(item.paciente);
+          if(estado_igual)
+          {
+            if (item.paciente != '' && item.profesional == profesional && !this.filtrados.includes(item.paciente) && item.estado == estado) 
+            {          
+              this.filtrados.push(item.paciente);
+            }
+          }
+          else
+          {
+            if (item.paciente != '' && item.profesional == profesional && !this.filtrados.includes(item.paciente) && item.estado != estado) 
+            {          
+              this.filtrados.push(item.paciente);
+            }
           }
         }
-        else
+        //#endregion
+
+        //#region Sin profesional
+        else 
         {
-          if (item.paciente != '' && item.profesional == profesional && !this.filtrados.includes(item.paciente) && item.estado != estado) 
-          {          
-            this.filtrados.push(item.paciente);
+          if(estado_igual)
+          {
+            if (item.paciente != '' && item.profesional != '' && !this.filtrados.includes(item.paciente) && item.estado == estado) 
+            {          
+              this.filtrados.push(item.paciente);
+            }
+          }
+          else
+          {
+            if (item.paciente != '' && item.profesional != '' && !this.filtrados.includes(item.paciente) && item.estado != estado) 
+            {          
+              this.filtrados.push(item.paciente);
+            }
           }
         }
-        
+        //#endregion                  
       }
     }
 

@@ -13,6 +13,8 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 })
 export class RegistroComponent {
   //#region Propiedades
+  public isLogged: boolean = false;
+
   form!: FormGroup;
   @Input() valueFromDirective: any;
   @Input() emailRegistrado:any;
@@ -20,16 +22,24 @@ export class RegistroComponent {
   emailRecibido: string = '';
   usuario: any;
   mail: string = this.firebaseService.userName;
-  isLogged: boolean = this.firebaseService.isLoggedIn;
+  
   //#endregion
 
   //#region Constructor
   constructor(
     private firebaseService: FirebaseAuthService,
     private usuarioService: UsuarioService,
-  ) {}
+  ) { this.checkLoggedIn();}
 
   //#endregion
+
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
+  SignOut() {
+    this.firebaseService.SignOut();
+  }
   
   //#region Hooks
   ngOnInit(): void {

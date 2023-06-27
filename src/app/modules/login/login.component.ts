@@ -11,13 +11,21 @@ import { FirebaseAuthService } from '../../services/angularFire/angular-fire.ser
 })
 export class LoginComponent {
   form!: FormGroup;
+  public isLogged: boolean = false;
 
   constructor(
     public firebaseService: FirebaseAuthService,
     // public firestoreService: FirestoreService
-  ) {}
+  ) {this.checkLoggedIn();}
 
-  public isLogged: boolean = this.firebaseService.isLoggedIn;
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
+  SignOut() {
+    this.firebaseService.SignOut();
+  }
+
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -25,6 +33,8 @@ export class LoginComponent {
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
+
+    console.log(this.firebaseService.GetLogueado())
   }
 
   get email() {

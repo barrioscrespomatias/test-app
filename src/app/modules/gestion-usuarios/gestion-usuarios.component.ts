@@ -32,4 +32,8 @@ export class GestionUsuariosComponent {
 
   }
   //#endregion
+
+  SignOut() {
+    this.firebaseService.SignOut();
+  }
 }

@@ -64,7 +64,6 @@ export class TablaHistoriasClinicasComponent {
 
     this.turnoService.TraerTodos().then((turnos: any) => {
       this.turnos = turnos;
-      console.log(turnos)
     });
 
     this.especialidadService.TraerTodos().then((especialidades: any) => {

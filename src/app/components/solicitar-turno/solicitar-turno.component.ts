@@ -27,7 +27,6 @@ export class SolicitarTurnoComponent {
 
   form!: FormGroup;
   usuario: any;
-  isLogged: boolean = this.firebaseService.isLoggedIn;
   mail: string = this.firebaseService.userName;
   especialidades: any;
   usuarios: any;
