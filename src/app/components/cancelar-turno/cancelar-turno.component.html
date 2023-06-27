@@ -7,12 +7,14 @@
     </ul>
 
     <div class="form-group mb-3 mt-3">
-        <label for="resena">Resena cancelacion</label>
+        <label for="resena">Reseña cancelacion</label>
         <textarea class="form-control" id="resena" formControlName="resena" rows="3" required></textarea>
     </div>
 
     <p>Realmente desea cancelar el turno?</p>
+<div>    
+    <td><button class="btn btn-primary" (click)="CancelarTurno()">Si</button></td>
+<td><button class="btn btn-secondary" data-bs-dismiss="modal" >No</button></td>
+</div>
 
-    <button class="btn btn-primary" (click)="CancelarTurno()">Si</button>
-    <button class="btn btn-secondary">No</button>
 </form>
