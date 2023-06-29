@@ -29,6 +29,7 @@ export class FormularioRegistroComponent {
   profesionalCreado: any;
   fotoUno: string = '';
   fotoDos: string = '';
+  fotoTres: string = '';
   nuevaEspecialidad: string = '';
   especialidadHabilitada: boolean = false;
 
@@ -103,6 +104,7 @@ export class FormularioRegistroComponent {
       contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       imagenPerfil1: new FormControl('', Validators.required),
       imagenPerfil2: new FormControl(''),
+      imagen_especialidad: new FormControl(''),
       obra_social: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
       // especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       especialidad: new FormControl('',),
@@ -154,6 +156,10 @@ export class FormularioRegistroComponent {
     return this.form.get('imagenPerfil2');
   }
 
+  get imagen_especialidad() {
+    return this.form.get('imagen_especialidad');
+  }
+
   get obra_social() {
     return this.form.get('obra_social');
   }
@@ -191,30 +197,73 @@ export class FormularioRegistroComponent {
       altura: 0,
     };
 
-    let respuesta = this.usuarioServicio.Crear(usuario);
-    respuesta.then((response) => {
-      if (response.valido) {
-        this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
-        // this.alertaMensajeSucces(response.mensaje);
-        // this._usuarioService.setUserToLocalStorage(user);
-        // this._router.navigate(['usuario/login']);
-      } else {
-        this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
-        // this.alertaMensajeError(response.mensaje);
-      }
-      
-    });
+    console.log(usuario)
+    // let respuesta = this.usuarioServicio.Crear(usuario);
+    // respuesta.then((response) => {
+    //   if (response.valido) {
+    //     this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
+    //     // this.alertaMensajeSucces(response.mensaje);
+    //     // this._usuarioService.setUserToLocalStorage(user);
+    //     // this._router.navigate(['usuario/login']);
+    //   } else {
+    //     this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
+    //     // this.alertaMensajeError(response.mensaje);
+    //   }      
+    // });
+
   }
 
+
+
+  AgregarEspecialidad() {
+    this.especialidadHabilitada = !this.especialidadHabilitada
+    const especialidad: Especialidad = {
+      nombre: this.especialidad_agregada?.value,
+      path: this.fotoTres,
+    };
+
+    if (especialidad.nombre?.length > 0) {
+      this.especialidadService.Crear(especialidad);
+    }
+  }
+
+  public FormularioConErrores(): boolean {
+
+    // console.log(this.form.controls);
+
+    // // Recorrer los controles del formulario
+    // for (const controlName in this.form.controls) {
+    //   if (this.form.controls.hasOwnProperty(controlName)) {
+    //     const control = this.form.controls[controlName];
+        
+    //     // Verificar si el control tiene errores
+    //     if (control.errors) {
+    //       console.log(`Errores en ${controlName}:`, control.errors);
+    //     }
+    //   }
+    // }
+
+    return this.form.invalid;
+  }
+
+  //#region  foto
   SubirArchivo(e: any, imgNum: number) {
-    if (imgNum == 1) {
+    if (imgNum == 1) 
+    {
       this.fotoUno = `${this.getFecha()}_${1}`;
-    } else if (imgNum == 2) {
+    } 
+    else if (imgNum == 2) 
+    {
       this.fotoDos = `${this.getFecha()}_${2}`;
     }
+    else if(imgNum == 3)
+    {
+      this.fotoTres = `${this.getFecha()}_${3}`;
+    }
+    debugger
 
     const storage = getStorage();
-    const storageRef = ref(storage, imgNum == 1 ? this.fotoUno : this.fotoDos);
+    const storageRef = ref(storage, imgNum == 1 ? this.fotoUno : imgNum == 2 ? this.fotoDos : this.fotoTres);
 
     uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
       
@@ -235,36 +284,7 @@ export class FormularioRegistroComponent {
     return y + '-' + m + '-' + d + '_' + h + '-' + min + '-' + s + '-' + mls;
   }
 
-  AgregarEspecialidad() {
-    this.especialidadHabilitada = !this.especialidadHabilitada
-    const especialidad: Especialidad = {
-      nombre: this.especialidad_agregada?.value,
-    };
-
-    if (especialidad.nombre?.length > 0) {
-      this.especialidadService.Crear(especialidad);
-    }
-  }
-
-  public FormularioConErrores(): boolean {
-    console.log(this.form.invalid)
-
-    console.log(this.form.controls);
-
-    // Recorrer los controles del formulario
-    for (const controlName in this.form.controls) {
-      if (this.form.controls.hasOwnProperty(controlName)) {
-        const control = this.form.controls[controlName];
-        
-        // Verificar si el control tiene errores
-        if (control.errors) {
-          console.log(`Errores en ${controlName}:`, control.errors);
-        }
-      }
-    }
-
-    return this.form.invalid;
-  }
+  //#endregion
 
   //#region Metodos captcha
   public executeRecaptchaV3() {

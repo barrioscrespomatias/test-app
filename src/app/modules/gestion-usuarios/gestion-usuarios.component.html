@@ -39,7 +39,8 @@
           <li class="nav-item">
             <button class="nav-link" appMostrarElement componentToggle="tabla-turnos" (click)="componenteVisible = 'tabla-turnos'">
               <span class="align-text-bottom"></span>
-              Mis Turnos
+              <span *ngIf="usuario?.perfil != 'administrador'">Mis Turnos</span>
+              <span *ngIf="usuario?.perfil == 'administrador'">Turnos</span>
             </button>
           </li>
           <!-- Fin Acceso: Todos -->

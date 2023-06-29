@@ -40,6 +40,7 @@ export class TablaHistoriasClinicasComponent {
   usuario: any;
   usuarios: any;
   mail: string = this.firebaseService.userName;
+  turnosSubscription:any;
   turnos: any;
   parametrosDinamicos: any;
   especialidades: any;
@@ -62,13 +63,25 @@ export class TablaHistoriasClinicasComponent {
       this.usuarios = usuarios;
     });
 
-    this.turnoService.TraerTodos().then((turnos: any) => {
-      this.turnos = turnos;
-    });
+    // this.turnoService.TraerTodos().then((turnos: any) => {
+    //   this.turnos = turnos;
+    // });
+
+    this.turnosSubscription = (
+      await this.turnoService.TraerTodos()
+    ).subscribe((turnos) => {
+      this.turnos = turnos
+    });  
 
     this.especialidadService.TraerTodos().then((especialidades: any) => {
       this.especialidades = especialidades;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.turnosSubscription) {
+      this.turnosSubscription.unsubscribe();
+    }
   }
 
   //#endregion

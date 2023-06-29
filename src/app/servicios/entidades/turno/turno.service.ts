@@ -57,15 +57,15 @@ export class TurnoService {
     }
   }
 
-  // async TraerTodos() {
-  //   return this.turnosRepositorioService.getAll();
-  // }
-
-
   async TraerTodos() {
-    const coleccion = collection(this.firestore, 'turnos');
-    return collectionData(coleccion);
+    return this.turnosRepositorioService.getAll();
   }
+
+
+  // async TraerTodos() {
+  //   const coleccion = collection(this.firestore, 'turnos');
+  //   return collectionData(coleccion);
+  // }
 
   async Modificar(docRef: string, turno: Turno) {
     return this.turnosRepositorioService.update(docRef, turno);

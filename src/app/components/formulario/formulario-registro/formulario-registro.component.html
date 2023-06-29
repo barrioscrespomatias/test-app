@@ -2,7 +2,6 @@
    <section class="get-in-touch">
       <h1 class="title">Alta Paciente</h1>
       <form class="contact-form row" [formGroup]="form">
-
          <div class="row">
             <div class="form-field col-md-6">
                <label for="nombre">Nombre</label>
@@ -237,6 +236,7 @@
             </div>
          </div>
            <div class="row mb-2" *ngIf="especialidadHabilitada">
+            <div class="form-field col-md-6">
                <input id="especialidad_agregada" formControlName="especialidad_agregada"
                   class="input-text js-input mt-4" type="text">
                <label for="agregar-especialidad"></label>
@@ -253,6 +253,19 @@
                    </div>
                    <span *ngIf="form.get('especialidad_agregada')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
                 </div>
+            </div>
+
+            <div class="form-field col-md-6">
+               <label class="form-label mb-4" for="imagen_especialidad" data-browse="cargar">Imagen especialidad</label>
+               <input type="file" (change)="SubirArchivo($event, 3)" formControlName="imagen_especialidad"
+                  class="form-control">
+
+                  <div *ngIf="form.get('imagen_especialidad')?.invalid && (form.get('imagen_especialidad')?.dirty || form.get('imagen_especialidad')?.touched)">
+                     <div *ngIf="form.get('imagen_especialidad')?.errors?.['required']" class="error-message">
+                        El campo es requerido.
+                     </div>
+                  </div>
+            </div>               
 
             </div>
             <div class="row">

@@ -6,13 +6,16 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import { FileService } from 'src/app/servicios/file/file.service';
 import { utils, writeFile } from 'xlsx';
 
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent {
-  constructor(private usuarioService: UsuarioService, private file : FileService) {}
+
+  constructor(private usuarioService: UsuarioService, private file : FileService) {
+  }
 
   series = [];
   suscripcionUsuariosService!: Subscription;
