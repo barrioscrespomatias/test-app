@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { from } from 'rxjs';
+import { Encuesta } from 'src/app/interfaces/encuesta';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
@@ -114,6 +115,10 @@ export class TablaTurnosComponent {
   AbrirModal(formularioModal:string, turno:Turno) {
     this.formularioSeleccionado = formularioModal;
     this.turno = turno;
+  }
+
+  getEncuestaKeys(encuesta: Encuesta): string[] {
+    return Object.keys(encuesta);
   }
 
   ObtenerPacienteSeleccionado(pacienteSeleccionado:string){

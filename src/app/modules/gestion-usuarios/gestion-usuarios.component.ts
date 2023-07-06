@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -9,9 +10,9 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 })
 export class GestionUsuariosComponent {
   //#region Propiedades
-  componenteVisible: string = 'tabla-turnos';
   usuario: any;
   mail: string = this.firebaseService.userName;
+  componenteVisible: string = 'tabla-turnos';
 
   //#endregion
 
@@ -28,6 +29,8 @@ export class GestionUsuariosComponent {
 
     this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
       this.usuario = usuario;
+      if(this.usuario?.perfil != 'profesional')
+      this.componenteVisible = 'solicitar-turno'
     });
 
   }

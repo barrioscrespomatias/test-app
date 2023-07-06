@@ -177,12 +177,40 @@ async isLoggedIn(): Promise<boolean> {
   GetLogueado() { 
     return new Promise<boolean>((resolve, reject) => {
       this.afAuth.onAuthStateChanged((user) => {
-        if (user) {
+        if (user) {          
           // Usuario logueado
           resolve(true);
         } else {
           // Usuario no logueado
           resolve(false);
+        }
+      });
+    });
+  }
+
+  GetEmailLogueado() { 
+    return new Promise<string>((resolve, reject) => {
+      this.afAuth.onAuthStateChanged((user) => {
+        if (user && user.email) {
+          // Usuario logueado con correo electrónico
+          resolve(user.email);
+        } else {
+          // Usuario no logueado o sin correo electrónico
+          resolve("");
+        }
+      });
+    });
+  }
+
+  GetUserLogueado() { 
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.onAuthStateChanged((user) => {
+        if (user) {
+          // Usuario logueado con correo electrónico
+          resolve(user);
+        } else {
+          // Usuario no logueado o sin correo electrónico
+          resolve("");
         }
       });
     });

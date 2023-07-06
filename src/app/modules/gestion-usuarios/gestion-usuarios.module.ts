@@ -25,6 +25,8 @@ import { ObtenerFechasTurnosPipe } from '../../pipes/obtenerFechasTurnos/obtener
 import { ObtenerValoresAtributosPipe } from '../../pipes/obtenerValoresAtributos/obtener-valores-atributos.pipe';
 import { UsuariosProfesionalesPipe } from '../../pipes/filtroUsuariosProfesionales/usuarios-profesionales.pipe';
 import { FiltroTurnosHistoriaClinicaPipe } from '../../pipes/filtroTurnosHistoriaClinica/filtro-turnos-historia-clinica.pipe';
+import { ObtenerTodosLosPacientesPipe } from '../../pipes/obtenerTodosLosPacientes/obtener-todos-los-pacientes.pipe';
+import { BooleanoPipe } from '../../pipes/booleano/booleano.pipe';
 
 
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
@@ -70,6 +72,8 @@ import { RegistroModule } from '../registro/registro.module';
     ObtenerValoresAtributosPipe,
     UsuariosProfesionalesPipe,
     FiltroTurnosHistoriaClinicaPipe,
+    ObtenerTodosLosPacientesPipe,
+    BooleanoPipe,
 
     CancelarTurnoComponent,
     VerResenaComponent,

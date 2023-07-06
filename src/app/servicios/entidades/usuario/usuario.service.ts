@@ -43,6 +43,7 @@ export class UsuarioService {
   async Crear(
     usuarioRegistro: Usuario
   ): Promise<{ mensaje: string; valido: boolean }> {
+    debugger
     try {
       const userCredential = await createUserWithEmailAndPassword(
         this.afAuth,
@@ -78,9 +79,32 @@ export class UsuarioService {
     return this.usuariosRepository.getAll();
   }
 
-  async Modificar(docRefusuarioId: string, usuario: Usuario) {
-    return this.usuariosRepository.update(docRefusuarioId, usuario);
+  async Modificar(docRefusuarioId: string, usuario: Usuario): Promise<{ mensaje: string; valido: boolean }> {
+    debugger
+    try {
+
+      this.usuariosRepository.update(docRefusuarioId, usuario);  
+
+
+      return {
+        mensaje: 'Usuario modificado correctamente, por favor verifica el mail',
+        valido: true,
+      };
+    } catch (err) {
+      console.log(err);
+      let errorMensaje = 'Hubo un error al intentar modificar';
+      if (err instanceof FirebaseError) {
+        if (err.code == 'auth/email-already-in-use') {
+          errorMensaje = 'El email ingresado ya existe, ingrese otro';
+        }
+      }
+      return { mensaje: errorMensaje, valido: false };
+    }
   }
+
+  // async Modificar(docRefusuarioId: string, usuario: Usuario) {
+  //   return this.usuariosRepository.update(docRefusuarioId, usuario);
+  // }
 
   async getProfesional(mail: string) {
     return new Promise((resolve, reject) => {

@@ -73,6 +73,7 @@ export class FiltroTurnosPacientePipe implements PipeTransform {
           //#region No paciente, no profesional
           else if(profesional.length == 0 && paciente.length == 0) 
           {
+            alert('entra aca')
             if(estado_igual)
             {
               if (item.estado == estado) 

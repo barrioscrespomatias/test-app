@@ -46,12 +46,12 @@
           <!-- Fin Acceso: Todos -->
 
           <!-- Acceso: Profesional -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <button class="nav-link active" *ngIf="usuario?.perfil == 'profesional' " appMostrarElement componentToggle="grilla-horarios" (click)="componenteVisible = 'grilla-horarios'">
               <span class="align-text-bottom"></span>
               Generar turnos disponibles
             </button>
-          </li>
+          </li> -->
           <li class="nav-item">
             <button class="nav-link" *ngIf="usuario?.perfil == 'profesional' " appMostrarElement componentToggle="generar-turnos" (click)="componenteVisible = 'generar-turnos'">
               <span class="align-text-bottom"></span>
@@ -62,7 +62,7 @@
 
           <!-- Acceso: Paciente -->
           <li class="nav-item">
-            <button class="nav-link" *ngIf="usuario?.perfil == 'paciente' " appMostrarElement componentToggle="solicitar-turno" (click)="componenteVisible = 'solicitar-turno'">
+            <button class="nav-link" *ngIf="usuario?.perfil != 'profesional' " appMostrarElement componentToggle="solicitar-turno" (click)="componenteVisible = 'solicitar-turno'">
               <span class="align-text-bottom"></span>
               Solicitar turno
             </button>
@@ -80,9 +80,9 @@
 
            <!-- Acceso: Todos -->
            <li class="nav-item">
-            <button class="nav-link" appMostrarElement componentToggle="tabla-historicas-clinicas" (click)="componenteVisible = 'tabla-historicas-clinicas'">
+            <button class="nav-link" *ngIf="usuario?.perfil == 'profesional' " appMostrarElement componentToggle="tabla-historicas-clinicas" (click)="componenteVisible = 'tabla-historicas-clinicas'">
               <span class="align-text-bottom"></span>
-              Historia clinica
+              Pacientes
             </button>
           </li>
            <li class="nav-item">

@@ -37,11 +37,13 @@ export class EspecialidadRepositorioService
   }
 
   create(entity: Especialidad): string {
+    debugger
+
     if (this.listadoEspecialidades) {
       let docRef: DocumentReference<DocumentData> = doc(this.listadoEspecialidades);
-      const newItem: Especialidad = {
+      const newItem: any = {
+        ...entity,
         docRef: docRef.id,
-        nombre: entity.nombre
       };
 
       setDoc(docRef, newItem);

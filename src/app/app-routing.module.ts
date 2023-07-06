@@ -5,12 +5,14 @@ import { HomeComponent } from './components/home/home/home.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { TablaHistoriasClinicasComponent } from './components/tabla-historias-clinicas/tabla-historias-clinicas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 const routes: Routes = [
   //normal loading
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'perfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
   { path: 'historias-clinicas', component: TablaHistoriasClinicasComponent, canActivate: [AuthGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+  { path: 'solicitar-turno', component: SolicitarTurnoComponent, canActivate: [AuthGuard] },
 
   // lazy loading
   {

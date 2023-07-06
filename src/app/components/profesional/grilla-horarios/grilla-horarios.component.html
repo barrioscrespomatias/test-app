@@ -1,4 +1,4 @@
-<h2>Generar turnos disponibles</h2>
+<h2>Mis horarios</h2>
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -24,4 +24,4 @@
 </div>
 
 
-<button (click)="CrearTurnos()" class="btn btn-primary" >Confirmar turnos</button>
+<button *ngIf="usuario?.perfil == 'profesional'" (click)="CrearTurnos()" class="btn btn-primary" >Confirmar turnos</button>

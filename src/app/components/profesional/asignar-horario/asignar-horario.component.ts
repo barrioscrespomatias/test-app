@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription, firstValueFrom, map } from 'rxjs';
 import { DiaHora } from 'src/app/interfaces/diaHora';
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
@@ -7,6 +8,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 
 @Component({
   selector: 'app-asignar-horario',
@@ -18,7 +20,9 @@ export class AsignarHorarioComponent {
   constructor(
     private especialidadService: EspecialidadService,
     private usuarioService: UsuarioService,
-    private firebaseService: FirebaseAuthService
+    private firebaseService: FirebaseAuthService,
+    private sweetAlertServicio: SweetAlertService,
+    public router: Router,
   ) {}
 
   //#endregion
@@ -124,19 +128,19 @@ export class AsignarHorarioComponent {
     });
     this.usuario.horarioEspecialidad = horarioEspecialidad;
     
-    this.usuarioService.Modificar(this.mail,this.usuario);
+    var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
 
-    //   let respuesta = this.usuarioServicio.Crear(usuario);
-    //   respuesta.then((response) => {
-    //     if (response.valido) {
-    //       // this.alertaMensajeSucces(response.mensaje);
-    //       // this._usuarioService.setUserToLocalStorage(user);
-    //       // this._router.navigate(['usuario/login']);
-    //     } else {
-    //       // this.alertaMensajeError(response.mensaje);
-    //     }
-    //     alert(response.valido);
-    //   });
+    respuesta.then((response) => {
+      if (response.valido) {
+        this.sweetAlertServicio.MensajeExitoso("Horarios asignados correctamente!")
+        // this.alertaMensajeSucces(response.mensaje);
+        // this._usuarioService.setUserToLocalStorage(user);
+        // this.router.navigate(['']);
+      } else {
+        this.sweetAlertServicio.MensajeError("Hubo un error al asignar los horarios, intente nuevamente.")
+        // this.alertaMensajeError(response.mensaje);
+      }      
+    });
   }
   //#endregion
 }

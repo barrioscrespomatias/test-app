@@ -355,10 +355,10 @@
           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
               *ngIf="turno.resena != '' " (click)="AbrirModal('ver-resena', turno)">Ver resena</button></td>
           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.resena != '' && turno.estado == 4 "
+              *ngIf="getEncuestaKeys(turno?.encuesta).length == 0 && turno.estado == 4 "
               (click)="AbrirModal('completar-encuesta', turno)">Completar encuesta</button></td>
           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.resena != '' && turno.estado == 4 "
+              *ngIf="turno.rating == 0 && turno.estado == 4 "
               (click)="AbrirModal('calificar-atencion', turno)">Calificar atencion</button></td>
         </tr>
       </ng-container>

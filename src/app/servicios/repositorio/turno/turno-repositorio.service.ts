@@ -49,7 +49,6 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
-    debugger
     try {
       const documentReference = doc(this.listadoTurnos, docRef);
       updateDoc(documentReference, {

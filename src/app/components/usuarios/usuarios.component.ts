@@ -40,7 +40,7 @@ export class UsuariosComponent {
 
   CambiarEstado(usuario: Usuario) {
       usuario.habilitado = !usuario.habilitado;
-
+      
     if (usuario.docRef != null)
       this.usuarioService.Modificar(usuario?.docRef, usuario);
   }

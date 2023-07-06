@@ -29,7 +29,6 @@ export class CompletarEncuestaComponent {
         eficiencia_obtener_turno: this.eficiencia_obtener_turno,
         nivel_recomendacion: this.nivel_recomendacion,
     };
-
     this.turnoRecibido.encuesta = encuesta;
     this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
   }

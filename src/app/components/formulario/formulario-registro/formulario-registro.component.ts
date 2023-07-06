@@ -10,6 +10,9 @@ import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Especialidad } from 'src/app/interfaces/especialidad';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
+import { FileService } from 'src/app/servicios/file/file.service';
+import { Router } from '@angular/router';
 
 //#endregion
 @Component({
@@ -32,7 +35,6 @@ export class FormularioRegistroComponent {
   fotoTres: string = '';
   nuevaEspecialidad: string = '';
   especialidadHabilitada: boolean = false;
-
 
   //#region Captcha
   public version = VERSION.full;
@@ -58,6 +60,9 @@ export class FormularioRegistroComponent {
     private usuarioServicio: UsuarioService,
     private sweetAlertServicio: SweetAlertService,
     private recaptchaV3Service: ReCaptchaV3Service,
+    private fileService: FileService,
+    public router: Router, 
+    private usuarioService: UsuarioService,
     
 
   ) {}
@@ -179,7 +184,43 @@ export class FormularioRegistroComponent {
   //#endregion
 
   //#region Métodos
-  CrearUsuario() {
+  async CrearUsuario() {
+    const horarioEspecialidad: HorarioEspecialidad[] = [];
+
+    let url1: string = '';
+    let url2: string = '';
+    // let url3: string = '';
+    
+    try {
+      url1 = await this.ObtenerArchivo(this.fotoUno);
+    } catch (error) {
+      console.log('Error al obtener la URL de la imagen:', error);
+    }
+    
+    try {
+      url2 = await this.ObtenerArchivo(this.fotoDos);
+    } catch (error) {
+      console.log('Error al obtener la URL de la imagen:', error);
+    }    
+    
+    // try {
+    //   url3 = await this.ObtenerArchivo(this.fotoTres);
+    // } catch (error) {
+    //   console.log('Error al obtener la URL de la imagen:', error);
+    // }
+
+
+
+    // const especialidad: Especialidad = {
+    //   nombre: this.especialidad_agregada?.value,
+    //   path: url3,
+    // };
+
+    // var esp: string[] = [];
+
+    // if(especialidad.nombre.length > 0)
+    //   esp.push(especialidad.nombre);
+
     const usuario: Usuario = {
       nombre: this.nombre?.value,
       apellido: this.apellido?.value,
@@ -187,61 +228,62 @@ export class FormularioRegistroComponent {
       dni: this.dni?.value,
       mail: this.mail?.value,
       contrasena: this.contrasena?.value,
-      imagenPerfil1: this.fotoUno,
-      imagenPerfil2: this.fotoDos,
-      habilitado: this.perfilRecibido == 'Paciente' || this.perfilRecibido == 'Administrador' ? true : true,
+      imagenPerfil1: url1 ,
+      imagenPerfil2: url2,
+      habilitado: (this.perfilRecibido == 'Paciente' || this.perfilRecibido == 'Administrador') ? true : false,
       perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : this.perfilRecibido == 'Paciente' ? 'paciente' : 'administrador',
       obraSocial: this.obra_social?.value,
+      // especialidades: especialidad.nombre.length > 0 ? esp : this.especialidad?.value,
       especialidades: this.especialidad?.value,
       peso: 0,
       altura: 0,
+      horarioEspecialidad: horarioEspecialidad,
     };
 
-    console.log(usuario)
-    // let respuesta = this.usuarioServicio.Crear(usuario);
-    // respuesta.then((response) => {
-    //   if (response.valido) {
-    //     this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
-    //     // this.alertaMensajeSucces(response.mensaje);
-    //     // this._usuarioService.setUserToLocalStorage(user);
-    //     // this._router.navigate(['usuario/login']);
-    //   } else {
-    //     this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
-    //     // this.alertaMensajeError(response.mensaje);
-    //   }      
-    // });
+    // debugger
+    // if (especialidad) {
+    //   this.especialidadService.Crear(especialidad);
+    // }
+
+
+
+    let respuesta = this.usuarioServicio.Crear(usuario);
+    respuesta.then((response) => {
+      if (response.valido) {
+        this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
+        // this.alertaMensajeSucces(response.mensaje);
+        // this._usuarioService.setUserToLocalStorage(user);
+        this.router.navigate(['']);
+      } else {
+        this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
+        // this.alertaMensajeError(response.mensaje);
+      }      
+    });
 
   }
 
 
 
-  AgregarEspecialidad() {
-    this.especialidadHabilitada = !this.especialidadHabilitada
-    const especialidad: Especialidad = {
-      nombre: this.especialidad_agregada?.value,
-      path: this.fotoTres,
-    };
-
-    if (especialidad.nombre?.length > 0) {
-      this.especialidadService.Crear(especialidad);
-    }
+  async AgregarEspecialidad() {
+    this.especialidadHabilitada = !this.especialidadHabilitada;
+    
   }
 
   public FormularioConErrores(): boolean {
 
-    // console.log(this.form.controls);
+    console.log(this.form.controls);
 
-    // // Recorrer los controles del formulario
-    // for (const controlName in this.form.controls) {
-    //   if (this.form.controls.hasOwnProperty(controlName)) {
-    //     const control = this.form.controls[controlName];
+    // Recorrer los controles del formulario
+    for (const controlName in this.form.controls) {
+      if (this.form.controls.hasOwnProperty(controlName)) {
+        const control = this.form.controls[controlName];
         
-    //     // Verificar si el control tiene errores
-    //     if (control.errors) {
-    //       console.log(`Errores en ${controlName}:`, control.errors);
-    //     }
-    //   }
-    // }
+        // Verificar si el control tiene errores
+        if (control.errors) {
+          console.log(`Errores en ${controlName}:`, control.errors);
+        }
+      }
+    }
 
     return this.form.invalid;
   }
@@ -269,6 +311,19 @@ export class FormularioRegistroComponent {
       
     });
   }
+
+ObtenerArchivo(nombreArchivo: string): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    this.fileService.ObtenerURLImagen(nombreArchivo)
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        console.log('Error al obtener la URL de la imagen:', error);
+        reject(error);
+      });
+  });
+}
 
   getFecha(): string {
     var fecha = new Date();

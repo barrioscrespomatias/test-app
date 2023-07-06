@@ -12,7 +12,7 @@ import { NavComponent } from './components/nav/nav/nav.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FirebaseAuthService } from './services/angularFire/angular-fire.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ObtenerAtributosPipe } from './pipes/obtener-atributos.pipe';
+import { PacientesComponent } from './componentes/pacientes/pacientes.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ObtenerAtributosPipe } from './pipes/obtener-atributos.pipe';
     AppComponent,
     HomeComponent,
     NavComponent,
-    ObtenerAtributosPipe,
+    PacientesComponent,
   ],
   imports: [
     BrowserModule,

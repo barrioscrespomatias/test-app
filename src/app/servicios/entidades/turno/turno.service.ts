@@ -67,7 +67,23 @@ export class TurnoService {
   //   return collectionData(coleccion);
   // }
 
-  async Modificar(docRef: string, turno: Turno) {
-    return this.turnosRepositorioService.update(docRef, turno);
+  async Modificar(docRef: string, turno: Turno): Promise<{ mensaje: string; valido: boolean }> 
+  {
+    try {
+      this.turnosRepositorioService.update(docRef, turno);
+
+      return {
+        mensaje: 'Turnos modificados correctamente',
+        valido: true,
+      };
+    } catch (err) {
+      console.log(err);
+      let errorMensaje = 'Hubo un error al intentar modificar los turnos';
+      return { mensaje: errorMensaje, valido: false };
+    }
   }
+
+  // async Modificar(docRef: string, turno: Turno) {
+  //   return this.turnosRepositorioService.update(docRef, turno);
+  // }
 }

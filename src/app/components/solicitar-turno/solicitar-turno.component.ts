@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { Encuesta } from 'src/app/interfaces/encuesta';
@@ -7,6 +7,7 @@ import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/es
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -21,6 +22,7 @@ export class SolicitarTurnoComponent {
     private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService,
     private sweetAlert: SweetAlertService,
+    public router: Router,
  
   ) {}
 
@@ -35,6 +37,7 @@ export class SolicitarTurnoComponent {
   usuarios: any;
   especialidadSeleccionada: string = '';
   profesionalSeleccionado: string = '';
+  pacienteSeleccionado: string = '';
   turnoSeleccionado: any;
 
   profesionalSeleccionadoParaTurno: any;
@@ -42,8 +45,12 @@ export class SolicitarTurnoComponent {
 
   //visualizador
   visualizarEspecialidades: boolean = true;
-  visualizarProfesionales: boolean = false;
-  visualizarTurnos: boolean = false;
+  visualizarProfesionales: boolean = true;
+  visualizarTurnos: boolean = true;
+
+  // visualizarEspecialidades: boolean = true;
+  // visualizarProfesionales: boolean = false;
+  // visualizarTurnos: boolean = false;
 
   //#endregion
 
@@ -75,13 +82,33 @@ export class SolicitarTurnoComponent {
     // this.GenerarHorariosParaTurnos();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // if (changes['turnoRecibido'] && this.turnoRecibido) {
+    // if (changes) {
+    console.log(changes)
+      // this.ActualizarFormulario();
+    // }
+  }
+
   //#endregion
 
   //#region Metodos
   ObtenerValorEspecialidad(nombreEspecialidad: string) {
     this.visualizarEspecialidades = false;
-    this.visualizarProfesionales = true;
-    this.especialidadSeleccionada = nombreEspecialidad;
+
+
+    if(nombreEspecialidad.length > 0)
+    {
+      this.visualizarProfesionales = true;
+      this.especialidadSeleccionada = nombreEspecialidad;
+    }
+    
+
+  }
+
+  
+  ObtenerPacienteSeleccionado(emailPaciente:string){
+    this.pacienteSeleccionado = emailPaciente;    
   }
 
   ObtenerValorProfesional(nombreProfesional: string) {
@@ -112,7 +139,7 @@ export class SolicitarTurnoComponent {
     // ];
     
     this.turnoSeleccionado = turnoSeleccionado;
-    this.turnoSeleccionado.paciente = this.mail;
+    this.turnoSeleccionado.paciente = this.pacienteSeleccionado.length > 0 ? this.pacienteSeleccionado : this.mail;
     this.turnoSeleccionado.estado = EstadoEnum.PendienteAprobacion;
     this.turnoSeleccionado.encuesta = encuesta;
     this.turnoSeleccionado.rating = 0;
@@ -124,11 +151,29 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.temperatura = '0';
     this.turnoSeleccionado.preison = '';
 
-    this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
+    var solicitarTurno = this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
+
+    solicitarTurno.then((response) => {
+      if (response.valido) {          
+        this.sweetAlert.MensajeExitoso('Se ha asignado el turno exitosamente!')
+        this.ReloadCurrentRoute();
+      }      
+      else{
+        this.sweetAlert.MensajeError('Ha ocurrido un problema al asignar el turno. Intente nuevamente.')
+        this.ReloadCurrentRoute();
+      } 
+    });
   }
 
   ConvertirFecha(fecha:any){
     return new Date(fecha.seconds * 1000);
+  }
+
+  ReloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
   }
 
   //#endregion

@@ -33,8 +33,6 @@ export class LoginComponent {
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
-
-    console.log(this.firebaseService.GetLogueado())
   }
 
   get email() {
@@ -46,10 +44,7 @@ export class LoginComponent {
   }
 
   SignIn() {
-    console.log(this.email?.value, this.password?.value)
     this.firebaseService.SignIn(this.email?.value, this.password?.value);
-    //TODO especificamente aca utiliza el serivicio
-    // this.firestoreService.guardar(this.email?.value);
   }
 
   GoogleAuth() {

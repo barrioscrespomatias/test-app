@@ -41,10 +41,7 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
       let docRef: DocumentReference<DocumentData> = doc(this.listadoUsuarios,mail);
       const newItem: any = {
         ...entity,
-        // docRefUsuarioId: docRef.id,
-        // docRefUsuarioId: mail,
         docRef: mail,
-        // userFirebaseAuthId: userFirebaseAuthId,
       };
 
       setDoc(docRef, newItem);
@@ -54,6 +51,8 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
   }
   update(docRef: string, ...args: unknown[]): boolean {
     debugger
+    console.log(args
+      )
     try {
       const documentReference = doc(this.listadoUsuarios, docRef);
       updateDoc(documentReference, {
@@ -70,6 +69,7 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
     } catch (e) {
       console.log(e);
     }
+    console.log('supuestamente cambio')
     return false;
   }  
 

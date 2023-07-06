@@ -38,6 +38,7 @@ export class EspecialidadService {
     especialidadRegistro: Especialidad
   ): Promise<{ mensaje: string; valido: boolean }> {
     try {
+      debugger
       let especialidadDocRef =
         this.especialidadRepositorioService.create(especialidadRegistro);
 

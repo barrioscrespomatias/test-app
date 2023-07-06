@@ -1,3 +1,68 @@
+<div>
+    <!-- FILTROS -->
+    <div class="accordion accordion-flush" id="accordionFiltros" *ngIf="usuario?.perfil == 'administrador'">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseFiltros" aria-expanded="false" aria-controls="flush-collapseFiltros">
+            Mostrar filtros
+          </button>
+        </h2>
+        <div id="flush-collapseFiltros" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+          <div class="accordion-body">
+  
+            <div class="">
+              <!-- FILTRO POR PACIENTES -->
+              <div class="accordion accordion-flush" id="accordionPacientes">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapsePacientes" aria-expanded="false"
+                      aria-controls="flush-collapsePacientes">
+                      Pacientes
+                    </button>
+                  </h2>
+                  <div id="flush-collapsePacientes" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionPacientes">
+                    <div class="accordion-body">
+                      <button class="badge bg-primary m-2"
+                        *ngFor="let usuario of usuarios | async | obtenerTodosLosPacientes: 'paciente'"
+                        (click)="ObtenerPacienteSeleccionado(usuario)">{{usuario}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END FILTRO POR PACIENTES -->
+  
+              <!-- FILTRO FECHA -->
+              <!-- <div class="accordion accordion-flush" id="accordionFechas" *ngIf="usuario?.perfil == 'paciente'">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseFechas" aria-expanded="false"
+                      aria-controls="flush-collapseFechas">
+                      Fecha
+                    </button>
+                  </h2>
+                  <div id="flush-collapseFechas" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFechas">
+                    <div class="accordion-body">
+                      <button class="badge bg-primary m-2"
+                        *ngFor="let fecha of turnos | obtenerFechasTurnos: usuario?.mail : ''"
+                        (click)="ObtenerFechaSeleccionada(fecha)">{{GetFormattedDate(fecha)}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- END FILTRO POR FECHA -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END FILTROS -->
+  </div>
+
 <div class="card text-center">
     <!-- <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
@@ -20,7 +85,8 @@
                     <span class="align-text-bottom"></span>
                     {{especialidad.nombre}}
                  
-                   <img class="mx-auto d-block rounded-circle" src="../../../assets/img/especialidaes default.jpg" alt="Card image cap" width="200" height="200">
+                   <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length == 0" src="../../../assets/img/especialidaes default.jpg" alt="Card image cap" width="200" height="200">
+                   <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length > 0" src={{especialidad?.path}} alt="Card image cap" width="200" height="200">
                   </button>
                 
                 <!-- <h5 class="card-title">{{especialidad.nombre}}</h5> -->
@@ -28,7 +94,6 @@
             </div>
         </div>
     </div>
-
     <div *ngIf="especialidadSeleccionada != '' && visualizarProfesionales ">
         <div class="card-body">
             <div class="row">
@@ -36,7 +101,8 @@
                     (click)="ObtenerValorProfesional(usuario.mail)">
                     <button class="nav-link" >
                         <span class="align-text-bottom"></span>
-                    <img class="mx-auto d-block rounded-circle" src="../../../assets/img/doctor.png" alt="Card image cap" width="200" height="200">
+                    <img class="mx-auto d-block rounded-circle" *ngIf="usuario?.imagenPerfil1.length == 0" src="../../../assets/img/doctor.png" alt="Card image cap" width="200" height="200">
+                    <img class="mx-auto d-block rounded-circle" *ngIf="usuario?.imagenPerfil1.length > 0" src="{{usuario?.imagenPerfil1}}" alt="Card image cap" width="200" height="200">
                     <h5 class="card-title">{{usuario?.nombre}} {{usuario.apellido}}</h5>
                     </button>
                 </div>
@@ -61,6 +127,5 @@
             </div>
         </div>
     </div>
-
 
 </div>

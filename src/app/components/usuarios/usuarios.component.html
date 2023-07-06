@@ -18,7 +18,7 @@
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.mail}}</td>
                 <td>{{usuario.perfil}}</td>
-                <td>{{usuario.habilitado}}</td>
+                <td>{{usuario.habilitado ? 'Si' : 'No'}}</td>
                 <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}" (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" : "Activar"}}</button></td>
             </tr>
         </tbody>
@@ -36,11 +36,8 @@
     <button class="btn btn-primary col-4" (click)="DescargarPDF()">Descargar un PDF</button>
 </div>
 <div class="row justify-content-center m-2">
-    <button class="btn btn-primary col-4" (click)="RegistrarUsuarioAdministrador()">RegistrarUsuario</button>
+    <button class="btn btn-primary col-4" (click)="RegistrarUsuarioAdministrador()">Registrar nuevo administrador</button>
 </div>
-    
-    
-
 
 
 <app-formulario-registro *ngIf="formularioRegistrarUsuarioVisible" [perfilRecibido]="'Administrador'"></app-formulario-registro>
