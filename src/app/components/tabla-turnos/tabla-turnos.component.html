@@ -13,7 +13,7 @@
 
           <div class="">
             <!-- FILTRO POR PACIENTES -->
-            <div class="accordion accordion-flush" id="accordionPacientes" *ngIf="usuario?.perfil != 'paciente' ">
+            <div class="accordion accordion-flush" id="accordionPacientes" *ngIf="usuario?.perfil == 'profesional' ">
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
