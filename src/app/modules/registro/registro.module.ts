@@ -65,12 +65,12 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     // },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: '6Lfli9ImAAAAAAWGXGxCckymjtBFr1k96RVl17cx'
+      useValue: '6LdbARsnAAAAAObf00FdSTKsDgvZiV9_iADGVlgT'
     },
     {
       provide: RECAPTCHA_SETTINGS,
       useValue: {
-        siteKey: RECAPTCHA_V2_DUMMY_KEY
+        siteKey: '6LdeBxsnAAAAAN-yVQFgbO6xinlz4lVQM-wPE-G6'
       } as RecaptchaSettings
     }
   ],
