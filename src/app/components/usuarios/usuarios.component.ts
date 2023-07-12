@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import * as pdfMake from 'pdfmake/build/pdfmake';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { utils, writeFile } from 'xlsx';
+
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import * as fonts from 'pdfmake/build/vfs_fonts';
+
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 
 
 @Component({
@@ -16,6 +22,7 @@ export class UsuariosComponent {
 
   constructor(private usuarioService: UsuarioService, private file : FileService) {
   }
+  
 
   series = [];
   suscripcionUsuariosService!: Subscription;
@@ -99,18 +106,42 @@ export class UsuariosComponent {
   
     const headers: string[] = ['Dni', 'Nombre', 'Apellido', 'Mail', 'Perfil', 'Habilitado'];
   
+    // const documentDefinition: any = {
+    //   content: [
+    //     { text: 'Usuarios', style: 'header' },
+    //     {
+    //       table: {
+    //         headerRows: 1,
+    //         widths: ['10%', '20%', '20%', '20%', '20%', '10%'],
+    //         body: [
+    //           headers,
+    //           ...data,
+    //         ],
+    //       },
+    //     },
+    //   ],
+    //   styles: {
+    //     header: {
+    //       fontSize: 12,
+    //       bold: true,
+    //       margin: [0, 10, 0, 10], // Ajusta los valores de margen según tus necesidades
+    //     },
+    //   },
+    // };
+
     const documentDefinition: any = {
       content: [
         { text: 'Usuarios', style: 'header' },
         {
           table: {
             headerRows: 1,
-            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            widths: ['10%', '15%', '15%', '30%', '20%', '10%'],
             body: [
               headers,
               ...data,
             ],
           },
+          style: 'tableStyle', // Aplica el estilo de la tabla
         },
       ],
       styles: {
@@ -119,11 +150,14 @@ export class UsuariosComponent {
           bold: true,
           margin: [0, 10, 0, 10], // Ajusta los valores de margen según tus necesidades
         },
+        tableStyle: {
+          fontSize: 8, // Ajusta el tamaño de letra de la tabla
+        },
       },
     };
   
     // Generar el documento PDF
-    const pdfBuffer = pdfMake.createPdf(documentDefinition).getBuffer((buffer: any) => {
+    const pdfBuffer = pdfMake.createPdf(documentDefinition,undefined,undefined,pdfFonts.pdfMake.vfs).getBuffer((buffer: any) => {
       // Descargar el archivo PDF
       this.savePDFFile(buffer, 'usuarios.pdf');
     });

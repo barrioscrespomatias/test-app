@@ -65,11 +65,13 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     // },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
+      //Google SITE KEY RECAPTCHA V3
       useValue: '6LdbARsnAAAAAObf00FdSTKsDgvZiV9_iADGVlgT'
     },
     {
       provide: RECAPTCHA_SETTINGS,
       useValue: {
+        //Google SITE KEY RECAPTCHA V2
         siteKey: '6LdeBxsnAAAAAN-yVQFgbO6xinlz4lVQM-wPE-G6'
       } as RecaptchaSettings
     }
