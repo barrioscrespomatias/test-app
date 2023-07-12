@@ -1,132 +1,57 @@
-# ***IMPORTANTE:*** Siempre mirar la URL y/o que selección hay en el navbar (barra de navegación que está fija en la parte superior de la pantalla)
+# Clínica Online - Documentación
 
+🏥 Bienvenido a la documentación de Clínica Online, un sistema desarrollado para una clínica especializada en salud. Aquí encontrarás información sobre las funcionalidades, pantallas y requisitos mínimos del proyecto.
 
-# ***Deploys de cada sprint*** -> [./README_INFO.md](./README_INFO.md)
+## Descripción
 
-# Páginas para todos los usuarios no logeados
+La Clínica Online es un sistema que permite a los pacientes solicitar turnos con especialistas médicos de diferentes especialidades. También ofrece herramientas de administración para gestionar los usuarios y los turnos dentro de la clínica.
 
-## Página de inicio
-![página de inicio](./assets/readme/bienvenido.png)
+📅 Fechas de Entrega y Requerimientos Mínimos:
+- Sprint 1: Registro, inicio de sesión y gestión de usuarios.
+- Sprint 2: Carga y visualización de turnos.
+- Sprint 3: Historia clínica y mejoras en el filtro de turnos.
+- Sprint 4: Gráficos y estadísticas para los administradores.
+- Sprint 5: Nuevos datos dinámicos, captcha propio y animaciones de transición.
+- Sprint 6: Multilingüismo y encuesta de atención.
 
-## Página para registrarse
-![página para registrarse](./assets/readme/registrarse.png)
+🔗 Repositorio GitHub: [Enlace al repositorio](https://github.com/tu-usuario/repo-clinica-online)
 
-## Página para ingresar
-![Página para ingresar](./assets/readme/iniciar_sesion.png)
+## Capturas de Pantalla
 
-# Si ingreso como Paciente 
+Aquí se presentan algunas capturas de pantalla del sistema para ilustrar su funcionamiento:
 
-## Página para ver mi perfil
-![Página para ver mi perfil](./assets/readme/paciente_mi-perfil.png)
+1. Página de bienvenida y acceso rápido al inicio de sesión y registro.
+![Página de bienvenida](screenshots/welcome.png)
 
-## Página para ver mi historia clinica
-![Página para ver mi historia clinica](./assets/readme/paciente_mi-perfil-mi-historia-clinica.png)
+2. Registro de pacientes y especialistas con validación de campos.
+![Registro](screenshots/registro.png)
 
-> Nota: tiene la posibilidad de descargar un excel con los datos de la historia clinica
+3. Vista de turnos para pacientes, donde se pueden cancelar, ver reseñas y completar encuestas.
+![Mis Turnos (Paciente)](screenshots/mis-turnos-paciente.png)
 
-## Página para ver los turnos que ha sacado y sus estados
-![Página para ver mi historia clinica](./assets/readme/paciente_ver-turnos.png)
+4. Vista de turnos para especialistas, con opciones para cancelar, rechazar y finalizar turnos.
+![Mis Turnos (Especialista)](screenshots/mis-turnos-especialista.png)
 
-Podría hacer las siguientes acciones
-1. Cancelar turno
-    1. Solamente debe ser visible si el turno no fue realizado.
-    1. Debe dejar un comentario del porque se cancela el turno.
-1. Ver reseña.
-    1. Solo debe ser visible si el turno tiene un comentario o reseña
-cargado.
-1. Completar encuesta.
-    1. Solamente debe estar visible si el especialista marcó el turno
-como realizado y dejo la reseña.
-1. Calificar Atención
-    1. Solamente debe ser visible una vez que el turno sea
-realizado.
-    1. El paciente debe dejar un comentario de como fue la
-atención del Especialista.
+5. Vista de turnos para administradores, con filtrado y opción de solicitar turnos.
+![Turnos (Administrador)](screenshots/turnos-administrador.png)
 
+6. Perfil de usuario con información personal y horarios disponibles para especialistas.
+![Mi Perfil](screenshots/mi-perfil.png)
 
-## Página para sacar turnos
-![Página para sacar turnos](./assets/readme/paciente_sacar-turnos.png)
+## Requerimientos Mínimos
 
-1. Primero eligo un especialista
-1. Luego una especialidad de dicho especialista
-1. Por último eligo un turno (si es que tiene disponibilidad el especialista)
+El sistema cumple con los siguientes requerimientos mínimos:
 
+- Favicon personalizado 🌟
+- Estilos y experiencia de usuario mejorados ✨
+- Implementación de Captcha propio para registro ✅
+- Manejo de imágenes para perfiles y avatares 🖼️
+- Generación de archivos Excel o PDF 📊
+- Lazy loading para mejorar la carga de contenido ⏩
+- Uso de 3 Pipes y 3 Directivas personalizadas ⚙️
 
-# Si ingreso como Especialista
+## Contribución
 
-## Página para ver mi perfil
-![Página para ver mi perfil](./assets/readme/especialista_mi-perfil.png)
+Si deseas contribuir al desarrollo de Clínica Online, te invitamos a hacer un fork de este repositorio y enviar tus mejoras mediante pull requests. Agradecemos tu participación y esperamos que este proyecto sea de utilidad para el aprendizaje y la aplicación de Angular.
 
-> Nota: en esta página esta el botón "Cargar Horarios"
-
-## Página para cargar nuevos horarios
-![Página para cargar nuevos horarios](./assets/readme/especialista_mi-perfil-cargar-horarios.png)
-
-## Página para ver las historias clinicas de ***mis pacientes***
-![Página para ver las historias clinicas de mis pacientes](./assets/readme/especialista_historia-clinica-pacientes.png)
-
-## Página para ver los turnos que tengo que presentarme y los que ya di
-![Página para ver los turnos que tengo que presentarme y los que ya di](./assets/readme/especialista_ver-mis-turnos.png)
-
-Podría hacer las siguientes acciones
-1. Cancelar turno
-    1. Solamente debe ser visible si el turno no fue Aceptado,
-Realizado o Rechazado.
-    1. Para cancelar el turno se debe dejar un comentario del
-porque se cancela el mismo.
-1. Rechazar turno
-    1. Solamente debe ser visible si el turno no fue Aceptado,
-Realizado o Cancelado.
-    1. Para rechazar el turno se debe dejar un comentario del
-porque se rechaza el mismo.
-1. Aceptar turno
-    1. Solamente debe ser visible si el turno no fue Realizado,
-Cancelado o Rechazado.
-1. Finalizar Turno
-    1. Solamente debe ser visible si el turno fue Aceptado.
-    1. Para finalizar el turno se debe dejar una reseña o comentario
-de la consulta y diagnóstico realizado.
-1. Ver Reseña
-    1. Solo debe ser visible si el turno tiene un comentario o reseña
-cargado
-
-> Nota: Ademas al finalizar el turno se puede cargar la historia clinica correspondiente al turno.
-
-
-# Si ingreso como Administrador
-
-## Página para ver mi perfil
-![Página para ver mi perfil](./assets/readme/administrador_mi-perfil.png)
-
-## Página administrar usuarios
-![Página administrar usuarios](./assets/readme/administrador_administrar-usuarios.png)
-
-Se puede
-
-1. Ver información de los usuarios , ***con posibilidad de descargar los datos en excel***
-1. Aceptar, rechazar o anular a los especialistas
-1. Agregar un nuevo especialista,paciente o administrador
-
-## Página para ver todas las historias clinicas
-![Página para ver todas las historias clinicas](./assets/readme/administrador_ver-historias-clinicas.png)
-
-## Página para ver los turnos
-![Página para ver los turnos](./assets/readme/administrador_ver_turnos.png)
-
-> Nota: solo puede verlos o cancelarlos (siempre y cuando eso sea posible)
-
-## Página para ver los turnos
-![Página para ver los turnos](./assets/readme/administrador_ver_turnos.png)
-
-> Nota: solo puede verlos o cancelarlos (siempre y cuando eso sea posible)
-
-
-## Página para sacar un turno
-![Página para sacar un turno](./assets/readme/administrador_sacar_turno.png)
-
-Pasos:
-
-1. Elegir paciente
-1. Lo siguiente es elegir un especialista
-1. Luego una especialidad de dicho especialista
-1. Por último eligo un turno (si es que tiene disponibilidad el especialista)
+🌐 **¡Gracias por tu interés en Clínica Online!** 🌐
