@@ -1,3 +1,4 @@
+<div [@slideAnimation]="estadoActual">
 <form [formGroup]="form">
     <div class="row">
         <div class="col-md-3">
@@ -65,3 +66,4 @@
 <ng-container *ngIf="usuario?.perfil == 'profesional'">
     <app-grilla-horarios></app-grilla-horarios>
 </ng-container>
+</div>

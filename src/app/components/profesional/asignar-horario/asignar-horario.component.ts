@@ -9,11 +9,14 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
+import { slideAnimation } from '../../../animation';
+
 
 @Component({
   selector: 'app-asignar-horario',
   templateUrl: './asignar-horario.component.html',
   styleUrls: ['./asignar-horario.component.css'],
+  animations: [slideAnimation]
 })
 export class AsignarHorarioComponent {
   //#region Constructor
@@ -27,6 +30,11 @@ export class AsignarHorarioComponent {
 
   //#endregion
 
+  estadoActual: string = 'estadoInicial';
+
+  cambiarEstado() {
+    this.estadoActual = 'estadoFinal';
+  }
   //#region Propiedades
   especialidades!: any;
   form!: FormGroup;

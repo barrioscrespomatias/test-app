@@ -1,4 +1,6 @@
-<div class="" *ngIf="usuario?.perfil != 'paciente' ">
+<div [@slideAnimation]="estadoActual">
+
+<div class="">
     <!-- FILTROS -->
     <div class="accordion accordion-flush" id="accordionFiltros">
       <div class="accordion-item">
@@ -33,24 +35,45 @@
                 </div>
               </div>
               <!-- END FILTRO POR PACIENTES --> 
+
+              <!-- FILTRO POR ESPECIALIDADES -->
+            <div class="accordion accordion-flush" id="accordionEspecialidades" *ngIf="usuario?.perfil == 'paciente'">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseEspecialidades" aria-expanded="false"
+                    aria-controls="flush-collapseEspecialidades">
+                    Especialidades
+                  </button>
+                </h2>
+                <div id="flush-collapseEspecialidades" class="accordion-collapse collapse"
+                  data-bs-parent="#accordionEspecialidades">
+                  <div class="accordion-body">
+                    <button class="badge bg-primary m-2"
+                      *ngFor="let especialidad of turnos | obtenerEspecialidadProfesional: usuario?.mail: '' "
+                      (click)="ObtenerEspecialidadSeleccionada(especialidad)">{{especialidad}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END FILTRO POR ESPECIALIDADES -->
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- END FILTROS -->
-  </div>
-
-
+</div>
 
 <div class="container text-center">
     <h1>Historias clinicas</h1>
-  </div>
-  <div class="container">
+</div>
+<div class="container">
     <div class="row">
       <div class="search-hero">
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off">
       </div>
+
       <table class="table table-striped">
         <thead>
         <tr>
@@ -114,7 +137,8 @@
         </tbody>
       </table>
     </div>
-  </div>
+    <!-- </div> -->
+</div>
 
   <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,7 +149,10 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
-  <!-- <span class="badge bg-success m-2" *ngFor="let turno of turnos  | async | filtroTurnosPaciente: usuario?.mail : '' : '0'">{{turno?.paciente}}</span> --> 
+  <div class="row justify-content-center m-2">
+    <button class="btn btn-primary col-4" (click)="DescargarPDF()">Descargar un PDF</button>
+</div>
+</div>
   

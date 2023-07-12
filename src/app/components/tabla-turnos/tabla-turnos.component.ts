@@ -8,11 +8,17 @@ import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/es
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { slideAnimation } from '../../animation';
+
+//animations
+// import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-tabla-turnos',
   templateUrl: './tabla-turnos.component.html',
   styleUrls: ['./tabla-turnos.component.css'],
+  animations: [slideAnimation]
 })
 export class TablaTurnosComponent {
   //#region Constructor
@@ -29,6 +35,12 @@ export class TablaTurnosComponent {
 
   //#endregion
 
+  estadoActual: string = 'estadoInicial';
+
+  cambiarEstado() {
+    this.estadoActual = 'estadoFinal';
+  }
+
   //#region Propiedades
   usuario: any;
   mail: string = this.firebaseService.userName;
@@ -37,6 +49,7 @@ export class TablaTurnosComponent {
   parametrosDinamicos: any;
   especialidades: any;
   turno:any;
+  searchText: any;
 
   // Disponible = 0,
   // PendienteAprobacion = 1, //Falta aprobacion de profeisonal

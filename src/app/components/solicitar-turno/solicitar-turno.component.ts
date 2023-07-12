@@ -9,11 +9,13 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { slideAnimation } from '../../animation';
 
 @Component({
   selector: 'app-solicitar-turno',
   templateUrl: './solicitar-turno.component.html',
   styleUrls: ['./solicitar-turno.component.css'],
+  animations: [slideAnimation]
 })
 export class SolicitarTurnoComponent {
   //#region Constructor
@@ -28,6 +30,12 @@ export class SolicitarTurnoComponent {
   ) {}
 
   //#endregion
+
+  estadoActual: string = 'estadoInicial';
+
+  cambiarEstado() {
+    this.estadoActual = 'estadoFinal';
+  }
 
   //#region Propiedades
 

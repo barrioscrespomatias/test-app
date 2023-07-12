@@ -4,31 +4,36 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { utils, writeFile } from 'xlsx';
-
-// import * as pdfMake from 'pdfmake/build/pdfmake';
-// import * as fonts from 'pdfmake/build/vfs_fonts';
-
+import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-
-
+import { slideAnimation } from '../../animation';
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  styleUrls: ['./usuarios.component.css'],
+  animations: [slideAnimation]
 })
 export class UsuariosComponent {
 
-  constructor(private usuarioService: UsuarioService, private file : FileService) {
-  }
-  
+  constructor(
+              private usuarioService: UsuarioService,
+              private fileService : FileService
+              ) {
+  }  
 
   series = [];
   suscripcionUsuariosService!: Subscription;
   usuarios: any;
   usuariosSubscription:any;
   formularioRegistrarUsuarioVisible:boolean = false;
+
+  estadoActual: string = 'estadoInicial';
+
+  cambiarEstado() {
+    this.estadoActual = 'estadoFinal';
+  }
 
   async ngOnInit() {
 
@@ -97,7 +102,7 @@ export class UsuariosComponent {
     }   
   }
 
-  DescargarPDF() {
+  async DescargarPDF() {
     const data: Usuario[][] = this.usuarios.map((usuario: { dni: string; nombre: string; apellido: string; mail: string; perfil: string; habilitado: boolean }) => {
       let habilitado = usuario.habilitado ? 'si' : 'no';
     
@@ -105,33 +110,26 @@ export class UsuariosComponent {
     });
   
     const headers: string[] = ['Dni', 'Nombre', 'Apellido', 'Mail', 'Perfil', 'Habilitado'];
-  
-    // const documentDefinition: any = {
-    //   content: [
-    //     { text: 'Usuarios', style: 'header' },
-    //     {
-    //       table: {
-    //         headerRows: 1,
-    //         widths: ['10%', '20%', '20%', '20%', '20%', '10%'],
-    //         body: [
-    //           headers,
-    //           ...data,
-    //         ],
-    //       },
-    //     },
-    //   ],
-    //   styles: {
-    //     header: {
-    //       fontSize: 12,
-    //       bold: true,
-    //       margin: [0, 10, 0, 10], // Ajusta los valores de margen según tus necesidades
-    //     },
-    //   },
-    // };
 
     const documentDefinition: any = {
+      header: `Informe... ${moment().format('DD/MM/YYYY')}`,
+      footer: (currentPage: number, pageCount: number) => {
+        return {
+          text: `Página ${currentPage} de ${pageCount}`,
+          alignment: 'center',
+        };
+      },      
       content: [
-        { text: 'Usuarios', style: 'header' },
+        {
+          image: await this.getBase64ImageFromURL('assets/img/logo_matcres.png'),
+          width: 50, // Ancho de la imagen en puntos (ajusta según tus necesidades)
+          height: 50, // Alto de la imagen en puntos (ajusta según tus necesidades)
+          alignment: 'center', // Centra la imagen horizontalmente
+          margin: [0, 0, 0, 10], // Márgenes superiores e inferiores de la imagen
+          style : 'header'
+        },
+        { text: 'Usuarios' },
+        
         {
           table: {
             headerRows: 1,
@@ -160,6 +158,31 @@ export class UsuariosComponent {
     const pdfBuffer = pdfMake.createPdf(documentDefinition,undefined,undefined,pdfFonts.pdfMake.vfs).getBuffer((buffer: any) => {
       // Descargar el archivo PDF
       this.savePDFFile(buffer, 'usuarios.pdf');
+    });
+  }
+
+  async getBase64ImageFromURL(url: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const img = new Image();
+      img.setAttribute('crossOrigin', 'anonymous');
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0);
+
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+
+      img.onerror = () => {
+        reject(new Error('No se pudo cargar la imagen'));
+      };
+
+      img.src = url;
     });
   }
 

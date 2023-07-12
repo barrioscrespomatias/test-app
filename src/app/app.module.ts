@@ -13,6 +13,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FirebaseAuthService } from './services/angularFire/angular-fire.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PacientesComponent } from './componentes/pacientes/pacientes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { PacientesComponent } from './componentes/pacientes/pacientes.component'
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [FirebaseAuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
