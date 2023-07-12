@@ -6,13 +6,13 @@
 
 La Clínica Online es un sistema que permite a los pacientes solicitar turnos con especialistas médicos de diferentes especialidades. También ofrece herramientas de administración para gestionar los usuarios y los turnos dentro de la clínica.
 
-📅 Fechas de Entrega y Requerimientos Mínimos:
-- Sprint 1: Registro, inicio de sesión y gestión de usuarios.
-- Sprint 2: Carga y visualización de turnos.
-- Sprint 3: Historia clínica y mejoras en el filtro de turnos.
-- Sprint 4: Gráficos y estadísticas para los administradores.
-- Sprint 5: Nuevos datos dinámicos, captcha propio y animaciones de transición.
-- Sprint 6: Multilingüismo y encuesta de atención.
+📅 Funcionalidad:
+- Registro, inicio de sesión y gestión de usuarios.
+- Carga y visualización de turnos.
+- Historia clínica y mejoras en el filtro de turnos.
+- Gráficos y estadísticas para los administradores.
+- Nuevos datos dinámicos, captcha propio y animaciones de transición.
+- Multilingüismo y encuesta de atención.
 
 🔗 Repositorio GitHub: [Enlace al repositorio](https://github.com/barrioscrespomatias/test-app)
 
@@ -24,31 +24,29 @@ Aquí se presentan algunas capturas de pantalla del sistema para ilustrar su fun
 ![Página de bienvenida](https://i.imgur.com/XKMgsgb.png)
 
 2. Registro de pacientes y especialistas con validación de campos.
-![Registro](screenshots/registro.png)
+![Registro](https://imgur.com/HnCXTyW)
 
 3. Vista de turnos para pacientes, donde se pueden cancelar, ver reseñas y completar encuestas.
-![Mis Turnos (Paciente)](screenshots/mis-turnos-paciente.png)
+![Mis Turnos (Paciente)](https://imgur.com/VCAEfVT)
 
 4. Vista de turnos para especialistas, con opciones para cancelar, rechazar y finalizar turnos.
-![Mis Turnos (Especialista)](screenshots/mis-turnos-especialista.png)
+![Mis Turnos (Especialista)](https://imgur.com/zTEDgk3)
 
-5. Vista de turnos para administradores, con filtrado y opción de solicitar turnos.
-![Turnos (Administrador)](screenshots/turnos-administrador.png)
+5. Perfil de usuario con información personal.
+![Mi Perfil](https://imgur.com/lxQVBa1)
 
-6. Perfil de usuario con información personal y horarios disponibles para especialistas.
-![Mi Perfil](screenshots/mi-perfil.png)
+6. Vista solicitar turno con paciente.
+![Mi Perfil](https://imgur.com/0exDpSG)
 
-## Requerimientos Mínimos
+## Requerimientos
 
-El sistema cumple con los siguientes requerimientos mínimos:
+El sistema cumple con los siguientes requerimientos:
 
 - Favicon personalizado 🌟
 - Estilos y experiencia de usuario mejorados ✨
 - Implementación de Captcha propio para registro ✅
 - Manejo de imágenes para perfiles y avatares 🖼️
 - Generación de archivos Excel o PDF 📊
-- Lazy loading para mejorar la carga de contenido ⏩
-- Uso de 3 Pipes y 3 Directivas personalizadas ⚙️
 
 ## Contribución
 
