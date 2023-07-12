@@ -35,6 +35,7 @@ export class FormularioRegistroComponent {
   fotoTres: string = '';
   nuevaEspecialidad: string = '';
   especialidadHabilitada: boolean = false;
+  captchaVerificado = false;
 
   //#region Captcha
   public version = VERSION.full;
@@ -356,6 +357,7 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
   }
 
   public addTokenLog(message: string, token: string | null) {
+    this.captchaVerificado = true;
     this.log.push(`${message}: ${this.formatToken(token)}`);
   }
 

@@ -82,9 +82,7 @@
             <div class="card col-sm-3" *ngFor="let especialidad of especialidades"
                 (click)="ObtenerValorEspecialidad(especialidad.nombre)">
                 <button class="nav-link" >
-                    <span class="align-text-bottom"></span>
-                    {{especialidad.nombre}}
-                 
+                    <span class="align-text-bottom"></span>                 
                    <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length == 0" src="../../../assets/img/especialidaes default.jpg" alt="Card image cap" width="200" height="200">
                    <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length > 0" src={{especialidad?.path}} alt="Card image cap" width="200" height="200">
                   </button>
@@ -110,14 +108,29 @@
         </div>
     </div>
     
+<div *ngIf="profesionalSeleccionado != '' && visualizarFechasDisponibles">
+        <div class="card-body">
+            <div class="row">                
+                <div class="card col-sm-3" *ngFor="let fecha of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' : '' | obtenerFechasTurnos: '' : '' "
+                    (click)="ObtenerValorFechaSeleccionada(fecha)">
+                    <h5 class="card-title">{{GetFormattedDate(fecha)}}</h5>
+                    <button class="nav-link" >
+                        <span class="align-text-bottom"></span>
+                    <img class="card-img-top" src="../../../assets/img/almanaque.png" alt="Card image cap" width="200" height="200">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div *ngIf="profesionalSeleccionado != '' && visualizarTurnos">
         <div class="card-body">
             <div class="row">
                 
-                <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' "
+                <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' : fechaSeleccionada "
                     (click)="ObtenerTurnoSeleccionado(item)">
-                    <h5 class="card-title">{{ConvertirFecha(item?.fecha) | date:'medium'}}</h5>
+                    <h5 class="card-title">{{ConvertirFecha(item?.fecha)}}</h5>
                     <button class="nav-link" >
                         <span class="align-text-bottom"></span>
                     <img class="card-img-top" src="../../../assets/img/turno-medico.jpg" alt="Card image cap">
@@ -127,5 +140,3 @@
             </div>
         </div>
     </div>
-
-</div>

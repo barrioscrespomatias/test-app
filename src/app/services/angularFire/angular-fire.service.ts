@@ -67,11 +67,13 @@ export class FirebaseAuthService {
         // this.SetUserData(result.user);
       })
       .catch((error) => {
+
+        if(error.message == 'Firebase: Error (auth/email-already-in-use).')
         // this.swal.SwalMensajeError('Error',error.message);
         SweetAlert.fire({
           icon: 'error',
           title: 'Error',
-          text: error.message,
+          text: 'El dirección de email ya se encuentra registrada.',
         });
       });
   }

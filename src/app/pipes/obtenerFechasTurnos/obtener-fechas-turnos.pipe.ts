@@ -20,16 +20,23 @@ export class ObtenerFechasTurnosPipe implements PipeTransform {
       for (let item of turnos) 
       {
         
-        if (paciente.length > 0) 
+        if (paciente.length > 0 && profesional.length == 0) 
         {
           if (item.paciente == paciente && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != 0)
           {
             this.filtrados.push(item.fecha);
           }
         } 
-        else if (profesional.length > 0) 
+        else if (profesional.length > 0 && paciente.length == 0) 
         {
           if ( item.profesional == profesional && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != 0) 
+          {
+            this.filtrados.push(item.fecha);
+          }
+        }
+        else if(profesional.length == 0 && paciente.length == 0)
+        {
+          if (!this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado == 0) 
           {
             this.filtrados.push(item.fecha);
           }

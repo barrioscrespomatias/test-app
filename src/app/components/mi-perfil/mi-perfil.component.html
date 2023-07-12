@@ -1,10 +1,18 @@
 <form [formGroup]="form">
     <div class="row">
         <div class="col-md-3">
-            <div class="d-flex flex-column align-items-center p-3 py-5"><img class="rounded-circle mt-5" width="150px"
+            <div class="d-flex align-items-center mt-5">
+                <img class="rounded-circle mt-5 m-3" width="150px"
                     src={{usuario?.imagenPerfil1}}>
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
+                <img class="rounded-circle mt-5 m-3" width="150px"
+                    src={{usuario?.imagenPerfil2}}>
+            </div>
+            <div class="d-flex justify-content-center">
+                <span class="font-weight-bold">{{usuario?.nombre}}</span>                
+            </div>
+            <div class="d-flex justify-content-center">
+                <span class="text-black-50">{{usuario?.mail}}</span>
+
             </div>
         </div>
         <div class="col-md-9">
@@ -15,37 +23,33 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="labels">Nombre</label>
-                        <input type="text" class="form-control" formControlName="nombre" id="nombre" readonly>
+                        <input type="text" class="form-control" id="nombre" value="{{usuario?.nombre}}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Apellido</label>
-                        <input type="text" class="form-control" formControlName="apellido" readonly>
+                        <input type="text" class="form-control" value="{{usuario?.apellido}}" readonly>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Email</label>
-                        <input type="text" class="form-control" formControlName="mail" readonly>
+                        <input type="text" class="form-control" value="{{usuario?.mail}}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Dni</label>
-                        <input type="text" class="form-control" formControlName="dni" readonly>
+                        <input type="text" class="form-control" value="{{usuario?.dni}}" readonly>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Edad</label>
-                        <input type="text" class="form-control" formControlName="edad" readonly>
+                        <input type="text" class="form-control" value="{{usuario?.edad}}" readonly>
                     </div>
                     <div class="col-md-6" *ngIf="usuario?.perfil == 'paciente'">
                         <label class="labels">Obra social</label>
-                        <input type="text" class="form-control" formControlName="obra_social" readonly>
+                        <input type="text" class="form-control" value="{{usuario?.obraSocial}}" readonly>
                     </div>
                 </div>
-                <!-- <div class="row mt-3">
-                    <div class="col-md-6 mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Ir a </button></div>
-                    <div class="col-md-6 mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
-                </div> -->
             </div>
         </div>
     </div>

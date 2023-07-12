@@ -26,7 +26,9 @@ import {
   ReCaptchaV3Service
 } from 'ng-recaptcha';
 
-const RECAPTCHA_V3_STACKBLITZ_KEY = '6LeHBK0bAAAAAOQVTvBOWhfb08cQfUpFoSE3FsmP';
+// const RECAPTCHA_V3_STACKBLITZ_KEY = '6LeHBK0bAAAAAOQVTvBOWhfb08cQfUpFoSE3FsmP';
+// const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
+const RECAPTCHA_V3_STACKBLITZ_KEY = '6Lfli9ImAAAAAAWGXGxCckymjtBFr1k96RVl17cx';
 const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
 
 
@@ -57,9 +59,13 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     ReCaptchaV3Service,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },  
 
+    // {
+    //   provide: RECAPTCHA_V3_SITE_KEY,
+    //   useValue: RECAPTCHA_V3_STACKBLITZ_KEY
+    // },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: RECAPTCHA_V3_STACKBLITZ_KEY
+      useValue: '6Lfli9ImAAAAAAWGXGxCckymjtBFr1k96RVl17cx'
     },
     {
       provide: RECAPTCHA_SETTINGS,

@@ -137,12 +137,18 @@
                value="{{perfilRecibido}}" readonly>
          </div>
 
-         <re-captcha *ngIf="!FormularioConErrores()"
+         <re-captcha class="form-field col-sm-12"
             (resolved)="addTokenLog('Normal mode resolved', $event)">
          </re-captcha>
+      
 
          <div class="form-field col-sm-12">
-            <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
+            <div *ngIf="!FormularioConErrores() && captchaVerificado">
+               <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+            </div>
+            <div *ngIf="FormularioConErrores() || !captchaVerificado">
+               <input class="submit-btn" (click)="CrearUsuario()" disabled value="Crear Usuario">
+            </div>         
          </div>
 
       </form>
@@ -320,12 +326,17 @@
                </div>
             </div>
 
-            <re-captcha *ngIf="!FormularioConErrores()"
+            <re-captcha class="form-field col-sm-12"
                (resolved)="addTokenLog('Normal mode resolved', $event)">
             </re-captcha>
 
             <div class="form-field col-sm-12">
-               <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
+               <div *ngIf="!FormularioConErrores() && captchaVerificado">
+                  <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+               </div>
+               <div *ngIf="FormularioConErrores() || !captchaVerificado">
+                  <input class="submit-btn" (click)="CrearUsuario()" disabled value="Crear Usuario">
+               </div>         
             </div>
   
          </form>
@@ -333,7 +344,7 @@
 </div>
 
 
-<!-- <div class="row" *ngIf="perfilRecibido == 'Administrador' "> -->
+<div class="row" *ngIf="perfilRecibido == 'Administrador' ">
 <div class="row">
    <section class="get-in-touch">
       <h1 class="title">Alta Administrador</h1>
@@ -448,13 +459,19 @@
             </div>
          </div>
 
-         <re-captcha class="form-field col-sm-12" *ngIf="!FormularioConErrores()"
+         <re-captcha class="form-field col-sm-12"
             (resolved)="addTokenLog('Normal mode resolved', $event)">
          </re-captcha>
 
          <div class="form-field col-sm-12">
-            <input class="submit-btn" *ngIf="!FormularioConErrores()" (click)="CrearUsuario()" value="Crear Usuario">
+            <div *ngIf="!FormularioConErrores() && captchaVerificado">
+               <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
+            </div>
+            <div *ngIf="FormularioConErrores() || !captchaVerificado">
+               <input class="submit-btn" (click)="CrearUsuario()" disabled value="Crear Usuario">
+            </div>         
          </div>
+
       </form>
    </section>
 </div> 

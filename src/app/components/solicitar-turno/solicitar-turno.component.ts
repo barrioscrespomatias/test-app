@@ -8,6 +8,7 @@ import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -45,8 +46,12 @@ export class SolicitarTurnoComponent {
 
   //visualizador
   visualizarEspecialidades: boolean = true;
-  visualizarProfesionales: boolean = true;
-  visualizarTurnos: boolean = true;
+  visualizarProfesionales: boolean = false;
+  visualizarFechasDisponibles: boolean = false;
+  visualizarTurnos: boolean = false;
+
+  fechaSeleccionada:string = '';
+  datePipe = new DatePipe('en-US');
 
   // visualizarEspecialidades: boolean = true;
   // visualizarProfesionales: boolean = false;
@@ -113,18 +118,14 @@ export class SolicitarTurnoComponent {
 
   ObtenerValorProfesional(nombreProfesional: string) {
     this.visualizarProfesionales = false;
-    this.visualizarTurnos = true;
+    this.visualizarFechasDisponibles = true;
     this.profesionalSeleccionado = nombreProfesional;
+  }
 
-    // if(generacionSinErrores)
-
-    //   else
-    //   this.sweetAlert.MensajeError('No hay turnos para esta especialidad');
-  
-
-    // this.usuarioService.getProfesional(this.mail).then((profesional: any) => {
-    //   this.profesionalSeleccionadoParaTurno = profesional;
-    // });
+  ObtenerValorFechaSeleccionada(fehcaSeleccionada: string) {
+    this.visualizarFechasDisponibles = false;
+    this.visualizarTurnos = true;
+    this.fechaSeleccionada = fehcaSeleccionada;
   }
 
   ObtenerTurnoSeleccionado(turnoSeleccionado: any) {
@@ -166,7 +167,9 @@ export class SolicitarTurnoComponent {
   }
 
   ConvertirFecha(fecha:any){
-    return new Date(fecha.seconds * 1000);
+    const date = fecha ? new Date(fecha.seconds * 1000) : null;
+
+    return this.datePipe.transform(date, 'hh:mm a') ?? '';
   }
 
   ReloadCurrentRoute() {
@@ -174,6 +177,17 @@ export class SolicitarTurnoComponent {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
     });
+  }
+
+  ObtenterFechaSeleccionada(fechaSeleccionada:string)
+  {    
+    this.fechaSeleccionada = fechaSeleccionada;
+  }
+
+  GetFormattedDate(fecha: any): string {
+    const date = fecha ? new Date(fecha.seconds * 1000) : null;
+
+    return this.datePipe.transform(date, 'dd/MM') ?? '';
   }
 
   //#endregion

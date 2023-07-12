@@ -37,3 +37,49 @@
   background-color: hsla(0, 0%, 100%, 0.9) !important;
   backdrop-filter: saturate(200%) blur(25px);
 }
+
+.button-with-bg-pr1 {
+  background-image: url('../../../assets/img/musicoterapeuta.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.button-with-bg-pr2 {
+  background-image: url('../../../assets/img/kinesiologo.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.button-with-bg-pa1 {
+  background-image: url('../../../assets/img/pajuangomez.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.button-with-bg-pa2 {
+  background-image: url('../../../assets/img/patomas.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.button-with-bg-pa3 {
+  background-image: url('../../../assets/img/papedro.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.button-with-bg-ad1 {
+  background-image: url('../../../assets/img/adbrunosal.png');
+  background-size: 50%;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.text-left {
+  text-align: left !important;
+}
