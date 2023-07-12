@@ -14,14 +14,14 @@ La Clínica Online es un sistema que permite a los pacientes solicitar turnos co
 - Sprint 5: Nuevos datos dinámicos, captcha propio y animaciones de transición.
 - Sprint 6: Multilingüismo y encuesta de atención.
 
-🔗 Repositorio GitHub: [Enlace al repositorio](https://github.com/tu-usuario/repo-clinica-online)
+🔗 Repositorio GitHub: [Enlace al repositorio](https://github.com/barrioscrespomatias/test-app)
 
 ## Capturas de Pantalla
 
 Aquí se presentan algunas capturas de pantalla del sistema para ilustrar su funcionamiento:
 
 1. Página de bienvenida y acceso rápido al inicio de sesión y registro.
-![Página de bienvenida](screenshots/welcome.png)
+![Página de bienvenida](https://i.imgur.com/XKMgsgb.png)
 
 2. Registro de pacientes y especialistas con validación de campos.
 ![Registro](screenshots/registro.png)
