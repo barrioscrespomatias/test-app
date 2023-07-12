@@ -24,19 +24,19 @@ Aquí se presentan algunas capturas de pantalla del sistema para ilustrar su fun
 ![Página de bienvenida](https://i.imgur.com/XKMgsgb.png)
 
 2. Registro de pacientes y especialistas con validación de campos.
-![Registro](https://imgur.com/HnCXTyW)
+![Registro](https://i.imgur.com/HnCXTyW.png)
 
 3. Vista de turnos para pacientes, donde se pueden cancelar, ver reseñas y completar encuestas.
-![Mis Turnos (Paciente)](https://imgur.com/VCAEfVT)
+![Mis Turnos (Paciente)](https://i.imgur.com/VCAEfVT.png)
 
 4. Vista de turnos para especialistas, con opciones para cancelar, rechazar y finalizar turnos.
-![Mis Turnos (Especialista)](https://imgur.com/zTEDgk3)
+![Mis Turnos (Especialista)](https://i.imgur.com/zTEDgk3.png)
 
 5. Perfil de usuario con información personal.
-![Mi Perfil](https://imgur.com/lxQVBa1)
+![Mi Perfil](https://i.imgur.com/lxQVBa1.png)
 
 6. Vista solicitar turno con paciente.
-![Mi Perfil](https://imgur.com/0exDpSG)
+![Mi Perfil](https://i.imgur.com/0exDpSG.png)
 
 ## Requerimientos
 
