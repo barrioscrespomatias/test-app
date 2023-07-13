@@ -66,22 +66,13 @@ export class UsuariosComponent {
 
   DescargarExcel() {
     if(this.usuarios.length > 0){
-      const data: Usuario[][] = this.usuarios.map((usuario: { dni: string; nombre: string; apellido: string; mail: string; perfil: string; habilitado: boolean }) => {
-        let habilitado = usuario.habilitado ? 'si' : 'no';
-    
-        // let perfil: string;
-        // switch (usuario.perfil) {
-        //   case 1:
-        //     perfil = 'Lunes';
-        //     break;
-        //   case 2:
-        //     perfil = 'Martes';
-        //     break;
-        //   default:
-        //     perfil = 'Otro día';
-        //     break;
-        // }
-    
+      const data: Usuario[][] = 
+      
+      this.usuarios     
+      .filter((usuario: { perfil: string }) => usuario.perfil == 'profesional') 
+      .map((usuario: { dni: string; nombre: string; apellido: string; mail: string; perfil: string; habilitado: boolean }) => {
+        let habilitado = usuario.habilitado ? 'si' : 'no';   
+        
         return [usuario.dni, usuario.nombre, usuario.apellido, usuario.mail, usuario.perfil, habilitado];
       });   
       
@@ -112,7 +103,7 @@ export class UsuariosComponent {
     const headers: string[] = ['Dni', 'Nombre', 'Apellido', 'Mail', 'Perfil', 'Habilitado'];
 
     const documentDefinition: any = {
-      header: `Informe... ${moment().format('DD/MM/YYYY')}`,
+      header: `Listado de usuarios ${moment().format('DD/MM/YYYY')}`,
       footer: (currentPage: number, pageCount: number) => {
         return {
           text: `Página ${currentPage} de ${pageCount}`,

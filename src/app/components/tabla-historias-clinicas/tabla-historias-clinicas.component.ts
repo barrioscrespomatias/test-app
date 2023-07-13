@@ -159,7 +159,7 @@ export class TablaHistoriasClinicasComponent {
     const headers: string[] = ['Especialidad', 'Estado turno', 'Diagnostico', 'Reseña'];
 
     const documentDefinition: any = {
-      header: `Informe... ${moment().format('DD/MM/YYYY')}`,
+      header: `Historia clinica. Fecha: ${moment().format('DD/MM/YYYY')}`,
       footer: (currentPage: number, pageCount: number) => {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
@@ -175,7 +175,7 @@ export class TablaHistoriasClinicasComponent {
           margin: [0, 0, 0, 10], // Márgenes superiores e inferiores de la imagen
           style : 'header'
         },
-        { text: 'Usuarios' },
+        { text: 'Turnos' },
         
         {
           table: {
