@@ -61,12 +61,6 @@ export class TurnoService {
     return this.turnosRepositorioService.getAll();
   }
 
-
-  // async TraerTodos() {
-  //   const coleccion = collection(this.firestore, 'turnos');
-  //   return collectionData(coleccion);
-  // }
-
   async Modificar(docRef: string, turno: Turno): Promise<{ mensaje: string; valido: boolean }> 
   {
     try {
@@ -83,7 +77,7 @@ export class TurnoService {
     }
   }
 
-  // async Modificar(docRef: string, turno: Turno) {
-  //   return this.turnosRepositorioService.update(docRef, turno);
-  // }
+  async Buscar(clave: string, valor: string) {
+    return this.turnosRepositorioService.Buscar(clave, valor);
+  }
 }

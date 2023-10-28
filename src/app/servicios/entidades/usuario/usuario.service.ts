@@ -106,7 +106,7 @@ export class UsuarioService {
   //   return this.usuariosRepository.update(docRefusuarioId, usuario);
   // }
 
-  async getProfesional(mail: string) {
+  async getUsuario(mail: string) {
     return new Promise((resolve, reject) => {
       this.db
         .collection('usuarios')

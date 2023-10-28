@@ -47,7 +47,7 @@ export class FinalizarTurnoComponent {
       presion: new FormControl('', [Validators.minLength(0), Validators.maxLength(5)]),      
     });
 
-    this.pacienteAtendido = this.usuarioService.getProfesional(this.turnoRecibido.paciente);
+    this.pacienteAtendido = this.usuarioService.getUsuario(this.turnoRecibido.paciente);
   }
 
   //#endregion

@@ -69,7 +69,7 @@ export class SolicitarTurnoComponent {
 
   //#region Hooks
   async ngOnInit() {
-    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
 
