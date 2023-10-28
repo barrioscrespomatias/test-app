@@ -48,7 +48,7 @@ export class RegistroComponent {
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
 
-    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
   }

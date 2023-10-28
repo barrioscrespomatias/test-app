@@ -36,7 +36,7 @@ export class MiPerfilComponent {
   //#region Hooks
   async ngOnInit() {
 
-    await this.usuarioService.getProfesional(this.email).then((usuario: any) => {
+    await this.usuarioService.getUsuario(this.email).then((usuario: any) => {
       this.usuario = usuario;        
     });
 

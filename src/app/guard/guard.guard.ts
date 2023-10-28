@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
     const userLogueado = await this.firebaseService.GetUserLogueado();  
   
     try {
-      this.usuario = await this.usuarioService.getProfesional(email);
+      this.usuario = await this.usuarioService.getUsuario(email);
 
       // console.log(this.usuario)
     

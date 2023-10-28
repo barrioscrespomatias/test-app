@@ -27,7 +27,7 @@ export class GestionUsuariosComponent {
   //#region Hooks
   async ngOnInit() {
 
-    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
       if(this.usuario?.perfil != 'profesional')
       this.componenteVisible = 'solicitar-turno'

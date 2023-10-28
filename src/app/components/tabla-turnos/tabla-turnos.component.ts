@@ -103,7 +103,7 @@ export class TablaTurnosComponent {
       this.turnos = turnos
     });    
 
-    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
    

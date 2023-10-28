@@ -28,7 +28,7 @@ export class forbidden  implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+      this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
         this.usuario = usuario;
       });
       

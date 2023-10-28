@@ -11,8 +11,10 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { Turno } from 'src/app/interfaces/turno';
@@ -33,7 +35,6 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return this.listadoTurnos$;
   }
 
-  // create(entity: Usuario, userFirebaseAuthId: string): string {
   create(entity: Turno): string {
     if (this.listadoTurnos) {
       // obtengo referencia al id del doucmento para asignarlo a un campo del usuario.
@@ -76,7 +77,6 @@ export class TurnoRepositorioService implements Repository<Turno> {
 
   delete(docRef: string): boolean {
     try {
-      console.log(docRef);
       const documentReference = doc(this.listadoTurnos, docRef);
 
       deleteDoc(documentReference);
@@ -86,29 +86,19 @@ export class TurnoRepositorioService implements Repository<Turno> {
       console.log(error);
       return false;
     }
-    // el guid que genera el doc
   }
 
-  // async getUsuarioByDocRefUserFirebaseAuth(userFirebaseAuthId: string) {
-  //   try {
-  //     let usuarios: Turno[] = [];
+  /**
+   * Busca en la entidad segun un parametro enviado
+   * @param clave 
+   * @param valor 
+   * @returns 
+   */
+  Buscar(clave: string, valor: string): Observable<Turno[]> {
+    const coleccion = collection(this._firestore, 'turnos');
+    const consulta = query(coleccion, where(clave, '==', valor));
+    const result = collectionData(consulta) as Observable<Turno[]>;
+    return result;
+  }
 
-  //     await new Promise<void>((resolve) => {
-  //       let usuariosSub = this.listadoTurnos$.subscribe((data) => {
-  //         usuarios = data;
-  //         usuariosSub.unsubscribe();
-  //         resolve(); // Signal that the data is available
-  //       });
-  //     });
-
-  //     let usuario: Turno = usuarios!.find(
-  //       (u) => u.userFirebaseAuthId == userFirebaseAuthId
-  //     )!;
-
-  //     return usuario.docRefUsuarioId;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return;
-  //   }
-  // }
 }

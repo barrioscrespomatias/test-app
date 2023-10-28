@@ -6,6 +6,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { FechaService } from 'src/app/helper/fecha/fecha.service';
 import { Router } from '@angular/router';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
@@ -23,7 +24,8 @@ export class GrillaHorariosComponent {
     private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService,
     private router: Router,
-    private sweetAlert: SweetAlertService
+    private sweetAlert: SweetAlertService,
+    private fechaHelper: FechaService
   ) {}
 
   //#endregion
@@ -37,13 +39,14 @@ export class GrillaHorariosComponent {
   horariosParaTurnosEspecialidad: { fecha: Date; especialidad: string }[] = [];
   turnos: any;
   especialidades: any;
+  turnosDelProfesional: Turno[] = [];
   // horariosParaTurnosEspecialidad
   //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
-    this.usuarioService.getProfesional(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
 
@@ -53,6 +56,10 @@ export class GrillaHorariosComponent {
 
     this.especialidadService.TraerTodos().then((especialidades: any) => {
       this.especialidades = especialidades;
+    });
+
+    (await this.turnoService.Buscar("profesional", "prof.kinesiologia@yopmail.com")).subscribe(turnos => {
+      this.turnosDelProfesional = turnos;
     });
 
     this.form = new FormGroup({
@@ -106,6 +113,15 @@ export class GrillaHorariosComponent {
     // const historia_clinica: HistoriaClinica = {};
     var historia_clinica: HistoriaClinica[] = [];
 
+    this.horariosParaTurnosEspecialidad = this.horariosParaTurnosEspecialidad.filter((htp) => {
+      // Verifica si la fecha de objeto1 no coincide con ninguna fecha en array2
+      return !this.turnosDelProfesional.some((tp) => 
+              this.fechaHelper.EsIgual(this.fechaHelper.ConvertirFechaISO8601(htp.fecha),
+              this.fechaHelper.ConvertirFechaFirestore(tp.fecha)));
+    }); 
+
+    console.log(this.horariosParaTurnosEspecialidad)
+
     this.horariosParaTurnosEspecialidad?.forEach(
       (horarioTurnoEspecialidad: any) => {
         const turno: Turno = {
@@ -128,7 +144,6 @@ export class GrillaHorariosComponent {
         turnosDisponibles?.push(turno);
       }
     );
-    
 
     let generacionSinErrores = true;
     turnosDisponibles.forEach(turno => {
