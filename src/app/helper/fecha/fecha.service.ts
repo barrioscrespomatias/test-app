@@ -17,8 +17,6 @@ export class FechaService {
   }
 
   EsIgual(primeraFecha:Date, segundaFecha:Date){
-    console.log("fecha 1 a comparar:" + primeraFecha.getTime())
-    console.log("fecha 2 a comparar:" + segundaFecha.getTime())
     return primeraFecha.getTime() === segundaFecha.getTime();
   }
   //#endregion
