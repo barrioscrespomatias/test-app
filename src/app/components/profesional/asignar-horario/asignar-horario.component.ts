@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription, firstValueFrom, map } from 'rxjs';
 import { DiaHora } from 'src/app/interfaces/diaHora';
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
-import { Usuario } from 'src/app/interfaces/usuario';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { slideAnimation } from '../../../animation';
+import { map } from 'rxjs';
 
 
 @Component({
@@ -38,7 +37,6 @@ export class AsignarHorarioComponent {
   //#region Propiedades
   especialidades!: any;
   form!: FormGroup;
-  // usuarioDbLogueado!: Usuario;
   usuario: any;
   mail: string = this.firebaseService.userName;
 
@@ -110,16 +108,8 @@ export class AsignarHorarioComponent {
   //#endregion
 
   //#region Metodos
-  CrearDisponibilidad() {
-    // const horario: Horario = {
-    //   especialidad: this.especialidad?.value,
-    //   hora_inicio: this.hora_inicio?.value,
-    //   hora_fin: this.hora_fin?.value,
-    //   duracion: this.duracion?.value,
-    //   dias: this.dias?.value,
-    // };
-   
-    let horarioEspecialidad: HorarioEspecialidad = {
+  ModificarDisponibilidad(){
+    let nuevoHorario: HorarioEspecialidad = {
       diasHorarios: []
     };
 
@@ -132,12 +122,19 @@ export class AsignarHorarioComponent {
         especialidad: this.especialidad?.value
       };
     
-      horarioEspecialidad.diasHorarios?.push(diaHora);
+      nuevoHorario.diasHorarios?.push(diaHora);
     });
-    this.usuario.horarioEspecialidad = horarioEspecialidad;
-    
-    var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
 
+    nuevoHorario.diasHorarios?.forEach((nh: DiaHora) => {
+      const index = this.usuario.horarioEspecialidad.diasHorarios?.findIndex((dia: DiaHora) => dia.dia === nh.dia);
+      if (index !== -1) {
+        // Si se encuentra, eliminar el día existente
+        this.usuario.horarioEspecialidad.diasHorarios?.splice(index, 1);        
+      }
+      this.usuario.horarioEspecialidad.diasHorarios?.push(nh);
+    });
+
+    var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
     respuesta.then((response) => {
       if (response.valido) {
         this.sweetAlertServicio.MensajeExitoso("Horarios asignados correctamente!")

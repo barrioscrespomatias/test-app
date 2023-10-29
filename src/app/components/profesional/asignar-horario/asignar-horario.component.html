@@ -1,4 +1,7 @@
 <div [@slideAnimation]="estadoActual">
+
+<app-grilla-horarios [visualizarBotonConfirmar] = "false"></app-grilla-horarios>
+
 <section class="get-in-touch">
     <h2 class="title">Gestionar horarios</h2>
     <form class="contact-form row" [formGroup]="form">
@@ -53,8 +56,10 @@
         </select>
 
 
-        <div class="col-lg-4 mt-4">
-            <input class="btn btn-primary" (click)="CrearDisponibilidad()" value="Agregar disponibilidad">
+        <div class="row">
+            <div class="col-lg-4 mt-4">
+                <input class="btn btn-primary" (click)="ModificarDisponibilidad()" value="Modificar Disponibilidad">
+            </div>
         </div>
     </form>
 </section>
