@@ -10,6 +10,7 @@ import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.ser
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { slideAnimation } from '../../animation';
+import SweetAlert from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -60,11 +61,6 @@ export class SolicitarTurnoComponent {
 
   fechaSeleccionada:string = '';
   datePipe = new DatePipe('en-US');
-
-  // visualizarEspecialidades: boolean = true;
-  // visualizarProfesionales: boolean = false;
-  // visualizarTurnos: boolean = false;
-
   //#endregion
 
   //#region Hooks
@@ -92,7 +88,6 @@ export class SolicitarTurnoComponent {
       duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
-    // this.GenerarHorariosParaTurnos();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -115,8 +110,6 @@ export class SolicitarTurnoComponent {
       this.visualizarProfesionales = true;
       this.especialidadSeleccionada = nombreEspecialidad;
     }
-    
-
   }
 
   
@@ -140,13 +133,7 @@ export class SolicitarTurnoComponent {
     this.visualizarTurnos = false;
     const encuesta: Encuesta={};
     var historia_clinica: { clave: string; valor: string }[] = [];
-    
-    // historia_clinica = [
-    //   { clave: 'Caries', valor: '4' },
-    //   { clave: 'Cantidad dientes', valor: '22' },
-    //   { clave: 'Limpieza', valor: 'Si' },
-    // ];
-    
+      
     this.turnoSeleccionado = turnoSeleccionado;
     this.turnoSeleccionado.paciente = this.pacienteSeleccionado.length > 0 ? this.pacienteSeleccionado : this.mail;
     this.turnoSeleccionado.estado = EstadoEnum.PendienteAprobacion;
@@ -160,17 +147,32 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.temperatura = '0';
     this.turnoSeleccionado.preison = '';
 
-    var solicitarTurno = this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
-
-    solicitarTurno.then((response) => {
-      if (response.valido) {          
-        this.sweetAlert.MensajeExitoso('Se ha asignado el turno exitosamente!')
-        this.ReloadCurrentRoute();
-      }      
+    SweetAlert.fire({
+      title: 'Confirmar turno.',
+      text: 'Desea confirmar el turno en el horario seleccionado?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        var solicitarTurno = this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
+        solicitarTurno.then((response) => {
+          if (response.valido) {          
+            this.sweetAlert.MensajeExitoso('Se ha asignado el turno exitosamente!')
+            this.ReloadCurrentRoute();
+          }      
+          else{
+            this.sweetAlert.MensajeError('Ha ocurrido un problema al asignar el turno. Intente nuevamente.')
+            this.ReloadCurrentRoute();
+          } 
+        });
+      }
       else{
-        this.sweetAlert.MensajeError('Ha ocurrido un problema al asignar el turno. Intente nuevamente.')
         this.ReloadCurrentRoute();
-      } 
+      }
     });
   }
 
@@ -182,7 +184,8 @@ export class SolicitarTurnoComponent {
 
   ReloadCurrentRoute() {
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    console.log(currentUrl)
+    this.router.navigateByUrl('/refreshPage', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
     });
   }
@@ -197,6 +200,5 @@ export class SolicitarTurnoComponent {
 
     return this.datePipe.transform(date, 'dd/MM') ?? '';
   }
-
   //#endregion
 }

@@ -14,6 +14,7 @@ import { FirebaseAuthService } from './services/angularFire/angular-fire.service
 import { HttpClientModule } from '@angular/common/http';
 import { PacientesComponent } from './componentes/pacientes/pacientes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RefreshPageComponent } from './components/refresh-page/refresh-page.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     NavComponent,
     PacientesComponent,
+    RefreshPageComponent,
   ],
   imports: [
     BrowserModule,
