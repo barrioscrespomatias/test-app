@@ -24,4 +24,4 @@
 </div>
 
 
-<button *ngIf="usuario?.perfil == 'profesional'" (click)="CrearTurnos()" class="btn btn-primary" >Confirmar turnos</button>
+<button *ngIf="usuario?.perfil == 'profesional' && visualizarBotonConfirmar" (click)="CrearTurnos()" class="btn btn-primary" >Confirmar turnos</button>

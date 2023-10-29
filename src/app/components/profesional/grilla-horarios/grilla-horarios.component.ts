@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Encuesta } from 'src/app/interfaces/encuesta';
 import { Turno } from 'src/app/interfaces/turno';
@@ -40,6 +40,7 @@ export class GrillaHorariosComponent {
   turnos: any;
   especialidades: any;
   turnosDelProfesional: Turno[] = [];
+  @Input() visualizarBotonConfirmar: boolean = true;
   // horariosParaTurnosEspecialidad
   //#endregion
 
