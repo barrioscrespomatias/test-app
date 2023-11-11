@@ -130,7 +130,7 @@ export class GrillaHorariosComponent {
           especialidad: horarioTurnoEspecialidad.especialidad,
           paciente: '',
           profesional: this.mail,
-          estado: 0,
+          estado: "Disponible",
           encuesta: encuesta,
           rating: 0,
           resena: '',

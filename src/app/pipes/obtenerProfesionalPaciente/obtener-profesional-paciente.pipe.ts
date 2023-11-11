@@ -12,7 +12,7 @@ export class ObtenerProfesionalPacientePipe implements PipeTransform {
     if (turnos != null && paciente != null) {
       for (let item of turnos) {
         item.estado
-        if (item.profesional != '' && item.paciente == paciente && !this.filtrados.includes(item.profesional) && item.estado != 0) {    
+        if (item.profesional != '' && item.paciente == paciente && !this.filtrados.includes(item.profesional) && item.estado != "Disponible") {    
           this.filtrados.push(item.profesional);
         }
       }

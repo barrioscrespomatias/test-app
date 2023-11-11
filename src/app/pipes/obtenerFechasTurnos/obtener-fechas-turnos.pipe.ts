@@ -19,24 +19,26 @@ export class ObtenerFechasTurnosPipe implements PipeTransform {
     if (turnos != null) {
       for (let item of turnos) 
       {
-        
+        //Entra por paciente
         if (paciente.length > 0 && profesional.length == 0) 
         {
-          if (item.paciente == paciente && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != 0)
-          {
-            this.filtrados.push(item.fecha);
-          }
-        } 
-        else if (profesional.length > 0 && paciente.length == 0) 
-        {
-          if ( item.profesional == profesional && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != 0) 
+          if (item.paciente == paciente && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != "Disponible")
           {
             this.filtrados.push(item.fecha);
           }
         }
+        //Entra por profesional 
+        else if (profesional.length > 0 && paciente.length == 0) 
+        {
+          if ( item.profesional == profesional && !this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado != "Disponible") 
+          {
+            this.filtrados.push(item.fecha);
+          }
+        }
+        //Entra por admin
         else if(profesional.length == 0 && paciente.length == 0)
         {
-          if (!this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado == 0) 
+          if (!this.filtrados.some(f => this.MismaFecha(f, item.fecha)) && item.estado == "Disponible") 
           {
             this.filtrados.push(item.fecha);
           }

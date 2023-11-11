@@ -115,7 +115,7 @@
 <div *ngIf="profesionalSeleccionado != '' && visualizarFechasDisponibles">
         <div class="card-body">
             <div class="row">                
-                <div class="card col-sm-3" *ngFor="let fecha of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' : '' | obtenerFechasTurnos: '' : '' "
+                <div class="card col-sm-3" *ngFor="let fecha of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : 'Disponible' : '' | obtenerFechasTurnos: '' : '' "
                     (click)="ObtenerValorFechaSeleccionada(fecha)">
                     <h5 class="card-title">{{GetFormattedDate(fecha)}}</h5>
                     <button class="nav-link" >
@@ -132,7 +132,7 @@
         <div class="card-body">
             <div class="row">
                 
-                <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : '0' : fechaSeleccionada "
+                <div class="card col-sm-3" *ngFor="let item of turnos | async | filtroTurnos: especialidadSeleccionada : profesionalSeleccionado : 'Disponible' : fechaSeleccionada "
                     (click)="ObtenerTurnoSeleccionado(item)">
                     <h5 class="card-title">{{ConvertirFecha(item?.fecha)}}</h5>
                     <button class="nav-link" >

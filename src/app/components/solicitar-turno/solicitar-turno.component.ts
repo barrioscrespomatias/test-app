@@ -136,7 +136,7 @@ export class SolicitarTurnoComponent {
       
     this.turnoSeleccionado = turnoSeleccionado;
     this.turnoSeleccionado.paciente = this.pacienteSeleccionado.length > 0 ? this.pacienteSeleccionado : this.mail;
-    this.turnoSeleccionado.estado = EstadoEnum.PendienteAprobacion;
+    this.turnoSeleccionado.estado = "Pendiente de aprobacion";
     this.turnoSeleccionado.encuesta = encuesta;
     this.turnoSeleccionado.rating = 0;
     this.turnoSeleccionado.resena = '';

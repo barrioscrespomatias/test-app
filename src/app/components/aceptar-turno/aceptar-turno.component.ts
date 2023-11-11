@@ -23,7 +23,7 @@ export class AceptarTurnoComponent {
 
   //#region Metodos
     AceptarTurno(){
-      this.turnoRecibido.estado = EstadoEnum.Aceptado;
+      this.turnoRecibido.estado = "Aceptado";
       this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
     }
 

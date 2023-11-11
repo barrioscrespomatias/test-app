@@ -57,5 +57,4 @@ export class CustomNg2SearchPipe implements PipeTransform {
       return checkInside(item, term);
     });
   }
-
 }

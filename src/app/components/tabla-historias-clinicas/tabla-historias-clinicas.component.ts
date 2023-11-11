@@ -141,17 +141,9 @@ export class TablaHistoriasClinicasComponent {
    
       const data: Turno[][] = 
       this.turnos
-      .filter((turno: { profesional: string, estado:number; especialidad:string }) => turno.estado == 4 && this.especialidadSeleccionada == turno.especialidad )    
+      .filter((turno: { profesional: string, estado:string; especialidad:string }) => turno.estado == 'Realizado' && this.especialidadSeleccionada == turno.especialidad )    
       .map((turno: { especialidad: string; estado: number; diagnostico: string; resena: string; profesional: string; paciente: string;}) => {
-
-        let estadoTruno: string = '';
-          switch (turno.estado) {
-            case 4:
-              estadoTruno = 'Realizado';
-              break;            
-          }
-
-          return [turno.especialidad, estadoTruno, turno.diagnostico, turno.resena];
+          return [turno.especialidad, turno.estado, turno.diagnostico, turno.resena];
       });
    
     

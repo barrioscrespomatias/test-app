@@ -85,23 +85,18 @@
         </tr>
         </thead>
         <tbody>
-          <!-- turnos: any,
-          paciente: string,
-          profesional: string,
-          estado : number,
-          estado_igual:boolean -->
         <ng-container *ngIf="usuario?.perfil == 'profesional' && pacienteSeleccionado!= '' ">
             <tr *ngFor="let turno of turnos | filtroTurnosHistoriaClinica:
               pacienteSeleccionado :
               '' :
-              4 :
+              'Realizado' :
               true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>
                 <td>{{turno.paciente}}</td>
-                <td>{{turno.estado | estadoTurnos}}</td>
-                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 4" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
+                <td>{{turno.estado}}</td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 'Realizado'" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
             </tr>
         </ng-container>
 
@@ -109,14 +104,14 @@
             <tr *ngFor="let turno of turnos | filtroTurnosHistoriaClinica:
                  usuario?.mail :
                  '' :
-                 4 :
+                 'Realizado' :
                  true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>
                 <td>{{turno.paciente}}</td>
-                <td>{{turno.estado | estadoTurnos}}</td>
-                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 4" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
+                <td>{{turno.estado}}</td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 'Realizado'" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
             </tr>
         </ng-container>
 
@@ -124,14 +119,14 @@
             <tr *ngFor="let turno of turnos | filtroTurnosHistoriaClinica: 
                 pacienteSeleccionado :
                 '' :
-                4 :
+                'Realizado' :
                 true | customNg2Search:searchText">
                 <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
                 <td>{{turno.especialidad}}</td>
                 <td>{{turno.profesional}}</td>
                 <td>{{turno.paciente}}</td>
-                <td>{{turno.estado | estadoTurnos}}</td>
-                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 4" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
+                <td>{{turno.estado}}</td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 'Realizado'" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
             </tr>
         </ng-container>
         </tbody>

@@ -35,18 +35,6 @@ export class FiltroTurnosPipe implements PipeTransform {
       }
     }
 
-    // if(fechaSeleccionada != '')
-    // {
-    //   for (let item of this.filtrados) 
-    //   {     
-    //     if () 
-    //     {
-    //       this.filtradosConFechaSeleccionadaSeleccionado.push(item);
-    //     }
-    //   }
-    // }
-
-
     if(this.filtrados.length == 0 && turnos != null){
       this.sweetAlert.MensajeError('No existen turnos del profesional')
       this.reloadCurrentRoute();

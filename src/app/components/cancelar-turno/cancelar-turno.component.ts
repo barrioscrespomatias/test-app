@@ -43,7 +43,7 @@ export class CancelarTurnoComponent {
  
    //#region Metodos
      CancelarTurno(){
-       this.turnoRecibido.estado = EstadoEnum.Cancelado;
+       this.turnoRecibido.estado = "Cancelado";
        this.turnoRecibido.resena = this.resena?.value;
        this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
      }
