@@ -11,7 +11,7 @@ export class FiltroTurnosHistoriaClinicaPipe implements PipeTransform {
             turnos: any,
             paciente: string,
             profesional: string,
-            estado : number,
+            estado : string,
             estado_igual:boolean
   ): any[] {
 

@@ -133,77 +133,7 @@ export class TablaTurnosComponent {
   getEncuestaKeys(encuesta: Encuesta): string[] {
     return Object.keys(encuesta);
   }
-
-  ObtenerPacienteSeleccionado(pacienteSeleccionado:string){
-    this.pacienteSeleccionado = pacienteSeleccionado;
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerProfesionalSeleccionado(profesionalSeleccionado:string){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = profesionalSeleccionado;
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerEspecialidadSeleccionada(especialidadSeleccionada:string){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = especialidadSeleccionada;
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerAtributoDinamico(atributoDinamicoSeleccionado:string){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = atributoDinamicoSeleccionado;
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerEstadoSeleccionado(estadoSeleccionado:number){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = estadoSeleccionado;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
+  
   ObtenerFechaSeleccionada(fechaSeleccionada:string){
     this.pacienteSeleccionado = '';
     this.profesionalSeleccionado = '';
@@ -216,63 +146,6 @@ export class TablaTurnosComponent {
     this.atributoAlturaSeleccionado = 0;
     this.atributoPresionSeleccionado = '';
     this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerAtributoPesoSeleccionado(atributoPesoSeleccionado:number){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = atributoPesoSeleccionado;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerAtributoAlturaSeleccionado(atributoAlturaSeleccionado:number){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = atributoAlturaSeleccionado;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = 0;
-
-  }
-
-  ObtenerAtributoPresionSeleccionado(atributoPresionSeleccionado:string){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = atributoPresionSeleccionado;
-    this.atributoTemperaturaSeleccionado = 0;
-  }
-
-  ObtenerAtributoTemperaturaSeleccionado(atributoTemperaturaSeleccionado:number){
-    this.pacienteSeleccionado = '';
-    this.profesionalSeleccionado = '';
-    this.especialidadSeleccionada = '';
-    this.estadoSeleccionado = -1;
-    this.fechaSeleccionada = '';
-    this.atributoDinamicoSeleccionado = '';
-
-    this.atributoPesoSeleccionado = 0;
-    this.atributoAlturaSeleccionado = 0;
-    this.atributoPresionSeleccionado = '';
-    this.atributoTemperaturaSeleccionado = atributoTemperaturaSeleccionado;
   }
 
   GetFormattedDate(fecha: any): string {

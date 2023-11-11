@@ -105,7 +105,7 @@ export class FinalizarTurnoComponent {
 
   //#region Metodos
   FinalizarTurno() {
-    this.turnoRecibido.estado = EstadoEnum.Realizado;
+    this.turnoRecibido.estado = "Realizado";
     this.turnoRecibido.resena = this.resena?.value;
     this.turnoRecibido.diagnostico = this.diagnostico?.value;  
     this.turnoRecibido.altura = this.altura?.value;

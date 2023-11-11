@@ -8,7 +8,7 @@ export interface Turno {
   especialidad: string;
   paciente?: string;
   profesional?: string;
-  estado: EstadoEnum;
+  estado: string;
   resena?: string;
   diagnostico?: string;
   rating?: number;

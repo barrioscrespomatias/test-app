@@ -43,7 +43,7 @@ export class RechazarTurnoComponent {
 
   //#region Metodos
     RechazarTurno(){
-      this.turnoRecibido.estado = EstadoEnum.Rechazado;
+      this.turnoRecibido.estado = "Rechazado";
       this.turnoRecibido.resena = this.resena?.value;
       this.turnoService.Modificar(this.turnoRecibido.docRef, this.turnoRecibido);
     }
