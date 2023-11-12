@@ -1,45 +1,79 @@
 <div [@slideAnimation]="estadoActual">
-<div class="container">
+    <section id="toolbar">
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Seccion administrador</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="RegistrarUsuarioAdministrador()">
+                <mat-icon>person_add</mat-icon>
+            </button>
+        </mat-toolbar>
+    </section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Dni</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Mail</th>
-                <th scope="col">Perfil</th>
-                <th scope="col">Habilitado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let usuario of usuarios | usuariosProfesionales" >
-                <td>{{usuario.dni}}</td>
-                <td>{{usuario.nombre}}</td>
-                <td>{{usuario.apellido}}</td>
-                <td>{{usuario.mail}}</td>
-                <td>{{usuario.perfil}}</td>
-                <td>{{usuario.habilitado ? 'Si' : 'No'}}</td>
-                <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}" (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" : "Activar"}}</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <mat-divider></mat-divider>
 
-<!-- <ng-container *ngIf="usuario?.perfil == 'paciente'"> -->
-    <!-- <app-tabla-historias-clinicas></app-tabla-historias-clinicas> -->
-<!-- </ng-container> -->
+    <section id='registrar-administrador'>
+        <app-formulario-registro *ngIf="formularioRegistrarUsuarioVisible" [perfilRecibido]="'Administrador'">
+        </app-formulario-registro>
+    </section>
 
-<div class="row justify-content-center m-2">
-    <button class="btn btn-primary col-4" (click)="DescargarExcel()">Descargar un excel</button>
-</div>
-<div class="row justify-content-center m-2">
-    <button class="btn btn-primary col-4" (click)="DescargarPDF()">Descargar un PDF</button>
-</div>
-<div class="row justify-content-center m-2">
-    <button class="btn btn-primary col-4" (click)="RegistrarUsuarioAdministrador()">Registrar nuevo administrador</button>
-</div>
+    <mat-divider></mat-divider>
 
+    <section id='profesionales-registrados'>
+        <div class="container text-center">
+            <h1>Profesionales registrados</h1>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Dni</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Perfil</th>
+                        <th scope="col">Habilitado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios | usuariosProfesionales">
+                        <td>{{usuario.dni}}</td>
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.mail}}</td>
+                        <td>{{usuario.perfil}}</td>
+                        <td>{{usuario.habilitado ? 'Si' : 'No'}}</td>
+                        <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}"
+                                (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" :
+                                "Activar"}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-<app-formulario-registro *ngIf="formularioRegistrarUsuarioVisible" [perfilRecibido]="'Administrador'"></app-formulario-registro>
+    <mat-divider></mat-divider>
+
+    <section id='pacientes-registrados'>
+        <div class="container text-center">
+            <h1>Pacientes registrados</h1>
+        </div>
+        <div class="example-button-row d-flex justify-content-center">
+                <div class="example-button-container">
+
+                    <button mat-fab color="primary" class="my-fab"
+                        *ngFor="let usuario of usuarios | filtroUsuariosPacientes"
+                        (click)="DescargarExcelTurnos(usuario)">
+                        <div class="mb-1">{{usuario.nombre}}</div>
+                        <img class="rounded-circle" width="175px" height="175px" src={{usuario?.imagenPerfil1}}>
+                        <div lass="mt-1">{{usuario.apellido}}</div>
+                    </button>
+                </div>
+        </div>
+    </section>
+
+    <mat-divider></mat-divider>
 </div>

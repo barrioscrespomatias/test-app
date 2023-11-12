@@ -2,12 +2,16 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { utils, writeFile } from 'xlsx';
 import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { slideAnimation } from '../../animation';
+import { Turno } from 'src/app/interfaces/turno';
+import { FechaService } from 'src/app/helper/fecha/fecha.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,14 +23,19 @@ export class UsuariosComponent {
 
   constructor(
               private usuarioService: UsuarioService,
-              private fileService : FileService
+              private turnoService: TurnoService,
+              private fileService : FileService,
+              private fechaHelper: FechaService,
+              private datePipe: DatePipe,
               ) {
   }  
 
   series = [];
   suscripcionUsuariosService!: Subscription;
   usuarios: any;
+  turnos: any;
   usuariosSubscription:any;
+  turnosSubscription:any;
   formularioRegistrarUsuarioVisible:boolean = false;
 
   estadoActual: string = 'estadoInicial';
@@ -41,12 +50,22 @@ export class UsuariosComponent {
       await this.usuarioService.TraerTodos()
     ).subscribe((usuarios) => {
       this.usuarios = usuarios
-    });    
+    });
+    
+    this.turnosSubscription = (
+      await this.turnoService.TraerTodos()
+    ).subscribe((turnos) => {
+      this.turnos = turnos
+    }); 
   }
 
   ngOnDestroy() {
     if (this.usuariosSubscription) {
       this.usuariosSubscription.unsubscribe();
+    }
+
+    if (this.turnosSubscription) {
+      this.turnosSubscription.unsubscribe();
     }
   }
 
@@ -90,6 +109,39 @@ export class UsuariosComponent {
       // Descargar el archivo Excel
       if(excelBuffer != undefined)      
       this.saveExcelFile(excelBuffer, 'usuarios.xlsx');
+    }   
+  }
+
+  DescargarExcelTurnos(usuarioFiltrado: Usuario) {
+    if(this.turnos.length > 0){
+      const data: Turno[][] =       
+      this.turnos     
+      .filter((turno: { paciente: string, estado: string }) => turno.paciente == usuarioFiltrado.docRef && turno.estado == 'Realizado') 
+      .map((turno: { especialidad: string; estado: string; paciente: string; profesional:string, diagnostico:string, fecha: Date }) => {
+        let fecha:Date = this.fechaHelper.ConvertirFechaFirestore(turno.fecha); 
+        
+        let fechaFormateada : string|null;
+        fechaFormateada = this.datePipe.transform(fecha, 'dd/MM/yyyy hh:mm a');
+        
+        return [fechaFormateada, turno.estado, turno.especialidad, turno.diagnostico, turno.paciente, turno.profesional];
+      }); 
+      
+      console.log(data)
+      
+      
+      const headers: string[] = ['Fecha','Estado', 'Especialidad', 'Diagnostico', 'Paciente', 'Profesional'];
+  
+      // Crear el libro de trabajo
+      const workbook = utils.book_new();
+      const worksheet = utils.aoa_to_sheet([headers, ...data]);
+      utils.book_append_sheet(workbook, worksheet, 'Turnos-Profesionales');
+      
+      // Generar el archivo Excel
+      const excelBuffer = writeFile(workbook, 'turnos-profesionales.xlsx', { bookType: 'xlsx', type: 'buffer' });
+      
+      // Descargar el archivo Excel
+      if(excelBuffer != undefined)      
+      this.saveExcelFile(excelBuffer, 'turnos-profesionales.xlsx');
     }   
   }
 

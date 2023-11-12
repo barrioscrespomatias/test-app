@@ -27,6 +27,8 @@ import { UsuariosProfesionalesPipe } from '../../pipes/filtroUsuariosProfesional
 import { FiltroTurnosHistoriaClinicaPipe } from '../../pipes/filtroTurnosHistoriaClinica/filtro-turnos-historia-clinica.pipe';
 import { ObtenerTodosLosPacientesPipe } from '../../pipes/obtenerTodosLosPacientes/obtener-todos-los-pacientes.pipe';
 import { BooleanoPipe } from '../../pipes/booleano/booleano.pipe';
+import { FiltroUsuariosPacientesPipe } from '../../pipes/filtroUsuariosPacientes/filtro-usuarios-pacientes.pipe';
+import { DatePipe } from '@angular/common';
 
 
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
@@ -43,6 +45,11 @@ import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
 import { RegistroModule } from '../registro/registro.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -74,6 +81,7 @@ import { RegistroModule } from '../registro/registro.module';
     FiltroTurnosHistoriaClinicaPipe,
     ObtenerTodosLosPacientesPipe,
     BooleanoPipe,
+    FiltroUsuariosPacientesPipe,
 
     CancelarTurnoComponent,
     VerResenaComponent,
@@ -91,9 +99,14 @@ import { RegistroModule } from '../registro/registro.module';
     GestionUsuariosRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RegistroModule
+    RegistroModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatToolbarModule
   ],
-  providers: [TurnoService, TurnoRepositorioService],
+  providers: [TurnoService, TurnoRepositorioService, DatePipe],
   exports: [
     CustomNg2SearchPipe // Agrega el componente en la sección de exports
   ]

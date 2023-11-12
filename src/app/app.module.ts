@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PacientesComponent } from './componentes/pacientes/pacientes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RefreshPageComponent } from './components/refresh-page/refresh-page.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { RefreshPageComponent } from './components/refresh-page/refresh-page.com
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSlideToggleModule
   ],
   providers: [FirebaseAuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
