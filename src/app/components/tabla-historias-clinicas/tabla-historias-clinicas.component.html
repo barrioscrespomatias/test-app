@@ -2,7 +2,7 @@
 
 <div class="">
     <!-- FILTROS -->
-    <div class="accordion accordion-flush" id="accordionFiltros">
+    <div class="accordion accordion-flush" id="accordionFiltros" *ngIf="usuario?.perfil != 'paciente'">
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -15,7 +15,7 @@
   
             <div class="">
               <!-- FILTRO POR PACIENTES -->
-              <div class="accordion accordion-flush" id="accordionPacientes" *ngIf="usuario?.perfil != 'paciente'">
+              <div class="accordion accordion-flush" id="accordionPacientes">
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -35,28 +35,6 @@
                 </div>
               </div>
               <!-- END FILTRO POR PACIENTES --> 
-
-              <!-- FILTRO POR ESPECIALIDADES -->
-            <div class="accordion accordion-flush" id="accordionEspecialidades" *ngIf="usuario?.perfil == 'paciente'">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseEspecialidades" aria-expanded="false"
-                    aria-controls="flush-collapseEspecialidades">
-                    Especialidades
-                  </button>
-                </h2>
-                <div id="flush-collapseEspecialidades" class="accordion-collapse collapse"
-                  data-bs-parent="#accordionEspecialidades">
-                  <div class="accordion-body">
-                    <button class="badge bg-primary m-2"
-                      *ngFor="let especialidad of turnos | obtenerEspecialidadProfesional: usuario?.mail: '' "
-                      (click)="ObtenerEspecialidadSeleccionada(especialidad)">{{especialidad}}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- END FILTRO POR ESPECIALIDADES -->
             </div>
           </div>
         </div>
