@@ -135,23 +135,40 @@ export class TablaHistoriasClinicasComponent {
     //     return [usuario.dni, usuario.nombre, usuario.apellido, usuario.mail, usuario.perfil, habilitado];
     // });
 
-
-    //Paciente seleccionado
-
-   
-      const data: Turno[][] = 
-      this.turnos
-      .filter((turno: { profesional: string, estado:string; especialidad:string }) => turno.estado == 'Realizado' && this.especialidadSeleccionada == turno.especialidad )    
-      .map((turno: { especialidad: string; estado: number; diagnostico: string; resena: string; profesional: string; paciente: string;}) => {
-          return [turno.especialidad, turno.estado, turno.diagnostico, turno.resena];
-      });
-   
+    var data: Turno[][];
     
-  
-    const headers: string[] = ['Especialidad', 'Estado turno', 'Diagnostico', 'Reseña'];
+    if(this.searchText != undefined && this.searchText.length > 0)
+    {
+      data = 
+      this.turnos   
+      .filter((turno: { profesional: string, estado:string; especialidad:string, paciente:string }) => turno.estado == 'Realizado' 
+                                                                                      && turno.paciente == this.usuario.docRef
+                                                                                      && (turno.especialidad.toLowerCase().includes(this.searchText.toLowerCase())                                                                                      
+                                                                                      || turno.estado.toLowerCase().includes(this.searchText.toLowerCase())
+                                                                                      || turno.profesional.toLowerCase().includes(this.searchText.toLowerCase())))    
+      .map((turno: { especialidad: string; estado: number; diagnostico: string; resena: string; profesional: string; paciente: string;}) => {
+          return [turno.profesional, turno.paciente, turno.especialidad, turno.estado, turno.diagnostico, turno.resena];
+      });
+    }
+    else{
+      data = 
+      this.turnos
+      .filter((turno: { profesional: string, estado:string; especialidad:string, paciente:string }) => turno.estado == 'Realizado' 
+                                                                                      && turno.paciente == this.usuario.docRef)    
+      .map((turno: { especialidad: string; estado: number; diagnostico: string; resena: string; profesional: string; paciente: string;}) => {
+          return [turno.profesional, turno.paciente, turno.especialidad, turno.estado, turno.diagnostico, turno.resena];
+      });
+    }
+     
+    //Debe coincidir con el return del filter/map de los datos.
+    const headers: string[] = ['Profesional', 'Paciente', 'Especialidad', 'Estado turno', 'Diagnostico', 'Reseña'];
 
     const documentDefinition: any = {
-      header: `Historia clinica. Fecha: ${moment().format('DD/MM/YYYY')}`,
+      header: {
+        text: `Historia clinica. Fecha: ${moment().format('DD/MM/YYYY')}`,
+        alignment: 'center',  // Centrar el texto
+        margin: [0, 10, 0, 10],  // Ajustar los márgenes según sea necesario
+      },
       footer: (currentPage: number, pageCount: number) => {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
@@ -167,12 +184,12 @@ export class TablaHistoriasClinicasComponent {
           margin: [0, 0, 0, 10], // Márgenes superiores e inferiores de la imagen
           style : 'header'
         },
-        { text: 'Turnos' },
-        
+        { text: 'Atenciones' },        
         {
           table: {
             headerRows: 1,
-            widths: ['10%', '15%', '15%', '30%', '20%', '10%'],
+            //Espacio que ocupa cada columna. Cantidad / 100 porcentaje optimo.
+            widths: ['15%', '15%', '15%', '25%', '15%', '15%'],
             body: [
               headers,
               ...data,
@@ -183,12 +200,12 @@ export class TablaHistoriasClinicasComponent {
       ],
       styles: {
         header: {
-          fontSize: 18,
+          fontSize: 12,
           bold: true,
           margin: [0, 10, 0, 10], // Ajusta los valores de margen según tus necesidades
         },
         tableStyle: {
-          fontSize: 8, // Ajusta el tamaño de letra de la tabla
+          fontSize: 6, // Ajusta el tamaño de letra de la tabla
         },
       },
     };
