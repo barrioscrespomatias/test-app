@@ -134,17 +134,38 @@
               <span class="badge bg-primary" *ngFor="let atributo of turno.historia_clinica">{{ atributo.clave }}: {{ atributo.valor }}</span>
             </ul>
           </td>
-          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
               *ngIf="turno.estado != 'Rechazado' && turno.estado != 'Aceptado' && turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
-              (click)="AbrirModal('cancelar-turno', turno)">Cancelar turno</button></td>
-          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.estado == 'Pendiente de aprobacion' " (click)="AbrirModal('rechazar-turno', turno)">Rechazar turno</button></td>
-          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.estado == 'Pendiente de aprobacion' " (click)="AbrirModal('aceptar-turno', turno)">Aceptar turno</button></td>
-          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.estado == 'Aceptado' " (click)="AbrirModal('finalizar-turno', turno)">Finalizar turno</button></td>
-          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-              *ngIf="turno.resena != '' " (click)="AbrirModal('ver-resena', turno)">Ver resena</button></td>
+              (click)="AbrirModal('cancelar-turno', turno)">Cancelar turno
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              *ngIf="turno.estado == 'Pendiente de aprobacion' " (click)="AbrirModal('rechazar-turno', turno)">Rechazar turno
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            *ngIf="turno.estado == 'Pendiente de aprobacion' " (click)="AbrirModal('aceptar-turno', turno)">Aceptar turno
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              *ngIf="turno.estado == 'Aceptado' " (click)="AbrirModal('finalizar-turno', turno)">Finalizar turno
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              *ngIf="turno.resena != '' " (click)="AbrirModal('ver-resena', turno)">Ver reseña
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              *ngIf="turno.encuesta && turno.encuesta.facilidad_uso && turno.encuesta.eficiencia_obtener_turno && turno.encuesta.nivel_recomendacion"
+              (click)="AbrirModal('ver-encuesta', turno)">Ver encuesta
+            </button>
+          </td>             
         </tr>
       </ng-container>
 
@@ -173,17 +194,34 @@
                 <span class="badge bg-primary" *ngFor="let atributo of turno.historia_clinica">{{ atributo.clave }}: {{ atributo.valor }}</span>
               </ul>
             </td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 *ngIf="turno.estado != 'Rechazado' && turno.estado != 'Aceptado' && turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
-                (click)="AbrirModal('cancelar-turno', turno)">Cancelar turno</button></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                *ngIf="turno.resena != '' " (click)="AbrirModal('ver-resena', turno)">Ver resena</button></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="AbrirModal('cancelar-turno', turno)">Cancelar turno
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                *ngIf="turno.resena != '' " (click)="AbrirModal('ver-resena', turno)">Ver reseña</button>
+              </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                *ngIf="turno.encuesta && turno.encuesta.facilidad_uso && turno.encuesta.eficiencia_obtener_turno && turno.encuesta.nivel_recomendacion"
+                (click)="AbrirModal('ver-encuesta', turno)">Ver encuesta
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 *ngIf="getEncuestaKeys(turno?.encuesta).length == 0 && turno.estado == 'Realizado' "
-                (click)="AbrirModal('completar-encuesta', turno)">Completar encuesta</button></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="AbrirModal('completar-encuesta', turno)">Completar encuesta
+              </button>
+              </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 *ngIf="turno.rating == 0 && turno.estado == 'Realizado' "
-                (click)="AbrirModal('calificar-atencion', turno)">Calificar atencion</button></td>
+                (click)="AbrirModal('calificar-atencion', turno)">Calificar atencion
+              </button>
+            </td>
           </tr>
         </ng-container>
 
@@ -231,6 +269,7 @@
         <app-cancelar-turno [turnoRecibido]="turno"
           *ngIf="formularioSeleccionado === 'cancelar-turno'"></app-cancelar-turno>
         <app-ver-resena [turnoRecibido]="turno" *ngIf="formularioSeleccionado === 'ver-resena'"></app-ver-resena>
+        <app-ver-encuesta [turnoRecibido]="turno" *ngIf="formularioSeleccionado === 'ver-encuesta'"></app-ver-encuesta>
         <app-aceptar-turno [turnoRecibido]="turno"
           *ngIf="formularioSeleccionado === 'aceptar-turno'"></app-aceptar-turno>
         <app-rechazar-turno [turnoRecibido]="turno"
