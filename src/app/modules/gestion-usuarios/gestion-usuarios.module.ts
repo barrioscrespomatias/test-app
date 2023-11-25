@@ -33,6 +33,7 @@ import { DatePipe } from '@angular/common';
 
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
+import { VerEncuestaComponent } from '../../components/ver-encuesta/ver-encuesta.component';
 import { CompletarEncuestaComponent } from '../../components/completar-encuesta/completar-encuesta.component';
 import { CalificarAtencionComponent } from '../../components/calificar-atencion/calificar-atencion.component';
 import { RechazarTurnoComponent } from '../../components/rechazar-turno/rechazar-turno.component';
@@ -85,6 +86,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
     CancelarTurnoComponent,
     VerResenaComponent,
+    VerEncuestaComponent,
     CompletarEncuestaComponent,
     CalificarAtencionComponent,
     RechazarTurnoComponent,
