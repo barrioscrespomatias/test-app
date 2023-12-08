@@ -1,4 +1,6 @@
 import { HorarioEspecialidad } from "./horarioEspecialidad";
+import { Paciente } from "./paciente";
+import { Profesional } from "./profesional";
 import { Turno } from "./turno";
 
 export interface Usuario {    
@@ -20,4 +22,8 @@ export interface Usuario {
     especialidades: string[];
     horarioEspecialidad? : HorarioEspecialidad[];
     turnosDisponibles? : Turno[];
+
+    ///Relaciones
+    pacientesAsistidos? : Paciente[];
+    equipoProfesional? :Profesional[];
 }

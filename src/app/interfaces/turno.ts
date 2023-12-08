@@ -1,6 +1,8 @@
 import { EstadoEnum } from '../enum/estadoTurnoEnum/estado-turno-enum';
 import { Encuesta } from './encuesta';
 import { HistoriaClinica } from './historiaClinica';
+import { Paciente } from './paciente';
+import { Profesional } from './profesional';
 
 export interface Turno {
   docRef?: string;
@@ -18,4 +20,7 @@ export interface Turno {
   peso?: number;
   temperatura?: number;
   presion?: string;
+
+  iPaciente? : Paciente;
+  iProfesional? : Profesional;
 }

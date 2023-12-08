@@ -17,6 +17,7 @@ export class FiltroUsuariosPipe implements PipeTransform {
   filtrados: any[] = [];
 
   transform(usuarios: any, especialidad: string): any[] {
+    console.log(usuarios, especialidad)
     this.filtrados = [];
     if (usuarios != null) 
     {
@@ -28,8 +29,10 @@ export class FiltroUsuariosPipe implements PipeTransform {
         }
       }
     }
+    
 
     if(this.filtrados.length == 0 && usuarios != null){
+      console.log(usuarios, especialidad)
       this.sweetAlert.MensajeError('No existen profesionales en la especialidad seleccionada')
       // this.router.navigate(['gestionUsuarios']);
       this.reloadCurrentRoute();

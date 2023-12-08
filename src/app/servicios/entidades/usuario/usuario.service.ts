@@ -119,7 +119,17 @@ export class UsuarioService {
           (error) => reject(error)
         );
     });
-  } 
+  }
+  
+  /**
+   * Busca en la entidad segun un parametro enviado
+   * @param clave 
+   * @param valor 
+   * @returns 
+   */
+  async Buscar(clave: string, valor: string) {
+    return this.usuariosRepository.Buscar(clave, valor);
+  }
 
   //#endregion
 }

@@ -1,47 +1,22 @@
 <div [@slideAnimation]="estadoActual">
 
-<div class="">
-    <!-- FILTROS -->
-    <div class="accordion accordion-flush" id="accordionFiltros" *ngIf="usuario?.perfil != 'paciente'">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseFiltros" aria-expanded="false" aria-controls="flush-collapseFiltros">
-            Mostrar filtros
-          </button>
-        </h2>
-        <div id="flush-collapseFiltros" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
-          <div class="accordion-body">
-  
-            <div class="">
-              <!-- FILTRO POR PACIENTES -->
-              <div class="accordion accordion-flush" id="accordionPacientes">
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapsePacientes" aria-expanded="false"
-                      aria-controls="flush-collapsePacientes">
-                      Filtrar por pacientes
-                    </button>
-                  </h2>
-                  <div id="flush-collapsePacientes" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionPacientes">
-                    <div class="accordion-body">
-                      <button class="badge bg-primary m-2"
-                        *ngFor="let paciente of turnos | obtenerPacientes: '' : '0' : false"
-                        (click)="ObtenerPacienteSeleccionado(paciente)">{{paciente}}</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- END FILTRO POR PACIENTES --> 
-            </div>
-          </div>
-        </div>
-      </div>
+  <section id='pacientes-registrados'>
+    <div class="container text-center">
     </div>
-    <!-- END FILTROS -->
-</div>
+    <div class="example-button-row d-flex justify-content-center">
+            <div class="example-button-container">
+                <button mat-fab color="primary" class="my-fab"
+                    *ngFor="let turno of turnosProfesionalArray"  
+                    (click)="ObtenerPacienteSeleccionado(turno?.iPaciente.docRef)">
+                    <ng-container *ngIf="turno?.iPaciente">
+                      <div class="mb-1">{{turno?.iPaciente?.nombre}}</div>
+                      <img class="rounded-circle" width="175px" height="175px" src={{turno?.iPaciente?.imagenPerfil1}}>
+                      <div class="mt-1">{{turno?.iPaciente?.apellido}}</div>
+                    </ng-container>
+                </button>
+            </div>
+    </div>
+</section>
 
 <div class="container text-center">
     <h1>Historias clinicas</h1>
@@ -125,7 +100,7 @@
 </div>
 
 <!-- *ngIf="especialidadSeleccionada.length > 0" -->
-  <div class="row justify-content-center m-2" *ngIf="usuario.perfil == 'paciente' ">
+  <div class="row justify-content-center m-2" *ngIf="usuario?.perfil == 'paciente' ">
     <button class="btn btn-primary col-4" (click)="DescargarPDF()">Descargar historia clinica</button>
   </div>
 </div>  

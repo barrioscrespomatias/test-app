@@ -20,7 +20,7 @@ import { DatePipe } from '@angular/common';
   animations: [slideAnimation]
 })
 export class UsuariosComponent {
-
+  //#region Constructor
   constructor(
               private usuarioService: UsuarioService,
               private turnoService: TurnoService,
@@ -28,7 +28,10 @@ export class UsuariosComponent {
               private fechaHelper: FechaService,
               private datePipe: DatePipe,
               ) {
-  }  
+  }
+  //#endregion  
+
+  //#region Propiedades 
 
   series = [];
   suscripcionUsuariosService!: Subscription;
@@ -37,12 +40,15 @@ export class UsuariosComponent {
   usuariosSubscription:any;
   turnosSubscription:any;
   formularioRegistrarUsuarioVisible:boolean = false;
-
   estadoActual: string = 'estadoInicial';
+
+  //#endregion
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
   }
+
+  //#region Hooks
 
   async ngOnInit() {
 
@@ -69,6 +75,10 @@ export class UsuariosComponent {
     }
   }
 
+  //#endregion
+
+  //#region Metodos
+  
   CambiarEstado(usuario: Usuario) {
       usuario.habilitado = !usuario.habilitado;
       
@@ -260,4 +270,6 @@ export class UsuariosComponent {
   RegistrarUsuarioAdministrador(){
     this.formularioRegistrarUsuarioVisible = !this.formularioRegistrarUsuarioVisible;
   }
+
+  //#endregion
 }

@@ -18,3 +18,37 @@
   .form-control::placeholder  {
     font-family: FontAwesome;
   }
+
+  /* Fabutton */
+.example-button-row {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente fila cuando no hay suficiente espacio */
+  
+}
+
+.example-flex-container{
+  align-items: center;
+}
+
+.my-fab {
+  width: 300px;
+  height: 300px;
+  line-height: 25px;
+  font-size: 25px;
+  overflow: hidden;
+  margin: 8px; /* Agrega un pequeño margen entre los botones */
+}
+
+.profile-image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* End Fabutton */

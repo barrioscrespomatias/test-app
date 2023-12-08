@@ -51,9 +51,10 @@ export class TablaHistoriasClinicasComponent {
   //#region Propiedades
   
   usuario: any;
-  usuarios: any;
+  usuariosPacientes: any;
   mail: string = this.firebaseService.userName;
   turnosSubscription:any;
+  usuariosSubscription:any;
   turnos: any;
   parametrosDinamicos: any;
   especialidades: any;
@@ -64,22 +65,45 @@ export class TablaHistoriasClinicasComponent {
   profesionalSeleccionado:string='';
   especialidadSeleccionada:string='';
 
+  turnosProfesional: any;
+  turnosProfesionalArray:any;
+
   //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
-    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then(async (usuario: any) => {
       this.usuario = usuario;
+
+      (await this.turnoService.TurnosRealizadosProfesional(this.usuario?.docRef)).subscribe(turnosDelProfesional => {
+        this.turnosProfesional = this.agruparTurnosPorPaciente(turnosDelProfesional);
+        // console.log(this.turnosProfesional)
+
+            // Convertir el Map a un array para usar en la plantilla
+        this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
+
+        console.log("aca")
+        console.log(this.turnosProfesionalArray);
+      });
     });
 
-    this.usuarioService.TraerTodos().then((usuarios: any) => {
-      this.usuarios = usuarios;
-    });
+    
+
+    // this.usuarioService.TraerTodos().then((usuarios: any) => {
+    //   this.usuarios = usuarios;
+    // });
 
     // this.turnoService.TraerTodos().then((turnos: any) => {
     //   this.turnos = turnos;
     // });
+
+    // this.usuariosSubscription = (
+    //   await this.usuarioService.TraerTodos()
+    // ).subscribe((usuarios) => {
+    //   this.usuarios = usuarios
+    //   console.log(usuarios)
+    // }); 
 
     this.turnosSubscription = (
       await this.turnoService.TraerTodos()
@@ -90,6 +114,16 @@ export class TablaHistoriasClinicasComponent {
     this.especialidadService.TraerTodos().then((especialidades: any) => {
       this.especialidades = especialidades;
     });
+
+    (await this.usuarioService.Buscar("perfil", "paciente")).subscribe(usuariosPacientes => {
+      this.usuariosPacientes = usuariosPacientes;
+    });
+
+    (await this.usuarioService.Buscar("perfil", "paciente")).subscribe(usuariosPacientes => {
+      this.usuariosPacientes = usuariosPacientes;
+    });
+
+
   }
 
   ngOnDestroy() {
@@ -110,8 +144,8 @@ export class TablaHistoriasClinicasComponent {
     this.turno = turno;
   }
 
-  ObtenerPacienteSeleccionado(emailPaciente:string){
-    this.pacienteSeleccionado = emailPaciente;    
+  ObtenerPacienteSeleccionado(paciente:any){
+    this.pacienteSeleccionado = paciente;    
   }
 
   ObtenerProfesionalSeleccionado(emailProfesional:string){
@@ -122,6 +156,24 @@ export class TablaHistoriasClinicasComponent {
     this.pacienteSeleccionado = '';
     this.profesionalSeleccionado = '';
     this.especialidadSeleccionada = especialidadSeleccionada;
+  }
+
+  agruparTurnosPorPaciente(turnos: Turno[]): Map<string, Turno> {
+    const turnosAgrupados = new Map<string, Turno>();
+  
+    for (const turno of turnos) {
+      // Utilizar el correo del paciente como clave
+      const clavePaciente = turno.paciente;
+  
+      // Si la clave aún no existe en el mapa, agregar el turno
+      if(clavePaciente != undefined){
+        if (!turnosAgrupados.has(clavePaciente)) {
+          turnosAgrupados.set(clavePaciente, turno);
+        }
+      }
+    }
+  
+    return turnosAgrupados;
   }
 
   //#endregion

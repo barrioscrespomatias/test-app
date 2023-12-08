@@ -11,8 +11,10 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -110,4 +112,17 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
       return;
     }
   }
+
+    /**
+   * Busca en la entidad segun un parametro enviado
+   * @param clave 
+   * @param valor 
+   * @returns 
+   */
+    Buscar(clave: string, valor: string): Observable<Usuario[]> {
+      const coleccion = collection(this._firestore, 'usuarios');
+      const consulta = query(coleccion, where(clave, '==', valor));
+      const result = collectionData(consulta) as Observable<Usuario[]>;
+      return result;
+    }
 }

@@ -17,7 +17,6 @@ export class MostrarElementDirective {
       });
       this.el.nativeElement.classList.add('active');
       const mainContainer = document.querySelector('.main-container');
-      console.log(mainContainer)
       if (mainContainer) {
         mainContainer.childNodes.forEach((node: any) => {
           if (node.nodeType === 1 && node.tagName.toLowerCase().startsWith('app-')) {

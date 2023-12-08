@@ -52,6 +52,8 @@ export class TurnoRepositorioService implements Repository<Turno> {
   update(docRef: string, ...args: unknown[]): boolean {
     try {
       const documentReference = doc(this.listadoTurnos, docRef);
+      console.log(args)
+      // console.log(args)
       updateDoc(documentReference, {
         fecha: (args[0] as any).fecha,        
         especialidad: (args[0] as any).especialidad,        
@@ -66,9 +68,10 @@ export class TurnoRepositorioService implements Repository<Turno> {
         altura: (args[0] as any).altura,        
         peso: (args[0] as any).peso,        
         temperatura: (args[0] as any).temperatura,        
-        presion: (args[0] as any).presion,        
+        presion: (args[0] as any).presion,
+        iPaciente: (args[0] as any).iPaciente,
+        iProfesional: (args[0] as any).iProfesional,
       });
-      console.log(args)
     } catch (e) {
       console.log(e);
     }
@@ -101,4 +104,15 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return result;
   }
 
+  /**
+   * Obtener los turnos realizados por el profesional
+   * @param profesional 
+   * @returns 
+   */
+  TurnosRealizadosProfesional(profesional: string): Observable<Turno[]> {
+    const coleccion = collection(this._firestore, 'turnos');
+    const consulta = query(coleccion, where('profesional', '==', profesional), where('estado', '==', 'Realizado'));
+    const result = collectionData(consulta) as Observable<Turno[]>;
+    return result;
+  }
 }

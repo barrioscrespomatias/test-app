@@ -80,4 +80,9 @@ export class TurnoService {
   async Buscar(clave: string, valor: string) {
     return this.turnosRepositorioService.Buscar(clave, valor);
   }
+
+  async TurnosRealizadosProfesional(profesional: string) {
+    return this.turnosRepositorioService.TurnosRealizadosProfesional(profesional);
+  }
+
 }
