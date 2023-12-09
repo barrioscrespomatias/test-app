@@ -50,9 +50,6 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
-    debugger
-    console.log(args
-      )
     try {
       const documentReference = doc(this.listadoUsuarios, docRef);
       updateDoc(documentReference, {
@@ -64,12 +61,12 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
         horarioEspecialidad: (args[0] as any).horarioEspecialidad,
         peso: (args[0] as any).peso,
         altura: (args[0] as any).altura,
+        profesionalesVisitados: (args[0] as any).profesionalesVisitados,
+        pacientesAtendidos: (args[0] as any).pacientesAtendidos,
       });
-      console.log(args)
     } catch (e) {
-      console.log(e);
-    }
-    console.log('supuestamente cambio')
+      console.log("error:" + e)
+    }    
     return false;
   }  
 

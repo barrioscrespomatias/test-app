@@ -145,7 +145,7 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.altura = 0;
     this.turnoSeleccionado.peso = 0;
     this.turnoSeleccionado.temperatura = '0';
-    this.turnoSeleccionado.preison = '';
+    this.turnoSeleccionado.presion = '';
 
     SweetAlert.fire({
       title: 'Confirmar turno.',
@@ -162,6 +162,12 @@ export class SolicitarTurnoComponent {
         solicitarTurno.then((response) => {
           if (response.valido) {          
             this.sweetAlert.MensajeExitoso('Se ha asignado el turno exitosamente!')
+
+            // if (this.usuario.profesionalesVisitados.indexOf(this.profesionalSeleccionado) === -1) 
+            // {
+            //   this.usuario.profesionalesVisitados.push(this.profesionalSeleccionado);
+            //   var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
+            // }            
             this.ReloadCurrentRoute();
           }      
           else{

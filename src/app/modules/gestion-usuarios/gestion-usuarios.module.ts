@@ -28,6 +28,7 @@ import { FiltroTurnosHistoriaClinicaPipe } from '../../pipes/filtroTurnosHistori
 import { ObtenerTodosLosPacientesPipe } from '../../pipes/obtenerTodosLosPacientes/obtener-todos-los-pacientes.pipe';
 import { BooleanoPipe } from '../../pipes/booleano/booleano.pipe';
 import { FiltroUsuariosPacientesPipe } from '../../pipes/filtroUsuariosPacientes/filtro-usuarios-pacientes.pipe';
+import { EspecialidadesDisponiblesPipe } from '../../pipes/especialidadesDisponibles/especialidades-disponibles.pipe';
 import { DatePipe } from '@angular/common';
 
 
@@ -83,6 +84,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ObtenerTodosLosPacientesPipe,
     BooleanoPipe,
     FiltroUsuariosPacientesPipe,
+    EspecialidadesDisponiblesPipe,
 
     CancelarTurnoComponent,
     VerResenaComponent,

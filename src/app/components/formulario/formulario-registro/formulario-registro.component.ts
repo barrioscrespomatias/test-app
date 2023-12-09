@@ -187,6 +187,8 @@ export class FormularioRegistroComponent {
   //#region Métodos
   async CrearUsuario() {
     const horarioEspecialidad: HorarioEspecialidad[] = [];
+    const profesionalesVisitados: string[] = [];
+    const pacientesAtendidos: string[] = [];
 
     let url1: string = '';
     let url2: string = '';
@@ -239,6 +241,8 @@ export class FormularioRegistroComponent {
       peso: 0,
       altura: 0,
       horarioEspecialidad: horarioEspecialidad,
+      profesionalesVisitados: profesionalesVisitados,
+      pacientesAtendidos: pacientesAtendidos,
     };
 
     // debugger

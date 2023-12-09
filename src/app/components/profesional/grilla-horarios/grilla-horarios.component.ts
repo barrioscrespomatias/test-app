@@ -47,8 +47,13 @@ export class GrillaHorariosComponent {
   //#region Hooks
 
   async ngOnInit() {
-    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then(async (usuario: any) => {
       this.usuario = usuario;
+
+      (await this.turnoService.Buscar("profesional", usuario.docRef)).subscribe(turnos => {
+        this.turnosDelProfesional = turnos;
+      });
+
     });
 
     this.turnoService.TraerTodos().then((turnos: any) => {
@@ -59,9 +64,7 @@ export class GrillaHorariosComponent {
       this.especialidades = especialidades;
     });
 
-    (await this.turnoService.Buscar("profesional", "prof.kinesiologia@yopmail.com")).subscribe(turnos => {
-      this.turnosDelProfesional = turnos;
-    });
+
 
     this.form = new FormGroup({
       especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -121,7 +124,7 @@ export class GrillaHorariosComponent {
               this.fechaHelper.ConvertirFechaFirestore(tp.fecha)));
     }); 
 
-    console.log(this.horariosParaTurnosEspecialidad)
+
 
     this.horariosParaTurnosEspecialidad?.forEach(
       (horarioTurnoEspecialidad: any) => {
@@ -147,6 +150,7 @@ export class GrillaHorariosComponent {
     );
 
     let generacionSinErrores = true;
+
     turnosDisponibles.forEach(turno => {
       let respuestaTurno = this.turnoService.Crear(turno);
       // respuestaTurno.then((response) => {

@@ -20,4 +20,8 @@ export interface Usuario {
     especialidades: string[];
     horarioEspecialidad? : HorarioEspecialidad[];
     turnosDisponibles? : Turno[];
+
+    //Relacion
+    pacientesAtendidos? : string[];
+    profesionalesVisitados? : string[];
 }
