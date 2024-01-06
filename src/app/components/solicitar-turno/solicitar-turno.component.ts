@@ -136,6 +136,9 @@ export class SolicitarTurnoComponent {
       
     this.turnoSeleccionado = turnoSeleccionado;
     this.turnoSeleccionado.paciente = this.pacienteSeleccionado.length > 0 ? this.pacienteSeleccionado : this.mail;
+    this.turnoSeleccionado.pacienteImagen = this.usuario.imagenPerfil1;
+    this.turnoSeleccionado.pacienteNombre = this.usuario.nombre;
+    this.turnoSeleccionado.pacienteApellido = this.usuario.apellido;
     this.turnoSeleccionado.estado = "Pendiente de aprobacion";
     this.turnoSeleccionado.encuesta = encuesta;
     this.turnoSeleccionado.rating = 0;
@@ -145,11 +148,11 @@ export class SolicitarTurnoComponent {
     this.turnoSeleccionado.altura = 0;
     this.turnoSeleccionado.peso = 0;
     this.turnoSeleccionado.temperatura = '0';
-    this.turnoSeleccionado.preison = '';
+    this.turnoSeleccionado.presion = '';
 
     SweetAlert.fire({
       title: 'Confirmar turno.',
-      text: 'Desea confirmar el turno en el horario seleccionado?',
+      text: 'Desea solicitar el turno en el horario seleccionado?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -161,11 +164,17 @@ export class SolicitarTurnoComponent {
         var solicitarTurno = this.turnoService.Modificar(this.turnoSeleccionado.docRef,this.turnoSeleccionado);
         solicitarTurno.then((response) => {
           if (response.valido) {          
-            this.sweetAlert.MensajeExitoso('Se ha asignado el turno exitosamente!')
+            this.sweetAlert.MensajeExitoso('Se ha solicitado el turno exitosamente!')
+
+            // if (this.usuario.profesionalesVisitados.indexOf(this.profesionalSeleccionado) === -1) 
+            // {
+            //   this.usuario.profesionalesVisitados.push(this.profesionalSeleccionado);
+            //   var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
+            // }            
             this.ReloadCurrentRoute();
           }      
           else{
-            this.sweetAlert.MensajeError('Ha ocurrido un problema al asignar el turno. Intente nuevamente.')
+            this.sweetAlert.MensajeError('Ha ocurrido un problema al solicitar el turno. Intente nuevamente.')
             this.ReloadCurrentRoute();
           } 
         });

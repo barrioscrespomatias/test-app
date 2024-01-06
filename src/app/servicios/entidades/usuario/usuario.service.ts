@@ -80,7 +80,6 @@ export class UsuarioService {
   }
 
   async Modificar(docRefusuarioId: string, usuario: Usuario): Promise<{ mensaje: string; valido: boolean }> {
-    debugger
     try {
 
       this.usuariosRepository.update(docRefusuarioId, usuario);  

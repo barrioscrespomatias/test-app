@@ -11,6 +11,7 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  orderBy,
   query,
   setDoc,
   updateDoc,
@@ -29,7 +30,8 @@ export class TurnoRepositorioService implements Repository<Turno> {
 
   constructor(private _firestore: Firestore) {
     this.listadoTurnos = collection(this._firestore, 'turnos');
-    this.listadoTurnos$ = collectionData(this.listadoTurnos) as Observable<Turno[]>;
+    const queryOrdenada = query(this.listadoTurnos, orderBy('fecha', 'desc'));
+    this.listadoTurnos$ = collectionData(queryOrdenada) as Observable<Turno[]>;
   }
   getAll(): Observable<Turno[]> {
     return this.listadoTurnos$;
@@ -50,12 +52,16 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
+    console.log(args)
     try {
       const documentReference = doc(this.listadoTurnos, docRef);
       updateDoc(documentReference, {
         fecha: (args[0] as any).fecha,        
         especialidad: (args[0] as any).especialidad,        
         paciente: (args[0] as any).paciente,        
+        pacienteNombre: (args[0] as any).pacienteNombre,        
+        pacienteApellido: (args[0] as any).pacienteApellido,        
+        pacienteImagen: (args[0] as any).pacienteImagen,        
         profesional: (args[0] as any).profesional,        
         estado: (args[0] as any).estado,        
         rating: (args[0] as any).rating,
@@ -97,6 +103,18 @@ export class TurnoRepositorioService implements Repository<Turno> {
   Buscar(clave: string, valor: string): Observable<Turno[]> {
     const coleccion = collection(this._firestore, 'turnos');
     const consulta = query(coleccion, where(clave, '==', valor));
+    const result = collectionData(consulta) as Observable<Turno[]>;
+    return result;
+  }
+
+   /**
+   * Obtener los turnos realizados por el profesional
+   * @param profesional 
+   * @returns 
+   */
+   TurnosRealizadosProfesional(profesional: string): Observable<Turno[]> {
+    const coleccion = collection(this._firestore, 'turnos');
+    const consulta = query(coleccion, where('profesional', '==', profesional), where('estado', '==', 'Realizado'), orderBy('fecha', 'desc'));
     const result = collectionData(consulta) as Observable<Turno[]>;
     return result;
   }

@@ -125,14 +125,17 @@ export class AsignarHorarioComponent {
       nuevoHorario.diasHorarios?.push(diaHora);
     });
 
-    nuevoHorario.diasHorarios?.forEach((nh: DiaHora) => {
-      const index = this.usuario.horarioEspecialidad.diasHorarios?.findIndex((dia: DiaHora) => dia.dia === nh.dia);
-      if (index !== -1) {
-        // Si se encuentra, eliminar el día existente
-        this.usuario.horarioEspecialidad.diasHorarios?.splice(index, 1);        
-      }
-      this.usuario.horarioEspecialidad.diasHorarios?.push(nh);
-    });
+    this.usuario.horarioEspecialidad = nuevoHorario;
+
+    // nuevoHorario.diasHorarios?.forEach((nh: DiaHora) => {
+    //   const index = this.usuario.horarioEspecialidad.diasHorarios?.findIndex((dia: DiaHora) => dia.dia === nh.dia);
+    //   if (index !== -1) {
+    //     // Si se encuentra, eliminar el día existente
+    //     this.usuario.horarioEspecialidad.diasHorarios?.splice(index, 1);        
+    //   }
+    //   this.usuario.horarioEspecialidad.diasHorarios?.push(nh);
+      
+    // });
 
     var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
     respuesta.then((response) => {

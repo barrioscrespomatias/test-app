@@ -81,21 +81,23 @@
             </li>
         </ul>
     </div> -->
+
+
     <div class="card-body" *ngIf="visualizarEspecialidades">
-        <div class="row">
-            <div class="card col-sm-3" *ngFor="let especialidad of especialidades"
-                (click)="ObtenerValorEspecialidad(especialidad.nombre)">
-                <button class="nav-link" >
-                    <span class="align-text-bottom"></span>                 
-                   <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length == 0" src="../../../assets/img/especialidaes default.jpg" alt="Card image cap" width="200" height="200">
-                   <img class="mx-auto d-block rounded-circle" *ngIf="especialidad?.path.length > 0" src={{especialidad?.path}} alt="Card image cap" width="200" height="200">
-                  </button>
-                
-                <!-- <h5 class="card-title">{{especialidad.nombre}}</h5> -->
-                <!-- <img class="mx-auto d-block rounded-circle" src="../../../assets/img/especialidades-medicas.jpg" alt="Card image cap" width="300" height="300"> -->
-            </div>
-        </div>
-    </div>
+      <div class="row">
+          <div class="card col-sm-3" *ngFor="let especialidadDelTurno of turnos | async | especialidadesDisponibles: especialidades : 'Disponible' "
+              (click)="ObtenerValorEspecialidad(especialidadDelTurno)">
+              <button class="nav-link" >
+                  <span class="align-text-bottom"></span>                 
+                 <img class="mx-auto d-block rounded-circle"  src="../../../assets/img/especialidaes default.jpg" alt="Card image cap" width="200" height="200">
+                 <img class="mx-auto d-block rounded-circle"  alt="Card image cap" width="200" height="200">
+                </button>
+              
+              <!-- <h5 class="card-title">{{especialidad.nombre}}</h5> -->
+              <!-- <img class="mx-auto d-block rounded-circle" src="../../../assets/img/especialidades-medicas.jpg" alt="Card image cap" width="300" height="300"> -->
+          </div>
+      </div>
+  </div>
     <div *ngIf="especialidadSeleccionada != '' && visualizarProfesionales ">
         <div class="card-body">
             <div class="row">

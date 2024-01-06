@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
+import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
@@ -11,6 +12,15 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
   styleUrls: ['./finalizar-turno.component.css'],
 })
 export class FinalizarTurnoComponent {
+
+    //#region Constructor
+    constructor(private turnoService: TurnoService,
+      private usuarioService: UsuarioService,
+      private firebaseService: FirebaseAuthService,
+) {}
+
+//#endregion
+
   //#region Propiedades
   @Input() turnoRecibido: any;
   form!: FormGroup;
@@ -18,19 +28,26 @@ export class FinalizarTurnoComponent {
   mostrarParametroDos : boolean = false;
   mostrarParametroTres : boolean = false;
   pacienteAtendido : any;
-
+  mail: string = this.firebaseService.userName;
+  usuario: any;
   //#endregion
 
-  //#region Constructor
-  constructor(private turnoService: TurnoService,
-              private usuarioService: UsuarioService,
-    ) {}
 
-  //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
+
+    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
+      this.usuario = usuario;
+    });
+
+    this.pacienteAtendido = this.usuarioService.getUsuario(this.turnoRecibido.paciente);
+
+    this.usuarioService.getUsuario(this.turnoRecibido.paciente).then((paciente: any) => {
+      this.pacienteAtendido = paciente;
+    });
+
     this.form = new FormGroup({
       resena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       diagnostico: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -45,9 +62,7 @@ export class FinalizarTurnoComponent {
       peso: new FormControl('', [Validators.min(0), Validators.max(200,)]),      
       temperatura: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
       presion: new FormControl('', [Validators.minLength(0), Validators.maxLength(5)]),      
-    });
-
-    this.pacienteAtendido = this.usuarioService.getUsuario(this.turnoRecibido.paciente);
+    });    
   }
 
   //#endregion
@@ -158,12 +173,6 @@ export class FinalizarTurnoComponent {
       ];
     }
 
-    //  historia_clinica = [
-    //    { clave: 'Caries', valor: '4' },
-    //    { clave: 'Cantidad dientes', valor: '22' },
-    //    { clave: 'Limpieza', valor: 'Si' },
-    //  ];
-
     //Turno
     this.turnoRecibido.altura = this.altura?.value;
     this.turnoRecibido.peso = this.peso?.value;
@@ -174,7 +183,20 @@ export class FinalizarTurnoComponent {
     this.pacienteAtendido.altura = this.altura?.value;
     this.pacienteAtendido.peso = this.peso?.value;
 
-    this.usuarioService.Modificar(this.pacienteAtendido?.docRef, this.pacienteAtendido);
+     //Paciente
+     if (this.pacienteAtendido.profesionalesVisitados.indexOf(this.mail) === -1) 
+     {
+       this.pacienteAtendido.profesionalesVisitados.push(this.mail);
+       var respuesta = this.usuarioService.Modificar(this.pacienteAtendido.docRef,this.pacienteAtendido);
+     }
+
+    //Profesional
+    if (this.usuario.pacientesAtendidos.indexOf(this.pacienteAtendido.docRef) === -1) 
+    {
+      this.usuario.pacientesAtendidos.push(this.pacienteAtendido.docRef);
+      var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
+    }
+
   }
 
   ConvertirFecha(fecha: any) {
