@@ -64,13 +64,26 @@ export class TablaHistoriasClinicasComponent {
   profesionalSeleccionado:string='';
   especialidadSeleccionada:string='';
 
+  usuariosPacientes: any;
+  turnosProfesional: any;
+  turnosProfesionalArray:any;
+  showDivTurno:boolean = false;
+
   //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
-    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
+    this.usuarioService.getUsuario(this.mail).then(async (usuario: any) => {
       this.usuario = usuario;
+
+      (await this.turnoService.TurnosRealizadosProfesional(this.usuario?.docRef)).subscribe(turnosDelProfesional => {
+        this.turnosProfesional = this.agruparTurnosPorPaciente(turnosDelProfesional);
+        // console.log(this.turnosProfesional)
+
+        // Convertir el Map a un array para usar en la plantilla
+        this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
+      });
     });
 
     this.usuarioService.TraerTodos().then((usuarios: any) => {
@@ -111,7 +124,7 @@ export class TablaHistoriasClinicasComponent {
   }
 
   ObtenerPacienteSeleccionado(emailPaciente:string){
-    this.pacienteSeleccionado = emailPaciente;    
+    this.pacienteSeleccionado = emailPaciente;
   }
 
   ObtenerProfesionalSeleccionado(emailProfesional:string){
@@ -122,6 +135,24 @@ export class TablaHistoriasClinicasComponent {
     this.pacienteSeleccionado = '';
     this.profesionalSeleccionado = '';
     this.especialidadSeleccionada = especialidadSeleccionada;
+  }
+
+  agruparTurnosPorPaciente(turnos: Turno[]): Map<string, Turno> {
+    const turnosAgrupados = new Map<string, Turno>();
+
+    for (const turno of turnos) {
+      // Utilizar el correo del paciente como clave
+      const clavePaciente = turno.paciente;
+
+      // Si la clave aún no existe en el mapa, agregar el turno
+      if(clavePaciente != undefined){
+        if (!turnosAgrupados.has(clavePaciente)) {
+          turnosAgrupados.set(clavePaciente, turno);
+        }
+      }
+    }
+
+    return turnosAgrupados;
   }
 
   //#endregion

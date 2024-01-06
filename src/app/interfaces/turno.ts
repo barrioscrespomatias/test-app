@@ -7,6 +7,9 @@ export interface Turno {
   fecha?: Date;
   especialidad: string;
   paciente?: string;
+  pacienteImagen?: string;
+  pacienteNombre?: string;
+  pacienteApellido?: string;
   profesional?: string;
   estado: string;
   resena?: string;

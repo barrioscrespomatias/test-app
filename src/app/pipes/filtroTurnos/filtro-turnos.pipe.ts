@@ -36,8 +36,8 @@ export class FiltroTurnosPipe implements PipeTransform {
     }
 
     if(this.filtrados.length == 0 && turnos != null){
-      this.sweetAlert.MensajeError('No existen turnos del profesional')
-      this.reloadCurrentRoute();
+      // this.sweetAlert.MensajeError('No existen turnos del profesional')
+      // this.reloadCurrentRoute();
     }
     return this.filtrados;
   }
