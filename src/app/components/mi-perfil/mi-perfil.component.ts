@@ -88,11 +88,6 @@ export class MiPerfilComponent {
   //#region  pdf
 
   async DescargarPDF() {
-    // const data: Turno[][] = this.usuario.turnos.map((usuario: { dni: string; nombre: string; apellido: string; mail: string; perfil: string; habilitado: boolean }) => {
-    //   let habilitado = usuario.habilitado ? 'si' : 'no';
-    
-    //     return [usuario.dni, usuario.nombre, usuario.apellido, usuario.mail, usuario.perfil, habilitado];
-    // });
 
     const data: Turno[][] = this.usuario.turnos.map((usuario: { dni: string; nombre: string; apellido: string; mail: string; perfil: string; habilitado: boolean }) => {
       let habilitado = usuario.habilitado ? 'si' : 'no';

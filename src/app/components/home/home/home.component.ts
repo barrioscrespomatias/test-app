@@ -15,7 +15,6 @@ export class HomeComponent {
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
   }
-
   SignOut() {
     this.firebaseService.SignOut();
   }
