@@ -46,6 +46,9 @@ import { HistoriaClinicaComponent } from '../../components/historia-clinica/hist
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
+import { GraficosPageComponent } from 'src/app/components/graficos-page/graficos-page.component';
+import { ChartComponent } from 'src/app/components/chart/chart.component';
+import { NgChartjsModule } from 'ng-chartjs';
 import { RegistroModule } from '../registro/registro.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
@@ -97,6 +100,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MiPerfilComponent,
     TablaHistoriasClinicasComponent,
     HistoriaClinicaComponent,
+    GraficosPageComponent,
+    ChartComponent,
   ],
   imports: [
     CommonModule,
@@ -108,7 +113,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgChartjsModule,
   ],
   providers: [TurnoService, TurnoRepositorioService, DatePipe],
   exports: [

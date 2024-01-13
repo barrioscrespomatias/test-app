@@ -1,5 +1,3 @@
-
-
 <div class="chart-container" style="position: relative; height:40vh; width:60vw">
     <canvas ngChartjs
         [datasets]="lineChartData" 
@@ -9,5 +7,5 @@
         [chartType]="lineChartType"
         [inlinePlugins]="inlinePlugin">
     </canvas>
-  </div>
-  <button class="btn btn-primary" (click)="DescargarPDF()">Descargar</button>
+</div>
+<button class="btn btn-primary" (click)="DescargarPDF(chartSelector)">Descargar</button>

@@ -16,8 +16,6 @@ import { PacientesComponent } from './componentes/pacientes/pacientes.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RefreshPageComponent } from './components/refresh-page/refresh-page.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ChartComponent } from './components/chart/chart.component';
-import { NgChartjsModule } from 'ng-chartjs';
 
 
 @NgModule({
@@ -27,7 +25,6 @@ import { NgChartjsModule } from 'ng-chartjs';
     NavComponent,
     PacientesComponent,
     RefreshPageComponent,
-    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +35,6 @@ import { NgChartjsModule } from 'ng-chartjs';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
-    NgChartjsModule
   ],
   providers: [FirebaseAuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]

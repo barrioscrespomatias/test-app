@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import * as Chart from 'chart.js';
 import html2canvas from 'html2canvas';
 import * as moment from 'moment';
@@ -16,6 +16,7 @@ export class ChartComponent {
   @Input() chartsLabels: Array<any> = new Array<any>;
   @Input() title: string = '';
   @Input() type: string = '';
+  @Input() chartSelector: string = '';
 
   lineChartData: Chart.ChartDataset[] = [];
   lineChartLegend = true;
@@ -75,7 +76,7 @@ export class ChartComponent {
     this.lineChartType = this.type;
   }
 
-  async DescargarPDF() {
+  async DescargarPDF(chartSelector:string) {
     const documentDefinition: any = {
       // header: `Informe... ${moment().format('DD/MM/YYYY')}`,
       content: [
@@ -92,7 +93,7 @@ export class ChartComponent {
         },
       },
     };
-    const chartContainer = document.querySelector('.chart-container');
+    const chartContainer = document.querySelector(chartSelector);    
   
     if (chartContainer instanceof HTMLElement) {
       try {
