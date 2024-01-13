@@ -76,6 +76,12 @@
               Usuarios
             </button>
           </li>
+          <li class="nav-item">
+            <button class="nav-link" *ngIf="usuario?.perfil == 'administrador'" appMostrarElement componentToggle="graficos-page"  (click)="componenteVisible = 'graficos-page'">
+              <span class="align-text-bottom"></span>
+              Gráficos
+            </button>
+          </li>
           <!-- Fin Acceso: Admin -->
 
            <!-- Acceso: Todos -->
@@ -109,6 +115,7 @@
       <app-mi-perfil id="mi-perfil" *ngIf="componenteVisible === 'mi-perfil'"></app-mi-perfil>
       <app-usuarios id="usuarios" *ngIf="componenteVisible === 'usuarios'"></app-usuarios>
       <app-tabla-historias-clinicas id="tabla-historicas-clinicas" *ngIf="componenteVisible === 'tabla-historicas-clinicas'"></app-tabla-historias-clinicas>
+      <app-graficos-page id="graficos-page" *ngIf="componenteVisible === 'graficos-page'"></app-graficos-page>
     </main>
   </div>
 </div>
