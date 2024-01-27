@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/data/common-repository.interface';
 import { Observable } from 'rxjs';
+import { startOfDay, endOfDay } from 'date-fns';
 import {
   CollectionReference,
   DocumentData,
@@ -131,8 +132,11 @@ export class TurnoRepositorioService implements Repository<Turno> {
    * @returns
    */
   TurnosSolicitadosRangoFechas(desde: any, hasta: any): Observable<Turno[]> {
-    const desdeTimestamp = Timestamp.fromDate(desde);
-    const hastaTimestamp = Timestamp.fromDate(hasta);
+    const desdeInicioDia = startOfDay(desde); // Desde las 00:00:00
+    const hastaFinDia = endOfDay(hasta); // Hasta las 23:59:59
+  
+    const desdeTimestamp = Timestamp.fromDate(desdeInicioDia);
+    const hastaTimestamp = Timestamp.fromDate(hastaFinDia);
 
     const coleccion = collection(this._firestore, 'turnos');
     const consulta = query(
@@ -150,4 +154,31 @@ export class TurnoRepositorioService implements Repository<Turno> {
     const result = collectionData(consulta) as Observable<Turno[]>;
     return result;
   }
+
+    /**
+   * Obtener los turnos finalizados de los profesionales.
+   * @param desde
+   * @param hasta
+   * @returns
+   */
+    TurnosFinalizadosRangoFechas(desde: any, hasta: any): Observable<Turno[]> {
+      const desdeInicioDia = startOfDay(desde); // Desde las 00:00:00
+      const hastaFinDia = endOfDay(hasta); // Hasta las 23:59:59
+    
+      const desdeTimestamp = Timestamp.fromDate(desdeInicioDia);
+      const hastaTimestamp = Timestamp.fromDate(hastaFinDia);
+  
+      const coleccion = collection(this._firestore, 'turnos');
+      const consulta = query(
+        coleccion,
+        where('fecha', '>=', desdeTimestamp),
+        where('fecha', '<=', hastaTimestamp),
+        where('estado', 'in', [
+          'Realizado'
+        ]),
+        orderBy('fecha', 'desc')
+      );
+      const result = collectionData(consulta) as Observable<Turno[]>;
+      return result;
+    }
 }
