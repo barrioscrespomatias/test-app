@@ -31,7 +31,6 @@ import { FiltroUsuariosPacientesPipe } from '../../pipes/filtroUsuariosPacientes
 import { EspecialidadesDisponiblesPipe } from '../../pipes/especialidadesDisponibles/especialidades-disponibles.pipe';
 import { DatePipe } from '@angular/common';
 
-
 import { CancelarTurnoComponent } from '../../components/cancelar-turno/cancelar-turno.component';
 import { VerResenaComponent } from '../../components/ver-resena/ver-resena.component';
 import { VerEncuestaComponent } from '../../components/ver-encuesta/ver-encuesta.component';
@@ -51,12 +50,14 @@ import { ChartComponent } from 'src/app/components/chart/chart.component';
 import { NgChartjsModule } from 'ng-chartjs';
 import { RegistroModule } from '../registro/registro.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -109,16 +110,24 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     RegistroModule,
+    MatInputModule,
+
+    //Material
     MatSlideToggleModule,
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+
+    //Chart
     NgChartjsModule,
   ],
   providers: [TurnoService, TurnoRepositorioService, DatePipe],
   exports: [
-    CustomNg2SearchPipe // Agrega el componente en la sección de exports
-  ]
+    CustomNg2SearchPipe, // Agrega el componente en la sección de exports
+  ],
 })
-export class GestionUsuariosModule { }
+export class GestionUsuariosModule {}
