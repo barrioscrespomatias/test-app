@@ -61,6 +61,10 @@ export class TurnoService {
     return this.turnosRepositorioService.getAll();
   }
 
+  async TurnosSolicitadosRangoFechas (desde:any, hasta:any) {
+    return this.turnosRepositorioService.TurnosSolicitadosRangoFechas(desde,hasta);
+  }
+
   async Modificar(docRef: string, turno: Turno): Promise<{ mensaje: string; valido: boolean }> 
   {
     try {

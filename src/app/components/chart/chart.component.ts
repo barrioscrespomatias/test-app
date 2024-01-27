@@ -1,9 +1,18 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Chart from 'chart.js';
 import html2canvas from 'html2canvas';
 import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chart',
@@ -11,12 +20,23 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
   styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent {
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   @Input() data: number[] = [];
-  @Input() chartsLabels: Array<any> = new Array<any>;
+  @Input() chartsLabels: Array<any> = new Array<any>();
   @Input() title: string = '';
   @Input() type: string = '';
   @Input() chartSelector: string = '';
+  @Input() dateProperty: boolean = false;
+
+  @Output() dateRangeSelected: EventEmitter<{ desde: any; hasta: any }> =
+    new EventEmitter();
+
+  today = new Date();
+  month = this.today.getMonth();
+  year = this.today.getFullYear();
+
+  form: any;
 
   lineChartData: Chart.ChartDataset[] = [];
   lineChartLegend = true;
@@ -27,7 +47,41 @@ export class ChartComponent {
     responsive: true,
   };
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.updateChart();
+    }
+  }
+
+  private updateChart(): void {
+    // this.changeDetectorRef.detectChanges();
+    this.IniciarChart();
+  }
+
   ngOnInit() {
+    const today = new Date();
+    const fourDaysAgo = new Date();
+    fourDaysAgo.setDate(today.getDate() - 4);
+
+    this.form = new FormGroup({
+      desde: new FormControl(today),
+      hasta: new FormControl(fourDaysAgo),
+    });
+
+    this.IniciarChart();
+  }
+
+  //#region Getters
+  get desde() {
+    return this.form.get('desde');
+  }
+  get hasta() {
+    return this.form.get('hasta');
+  }
+
+  //#endregion
+
+  IniciarChart() {
     this.lineChartData = [
       {
         label: this.title,
@@ -63,10 +117,10 @@ export class ChartComponent {
           const fontSize = (height / 114).toFixed(2);
           ctx.font = `${fontSize}em sans-serif`;
           ctx.textBaseline = 'middle';
-          const text = 'Text Plugin';
-          const textX = Math.round((width - ctx.measureText(text).width) / 2);
+          // const text = 'Text Plugin';
+          // const textX = Math.round((width - ctx.measureText(text).width) / 2);
           const textY = height / 2;
-          ctx.fillText(text, textX, textY);
+          // ctx.fillText(text, textX, textY);
           ctx.save();
         },
       },
@@ -76,7 +130,7 @@ export class ChartComponent {
     this.lineChartType = this.type;
   }
 
-  async DescargarPDF(chartSelector:string) {
+  async DescargarPDF(chartSelector: string) {
     const documentDefinition: any = {
       // header: `Informe... ${moment().format('DD/MM/YYYY')}`,
       content: [
@@ -93,21 +147,26 @@ export class ChartComponent {
         },
       },
     };
-    const chartContainer = document.querySelector(chartSelector);    
-  
+    const chartContainer = document.querySelector(chartSelector);
+
     if (chartContainer instanceof HTMLElement) {
       try {
         const chartImage = await html2canvas(chartContainer, { scale: 2 });
-  
+
         // Convertir la imagen capturada a base64
         const chartImageData = chartImage.toDataURL('image/png');
-  
+
         // Agregar la imagen al contenido del PDF
         documentDefinition.content.push({ image: chartImageData, width: 500 });
-  
+
         // Generar el documento PDF
         const pdfBuffer = pdfMake
-          .createPdf(documentDefinition, undefined, undefined, pdfFonts.pdfMake.vfs)
+          .createPdf(
+            documentDefinition,
+            undefined,
+            undefined,
+            pdfFonts.pdfMake.vfs
+          )
           .getBuffer((buffer: any) => {
             // Descargar el archivo PDF
             this.savePDFFile(buffer, 'grafico.pdf');
@@ -123,13 +182,20 @@ export class ChartComponent {
   savePDFFile(buffer: ArrayBuffer, fileName: string) {
     const data = new Blob([buffer], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(data);
-  
+
     const link = document.createElement('a');
     link.href = url;
     link.download = fileName;
     link.click();
-  
+
     // Liberar la URL del objeto
     window.URL.revokeObjectURL(url);
+  }
+
+  onDateChange() {
+    var desde = this.desde?.value;
+    var hasta = this.hasta?.value;
+
+    this.dateRangeSelected.emit({ desde, hasta });
   }
 }

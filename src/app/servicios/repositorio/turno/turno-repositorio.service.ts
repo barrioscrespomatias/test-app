@@ -7,6 +7,7 @@ import {
   DocumentReference,
   DocumentSnapshot,
   Firestore,
+  Timestamp,
   collectionData,
   deleteDoc,
   doc,
@@ -21,10 +22,9 @@ import { collection } from '@firebase/firestore';
 import { Turno } from 'src/app/interfaces/turno';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TurnoRepositorioService implements Repository<Turno> {
-
   listadoTurnos!: CollectionReference<DocumentData>;
   listadoTurnos$!: Observable<Turno[]>;
 
@@ -52,34 +52,34 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
-    console.log(args)
+    console.log(args);
     try {
       const documentReference = doc(this.listadoTurnos, docRef);
       updateDoc(documentReference, {
-        fecha: (args[0] as any).fecha,        
-        especialidad: (args[0] as any).especialidad,        
-        paciente: (args[0] as any).paciente,        
-        pacienteNombre: (args[0] as any).pacienteNombre,        
-        pacienteApellido: (args[0] as any).pacienteApellido,        
-        pacienteImagen: (args[0] as any).pacienteImagen,        
-        profesional: (args[0] as any).profesional,        
-        estado: (args[0] as any).estado,        
+        fecha: (args[0] as any).fecha,
+        especialidad: (args[0] as any).especialidad,
+        paciente: (args[0] as any).paciente,
+        pacienteNombre: (args[0] as any).pacienteNombre,
+        pacienteApellido: (args[0] as any).pacienteApellido,
+        pacienteImagen: (args[0] as any).pacienteImagen,
+        profesional: (args[0] as any).profesional,
+        estado: (args[0] as any).estado,
         rating: (args[0] as any).rating,
-        encuesta: (args[0] as any).encuesta,        
-        resena: (args[0] as any).resena,        
-        diagnostico: (args[0] as any).diagnostico,        
-        historia_clinica: (args[0] as any).historia_clinica,        
-        altura: (args[0] as any).altura,        
-        peso: (args[0] as any).peso,        
-        temperatura: (args[0] as any).temperatura,        
-        presion: (args[0] as any).presion,        
+        encuesta: (args[0] as any).encuesta,
+        resena: (args[0] as any).resena,
+        diagnostico: (args[0] as any).diagnostico,
+        historia_clinica: (args[0] as any).historia_clinica,
+        altura: (args[0] as any).altura,
+        peso: (args[0] as any).peso,
+        temperatura: (args[0] as any).temperatura,
+        presion: (args[0] as any).presion,
       });
-      console.log(args)
+      console.log(args);
     } catch (e) {
       console.log(e);
     }
     return false;
-  }  
+  }
 
   delete(docRef: string): boolean {
     try {
@@ -96,9 +96,9 @@ export class TurnoRepositorioService implements Repository<Turno> {
 
   /**
    * Busca en la entidad segun un parametro enviado
-   * @param clave 
-   * @param valor 
-   * @returns 
+   * @param clave
+   * @param valor
+   * @returns
    */
   Buscar(clave: string, valor: string): Observable<Turno[]> {
     const coleccion = collection(this._firestore, 'turnos');
@@ -107,16 +107,47 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return result;
   }
 
-   /**
+  /**
    * Obtener los turnos realizados por el profesional
-   * @param profesional 
-   * @returns 
+   * @param profesional
+   * @returns
    */
-   TurnosRealizadosProfesional(profesional: string): Observable<Turno[]> {
+  TurnosRealizadosProfesional(profesional: string): Observable<Turno[]> {
     const coleccion = collection(this._firestore, 'turnos');
-    const consulta = query(coleccion, where('profesional', '==', profesional), where('estado', '==', 'Realizado'), orderBy('fecha', 'desc'));
+    const consulta = query(
+      coleccion,
+      where('profesional', '==', profesional),
+      where('estado', '==', 'Realizado'),
+      orderBy('fecha', 'desc')
+    );
     const result = collectionData(consulta) as Observable<Turno[]>;
     return result;
   }
 
+  /**
+   * Obtener los turnos solicitados de los profesionales.
+   * @param desde
+   * @param hasta
+   * @returns
+   */
+  TurnosSolicitadosRangoFechas(desde: any, hasta: any): Observable<Turno[]> {
+    const desdeTimestamp = Timestamp.fromDate(desde);
+    const hastaTimestamp = Timestamp.fromDate(hasta);
+
+    const coleccion = collection(this._firestore, 'turnos');
+    const consulta = query(
+      coleccion,
+      where('fecha', '>=', desdeTimestamp),
+      where('fecha', '<=', hastaTimestamp),
+      where('estado', 'in', [
+        'Pendiente de aprobacion',
+        'Cancelado',
+        'Rechazado',
+        'Aceptado',
+      ]),
+      orderBy('fecha', 'desc')
+    );
+    const result = collectionData(consulta) as Observable<Turno[]>;
+    return result;
+  }
 }
