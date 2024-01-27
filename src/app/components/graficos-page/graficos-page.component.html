@@ -1,3 +1,5 @@
+
+<!-- Cantidad de turnos por especialidad  -->
 <div class="chart-1" *ngIf="data1.length > 0 && chartsLabels1.length>0">
     <app-chart [data]="data1" 
     [chartsLabels]="chartsLabels1"  
@@ -8,12 +10,22 @@
     </app-chart>
 </div>
 
-
+<!-- Cantidad de turnos solicitado por médico en un lapso de tiempo  -->
 <app-chart [data]="data2" 
     [chartsLabels]="chartsLabels2"  
     [title]="title2" 
     [type]="type2"
     [chartSelector]="chartSelector2"
     [dateProperty]="datePropertyTrue"
-    (dateRangeSelected)="ActualizarGraficos($event)">
+    (dateRangeSelected)="ActualizarGrafico2($event)">
+</app-chart>
+
+<!-- Cantidad de turnos finalizado por médico en un lapso de tiempo  -->
+<app-chart [data]="data3" 
+    [chartsLabels]="chartsLabels3"  
+    [title]="title3" 
+    [type]="type3"
+    [chartSelector]="chartSelector3"
+    [dateProperty]="datePropertyTrue"
+    (dateRangeSelected)="ActualizarGrafico3($event)">
 </app-chart>
