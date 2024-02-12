@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="chart-container" style="position: relative; height:40vh; width:60vw">
+  <div class="chart-container" style="position: relative; height:40vh; width:60vw; margin: 15vh;">
 
     <ng-container *ngIf="dateProperty">
       <mat-form-field class="example-form-field">
@@ -17,6 +17,6 @@
     <canvas ngChartjs [datasets]="lineChartData" [labels]="chartsLabels" [options]="lineChartOptions"
       [legend]="lineChartLegend" [chartType]="lineChartType" [inlinePlugins]="inlinePlugin">
     </canvas>
-    <button class="btn mt-1 btn-primary" (click)="DescargarPDF(chartSelector)">Descargar</button>
+    <button class="btn mt-1 btn-primary" (click)="DescargarPDF(chartSelector, title)">Descargar</button>
   </div>
 </form>

@@ -108,6 +108,24 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return result;
   }
 
+  TurnosIniciados(): Observable<Turno[]> {
+    const coleccion = collection(this._firestore, 'turnos');
+    const consulta = query(
+      coleccion,
+      where('estado', 'in', [
+        'Pendiente de aprobacion',
+        'Cancelado',
+        'Rechazado',
+        'Aceptado',
+        'Realizado',
+      ]),
+
+      orderBy('fecha', 'desc')
+    );
+    const result = collectionData(consulta) as Observable<Turno[]>;
+    return result;
+  }
+
   /**
    * Obtener los turnos realizados por el profesional
    * @param profesional
@@ -148,6 +166,7 @@ export class TurnoRepositorioService implements Repository<Turno> {
         'Cancelado',
         'Rechazado',
         'Aceptado',
+        'Realizado',
       ]),
       orderBy('fecha', 'desc')
     );
@@ -177,6 +196,19 @@ export class TurnoRepositorioService implements Repository<Turno> {
           'Realizado'
         ]),
         orderBy('fecha', 'desc')
+      );
+      const result = collectionData(consulta) as Observable<Turno[]>;
+      return result;
+    }
+
+    TurnosPorDia(): Observable<Turno[]> {
+  
+      const coleccion = collection(this._firestore, 'turnos');
+      const consulta = query(
+        coleccion,
+        orderBy('estado'), // Ordenar por 'estado' primero
+        where('estado', '!=', 'Disponible'), // Filtrar por 'estado' distinto de 'Disponible'
+        orderBy('fecha', 'desc') // Luego ordenar por 'fecha'
       );
       const result = collectionData(consulta) as Observable<Turno[]>;
       return result;

@@ -6,13 +6,12 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import * as Chart from 'chart.js';
 import html2canvas from 'html2canvas';
-import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FechaService } from 'src/app/helper/fecha/fecha.service';
 
 @Component({
   selector: 'app-chart',
@@ -20,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent {
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef, private fechaService: FechaService) {}
 
   @Input() data: number[] = [];
   @Input() chartsLabels: Array<any> = new Array<any>();
@@ -63,9 +62,12 @@ export class ChartComponent {
     const fourDaysAgo = new Date();
     fourDaysAgo.setDate(today.getDate() - 4);
 
+    const firstDayMonth = this.fechaService.InicioMesActual();
+    const lastDateMonth = this.fechaService.FinMesActual();
+
     this.form = new FormGroup({
-      desde: new FormControl(today),
-      hasta: new FormControl(fourDaysAgo),
+      desde: new FormControl(firstDayMonth),
+      hasta: new FormControl(lastDateMonth),
     });
 
     this.IniciarChart();
@@ -130,7 +132,7 @@ export class ChartComponent {
     this.lineChartType = this.type;
   }
 
-  async DescargarPDF(chartSelector: string) {
+  async DescargarPDF(chartSelector: string, graphName:string) {
     const documentDefinition: any = {
       // header: `Informe... ${moment().format('DD/MM/YYYY')}`,
       content: [
@@ -169,7 +171,7 @@ export class ChartComponent {
           )
           .getBuffer((buffer: any) => {
             // Descargar el archivo PDF
-            this.savePDFFile(buffer, 'grafico.pdf');
+            this.savePDFFile(buffer, `${graphName}.pdf`);
           });
       } catch (error) {
         console.error('Error al capturar el gráfico como una imagen:', error);
