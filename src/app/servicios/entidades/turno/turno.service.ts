@@ -61,12 +61,20 @@ export class TurnoService {
     return this.turnosRepositorioService.getAll();
   }
 
+  async TurnosIniciados() {
+    return this.turnosRepositorioService.TurnosIniciados();
+  }
+
   async TurnosSolicitadosRangoFechas (desde:any, hasta:any) {
     return this.turnosRepositorioService.TurnosSolicitadosRangoFechas(desde,hasta);
   }
 
   async TurnosFinalizadosRangoFechas (desde:any, hasta:any) {
     return this.turnosRepositorioService.TurnosFinalizadosRangoFechas(desde,hasta);
+  }
+
+  async TurnosPorDia () {
+    return this.turnosRepositorioService.TurnosPorDia();
   }
 
   async Modificar(docRef: string, turno: Turno): Promise<{ mensaje: string; valido: boolean }> 

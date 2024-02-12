@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+import 'moment/locale/es';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +18,31 @@ export class FechaService {
     return new Date(fecha);
   }
 
+  DiaDeLaFecha(date: Date) {
+    moment.locale('es');
+    var dateJs =  this.ConvertirFechaFirestore(date);    
+    const momentDate = moment(dateJs);    
+    return momentDate.format('dddd');
+  }
+
   EsIgual(primeraFecha:Date, segundaFecha:Date){
     return primeraFecha.getTime() === segundaFecha.getTime();
+  }
+
+  // InicioMesActual(){
+  //   return moment().startOf('month').format('YYYY-MM-DD hh:mm');
+  // }
+
+  // FinMesActual(){
+  //   return moment().endOf('month').format('YYYY-MM-DD hh:mm');
+  // }
+
+  InicioMesActual(){
+    return moment().startOf('month').toDate();
+  }
+
+  FinMesActual(){
+    return moment().endOf('month').toDate();
   }
   //#endregion
 }

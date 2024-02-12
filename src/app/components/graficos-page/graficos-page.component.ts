@@ -4,6 +4,9 @@ import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import * as moment from 'moment';
+import 'moment/locale/es';
+import { FechaService } from 'src/app/helper/fecha/fecha.service';
 
 @Component({
   selector: 'app-graficos-page',
@@ -16,7 +19,8 @@ export class GraficosPageComponent {
     private usuarioService: UsuarioService,
     private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService,
-    public router: Router
+    public router: Router,
+    private fechaService: FechaService
   ) {}
 
   //#endregion
@@ -28,7 +32,9 @@ export class GraficosPageComponent {
   turnos: any;
   turnosAgrupados: any;
   turnosProfesional: any;
+  turnosPorDia: any;
   turnosProfesionalArray: any;
+  turnosPorDiaArray: any;
   today = new Date();
   lastWeek = new Date();
 
@@ -55,6 +61,13 @@ export class GraficosPageComponent {
   title3 = 'Turnos finalizados por Médico en un lapso de tiempo';
   type3 = 'bar';
   chartSelector3 = '.chart-3';
+
+  // Cantidad de turnos por dia
+  data4: number[] = [];
+  chartsLabels4: Array<any> = [];
+  title4 = 'Turnos por dia';
+  type4 = 'bar';
+  chartSelector4 = '.chart-4';
   //#endregion
 
   //#region Hooks
@@ -66,7 +79,7 @@ export class GraficosPageComponent {
 
     //#region chart-1
     
-    (await this.turnoService.TraerTodos()).subscribe((turnosDelProfesional) => {
+    (await this.turnoService.TurnosIniciados()).subscribe((turnosDelProfesional) => {
       this.turnosProfesional =
         this.AgruparTurnosPorEspecialidad(turnosDelProfesional);
 
@@ -74,12 +87,20 @@ export class GraficosPageComponent {
       this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
       this.GenerarDatosPorEspecialidad(this.turnosProfesionalArray, 'chart-1');
     });
-    //#endregion
-    this.today.setHours(0, 0, 0, 0);
-    this.lastWeek.setDate(this.today.getDate() - 4);
-    this.lastWeek.setHours(0, 0, 0, 0);
 
-    this.Refresh2(this.lastWeek, this.today);
+    (await this.turnoService.TurnosPorDia()).subscribe((turnos) => {
+      this.turnosPorDia =
+        this.AgruparTurnosPorDia(turnos);
+
+      // Convertir el Map a un array para usar en la plantilla
+      this.turnosPorDiaArray = Array.from(this.turnosPorDia.values());
+      this.GenerarDatosPorDia(this.turnosPorDiaArray, 'chart-4');
+    });
+    //#endregion
+
+
+    this.Refresh2(this.fechaService.InicioMesActual(),this.fechaService.FinMesActual());
+    this.Refresh3(this.fechaService.InicioMesActual(),this.fechaService.FinMesActual());
   }
   //#endregion
 
@@ -139,6 +160,30 @@ export class GraficosPageComponent {
     }
   }
 
+  GenerarDatosPorDia(turnosAgrupados: Map<Turno, Turno[]>, chart: string) {
+    const data: number[] = [];
+    const chartsLabels: string[] = [];
+    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    for (const [turno, turnos] of turnosAgrupados) {
+      if(turno.fecha != undefined){
+        var dia = this.fechaService.DiaDeLaFecha(turno.fecha); 
+        chartsLabels.push(dia);
+      }
+    }
+
+    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    for (const turnos of turnosAgrupados) {
+      data.push(turnos.length);
+    }
+
+    switch (chart) {
+      case 'chart-4':
+        this.data4 = data;
+        this.chartsLabels4 = chartsLabels;
+        break;
+    }
+  }
+
   //#endregion
 
   //#region Agrupar Turnos
@@ -178,6 +223,28 @@ export class GraficosPageComponent {
           // Si la clave ya existe, agregar el turno al array existente
           turnosAgrupados.get(claveProfesional)!.push(turno);
         }
+      }
+    }
+    return turnosAgrupados;
+  }
+
+  AgruparTurnosPorDia(turnos: Turno[]): Map<string, Turno[]> {
+    const turnosAgrupados = new Map<string, Turno[]>();
+
+    for (const turno of turnos) {
+      // const fecha = moment(turno.fecha);
+      // const claveDia = fecha.format('dddd'); // Obtener el nombre del día de la semana
+
+      if(turno.fecha){
+        var claveDia = this.fechaService.DiaDeLaFecha(turno.fecha);  
+  
+        if (claveDia !== undefined) {
+          if (!turnosAgrupados.has(claveDia)) {
+            turnosAgrupados.set(claveDia, [turno]);
+          } else {
+            turnosAgrupados.get(claveDia)!.push(turno);
+          }
+        }        
       }
     }
     return turnosAgrupados;
@@ -231,7 +298,6 @@ export class GraficosPageComponent {
     ).subscribe((turnosRangoFecha) => {
       this.turnosProfesional =
         this.AgruparTurnosPorProfesional(turnosRangoFecha);
-        console.log(turnosRangoFecha)
 
       // Convertir el Map a un array para usar en la plantilla
       this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
@@ -244,7 +310,7 @@ export class GraficosPageComponent {
 
   async Refresh3(desde: Date, hasta: Date) {
     (
-      await this.turnoService.TurnosSolicitadosRangoFechas(desde, hasta)
+      await this.turnoService.TurnosFinalizadosRangoFechas(desde, hasta)
     ).subscribe((turnosRangoFecha) => {
       this.turnosProfesional =
         this.AgruparTurnosPorProfesional(turnosRangoFecha);
@@ -253,7 +319,7 @@ export class GraficosPageComponent {
       this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
       this.GenerarDatosTurnosPorProfesional(
         this.turnosProfesionalArray,
-        'chart-2'
+        'chart-3'
       );
     });
   }
