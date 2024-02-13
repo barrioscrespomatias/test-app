@@ -39,7 +39,7 @@ export class FirebaseAuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        // this.SetUserData(result.user);
+        this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['home']);
@@ -152,18 +152,18 @@ async isLoggedIn(): Promise<boolean> {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
+      `logins/${this.GuidGenerator()}`
     );
-    const userData: any = {
+    const loginData: any = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      date: new Date(),
+      // photoURL: user.photoURL,
       //TODO verificar cuenta con email
-      emailVerified: user.emailVerified,
+      // emailVerified: user.emailVerified,
       // emailVerified: true,
     };
-    return userRef.set(userData, {
+    return userRef.set(loginData, {
       merge: true,
     });
   }
@@ -216,5 +216,11 @@ async isLoggedIn(): Promise<boolean> {
         }
       });
     });
+  }
+
+  GuidGenerator() {
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c: string) =>
+    (parseInt(c, 10) ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> parseInt(c, 10) / 4).toString(16)
+  );
   }
 }

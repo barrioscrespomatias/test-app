@@ -31,6 +31,8 @@ export class ChartComponent {
   @Output() dateRangeSelected: EventEmitter<{ desde: any; hasta: any }> =
     new EventEmitter();
 
+  @Output() userSelected: EventEmitter<string> = new EventEmitter();
+
   today = new Date();
   month = this.today.getMonth();
   year = this.today.getFullYear();
@@ -44,6 +46,10 @@ export class ChartComponent {
   textPlugin: any;
   lineChartOptions: any = {
     responsive: true,
+    onClick: this.handleClick.bind(this),
+    layout:{
+      padding: 20,
+    }, 
   };
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,6 +61,14 @@ export class ChartComponent {
   private updateChart(): void {
     // this.changeDetectorRef.detectChanges();
     this.IniciarChart();
+  }
+
+  handleClick(event: any, chartElement: any) {
+    if (chartElement.length > 0) {
+      const dataIndex = chartElement[0].index;
+      const datasetIndex = chartElement[0].datasetIndex;
+      this.userSelected.emit(this.chartsLabels[dataIndex]);      
+    }
   }
 
   ngOnInit() {
@@ -107,28 +121,6 @@ export class ChartComponent {
         data: this.data,
       },
     ];
-
-    this.textPlugin = [
-      {
-        id: 'textPlugin',
-        beforeDraw(chart: any): any {
-          const width = chart.width;
-          const height = chart.height;
-          const ctx = chart.ctx;
-          ctx.restore();
-          const fontSize = (height / 114).toFixed(2);
-          ctx.font = `${fontSize}em sans-serif`;
-          ctx.textBaseline = 'middle';
-          // const text = 'Text Plugin';
-          // const textX = Math.round((width - ctx.measureText(text).width) / 2);
-          const textY = height / 2;
-          // ctx.fillText(text, textX, textY);
-          ctx.save();
-        },
-      },
-    ];
-
-    this.inlinePlugin = this.textPlugin;
     this.lineChartType = this.type;
   }
 

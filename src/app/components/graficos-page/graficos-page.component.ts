@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
@@ -7,6 +7,8 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import * as moment from 'moment';
 import 'moment/locale/es';
 import { FechaService } from 'src/app/helper/fecha/fecha.service';
+import { LoginService } from 'src/app/servicios/entidades/login/login.service';
+import { Login } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-graficos-page',
@@ -20,8 +22,18 @@ export class GraficosPageComponent {
     private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService,
     public router: Router,
-    private fechaService: FechaService
+    private fechaService: FechaService,
+    private loginService: LoginService
   ) {}
+
+  userSelectedData: string = '';
+
+  async onUserSelected(data: string) {
+    this.userSelectedData = data;
+    (await this.loginService.LoginsPorUsuario(data)).subscribe((logs) => {
+      this.logins = logs;
+    });
+  }
 
   //#endregion
 
@@ -34,9 +46,12 @@ export class GraficosPageComponent {
   turnosProfesional: any;
   turnosPorDia: any;
   turnosProfesionalArray: any;
+  loginsArray: any;
   turnosPorDiaArray: any;
   today = new Date();
   lastWeek = new Date();
+
+  logins: any;
 
   datePropertyTrue: boolean = true;
   datePropertyFalse: boolean = false;
@@ -68,6 +83,13 @@ export class GraficosPageComponent {
   title4 = 'Turnos por dia';
   type4 = 'bar';
   chartSelector4 = '.chart-4';
+
+  // Cantidad de turnos por dia
+  data5: number[] = [];
+  chartsLabels5: Array<any> = [];
+  title5 = 'Log de ingresos al sistema';
+  type5 = 'bar';
+  chartSelector5 = '.chart-5';
   //#endregion
 
   //#region Hooks
@@ -76,6 +98,8 @@ export class GraficosPageComponent {
     this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
+
+    // console.log(this.userSelected);
 
     //#region chart-1
     
@@ -101,8 +125,25 @@ export class GraficosPageComponent {
 
     this.Refresh2(this.fechaService.InicioMesActual(),this.fechaService.FinMesActual());
     this.Refresh3(this.fechaService.InicioMesActual(),this.fechaService.FinMesActual());
+
+        
+    (await this.loginService.getAll()).subscribe((logs) => {
+      this.logins =
+        this.AgruparLoginsPorUsuario(logs);
+
+      // Convertir el Map a un array para usar en la plantilla
+      this.loginsArray = Array.from(this.logins.values());
+      this.GenerarDatosLoginsPorUsuario(this.loginsArray, 'chart-5');
+    });
   }
   //#endregion
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      // this.updateChart();
+      console.log(changes['data'])
+    }
+  }
 
   //#region Metodos
 
@@ -184,6 +225,30 @@ export class GraficosPageComponent {
     }
   }
 
+  GenerarDatosLoginsPorUsuario(loginsAgrupados: Map<Login, Login[]>, chart: string) {
+    const data: number[] = [];
+    const chartsLabels: string[] = [];
+    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    for (const [login, logins] of loginsAgrupados) {
+      if(login.email != undefined){
+        var user = login.email;
+        chartsLabels.push(user);
+      }
+    }
+
+    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    for (const logins of loginsAgrupados) {
+      data.push(logins.length);
+    }
+
+    switch (chart) {
+      case 'chart-5':
+        this.data5 = data;
+        this.chartsLabels5 = chartsLabels;
+        break;
+    }
+  }
+
   //#endregion
 
   //#region Agrupar Turnos
@@ -243,6 +308,25 @@ export class GraficosPageComponent {
             turnosAgrupados.set(claveDia, [turno]);
           } else {
             turnosAgrupados.get(claveDia)!.push(turno);
+          }
+        }        
+      }
+    }
+    return turnosAgrupados;
+  }
+
+  AgruparLoginsPorUsuario(logins: Login[]): Map<string, Login[]> {
+    const turnosAgrupados = new Map<string, Login[]>();
+
+    for (const login of logins) {
+      if(login.email){
+        var clave = login.email;
+  
+        if (clave !== undefined) {
+          if (!turnosAgrupados.has(clave)) {
+            turnosAgrupados.set(clave, [login]);
+          } else {
+            turnosAgrupados.get(clave)!.push(login);
           }
         }        
       }
@@ -333,5 +417,9 @@ export class GraficosPageComponent {
       .then(() => {
         this.router.navigate([currentUrl]);
       });
+  }
+
+  FechaFirestore(date:any){
+    return this.fechaService.FechaFirestore(date);
   }
 }

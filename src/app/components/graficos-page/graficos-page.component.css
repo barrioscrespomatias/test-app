@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    /* Esto centra horizontalmente el carrusel */
+    align-items: flex-start;
+    /* Esto alinea el carrusel hacia arriba */
+    height: 100vh;
+    /* Esto hace que el contenedor ocupe toda la altura de la pantalla */
+}
+
+.carousel-container {
+    width: 50vw;
+    /* El carrusel ocupa la mitad del ancho de la pantalla */
+    height: 50vh;
+    /* El carrusel ocupa la mitad de la altura de la pantalla */
+    margin-top: 5vh;
+    /* Ajusta este valor según la cantidad de espacio que quieras arriba */
+}
+
+i.icon-black {
+    color: black;
+}
