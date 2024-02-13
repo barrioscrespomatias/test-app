@@ -1,46 +1,96 @@
 
-<!-- Cantidad de turnos por especialidad  -->
-<div class="chart-1" *ngIf="data1.length > 0 && chartsLabels1.length>0">
-    <app-chart [data]="data1" 
-    [chartsLabels]="chartsLabels1"  
-    [title]="title" 
-    [type]="type"
-    [chartSelector]="chartSelector1"
-    [dateProperty]="datePropertyFalse">
-    </app-chart>
-</div>
-
-<!-- Cantidad de turnos solicitado por médico en un lapso de tiempo  -->
-<div class="chart-2">
-    <app-chart [data]="data2" 
-        [chartsLabels]="chartsLabels2"  
-        [title]="title2" 
-        [type]="type2"
-        [chartSelector]="chartSelector2"
-        [dateProperty]="datePropertyTrue"
-        (dateRangeSelected)="ActualizarGrafico2($event)">
-    </app-chart>
-</div>
-
-<!-- Cantidad de turnos finalizado por médico en un lapso de tiempo  -->
-<div class="chart-3">
-    <app-chart [data]="data3" 
-        [chartsLabels]="chartsLabels3"  
-        [title]="title3" 
-        [type]="type3"
-        [chartSelector]="chartSelector3"
-        [dateProperty]="datePropertyTrue"
-        (dateRangeSelected)="ActualizarGrafico3($event)">
-    </app-chart>
-</div>
-
-<!-- Cantidad de turnos por dia  -->
-<div class="chart-4">
-    <app-chart [data]="data4" 
-        [chartsLabels]="chartsLabels4"  
-        [title]="title4" 
-        [type]="type4"
-        [chartSelector]="chartSelector4"
-        [dateProperty]="datePropertyFalse">
-    </app-chart>
+<div class="container">
+    <div class="carousel-container">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                    <!-- Cantidad de turnos por especialidad  -->
+                    <div class="chart-1" *ngIf="data1.length > 0 && chartsLabels1.length>0">
+                        <app-chart [data]="data1" 
+                        [chartsLabels]="chartsLabels1"  
+                        [title]="title" 
+                        [type]="type"
+                        [chartSelector]="chartSelector1"
+                        [dateProperty]="datePropertyFalse">
+                        </app-chart>
+                    </div>
+              </div>
+        
+              <div class="carousel-item">
+                    <!-- Cantidad de turnos solicitado por médico en un lapso de tiempo  -->
+                    <div class="chart-2">
+                        <app-chart [data]="data2" 
+                            [chartsLabels]="chartsLabels2"  
+                            [title]="title2" 
+                            [type]="type2"
+                            [chartSelector]="chartSelector2"
+                            [dateProperty]="datePropertyTrue"
+                            (dateRangeSelected)="ActualizarGrafico2($event)">
+                        </app-chart>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                    <!-- Cantidad de turnos finalizado por médico en un lapso de tiempo  -->
+                    <div class="chart-3">
+                        <app-chart [data]="data3" 
+                            [chartsLabels]="chartsLabels3"  
+                            [title]="title3" 
+                            [type]="type3"
+                            [chartSelector]="chartSelector3"
+                            [dateProperty]="datePropertyTrue"
+                            (dateRangeSelected)="ActualizarGrafico3($event)">
+                        </app-chart>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                <!-- Cantidad de turnos por dia  -->
+                <div class="chart-4">
+                    <app-chart [data]="data4" 
+                        [chartsLabels]="chartsLabels4"  
+                        [title]="title4" 
+                        [type]="type4"
+                        [chartSelector]="chartSelector4"
+                        [dateProperty]="datePropertyFalse">
+                    </app-chart>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="chart-5">
+                    <app-chart (userSelected)="onUserSelected($event)" [data]="data5" 
+                        [chartsLabels]="chartsLabels5"  
+                        [title]="title5" 
+                        [type]="type5"
+                        [chartSelector]="chartSelector5"
+                        [dateProperty]="datePropertyFalse">
+                    </app-chart>
+                </div>
+                <table class="table table-striped table-sm" id="tabla-turnos">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Usuario</th>
+                      </tr>
+                    </thead>
+                    <tbody>    
+                    <ng-container *ngIf="usuario?.perfil == 'administrador'">
+                        <tr *ngFor="let login of logins">
+                        <td>{{FechaFirestore(login.date)}}</td>
+                        <td>{{login.email}}</td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                <i class="large material-icons icon-black">navigate_before</i>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                <i class="large material-icons icon-black">navigate_next</i>
+              </button>
+          </div>
+    </div>
 </div>

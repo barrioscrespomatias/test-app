@@ -1,41 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TurnoRepositorioService } from '../../repositorio/turno/turno-repositorio.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Subscription } from 'rxjs';
 import { Turno } from 'src/app/interfaces/turno';
-import { FirebaseError } from 'firebase/app';
 
 import {
-  Firestore,
-  collection,
-  collectionData,
-  doc,
-  query,
-  setDoc,
-  where,
 } from '@angular/fire/firestore';
+import { TurnoRepositorioService } from '../../repositorio/turno/turno-repositorio.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TurnoService {
-  listadoTurnosModelo?: Turno[];
-  subscription?: Subscription;
-
   constructor(
-    private turnosRepositorioService: TurnoRepositorioService,
-    private db: AngularFirestore,
-    private firestore: Firestore,
-  ) {
-    // if (!this.subscription) {
-    //   this.subscription =
-    //     this.turnosRepositorioService.listadoTurnos$.subscribe((data) => {
-    //       this.listadoTurnosModelo = data;
-    //     });
-    // }
-
-    // End constructor
-  }
+    private turnosRepositorioService: TurnoRepositorioService
+  ) {}
   //#endregion
 
   //#region Métodos

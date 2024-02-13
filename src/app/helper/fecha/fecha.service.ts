@@ -29,6 +29,13 @@ export class FechaService {
     return primeraFecha.getTime() === segundaFecha.getTime();
   }
 
+  FechaFirestore(date: Date) {
+    moment.locale('es');
+    var dateJs =  this.ConvertirFechaFirestore(date);    
+    const momentDate = moment(dateJs);    
+    return momentDate.format('llll');
+  }
+
   // InicioMesActual(){
   //   return moment().startOf('month').format('YYYY-MM-DD hh:mm');
   // }

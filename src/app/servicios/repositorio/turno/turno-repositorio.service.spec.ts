@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TurnoRepositorioService } from './turno-repositorio.service';
+import { TurnoRepositorioService } from '../turno/turno-repositorio.service';
 
 describe('TurnoRepositorioService', () => {
   let service: TurnoRepositorioService;

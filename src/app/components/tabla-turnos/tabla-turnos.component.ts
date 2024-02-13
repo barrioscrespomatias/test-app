@@ -7,9 +7,9 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
-import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { slideAnimation } from '../../animation';
+import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -91,16 +91,12 @@ export class TablaTurnosComponent {
 
   //#region Hooks
 
-      // this.turnos = this.turnoRepositoryService.getAll().subscribe(turnos => {
-      // this.turnos = turnos;
-      // console.log(turnos)
-    // });
   async ngOnInit() {
 
     this.turnosSubscription = (
       await this.turnoService.TraerTodos()
     ).subscribe((turnos) => {
-      this.turnos = turnos
+      this.turnos = turnos;
     });    
 
     this.usuarioService.getUsuario(this.mail).then((usuario: any) => {

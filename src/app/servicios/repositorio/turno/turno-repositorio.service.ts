@@ -94,7 +94,7 @@ export class TurnoRepositorioService implements Repository<Turno> {
       return false;
     }
   }
-
+  
   /**
    * Busca en la entidad segun un parametro enviado
    * @param clave
@@ -201,8 +201,7 @@ export class TurnoRepositorioService implements Repository<Turno> {
       return result;
     }
 
-    TurnosPorDia(): Observable<Turno[]> {
-  
+    TurnosPorDia(): Observable<Turno[]> {  
       const coleccion = collection(this._firestore, 'turnos');
       const consulta = query(
         coleccion,

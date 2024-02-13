@@ -43,7 +43,6 @@ import { MiPerfilComponent } from '../../components/mi-perfil/mi-perfil.componen
 import { TablaHistoriasClinicasComponent } from '../../components/tabla-historias-clinicas/tabla-historias-clinicas.component';
 import { HistoriaClinicaComponent } from '../../components/historia-clinica/historia-clinica.component';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
-import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
 import { GraficosPageComponent } from 'src/app/components/graficos-page/graficos-page.component';
 import { ChartComponent } from 'src/app/components/chart/chart.component';
@@ -125,7 +124,7 @@ import { MatInputModule } from '@angular/material/input';
     //Chart
     NgChartjsModule,
   ],
-  providers: [TurnoService, TurnoRepositorioService, DatePipe],
+  providers: [DatePipe],
   exports: [
     CustomNg2SearchPipe, // Agrega el componente en la sección de exports
   ],
