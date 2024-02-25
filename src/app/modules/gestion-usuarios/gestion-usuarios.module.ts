@@ -1,4 +1,4 @@
-import { Injectable, NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GestionUsuariosRoutingModule } from './gestion-usuarios-routing.module';
@@ -57,6 +57,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {  MatCardModule} from '@angular/material/card';
+import {  MatSliderModule} from '@angular/material/slider';
+import {  MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -110,6 +113,9 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     RegistroModule,
     MatInputModule,
+    MatCardModule,
+    MatSliderModule,
+    MatRadioModule,
 
     //Material
     MatSlideToggleModule,

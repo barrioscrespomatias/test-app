@@ -37,7 +37,18 @@
         </div>
     </div>
 
-    <button class="btn btn-primary mb-2" (click)="AgregarParametro()">Agregar parametro</button>
+    <div class="row mb-2">
+        <div class="example-button-row">
+            <div class="example-flex-container">
+                <div class="example-button-container">                    
+                    <button mat-mini-fab color="primary" (click)="AgregarParametro()">
+                        <mat-icon>filter_3</mat-icon>
+                      </button>
+                      <label class="m-1">Parametros numericos</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row mb-2" *ngIf="mostrarParametroUno">
         <div class="col-4">
@@ -70,6 +81,84 @@
             <label for="">Valor</label>
             <input type="text" class="form-control" formControlName="valor_parametro_dinamico_3">
         </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="example-button-row">
+            <div class="example-flex-container">
+                <div class="example-button-container">
+                    <button mat-mini-fab color="primary" (click)="ConfigurarParametrosDinamicos()">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                      <label class="m-1">Parametros dinamicos</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarOpcionesDinamicas">
+        <mat-card>
+            <mat-card-content>
+              <section class="example-section">
+                <!-- <label class="example-margin">Tipo:</label> -->
+                <mat-radio-group formControlName="dinamicType">
+                    <mat-radio-button class="example-margin row" value="slider" *ngIf="mostrarOpcionParametroCuatro">Control de rango numerico</mat-radio-button>
+                    <mat-radio-button class="example-margin row" value="numero" *ngIf="mostrarOpcionParametroCinco">Cuadro de texto numerico</mat-radio-button>
+                    <mat-radio-button class="example-margin row" value="toggle" *ngIf="mostrarOpcionParametroSeis">Switch</mat-radio-button>
+                </mat-radio-group>
+              </section>
+            </mat-card-content>
+        </mat-card> 
+        <button class="btn btn-primary mb-2" (click)="AgregarMasParametros()" *ngIf="mostrarBotonAgregar">Agregar</button>
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroCuatro">
+        <mat-form-field class="example-form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="clave_parametro_dinamico_4">
+        </mat-form-field>          
+        <mat-card class="example-result-card">
+            <mat-card-content>
+            <div class="example-label-container">
+                <label class="example-value-label">{{slider.value}}</label>
+            </div>
+            <mat-slider
+                class="example-margin"
+                [disabled]="disabledSlider"
+                [max]="max"
+                [min]="min"
+                [step]="step"
+                [discrete]="thumbLabel"
+                [showTickMarks]="showTicks">
+                <input matSliderThumb formControlName="valor_parametro_dinamico_4" #slider>
+            </mat-slider>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    
+    <div class="row mb-2" *ngIf="mostrarParametroCinco">
+        <mat-form-field class="example-form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="clave_parametro_dinamico_5">
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+            <input matInput type="text" formControlName="valor_parametro_dinamico_5" min="0" max="100">
+        </mat-form-field>  
+    </div>
+
+    <div class="row mb-2" *ngIf="mostrarParametroSeis">      
+        <mat-form-field class="example-form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="clave_parametro_dinamico_6">
+        </mat-form-field>
+        <mat-card class="result">
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-slide-toggle class="example-margin" [color]="color" formControlName="valor_parametro_dinamico_6"  [disabled]="disabled">
+                    </mat-slide-toggle>
+                </section>
+            </mat-card-content>
+        </mat-card>
     </div>
 
     <p>Realmente desea finalizar el turno?</p>
