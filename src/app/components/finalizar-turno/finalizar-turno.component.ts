@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
-import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-finalizar-turno',
@@ -27,9 +27,33 @@ export class FinalizarTurnoComponent {
   mostrarParametroUno : boolean = false;
   mostrarParametroDos : boolean = false;
   mostrarParametroTres : boolean = false;
+  mostrarParametroCuatro : boolean = false;
+  mostrarOpcionParametroCuatro : boolean = true;
+  mostrarParametroCinco : boolean = false;
+  mostrarOpcionParametroCinco : boolean = true;
+  mostrarParametroSeis : boolean = false;
+  mostrarOpcionParametroSeis : boolean = true;
+  mostrarOpcionesDinamicas : boolean = false;
+  agregarMasParametrosButton : boolean = true;
+  mostrarBotonAgregar : boolean = true;
   pacienteAtendido : any;
   mail: string = this.firebaseService.userName;
   usuario: any;
+
+  //SlideToggle
+  color: ThemePalette = 'accent';
+  // checked = false;
+  disabled = false;
+
+  //SliderComponent
+  disabledSlider = false;
+  max = 100;
+  min = 0;
+  showTicks = false;
+  step = 1;
+  thumbLabel = false;
+  value = 0;
+
   //#endregion
 
 
@@ -55,13 +79,23 @@ export class FinalizarTurnoComponent {
       clave_parametro_dinamico_1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       clave_parametro_dinamico_2: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       clave_parametro_dinamico_3: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      clave_parametro_dinamico_4: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      clave_parametro_dinamico_5: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      clave_parametro_dinamico_6: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       valor_parametro_dinamico_1: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       valor_parametro_dinamico_2: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       valor_parametro_dinamico_3: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
+      valor_parametro_dinamico_4: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
+      valor_parametro_dinamico_5: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
+      valor_parametro_dinamico_6: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
       altura: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
       peso: new FormControl('', [Validators.min(0), Validators.max(200,)]),      
       temperatura: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),      
       presion: new FormControl('', [Validators.minLength(0), Validators.maxLength(5)]),      
+      necesitaNuevaConsulta: new FormControl(''),      
+      numeroDeConsulta: new FormControl('', [Validators.minLength(0), Validators.maxLength(100)]),      
+      valoracionPaciente: new FormControl('', [Validators.minLength(0), Validators.maxLength(100)]),      
+      dinamicType: new FormControl('',),      
     });    
   }
 
@@ -116,6 +150,34 @@ export class FinalizarTurnoComponent {
     return this.form.get('valor_parametro_dinamico_3');
   }
 
+  get clave_parametro_dinamico_4() {
+    return this.form.get('clave_parametro_dinamico_4');
+  }
+
+  get valor_parametro_dinamico_4() {
+    return this.form.get('valor_parametro_dinamico_4');
+  }
+
+  get clave_parametro_dinamico_5() {
+    return this.form.get('clave_parametro_dinamico_5');
+  }
+
+  get valor_parametro_dinamico_5() {
+    return this.form.get('valor_parametro_dinamico_5');
+  }
+
+  get clave_parametro_dinamico_6() {
+    return this.form.get('clave_parametro_dinamico_6');
+  }
+
+  get valor_parametro_dinamico_6() {
+    return this.form.get('valor_parametro_dinamico_6');
+  }
+
+  get dinamicType() {
+    return this.form.get('dinamicType');
+  }
+
   //#endregion
 
   //#region Metodos
@@ -128,49 +190,18 @@ export class FinalizarTurnoComponent {
     this.turnoRecibido.temperatura = this.temperatura?.value;
     this.turnoRecibido.presion = this.presion?.value;
 
-    var historia_clinica: HistoriaClinica[] = [];
+// Define un tipo para los nombres de las propiedades dinámicas
+  type DynamicParamName = 'clave_parametro_dinamico_1' | 'clave_parametro_dinamico_2' | 'clave_parametro_dinamico_3' | 'clave_parametro_dinamico_4' | 'clave_parametro_dinamico_5' | 'clave_parametro_dinamico_6';
 
+  let historia_clinica = [];
+    // Itera sobre los 6 parámetros dinámicos
+    for (let i = 1; i <= 6; i++) {
+        let clave = this[`clave_parametro_dinamico_${i}` as DynamicParamName]?.value;
+        let valor = this[`valor_parametro_dinamico_${i}` as DynamicParamName]?.value;
 
-    if (
-      this.clave_parametro_dinamico_1?.value != '' &&
-      this.clave_parametro_dinamico_2?.value != '' &&
-      this.clave_parametro_dinamico_3?.value != ''
-    ) {
-      historia_clinica = [
-        {
-          clave: this.clave_parametro_dinamico_1?.value,
-          valor: this.valor_parametro_dinamico_1?.value,
-        },
-        {
-          clave: this.clave_parametro_dinamico_2?.value,
-          valor: this.valor_parametro_dinamico_2?.value,
-        },
-        {
-          clave: this.clave_parametro_dinamico_3?.value,
-          valor: this.valor_parametro_dinamico_3?.value,
-        },
-      ];
-    } else if (
-      this.clave_parametro_dinamico_1?.value != '' &&
-      this.clave_parametro_dinamico_2?.value != ''
-    ) {
-      historia_clinica = [
-        {
-          clave: this.clave_parametro_dinamico_1?.value,
-          valor: this.valor_parametro_dinamico_1?.value,
-        },
-        {
-          clave: this.clave_parametro_dinamico_2?.value,
-          valor: this.valor_parametro_dinamico_2?.value,
-        },
-      ];
-    } else if (this.clave_parametro_dinamico_1?.value != '') {
-      historia_clinica = [
-        {
-          clave: this.clave_parametro_dinamico_1?.value,
-          valor: this.valor_parametro_dinamico_1?.value,
-        },
-      ];
+        if (clave && valor) {
+            historia_clinica.push({ clave, valor });
+        }
     }
 
     //Turno
@@ -196,7 +227,6 @@ export class FinalizarTurnoComponent {
       this.usuario.pacientesAtendidos.push(this.pacienteAtendido.docRef);
       var respuesta = this.usuarioService.Modificar(this.mail,this.usuario);
     }
-
   }
 
   ConvertirFecha(fecha: any) {
@@ -210,6 +240,32 @@ export class FinalizarTurnoComponent {
       this.mostrarParametroDos = true;
     else if(!this.mostrarParametroTres)
       this.mostrarParametroTres = true;
+  }
+
+  AgregarMasParametros(){
+    let dinamicType = this.dinamicType?.value;
+
+    if(dinamicType == 'slider'){
+      this.mostrarParametroCuatro = true;
+      this.mostrarOpcionParametroCuatro = false;
+
+    }
+    else if(dinamicType == 'numero'){
+      this.mostrarParametroCinco = true;
+      this.mostrarOpcionParametroCinco = false;
+
+    }
+    else if(dinamicType = 'toggle'){
+      this.mostrarParametroSeis = true;
+      this.mostrarOpcionParametroSeis = false;
+    }
+
+    if(this.mostrarParametroCuatro && this.mostrarParametroCinco && this.mostrarParametroSeis)
+      this.mostrarBotonAgregar = false;
+  }
+
+  ConfigurarParametrosDinamicos(){
+    this.mostrarOpcionesDinamicas = !this.mostrarOpcionesDinamicas;
   }
   //#endregion
 }
