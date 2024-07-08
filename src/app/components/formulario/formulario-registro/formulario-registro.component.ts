@@ -260,7 +260,7 @@ export class FormularioRegistroComponent {
         // this._usuarioService.setUserToLocalStorage(user);
         this.router.navigate(['']);
       } else {
-        this.sweetAlertServicio.MensajeError("Hubo un error. Verifique los campos ingresados")
+        this.sweetAlertServicio.MensajeError("Verifique los campos ingresados")
         // this.alertaMensajeError(response.mensaje);
       }      
     });
@@ -286,6 +286,7 @@ export class FormularioRegistroComponent {
         // Verificar si el control tiene errores
         if (control.errors) {
           console.log(`Errores en ${controlName}:`, control.errors);
+          // this.sweetAlertServicio.MensajeError("Se deben completar todos los campos")
         }
       }
     }
@@ -342,6 +343,16 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
     mls = fecha.getMilliseconds().toString();
 
     return y + '-' + m + '-' + d + '_' + h + '-' + min + '-' + s + '-' + mls;
+  }
+
+  onCaptchaVerified(captchaValue: boolean) {
+    if (captchaValue) {
+      // Avanzar en la pantalla o realizar alguna acción
+      console.log("avanzo")
+    } else {
+      // Manejar caso en que el captcha no es correcto
+      console.log("no avanzo")
+    }
   }
 
   //#endregion

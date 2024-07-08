@@ -137,20 +137,26 @@
                value="{{perfilRecibido}}" readonly>
          </div>
 
-         <re-captcha class="form-field col-sm-12"
+         <!-- <re-captcha class="form-field col-sm-12"
             (resolved)="addTokenLog('Normal mode resolved', $event)">
-         </re-captcha>
-      
+         </re-captcha> -->
 
-         <div class="form-field col-sm-12">
+         <div *ngIf="!FormularioConErrores()">
+            <app-custom-captcha (captchaVerified)="onCaptchaVerified($event)" [visible]="true"></app-custom-captcha>
+         </div>
+
+         
+
+         <!-- <div class="form-field col-sm-12">
             <div *ngIf="!FormularioConErrores() && captchaVerificado">
                <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario">
             </div>
             <div *ngIf="FormularioConErrores() || !captchaVerificado">
                <input class="submit-btn" (click)="CrearUsuario()" disabled value="Crear Usuario">
             </div>         
-         </div>
-
+         </div> -->
+            <input class="submit-btn" (click)="CrearUsuario()" value="Crear Usuario" [disabled]="FormularioConErrores() || !captchaVerificado">
+         
       </form>
    </section>
 </div>
