@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
+import { CustomCaptchaComponent } from 'src/app/components/custom-captcha/custom-captcha.component';
+
 import { RegistroRoutingModule } from './registro-routing.module';
 import { RegistroComponent } from './registro.component';
 import { ImageComponentComponent } from '../../components/imageComponent/image-component/image-component.component';
@@ -38,6 +41,7 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     ImageComponentComponent,
     FormularioRegistroComponent,
     OcultarElementosDirective,
+    CustomCaptchaComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,7 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     NgSelectModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    RecaptchaV3Module
+    RecaptchaV3Module,
   ],
   providers: [
     ProfesionalService,
