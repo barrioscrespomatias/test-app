@@ -52,6 +52,7 @@ export class GraficosPageComponent {
   lastWeek = new Date();
 
   logins: any;
+  loginsTable: any;
 
   datePropertyTrue: boolean = true;
   datePropertyFalse: boolean = false;

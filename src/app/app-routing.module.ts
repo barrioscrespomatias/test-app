@@ -7,6 +7,7 @@ import { TablaHistoriasClinicasComponent } from './components/tabla-historias-cl
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 import { RefreshPageComponent } from './components/refresh-page/refresh-page.component';
+
 const routes: Routes = [
   //normal loading
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -15,7 +16,6 @@ const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
   { path: 'solicitar-turno', component: SolicitarTurnoComponent, canActivate: [AuthGuard] },
   { path: 'refreshPage', component: RefreshPageComponent},
-
   // lazy loading
   {
     path: '',
