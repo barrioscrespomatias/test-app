@@ -8,11 +8,15 @@ export class SweetAlertService {
 
   constructor() { }
 
+  baseUrl = window.location.origin;
+  imagePath = '/assets/img/marquito.gif';
+  gifPath = '/assets/img/unicornio.gif';
+
   //#region Metodos
   MensajeError(mensaje: string) {
     SweetAlert.fire({
       icon: 'error',
-      title: 'Error',
+      title: 'Ooops...',
       text: mensaje,
     });
   }
@@ -32,6 +36,22 @@ export class SweetAlertService {
       title: mensaje,
       showConfirmButton: false,
       timer: 1500,
+    });
+  }
+
+  MensajeExitoImage(){
+    SweetAlert.fire({
+      title: 'Muy bien jugado!!',
+      width: 480,
+      padding: '3em',
+      color: '#716add',
+      background: `#fff url(${this.baseUrl}${this.imagePath})`,
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("${this.baseUrl}${this.gifPath}")
+        center top
+        no-repeat
+      `
     });
   }
   //#endregion

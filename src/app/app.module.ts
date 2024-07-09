@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage'; // Añadido 
     MatTableModule,
     AngularFirestoreModule,
     provideStorage(() => getStorage()), // Añadido para Storage
+    FormsModule,
   ],
   providers: [FirebaseAuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, AngularFirestore],
   bootstrap: [AppComponent]

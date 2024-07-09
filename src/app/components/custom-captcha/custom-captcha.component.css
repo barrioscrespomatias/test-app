@@ -1,0 +1,15 @@
+.captcha-container {
+    /* Estilos para el contenedor del captcha */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 200px; /* Establece el ancho deseado para el contenedor del captcha */
+    height: 100px; /* Establece la altura deseada para el contenedor del captcha */
+    padding: 10px; /* Ajusta el espacio interior si es necesario */
+}
+
+.captcha-letter {
+    margin-top: 65px; /* Ajusta el espacio entre las letras según sea necesario */
+    font-size: 24px; /* Tamaño de fuente para las letras del captcha */
+    color: #333; /* Color de las letras del captcha */
+}
