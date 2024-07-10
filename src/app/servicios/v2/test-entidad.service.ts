@@ -18,7 +18,7 @@ import {
   Storage,
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import { Especialidad } from '../interfaces/especialidad';
+import { Especialidad } from '../../interfaces/especialidad';
 
 @Injectable({
   providedIn: 'root'
