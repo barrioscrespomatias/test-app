@@ -9,6 +9,7 @@ import 'moment/locale/es';
 import { FechaService } from 'src/app/helper/fecha/fecha.service';
 import { LoginService } from 'src/app/servicios/entidades/login/login.service';
 import { Login } from 'src/app/interfaces/login';
+import { TurnoV2Service } from 'src/app/servicios/v2/turno-v2.service';
 
 @Component({
   selector: 'app-graficos-page',
@@ -23,7 +24,8 @@ export class GraficosPageComponent {
     private firebaseService: FirebaseAuthService,
     public router: Router,
     private fechaService: FechaService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private turnoV2Service:TurnoV2Service
   ) {}
 
   userSelectedData: string = '';
@@ -56,6 +58,8 @@ export class GraficosPageComponent {
 
   datePropertyTrue: boolean = true;
   datePropertyFalse: boolean = false;
+
+  turnosV2: Turno[] = [];
 
   // Cantidad de turnos por especialidad
   data1: number[] = [];
@@ -91,6 +95,13 @@ export class GraficosPageComponent {
   title5 = 'Log de ingresos al sistema';
   type5 = 'bar';
   chartSelector5 = '.chart-5';
+
+    // Cantidad de visitas que tuvo la clinica
+  data6: number[] = [];
+  chartsLabels6: Array<string> = [];
+  title6 = 'Cantidad de visitas que tuvo la clinica';
+  type6 = 'pie';
+  chartSelector6 = '.chart-6';
   //#endregion
 
   //#region Hooks
@@ -98,6 +109,12 @@ export class GraficosPageComponent {
   async ngOnInit() {
     this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
+    });
+
+    this.turnoV2Service.traerTurnoPorEstado('Realizado').subscribe((t) => {
+      this.turnosV2 = t as Turno[];
+      console.log(this.turnosV2)
+      this.inicializarCharts();
     });
 
     // console.log(this.userSelected);
@@ -147,6 +164,18 @@ export class GraficosPageComponent {
   }
 
   //#region Metodos
+
+  inicializarCharts() {
+    this.calcularCantidadVisitas();
+  }
+
+  calcularCantidadVisitas(){
+    // data6: number[] = [];
+    // chartsLabels6: Array<any> = [];
+    this.data6.push(this.turnosV2.length);
+    this.chartsLabels6.push('Cantidad de visitas')
+  };
+
 
   //#region Generar Datos
   GenerarDatosTurnosPorProfesional(
