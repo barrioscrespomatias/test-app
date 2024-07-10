@@ -20,3 +20,19 @@
 i.icon-black {
     color: black;
 }
+
+.card {
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+  
+  .card-title {
+    text-align: center;
+    font-size: 1.25rem; /* Tamaño de fuente */
+    margin-bottom: 15px; /* Espaciado inferior */
+  }
+  
+  .app-chart {
+    width: 100%;
+    height: auto;
+  }
