@@ -19,15 +19,15 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { UsuarioPerfilService } from 'src/app/services/usuarioPerfil/usuario-perfil.service';
 import { UsuarioFirebaseService } from 'src/app/services/usuarioFirebase/usuario-firebase.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import {
-  RecaptchaModule,
-  RECAPTCHA_SETTINGS,
-  RecaptchaSettings,
-  RecaptchaFormsModule,
-  RECAPTCHA_V3_SITE_KEY,
-  RecaptchaV3Module,
-  ReCaptchaV3Service
-} from 'ng-recaptcha';
+// import {
+//   RecaptchaModule,
+//   RECAPTCHA_SETTINGS,
+//   RecaptchaSettings,
+//   RecaptchaFormsModule,
+//   RECAPTCHA_V3_SITE_KEY,
+//   RecaptchaV3Module,
+//   ReCaptchaV3Service
+// } from 'ng-recaptcha';
 
 // const RECAPTCHA_V3_STACKBLITZ_KEY = '6LeHBK0bAAAAAOQVTvBOWhfb08cQfUpFoSE3FsmP';
 // const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
@@ -48,10 +48,7 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     RegistroRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgSelectModule,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-    RecaptchaV3Module,
+    NgSelectModule
   ],
   providers: [
     ProfesionalService,
@@ -60,25 +57,12 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
     UsuarioPerfilService,
     UsuarioFirebaseService,
     AuthService,
-    ReCaptchaV3Service,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },  
 
     // {
     //   provide: RECAPTCHA_V3_SITE_KEY,
     //   useValue: RECAPTCHA_V3_STACKBLITZ_KEY
     // },
-    {
-      provide: RECAPTCHA_V3_SITE_KEY,
-      //Google SITE KEY RECAPTCHA V3
-      useValue: '6LdbARsnAAAAAObf00FdSTKsDgvZiV9_iADGVlgT'
-    },
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        //Google SITE KEY RECAPTCHA V2
-        siteKey: '6LdeBxsnAAAAAN-yVQFgbO6xinlz4lVQM-wPE-G6'
-      } as RecaptchaSettings
-    }
   ],
   exports: [
     FormularioRegistroComponent // Agrega el componente en la sección de exports

@@ -9,7 +9,7 @@ import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/es
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Especialidad } from 'src/app/interfaces/especialidad';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { Router } from '@angular/router';
@@ -60,7 +60,7 @@ export class FormularioRegistroComponent {
     private firestore: Firestore,
     private usuarioServicio: UsuarioService,
     private sweetAlertServicio: SweetAlertService,
-    private recaptchaV3Service: ReCaptchaV3Service,
+    // private recaptchaV3Service: ReCaptchaV3Service,
     private fileService: FileService,
     public router: Router, 
     private usuarioService: UsuarioService,
@@ -357,42 +357,42 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
 
   //#endregion
 
-  //#region Metodos captcha
-  public executeRecaptchaV3() {
-    this.log.push(`Recaptcha v3 execution requested...`);
-    this.recaptchaV3Service.execute('myAction').subscribe(
-      (token) => {
-        this.addTokenLog('Recaptcha v3 token', token);
-      },
-      (error) => {
-        this.log.push(`Recaptcha v3 error: see console`);
-        console.log(`Recaptcha v3 error:`, error);
-      }
-    );
-  }
+  // //#region Metodos captcha
+  // public executeRecaptchaV3() {
+  //   this.log.push(`Recaptcha v3 execution requested...`);
+  //   this.recaptchaV3Service.execute('myAction').subscribe(
+  //     (token) => {
+  //       this.addTokenLog('Recaptcha v3 token', token);
+  //     },
+  //     (error) => {
+  //       this.log.push(`Recaptcha v3 error: see console`);
+  //       console.log(`Recaptcha v3 error:`, error);
+  //     }
+  //   );
+  // }
 
-  public addTokenLog(message: string, token: string | null) {
-    this.captchaVerificado = true;
-    this.log.push(`${message}: ${this.formatToken(token)}`);
-  }
+  // public addTokenLog(message: string, token: string | null) {
+  //   this.captchaVerificado = true;
+  //   this.log.push(`${message}: ${this.formatToken(token)}`);
+  // }
 
-  public onError() {
-    this.log.push(`reCAHPTCHA errored;`);
-  }
+  // public onError() {
+  //   this.log.push(`reCAHPTCHA errored;`);
+  // }
 
-  public formatToken(token: string | null) {
-    return token !== null
-      ? `${token.substring(0, 7)}...${token.substring(token.length - 7)}`
-      : 'null';
-  }
+  // public formatToken(token: string | null) {
+  //   return token !== null
+  //     ? `${token.substring(0, 7)}...${token.substring(token.length - 7)}`
+  //     : 'null';
+  // }
 
-  public printLog() {
-    return this.log
-      .map((logEntry, index) => `${index + 1}. ${logEntry}`)
-      .join('\n');
-  }
+  // public printLog() {
+  //   return this.log
+  //     .map((logEntry, index) => `${index + 1}. ${logEntry}`)
+  //     .join('\n');
+  // }
 
-  //#endregion
+  // //#endregion
 
 }
   //#endregion
