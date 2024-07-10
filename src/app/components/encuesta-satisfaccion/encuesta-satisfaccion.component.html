@@ -1,0 +1,72 @@
+<form [formGroup]="form" class="container">
+    
+    <h1>Encuesta de Satisfacción de la Clínica Online</h1>
+  
+    <div class="form-group mb-3 mt-3">
+      <label for="resena" class="mb-2">¿Cómo calificaría la amabilidad de los profesionales que lo atendió?</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="Excelente" formControlName="amabilidad">
+        <label class="form-check-label" for="amabilidad">Excelente</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="Buena" formControlName="amabilidad">
+        <label class="form-check-label" for="amabilidad">Buena</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="Regular" formControlName="amabilidad">
+        <label class="form-check-label" for="amabilidad">Regular</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="Mala" formControlName="amabilidad">
+        <label class="form-check-label" for="amabilidad">Mala</label>
+      </div>
+    </div>
+
+    <hr />
+  
+    <div class="form-group mb-3 mt-3">
+      <p for="resena">Calificación general de la atención recibida:</p>
+      <div class=""></div>
+      <ngb-rating [max]="5" formControlName="calificacionGeneral" class="d-flex justify-content-center"/>
+    </div>
+
+    <hr />
+    
+    <p for="aspectosDestacar">Aspectos a destacar de la clinica:</p>
+    <form [formGroup]="checkboxGroup">
+      <ng-container *ngFor="let checkbox of checkboxes; let i = index" formArrayName="checkboxes">
+        <div class="form-check">
+          <input type="checkbox" [formControlName]="i" class="form-check-input" />
+          <label class="form-check-label">
+            {{checkbox.name}}
+          </label>
+        </div>
+      </ng-container>
+  </form>
+
+  <hr />
+
+  <p>¿Te resulta simple conseguir turnos?</p>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" formControlName="simplicidadTurnos">
+  </div>
+
+  <hr />
+
+  <label for="recomendacion" class="form-label">¿Recomendarias la clinica a un amigo?</label>
+  <input type="range" class="form-range" min="0" max="5" formControlName="recomendacion">
+  <p class="d-flex justify-content-center"><strong> {{recomendacion?.value }}</strong></p>
+
+  <hr />
+
+  <div class="form-group">
+    <label for="observaciones">Observaciones</label>
+    <textarea class="form-control" id="observaciones" formControlName="observaciones" rows="3"></textarea>
+  </div>
+
+  <hr />
+  
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-secondary" (click)="submit()">Enviar</button>
+  </div>
+</form>  

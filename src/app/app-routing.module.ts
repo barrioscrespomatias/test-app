@@ -6,7 +6,7 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { TablaHistoriasClinicasComponent } from './components/tabla-historias-clinicas/tabla-historias-clinicas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
-import { RefreshPageComponent } from './components/refresh-page/refresh-page.component';
+import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccion/encuesta-satisfaccion.component';
 
 const routes: Routes = [
   //normal loading
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'historias-clinicas', component: TablaHistoriasClinicasComponent, canActivate: [AuthGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
   { path: 'solicitar-turno', component: SolicitarTurnoComponent, canActivate: [AuthGuard] },
-  { path: 'refreshPage', component: RefreshPageComponent},
+  { path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent},
   // lazy loading
   {
     path: '',
