@@ -104,7 +104,34 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="carousel-item">
+                            <!-- Cantidad de pacientes por especialidad  -->
+                            <div class="card text-white bg-dark-subtle">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{title7}}</h5>
+                                    <div class="chart-6 col-12">
+                                        <app-chart [data]="data7" [chartsLabels]="chartsLabels7" [title]="title7" [type]="type7"
+                                            [chartSelector]="chartSelector7" [dateProperty]="datePropertyFalse">
+                                        </app-chart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <!-- Cantidad de medicos por especialidad  -->
+                            <div class="card text-white bg-dark-subtle">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{title8}}</h5>
+                                    <div class="chart-6 col-12">
+                                        <app-chart [data]="data8" [chartsLabels]="chartsLabels8" [title]="title8" [type]="type8"
+                                            [chartSelector]="chartSelector8" [dateProperty]="datePropertyFalse">
+                                        </app-chart>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

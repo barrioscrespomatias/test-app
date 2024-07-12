@@ -59,7 +59,9 @@ export class GraficosPageComponent {
   datePropertyTrue: boolean = true;
   datePropertyFalse: boolean = false;
 
-  turnosV2: Turno[] = [];
+  turnosRealizadosV2: Turno[] = [];
+
+  //#region Propiedades Graficos 1 - 5
 
   // Cantidad de turnos por especialidad
   data1: number[] = [];
@@ -96,12 +98,28 @@ export class GraficosPageComponent {
   type5 = 'bar';
   chartSelector5 = '.chart-5';
 
-    // Cantidad de visitas que tuvo la clinica
+  //#endregion
+
+  // Cantidad de visitas que tuvo la clinica
   data6: number[] = [];
   chartsLabels6: Array<string> = [];
   title6 = 'Cantidad de visitas que tuvo la clinica';
   type6 = 'pie';
   chartSelector6 = '.chart-6';
+
+  // Cantidad de pacientes por especialidad
+  data7: number[] = [];
+  chartsLabels7: Array<string> = [];
+  title7 = 'Cantidad de pacientes por especialidad';
+  type7 = 'pie';
+  chartSelector7 = '.chart-7';
+
+  // Cantidad de pacientes por especialidad
+  data8: number[] = [];
+  chartsLabels8: Array<string> = [];
+  title8 = 'Cantidad de medicos por especialidad';
+  type8 = 'pie';
+  chartSelector8 = '.chart-8';
   //#endregion
 
   //#region Hooks
@@ -112,12 +130,10 @@ export class GraficosPageComponent {
     });
 
     this.turnoV2Service.traerTurnoPorEstado('Realizado').subscribe((t) => {
-      this.turnosV2 = t as Turno[];
-      console.log(this.turnosV2)
+      this.turnosRealizadosV2 = t as Turno[];
       this.inicializarCharts();
     });
 
-    // console.log(this.userSelected);
 
     //#region chart-1
     
@@ -154,7 +170,6 @@ export class GraficosPageComponent {
       this.GenerarDatosLoginsPorUsuario(this.loginsArray, 'chart-5');
     });
   }
-  //#endregion
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
@@ -162,19 +177,30 @@ export class GraficosPageComponent {
       console.log(changes['data'])
     }
   }
+  //#endregion
 
   //#region Metodos
 
   inicializarCharts() {
     this.calcularCantidadVisitas();
+    this.calcularCantidadPacientesPorEspecialidad()
+    this.calcularCantidadMedicosPorEspecialidad()
   }
 
   calcularCantidadVisitas(){
-    // data6: number[] = [];
-    // chartsLabels6: Array<any> = [];
-    this.data6.push(this.turnosV2.length);
+    this.data6.push(this.turnosRealizadosV2.length);
     this.chartsLabels6.push('Cantidad de visitas')
   };
+
+  calcularCantidadPacientesPorEspecialidad() {
+    var turnosPorEspecialidad = this.AgruparTurnosPorEspecialidad(this.turnosRealizadosV2);
+    this.GenerarDatosPacientesPorEspecialidad(turnosPorEspecialidad,  'chart-7')
+  }
+
+  calcularCantidadMedicosPorEspecialidad() {
+    var turnosPorEspecialidad = this.AgruparTurnosPorEspecialidad(this.turnosRealizadosV2);
+    this.GenerarDatosMedicosPorEspecialidad(turnosPorEspecialidad,  'chart-8')
+  }
 
 
   //#region Generar Datos
@@ -213,12 +239,12 @@ export class GraficosPageComponent {
     const data: number[] = [];
     const chartsLabels: string[] = [];
 
-    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    // Iterar sobre el mapa y llenar los arrays data
     for (const [turno, turnos] of turnosAgrupados) {
       chartsLabels.push(turno.especialidad);
     }
 
-    // Iterar sobre el mapa y llenar los arrays data y chartsLabels
+    // Iterar sobre el mapa y llenar los chartsLabels
     for (const turnos of turnosAgrupados) {
       data.push(turnos.length);
     }
@@ -227,6 +253,62 @@ export class GraficosPageComponent {
       case 'chart-1':
         this.data1 = data;
         this.chartsLabels1 = chartsLabels;
+        break;
+    }
+  }
+
+  GenerarDatosPacientesPorEspecialidad(turnosAgrupados: Map<string, Turno[]>, chart: string) {
+    const data: number[] = [];
+    const chartsLabels: string[] = [];
+
+    // Iterar sobre el mapa y llenar los chartslabels
+    for (const [especialidad, turnos] of turnosAgrupados) {
+      chartsLabels.push(especialidad);
+    }
+
+    const pacientesUnicos = new Set<string>();
+    // Iterar sobre el mapa y llenar los data
+    for (const [especialidad, turnos] of turnosAgrupados) {
+      for (let turno of turnos){
+        if(turno.paciente)
+          pacientesUnicos.add(turno.paciente);
+      }
+      data.push(pacientesUnicos.size);
+    }
+  
+  // data.push(turnos.length);
+    switch (chart) {
+      case 'chart-7':
+        this.data7 = data;
+        this.chartsLabels7 = chartsLabels;
+        break;
+    }
+  }
+
+  GenerarDatosMedicosPorEspecialidad(turnosAgrupados: Map<string, Turno[]>, chart: string) {
+    const data: number[] = [];
+    const chartsLabels: string[] = [];
+
+    // Iterar sobre el mapa y llenar los chartslabels
+    for (const [especialidad, turnos] of turnosAgrupados) {
+      chartsLabels.push(especialidad);
+    }
+
+    const profesionalesUnicos = new Set<string>();
+    // Iterar sobre el mapa y llenar los data
+    for (const [especialidad, turnos] of turnosAgrupados) {
+      for (let turno of turnos){
+        if(turno.profesional)
+          profesionalesUnicos.add(turno.profesional);
+      }
+      data.push(profesionalesUnicos.size);
+    }
+  
+  // data.push(turnos.length);
+    switch (chart) {
+      case 'chart-8':
+        this.data8 = data;
+        this.chartsLabels8 = chartsLabels;
         break;
     }
   }

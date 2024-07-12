@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng build && firebase deploy --only hosting",
-    "run": "ng s --o"
+    "web": "ng s --o"
   },
   "private": true,
   "dependencies": {
