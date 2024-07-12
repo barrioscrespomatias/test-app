@@ -276,7 +276,7 @@ export class FormularioRegistroComponent {
 
   public FormularioConErrores(): boolean {
 
-    console.log(this.form.controls);
+    // console.log(this.form.controls);
 
     // Recorrer los controles del formulario
     for (const controlName in this.form.controls) {
@@ -285,7 +285,7 @@ export class FormularioRegistroComponent {
         
         // Verificar si el control tiene errores
         if (control.errors) {
-          console.log(`Errores en ${controlName}:`, control.errors);
+          // console.log(`Errores en ${controlName}:`, control.errors);
           // this.sweetAlertServicio.MensajeError("Se deben completar todos los campos")
         }
       }
