@@ -2,7 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'obtenerFechasTurnos'
+  name: 'obtenerFechasTurnos',
+  standalone: true
 })
 export class ObtenerFechasTurnosPipe implements PipeTransform {
   filtrados: any[] = [];

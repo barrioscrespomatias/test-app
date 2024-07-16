@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'diaSemana',
+  standalone: true
 })
 export class DiaSemanaPipe implements PipeTransform {
   transform(estado: string) {

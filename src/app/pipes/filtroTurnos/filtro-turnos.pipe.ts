@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 
 @Pipe({
   name: 'filtroTurnos',
+  standalone: true
 })
 export class FiltroTurnosPipe implements PipeTransform {
 

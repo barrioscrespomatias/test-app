@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Encuesta } from 'src/app/interfaces/encuesta';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
@@ -10,11 +10,21 @@ import { FechaService } from 'src/app/helper/fecha/fecha.service';
 import { Router } from '@angular/router';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { HistoriaClinica } from 'src/app/interfaces/historiaClinica';
+import { DiaSemanaPipe } from 'src/app/pipes/diaSemana/dia-semana.pipe';
+import { CommonModule } from '@angular/common';
+import { NavComponent } from '../../nav/nav/nav.component';
 
 @Component({
   selector: 'app-grilla-horarios',
   templateUrl: './grilla-horarios.component.html',
   styleUrls: ['./grilla-horarios.component.css'],
+  standalone: true,
+  imports: [DiaSemanaPipe,
+            CommonModule,
+            FormsModule,
+            NavComponent],
+  providers: [],
+  schemas: [],
 })
 export class GrillaHorariosComponent {
   //#region Constructor
@@ -41,12 +51,24 @@ export class GrillaHorariosComponent {
   especialidades: any;
   turnosDelProfesional: Turno[] = [];
   @Input() visualizarBotonConfirmar: boolean = true;
+  isLogged: boolean = false;
   // horariosParaTurnosEspecialidad
   //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
+
+    this.form = new FormGroup({
+      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+    });
+
+    await this.checkLoggedIn();
+
     this.usuarioService.getUsuario(this.mail).then(async (usuario: any) => {
       this.usuario = usuario;
 
@@ -66,13 +88,7 @@ export class GrillaHorariosComponent {
 
 
 
-    this.form = new FormGroup({
-      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-    });
+
 
     this.proximasDosSemanas = this.ObtenerProximosDias(7);
 
@@ -105,6 +121,9 @@ export class GrillaHorariosComponent {
   //#endregion
 
   //#region Metodos
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
 
   /**
    * Crea turnos en el profesional segun la disponibilidad que ha asignado previamente.

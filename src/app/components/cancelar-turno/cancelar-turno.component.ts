@@ -1,12 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 
 @Component({
   selector: 'app-cancelar-turno',
   templateUrl: './cancelar-turno.component.html',
-  styleUrls: ['./cancelar-turno.component.css']
+  styleUrls: ['./cancelar-turno.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, DatePipe],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CancelarTurnoComponent {
 

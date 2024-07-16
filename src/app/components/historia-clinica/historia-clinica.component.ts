@@ -1,11 +1,16 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 
 @Component({
   selector: 'app-historia-clinica',
   templateUrl: './historia-clinica.component.html',
-  styleUrls: ['./historia-clinica.component.css']
+  styleUrls: ['./historia-clinica.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HistoriaClinicaComponent {
   //#region Propiedades

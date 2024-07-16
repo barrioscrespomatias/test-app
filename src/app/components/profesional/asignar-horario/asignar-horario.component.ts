@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DiaHora } from 'src/app/interfaces/diaHora';
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
@@ -9,13 +9,19 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { slideAnimation } from '../../../animation';
 import { map } from 'rxjs';
+import { GrillaHorariosComponent } from '../grilla-horarios/grilla-horarios.component';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-asignar-horario',
   templateUrl: './asignar-horario.component.html',
   styleUrls: ['./asignar-horario.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports:[CommonModule, GrillaHorariosComponent, FormsModule, ReactiveFormsModule],
+  providers: [EspecialidadService,UsuarioService, FirebaseAuthService, SweetAlertService, Router],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class AsignarHorarioComponent {
   //#region Constructor
@@ -47,6 +53,14 @@ export class AsignarHorarioComponent {
   //#region Hooks
 
   async ngOnInit() {
+    this.form = new FormGroup({
+      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+    });
+
     this.valorDias = [
       { clave: 'Lunes', valor: 1 },
       { clave: 'Martes', valor: 2 },
@@ -73,13 +87,7 @@ export class AsignarHorarioComponent {
       this.usuario = usuario;
     });
 
-    this.form = new FormGroup({
-      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-    });
+
   }
 
   //#endregion

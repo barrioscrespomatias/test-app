@@ -1,4 +1,7 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, Input, Output, EventEmitter } from '@angular/core'; // Importa AfterViewInit
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, ViewChild, AfterViewInit, Input, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; // Importa AfterViewInit
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 // import { FormsModule } from '@angular/forms'; // Importa FormsModules
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 
@@ -7,6 +10,10 @@ import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.ser
   selector: 'app-custom-captcha',
   templateUrl: './custom-captcha.component.html',
   styleUrls: ['./custom-captcha.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, BrowserModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CustomCaptchaComponent{
 

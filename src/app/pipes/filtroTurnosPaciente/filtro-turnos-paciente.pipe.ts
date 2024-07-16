@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'filtroTurnosPaciente',
+  standalone: true
 })
 export class FiltroTurnosPacientePipe implements PipeTransform {
   filtrados: any[] = [];

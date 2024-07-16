@@ -37,36 +37,36 @@ const RECAPTCHA_V2_DUMMY_KEY = '6Lc_scgmAAAAABK0rTUzr7v1ZbC-CF1dI3IbP-IP';
 
 @NgModule({
   declarations: [
-    RegistroComponent,
-    ImageComponentComponent,
-    FormularioRegistroComponent,
-    OcultarElementosDirective,
-    CustomCaptchaComponent,
+    // RegistroComponent,
+    // ImageComponentComponent,
+    // FormularioRegistroComponent,
+    // OcultarElementosDirective,
+    // CustomCaptchaComponent,
   ],
   imports: [
-    CommonModule,
-    RegistroRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgSelectModule
+    // CommonModule,
+    // RegistroRoutingModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // NgSelectModule
   ],
   providers: [
-    ProfesionalService,
-    EspecialidadProfesionalMtmService,
-    FirebaseAuthService,
-    UsuarioPerfilService,
-    UsuarioFirebaseService,
-    AuthService,
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },  
+    // ProfesionalService,
+    // EspecialidadProfesionalMtmService,
+    // FirebaseAuthService,
+    // UsuarioPerfilService,
+    // UsuarioFirebaseService,
+    // AuthService,
+    // { provide: FIREBASE_OPTIONS, useValue: environment.firebase },  
 
     // {
     //   provide: RECAPTCHA_V3_SITE_KEY,
     //   useValue: RECAPTCHA_V3_STACKBLITZ_KEY
     // },
   ],
-  exports: [
-    FormularioRegistroComponent // Agrega el componente en la sección de exports
-  ]
+  // exports: [
+  //   // FormularioRegistroComponent // Agrega el componente en la sección de exports
+  // ]
 
   
 })

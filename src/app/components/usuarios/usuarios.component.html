@@ -1,4 +1,5 @@
-<div [@slideAnimation]="estadoActual">
+<app-nav *ngIf="isLogged" ></app-nav>
+<div [@slideAnimation]="estadoActual" class="container">
     <section id="toolbar">
         <mat-toolbar>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">

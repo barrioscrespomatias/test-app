@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { ImagenService } from 'src/app/services/imagen/imagen.service';
 import { PacienteService } from 'src/app/services/paciente/paciente.service';
@@ -10,6 +11,10 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RegistroComponent {
   //#region Propiedades
@@ -70,11 +75,11 @@ export class RegistroComponent {
     this.firebaseService.SignUp(this.email?.value, this.password?.value);
   }
 
-  recibirItemDesdeHijo(valorAtributo: string): void {
+  recibirItemDesdeHijo(valorAtributo: any): void {
     this.attributeValue = valorAtributo;
   }
 
-  recibirItemDeHijo(email : string){
+  recibirItemDeHijo(email : any){
     this.emailRecibido = email;
   }
   //#endregion

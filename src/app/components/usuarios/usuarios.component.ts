@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
@@ -11,13 +11,34 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { slideAnimation } from '../../animation';
 import { Turno } from 'src/app/interfaces/turno';
 import { FechaService } from 'src/app/helper/fecha/fecha.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { FormularioRegistroComponent } from '../formulario/formulario-registro/formulario-registro.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { FiltroUsuariosPacientesPipe } from 'src/app/pipes/filtroUsuariosPacientes/filtro-usuarios-pacientes.pipe';
+import { UsuariosProfesionalesPipe } from 'src/app/pipes/filtroUsuariosProfesionales/usuarios-profesionales.pipe';
+import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { NavComponent } from '../nav/nav/nav.component';
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports: [CommonModule, 
+            MatIconModule, 
+            FormularioRegistroComponent, 
+            MatToolbarModule, 
+            FormularioRegistroComponent,
+            FiltroUsuariosPacientesPipe,
+            UsuariosProfesionalesPipe,
+            DatePipe,
+            NavComponent,
+            MatToolbarModule,
+            MatIconModule],
+  providers: [DatePipe],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UsuariosComponent {
 
@@ -27,6 +48,7 @@ export class UsuariosComponent {
               private fileService : FileService,
               private fechaHelper: FechaService,
               private datePipe: DatePipe,
+              private firebaseService:FirebaseAuthService
               ) {
   }  
 
@@ -39,12 +61,15 @@ export class UsuariosComponent {
   formularioRegistrarUsuarioVisible:boolean = false;
 
   estadoActual: string = 'estadoInicial';
+  isLogged: boolean = false;
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
   }
 
   async ngOnInit() {
+
+    await this.checkLoggedIn();
 
     this.usuariosSubscription = (
       await this.usuarioService.TraerTodos()
@@ -67,6 +92,10 @@ export class UsuariosComponent {
     if (this.turnosSubscription) {
       this.turnosSubscription.unsubscribe();
     }
+  }
+
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
   }
 
   CambiarEstado(usuario: Usuario) {

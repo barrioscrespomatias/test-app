@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let usuario of usuarios">
+            <div class="col-sm-4">
+                <app-usuario [path]="usuario.imagenPerfil1!" [classSize]="medium" [user]="usuario.mail!" (click)="sendMessage(usuario.mail!)"></app-usuario>
+            </div>
+        </ng-container>
+    </div>
+</div>

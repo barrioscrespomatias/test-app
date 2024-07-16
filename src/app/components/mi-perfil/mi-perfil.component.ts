@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
@@ -9,12 +9,25 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Turno } from 'src/app/interfaces/turno';
 import { slideAnimation } from '../../animation';
+import { TablaHistoriasClinicasComponent } from '../tabla-historias-clinicas/tabla-historias-clinicas.component';
+import { GrillaHorariosComponent } from '../profesional/grilla-horarios/grilla-horarios.component';
+import { CommonModule } from '@angular/common';
+import { NavComponent } from '../nav/nav/nav.component';
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports: [CommonModule,
+            TablaHistoriasClinicasComponent, 
+            GrillaHorariosComponent, 
+            FormsModule, 
+            ReactiveFormsModule,
+            NavComponent],
+  providers: [],
+  schemas: []
 })
 export class MiPerfilComponent {
 
@@ -26,6 +39,7 @@ export class MiPerfilComponent {
   usuario!: any;
   email: string = this.firebaseService.userName;
   form!: FormGroup;
+  isLogged: boolean = false;
 
   estadoActual: string = 'estadoInicial';
 
@@ -36,8 +50,11 @@ export class MiPerfilComponent {
   //#region Hooks
   async ngOnInit() {
 
+    
+
     await this.usuarioService.getUsuario(this.email).then((usuario: any) => {
-      this.usuario = usuario;        
+      this.usuario = usuario;      
+      console.log(this.usuario)  
     });
 
     if(this.usuario)
@@ -52,6 +69,7 @@ export class MiPerfilComponent {
          
       });
     }
+    await this.checkLoggedIn();
   }   
 
 
@@ -86,6 +104,10 @@ export class MiPerfilComponent {
 
 
   //#region  pdf
+
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
 
   async DescargarPDF() {
 

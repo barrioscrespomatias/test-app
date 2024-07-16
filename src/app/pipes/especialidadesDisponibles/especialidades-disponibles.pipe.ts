@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'especialidadesDisponibles'
+  name: 'especialidadesDisponibles',
+  standalone: true
 })
 export class EspecialidadesDisponiblesPipe implements PipeTransform {
   filtrados: any[] = [];

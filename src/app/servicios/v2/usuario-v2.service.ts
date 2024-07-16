@@ -19,22 +19,23 @@ import {
   Storage,
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import { Turno } from '../../interfaces/turno';
+import { Usuario } from '../../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TurnoV2Service {
-  sesionFirestore!: Turno;
+export class UsuarioV2Service {
+
+  sesionFirestore!: Usuario;
   constructor(
     private auth: Auth,
     private firestore: Firestore,
     private storage: Storage
   ) {}
 
-  coleccionTurnos: CollectionReference<DocumentData> = collection(
+  coleccionUsuarios: CollectionReference<DocumentData> = collection(
     this.firestore,
-    'turnos'
+    'usuarios'
   );
 
   //#region ABM
@@ -45,10 +46,10 @@ export class TurnoV2Service {
    * @param user
    * @returns
    */
-  modificar(Turno: Turno): Promise<void> {
-    const documento = doc(this.coleccionTurnos, Turno.docRef);
+  modificar(usuario: Usuario): Promise<void> {
+    const documento = doc(this.coleccionUsuarios, usuario.docRef);
 
-    return updateDoc(documento, { ...Turno });
+    return updateDoc(documento, { ...usuario });
   }
 
   //#endregion
@@ -59,12 +60,12 @@ export class TurnoV2Service {
    * GetAll Turnos
    * @returns
    */
-  traerTurnos() {
+  traerUsuarios() {
     const TurnoQuery = query(
-      this.coleccionTurnos,
-      orderBy('fecha', 'desc')
+      this.coleccionUsuarios,
+      orderBy('mail', 'desc')
     );
-    return collectionData(TurnoQuery) as Observable<Turno[]>;
+    return collectionData(TurnoQuery) as Observable<Usuario[]>;
   }
 
   /**
@@ -72,10 +73,10 @@ export class TurnoV2Service {
    * @param estado
    * @returns
    */
-  traerTurnoPorEstado(estadoTurno: string) {
+  traerTurnoPorPerfil(perfil: string) {
     const usuarios = query(
-      this.coleccionTurnos,
-      where('estado', '==', estadoTurno)
+      this.coleccionUsuarios,
+      where('perfil', '==', perfil)
     );
     return collectionData(usuarios) as Observable<any[]>;
   }
@@ -85,11 +86,10 @@ export class TurnoV2Service {
    * @param paciente
    * @returns
    */
-  buscarTurnoPorPaciente(paciente: string) {
+  buscarPorMail(mail: string) {
     const usuarios = query(
-      this.coleccionTurnos,
-      where('paciente', '==', paciente),
-      orderBy('fecha', 'desc')
+      this.coleccionUsuarios,
+      where('mail', '==', mail)
     );
     return collectionData(usuarios) as Observable<any[]>;
   }

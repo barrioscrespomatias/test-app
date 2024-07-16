@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Turno } from 'src/app/interfaces/turno';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
@@ -10,11 +10,26 @@ import { FechaService } from 'src/app/helper/fecha/fecha.service';
 import { LoginService } from 'src/app/servicios/entidades/login/login.service';
 import { Login } from 'src/app/interfaces/login';
 import { TurnoV2Service } from 'src/app/servicios/v2/turno-v2.service';
+import { ChartComponent } from '../chart/chart.component';
+import { CommonModule } from '@angular/common';
+import { NgChartjsModule } from 'ng-chartjs';
+import { NavComponent } from '../nav/nav/nav.component';
+
+//Swipper
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-graficos-page',
   templateUrl: './graficos-page.component.html',
   styleUrls: ['./graficos-page.component.css'],
+  standalone: true,
+  imports: [ChartComponent, 
+            CommonModule, 
+            NgChartjsModule,
+            NavComponent],
+  providers:[],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GraficosPageComponent {
   //#region Constructor
@@ -61,13 +76,16 @@ export class GraficosPageComponent {
 
   turnosRealizadosV2: Turno[] = [];
 
+  isLogged: boolean = false;
+  
+
   //#region Propiedades Graficos 1 - 5
 
   // Cantidad de turnos por especialidad
   data1: number[] = [];
   chartsLabels1: Array<any> = [];
-  title = 'Cantidad Turnos Por Especialidad';
-  type = 'bar';
+  title1 = 'Cantidad Turnos Por Especialidad';
+  type1 = 'bar';
   chartSelector1 = '.chart-1';
   
   // Cantidad de turnos solicitado por médico en un lapso de tiempo
@@ -120,11 +138,15 @@ export class GraficosPageComponent {
   title8 = 'Cantidad de medicos por especialidad';
   type8 = 'pie';
   chartSelector8 = '.chart-8';
+
+
   //#endregion
 
   //#region Hooks
 
   async ngOnInit() {
+    await this.checkLoggedIn();
+
     this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
@@ -133,6 +155,8 @@ export class GraficosPageComponent {
       this.turnosRealizadosV2 = t as Turno[];
       this.inicializarCharts();
     });
+
+
 
 
     //#region chart-1
@@ -181,6 +205,10 @@ export class GraficosPageComponent {
 
   //#region Metodos
 
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
   inicializarCharts() {
     this.calcularCantidadVisitas();
     this.calcularCantidadPacientesPorEspecialidad()
@@ -203,7 +231,11 @@ export class GraficosPageComponent {
   }
 
 
+
+
   //#region Generar Datos
+
+  
   GenerarDatosTurnosPorProfesional(
     turnosAgrupados: Map<Turno, Turno[]>,
     chart: string
@@ -365,6 +397,8 @@ export class GraficosPageComponent {
 
   //#region Agrupar Turnos
   
+
+
   AgruparTurnosPorEspecialidad(turnos: Turno[]): Map<string, Turno[]> {
     const turnosAgrupados = new Map<string, Turno[]>();
 

@@ -1,0 +1,27 @@
+<body>
+    <app-nav *ngIf="isLogged" ></app-nav>
+    <app-grilla-usuarios (messageEvent)="receiveMessage($event)"></app-grilla-usuarios>
+    
+    <div class="container">
+        <swiper-container>
+            <swiper-slide *ngIf="data1.length > 0">
+                <!-- Turnos por paciente por estado  -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="card col-4 ">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title1}}</h5>
+                            <div class="chart-1 col-12">
+                                <app-chart [data]="data1" [chartsLabels]="chartsLabels1" [title]="title1" [type]="type1"
+                                    [chartSelector]="chartSelector1" [dateProperty]="datePropertyFalse">
+                                </app-chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </swiper-slide>
+            <swiper-slide>
+                <!-- <p>algoo</p> -->
+            </swiper-slide>
+        </swiper-container>
+    </div>    
+</body>

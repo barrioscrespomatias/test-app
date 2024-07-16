@@ -7,15 +7,32 @@ import { TablaHistoriasClinicasComponent } from './components/tabla-historias-cl
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccion/encuesta-satisfaccion.component';
+import { UsuarioComponent } from './shared/components/usuario/usuario.component';
+import { InformesComponent } from './components/graficos/informes/informes.component';
+import { GrillaUsuariosComponent } from './shared/components/grilla-usuarios/grilla-usuarios.component';
+import { AsignarHorarioComponent } from './components/profesional/asignar-horario/asignar-horario.component';
+import { GrillaHorariosComponent } from './components/profesional/grilla-horarios/grilla-horarios.component';
+import { TablaTurnosComponent } from './components/tabla-turnos/tabla-turnos.component';
+import { GraficosPageComponent } from './components/graficos-page/graficos-page.component';
 
 const routes: Routes = [
   //normal loading
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'home', component: HomeComponent},
   { path: 'perfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
   { path: 'historias-clinicas', component: TablaHistoriasClinicasComponent, canActivate: [AuthGuard] },
-  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
-  { path: 'solicitar-turno', component: SolicitarTurnoComponent, canActivate: [AuthGuard] },
+  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'solicitar-turno', component: SolicitarTurnoComponent},
+  { path: 'asignar-horario', component: AsignarHorarioComponent },
+  { path: 'grilla-horarios', component: GrillaHorariosComponent },
+  { path: 'grilla-turnos', component: TablaTurnosComponent },
+  { path: 'mi-perfil', component: MiPerfilComponent },
+  { path: 'graficos', component: GraficosPageComponent },
+
+
   { path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent},
+  { path: 'usuario', component: UsuarioComponent},
+  { path: 'informes', component: InformesComponent},
+  { path: 'grilla-usuarios', component: GrillaUsuariosComponent},
   // lazy loading
   {
     path: '',

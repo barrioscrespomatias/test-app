@@ -1,15 +1,21 @@
-import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 
 import {ThemePalette} from '@angular/material/core';
+import { CommonModule } from '@angular/common';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-finalizar-turno',
   templateUrl: './finalizar-turno.component.html',
   styleUrls: ['./finalizar-turno.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSliderModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FinalizarTurnoComponent {
 

@@ -1,14 +1,17 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
+  NO_ERRORS_SCHEMA,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as Chart from 'chart.js';
 import html2canvas from 'html2canvas';
+import { NgChartjsModule } from 'ng-chartjs';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { FechaService } from 'src/app/helper/fecha/fecha.service';
@@ -17,6 +20,10 @@ import { FechaService } from 'src/app/helper/fecha/fecha.service';
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css'],
+  imports:[FormsModule, CommonModule, ReactiveFormsModule, NgChartjsModule ],
+  standalone:true,
+  providers: [ FechaService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class ChartComponent {
   constructor(private changeDetectorRef: ChangeDetectorRef, private fechaService: FechaService) {}
@@ -98,6 +105,8 @@ export class ChartComponent {
   //#endregion
 
   IniciarChart() {
+    const ctx = (document.getElementById('chartCanvas') as HTMLCanvasElement)?.getContext('2d');
+    console.log(ctx)
     this.lineChartData = [
       {
         label: this.title,

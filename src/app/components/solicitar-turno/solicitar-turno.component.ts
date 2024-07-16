@@ -1,5 +1,5 @@
-import { Component, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { Encuesta } from 'src/app/interfaces/encuesta';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
@@ -8,15 +8,33 @@ import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { slideAnimation } from '../../animation';
 import SweetAlert from 'sweetalert2';
+import { FiltroTurnosPipe } from 'src/app/pipes/filtroTurnos/filtro-turnos.pipe';
+import { FiltroUsuariosPipe } from 'src/app/pipes/filtroUsuarios/fitro-usuarios.pipe';
+import { ObtenerFechasTurnosPipe } from 'src/app/pipes/obtenerFechasTurnos/obtener-fechas-turnos.pipe';
+import { EspecialidadesDisponiblesPipe } from 'src/app/pipes/especialidadesDisponibles/especialidades-disponibles.pipe';
+import { ObtenerTodosLosPacientesPipe } from 'src/app/pipes/obtenerTodosLosPacientes/obtener-todos-los-pacientes.pipe';
+import { NavComponent } from '../nav/nav/nav.component';
 
 @Component({
   selector: 'app-solicitar-turno',
   templateUrl: './solicitar-turno.component.html',
   styleUrls: ['./solicitar-turno.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            ObtenerTodosLosPacientesPipe,
+            EspecialidadesDisponiblesPipe,
+            FiltroUsuariosPipe,
+            FiltroTurnosPipe,
+            ObtenerFechasTurnosPipe,
+            NavComponent],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SolicitarTurnoComponent {
   //#region Constructor
@@ -33,6 +51,9 @@ export class SolicitarTurnoComponent {
   //#endregion
 
   estadoActual: string = 'estadoInicial';
+
+  isLogged: boolean = false;
+  
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
@@ -65,6 +86,16 @@ export class SolicitarTurnoComponent {
 
   //#region Hooks
   async ngOnInit() {
+    this.form = new FormGroup({
+      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
+    });
+
+    await this.checkLoggedIn();
+
     this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
       this.usuario = usuario;
     });
@@ -81,13 +112,7 @@ export class SolicitarTurnoComponent {
       this.especialidades = especialidades;
     });
 
-    this.form = new FormGroup({
-      especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_inicio: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      hora_fin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      duracion: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-      dias: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
-    });
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -101,6 +126,10 @@ export class SolicitarTurnoComponent {
   //#endregion
 
   //#region Metodos
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
   ObtenerValorEspecialidad(nombreEspecialidad: string) {
     this.visualizarEspecialidades = false;
 

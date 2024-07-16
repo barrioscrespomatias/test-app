@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Turno } from 'src/app/interfaces/turno';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
@@ -11,12 +11,26 @@ import { slideAnimation } from '../../animation';
 import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomNg2SearchPipe } from 'src/app/pipes/customNg2Search/custom-ng2-search.pipe';
+import { FiltroTurnosHistoriaClinicaPipe } from 'src/app/pipes/filtroTurnosHistoriaClinica/filtro-turnos-historia-clinica.pipe';
+import { NavComponent } from '../nav/nav/nav.component';
 
 @Component({
   selector: 'app-tabla-historias-clinicas',
   templateUrl: './tabla-historias-clinicas.component.html',
   styleUrls: ['./tabla-historias-clinicas.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule, 
+            CustomNg2SearchPipe, 
+            FiltroTurnosHistoriaClinicaPipe,
+            NavComponent],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TablaHistoriasClinicasComponent {
   heroes = [
@@ -43,6 +57,7 @@ export class TablaHistoriasClinicasComponent {
   //#endregion
 
   estadoActual: string = 'estadoInicial';
+  isLogged: boolean = false;
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
@@ -74,14 +89,13 @@ export class TablaHistoriasClinicasComponent {
   //#region Hooks
 
   async ngOnInit() {
+    await this.checkLoggedIn();
+
     this.usuarioService.getUsuario(this.mail).then(async (usuario: any) => {
       this.usuario = usuario;
 
       (await this.turnoService.TurnosRealizadosProfesional(this.usuario?.docRef)).subscribe(turnosDelProfesional => {
         this.turnosProfesional = this.agruparTurnosPorPaciente(turnosDelProfesional);
-        // console.log(this.turnosProfesional)
-
-        // Convertir el Map a un array para usar en la plantilla
         this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());
       });
     });
@@ -89,10 +103,6 @@ export class TablaHistoriasClinicasComponent {
     this.usuarioService.TraerTodos().then((usuarios: any) => {
       this.usuarios = usuarios;
     });
-
-    // this.turnoService.TraerTodos().then((turnos: any) => {
-    //   this.turnos = turnos;
-    // });
 
     this.turnosSubscription = (
       await this.turnoService.TraerTodos()
@@ -112,6 +122,10 @@ export class TablaHistoriasClinicasComponent {
   }
 
   //#endregion
+
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
 
   //#region Metodos
   ConvertirFecha(fecha:any){

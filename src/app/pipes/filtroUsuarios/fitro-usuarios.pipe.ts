@@ -5,6 +5,7 @@ import { reload } from 'firebase/auth';
 
 @Pipe({
   name: 'filtroUsuarios',
+  standalone: true
 })
 export class FiltroUsuariosPipe implements PipeTransform {
 

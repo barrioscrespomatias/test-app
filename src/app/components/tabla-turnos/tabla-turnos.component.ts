@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { Component, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, Input, ViewChild, ElementRef, Renderer2, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { from } from 'rxjs';
 import { Encuesta } from 'src/app/interfaces/encuesta';
 import { Turno } from 'src/app/interfaces/turno';
@@ -10,6 +10,11 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import { animate, style, transition, trigger } from '@angular/animations';
 import { slideAnimation } from '../../animation';
 import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
+import { CustomNg2SearchPipe } from 'src/app/pipes/customNg2Search/custom-ng2-search.pipe';
+import { ObtenerFechasTurnosPipe } from 'src/app/pipes/obtenerFechasTurnos/obtener-fechas-turnos.pipe';
+import { FormsModule } from '@angular/forms';
+import { FiltroTurnosPacientePipe } from 'src/app/pipes/filtroTurnosPaciente/filtro-turnos-paciente.pipe';
+import { NavComponent } from '../nav/nav/nav.component';
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -18,7 +23,16 @@ import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/tur
   selector: 'app-tabla-turnos',
   templateUrl: './tabla-turnos.component.html',
   styleUrls: ['./tabla-turnos.component.css'],
-  animations: [slideAnimation]
+  animations: [slideAnimation],
+  standalone: true,
+  imports: [CommonModule,
+            FormsModule, 
+            CustomNg2SearchPipe, 
+            ObtenerFechasTurnosPipe, 
+            FiltroTurnosPacientePipe,
+            NavComponent],
+  providers: [DatePipe],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TablaTurnosComponent {
   //#region Constructor
@@ -36,6 +50,7 @@ export class TablaTurnosComponent {
   //#endregion
 
   estadoActual: string = 'estadoInicial';
+  isLogged: boolean = false;
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
@@ -93,6 +108,8 @@ export class TablaTurnosComponent {
 
   async ngOnInit() {
 
+    await this.checkLoggedIn();
+
     this.turnosSubscription = (
       await this.turnoService.TraerTodos()
     ).subscribe((turnos) => {
@@ -117,6 +134,11 @@ export class TablaTurnosComponent {
   //#endregion
 
   //#region Metodos
+  async checkLoggedIn() {
+    console.log('loguea??')
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+  
   ConvertirFecha(fecha:any){
     return new Date(fecha.seconds * 1000);
   }

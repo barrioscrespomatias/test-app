@@ -1,7 +1,7 @@
 //#region Imports
-import { Component, Input, VERSION } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, VERSION } from '@angular/core';
 import { Firestore, collection, doc } from '@angular/fire/firestore';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
@@ -13,12 +13,17 @@ import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.ser
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 //#endregion
 @Component({
   selector: 'app-formulario-registro',
   templateUrl: './formulario-registro.component.html',
   styleUrls: ['./formulario-registro.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FormularioRegistroComponent {
   //#region Propiedades
@@ -345,7 +350,7 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
     return y + '-' + m + '-' + d + '_' + h + '-' + min + '-' + s + '-' + mls;
   }
 
-  onCaptchaVerified(captchaValue: boolean) {
+  onCaptchaVerified(captchaValue: any) {
     if (captchaValue) {
       // Avanzar en la pantalla o realizar alguna acción
       console.log("avanzo")

@@ -27,8 +27,8 @@ import { StorageModule } from '@angular/fire/storage';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavComponent,
+    // HomeComponent,
+    // NavComponent,
     PacientesComponent,
     MaterialTablePaginatorComponent,
     

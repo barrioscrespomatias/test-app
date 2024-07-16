@@ -1,11 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadoEnum } from 'src/app/enum/estadoTurnoEnum/estado-turno-enum';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 
 @Component({
   selector: 'app-aceptar-turno',
   templateUrl: './aceptar-turno.component.html',
-  styleUrls: ['./aceptar-turno.component.css']
+  styleUrls: ['./aceptar-turno.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AceptarTurnoComponent {
   //#region Propiedades

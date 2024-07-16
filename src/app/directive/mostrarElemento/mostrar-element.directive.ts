@@ -2,6 +2,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appMostrarElement]',
+  standalone: true
 })
 export class MostrarElementDirective {
   @Input('componentToggle') componentId!: string;
@@ -10,6 +11,9 @@ export class MostrarElementDirective {
 
   @HostListener('click') onClick() {
     const component = document.getElementById(this.componentId);
+    console.log(component)
+    console.log(this.componentId)
+    console.log('pasa por aca')
     if (component) {
       const components = document.querySelectorAll('[componentToggle]');
       components.forEach((comp) => {
