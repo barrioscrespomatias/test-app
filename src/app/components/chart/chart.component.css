@@ -1,0 +1,10 @@
+.chart-container {
+    position: relative;
+  }
+  
+  .descargar-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }

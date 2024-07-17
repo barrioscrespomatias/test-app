@@ -92,7 +92,7 @@ export class GraficosPageComponent {
   data2: number[] = [];
   chartsLabels2: Array<any> = [];
   title2 = 'Turnos solicitados por Médico en un lapso de tiempo';
-  type2 = 'bar';
+  type2 = 'line';
   chartSelector2 = '.chart-2';
 
   // Cantidad de turnos finalizado por médico en un lapso de tiempo
@@ -106,7 +106,7 @@ export class GraficosPageComponent {
   data4: number[] = [];
   chartsLabels4: Array<any> = [];
   title4 = 'Turnos por dia';
-  type4 = 'bar';
+  type4 = 'line';
   chartSelector4 = '.chart-4';
 
   // Cantidad de turnos por dia
@@ -122,21 +122,21 @@ export class GraficosPageComponent {
   data6: number[] = [];
   chartsLabels6: Array<string> = [];
   title6 = 'Cantidad de visitas que tuvo la clinica';
-  type6 = 'pie';
+  type6 = 'line';
   chartSelector6 = '.chart-6';
 
   // Cantidad de pacientes por especialidad
   data7: number[] = [];
   chartsLabels7: Array<string> = [];
   title7 = 'Cantidad de pacientes por especialidad';
-  type7 = 'pie';
+  type7 = 'bar';
   chartSelector7 = '.chart-7';
 
   // Cantidad de pacientes por especialidad
   data8: number[] = [];
   chartsLabels8: Array<string> = [];
   title8 = 'Cantidad de medicos por especialidad';
-  type8 = 'pie';
+  type8 = 'line';
   chartSelector8 = '.chart-8';
 
 
