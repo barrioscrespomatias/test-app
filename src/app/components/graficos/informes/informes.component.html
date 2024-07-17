@@ -1,27 +1,72 @@
-<body>
-    <app-nav *ngIf="isLogged" ></app-nav>
-    <app-grilla-usuarios (messageEvent)="receiveMessage($event)"></app-grilla-usuarios>
-    
-    <div class="container">
-        <swiper-container>
-            <swiper-slide *ngIf="data1.length > 0">
-                <!-- Turnos por paciente por estado  -->
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="card col-4 ">
+<app-nav *ngIf="isLogged"></app-nav>
+<!-- <app-grilla-usuarios (messageEvent)="receiveMessage($event)"></app-grilla-usuarios> -->
+
+<div class="container">
+    <!-- <swiper-container> -->
+        <!-- <swiper-slide *ngIf="data1.length > 0"> -->
+            <!-- Turnos por paciente por estado  -->
+             <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                 <!-- <div class="d-flex justify-content-center align-items-center"> -->
+                     <div class="chart-2 col-4 col-xs-12">
+                         <div class="card text-black bg-light bg-gradient">
+                             <div class="card-body">
+                                 <h5 class="card-title">{{title1}}</h5>
+                                 <app-chart [data]="data1" [chartsLabels]="chartsLabels1" [title]="title1" [type]="type1"
+                                     [chartSelector]="chartSelector1" [dateProperty]="datePropertyFalse">
+                                 </app-chart>
+                             </div>
+                         </div>
+                     </div>
+                 <!-- </div> -->
+                 <!-- <div class="d-flex justify-content-center align-items-center"> -->
+                     <div class="chart-2 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                         <div class="card text-black bg-light bg-gradient">
+                             <div class="card-body">
+                                 <h5 class="card-title">{{title2}}</h5>
+                                 <app-chart [data]="data2" [chartsLabels]="chartsLabels2" [title]="title2" [type]="type2"
+                                     [chartSelector]="chartSelector2" [dateProperty]="datePropertyFalse">
+                                 </app-chart>
+                             </div>
+                         </div>
+                     </div>
+                 <!-- </div> -->
+
+                 <!-- <div class="d-flex justify-content-center align-items-center"> -->
+                     <div class="chart-3 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                         <div class="card text-black bg-light bg-gradient">
+                             <div class="card-body">
+                                 <h5 class="card-title">{{title3}}</h5>
+                                 <app-chart [data]="data3" [chartsLabels]="chartsLabels3" [title]="title3" [type]="type3"
+                                     [chartSelector]="chartSelector3" [dateProperty]="datePropertyFalse">
+                                 </app-chart>
+                             </div>
+                         </div>
+                     </div>
+                 <!-- </div> -->
+             </div>
+        <!-- </swiper-slide> -->
+        <!-- <swiper-slide class="d-flex justify-content-center align-items-center"> -->
+        <!-- </swiper-slide> -->
+
+        <!-- <swiper-slide class="d-flex justify-content-center align-items-center"> -->
+        <!-- </swiper-slide> -->
+
+
+        <!-- <swiper-slide class="d-flex justify-content-center align-items-center"> -->
+            <div class="row mb-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                <div class="chart-4 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
                         <div class="card-body">
-                            <h5 class="card-title">{{title1}}</h5>
-                            <div class="chart-1 col-12">
-                                <app-chart [data]="data1" [chartsLabels]="chartsLabels1" [title]="title1" [type]="type1"
-                                    [chartSelector]="chartSelector1" [dateProperty]="datePropertyFalse">
-                                </app-chart>
-                            </div>
+                            <h5 class="card-title">{{title4}}</h5>
+                            <app-chart [data]="data4" [chartsLabels]="chartsLabels4" [title]="title4" [type]="type4"
+                                [chartSelector]="chartSelector4" [dateProperty]="datePropertyFalse">
+                            </app-chart>
                         </div>
                     </div>
                 </div>
-            </swiper-slide>
-            <swiper-slide>
-                <!-- <p>algoo</p> -->
-            </swiper-slide>
-        </swiper-container>
-    </div>    
-</body>
+            </div>
+            <!-- <div class="d-flex justify-content-center align-items-center"> -->
+            <!-- </div> -->
+        <!-- </swiper-slide> -->
+    <!-- </swiper-container> -->
+</div>
