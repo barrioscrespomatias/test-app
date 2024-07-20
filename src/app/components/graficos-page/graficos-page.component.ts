@@ -27,7 +27,7 @@ register();
   imports: [ChartComponent, 
             CommonModule, 
             NgChartjsModule,
-            NavComponent],
+          ],
   providers:[],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

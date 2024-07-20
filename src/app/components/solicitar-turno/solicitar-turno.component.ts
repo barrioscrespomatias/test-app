@@ -32,7 +32,7 @@ import { NavComponent } from '../nav/nav/nav.component';
             FiltroUsuariosPipe,
             FiltroTurnosPipe,
             ObtenerFechasTurnosPipe,
-            NavComponent],
+          ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

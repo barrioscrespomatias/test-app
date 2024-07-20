@@ -1,4 +1,3 @@
-<app-nav *ngIf="isLogged" ></app-nav>
 
 <div [@slideAnimation]="estadoActual">
 <form [formGroup]="form" class="container">
@@ -61,8 +60,6 @@
 
 <!-- historia clinica PACIENTES: ve su historia clinica -->
 <ng-container *ngIf="usuario?.perfil === 'paciente'">
-    <p>que perfil pacienteee </p>
-
     <app-tabla-historias-clinicas></app-tabla-historias-clinicas>
 </ng-container>
 

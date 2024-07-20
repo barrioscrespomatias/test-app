@@ -28,7 +28,7 @@ import { NavComponent } from '../nav/nav/nav.component';
             ReactiveFormsModule, 
             CustomNg2SearchPipe, 
             FiltroTurnosHistoriaClinicaPipe,
-            NavComponent],
+          ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

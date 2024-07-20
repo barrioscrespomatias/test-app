@@ -9,7 +9,10 @@ import { NavComponent } from '../../nav/nav/nav.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NavComponent],
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule, 
+          ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

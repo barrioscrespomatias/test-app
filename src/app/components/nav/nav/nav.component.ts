@@ -7,10 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NavComponent {
   constructor(public firebaseService: FirebaseAuthService) {

@@ -30,7 +30,7 @@ import { NavComponent } from '../nav/nav/nav.component';
             CustomNg2SearchPipe, 
             ObtenerFechasTurnosPipe, 
             FiltroTurnosPacientePipe,
-            NavComponent],
+          ],
   providers: [DatePipe],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

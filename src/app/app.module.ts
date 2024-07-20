@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms'; // Importa FormsModule
 
@@ -28,7 +28,7 @@ import { StorageModule } from '@angular/fire/storage';
   declarations: [
     AppComponent,
     // HomeComponent,
-    // NavComponent,
+    NavComponent,
     PacientesComponent,
     MaterialTablePaginatorComponent,
     
@@ -55,6 +55,7 @@ import { StorageModule } from '@angular/fire/storage';
              AngularFirestore,
              provideFirebaseApp(() => initializeApp(environment.firebase))
             ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

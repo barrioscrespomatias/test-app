@@ -34,7 +34,6 @@ import { NavComponent } from '../nav/nav/nav.component';
             FiltroUsuariosPacientesPipe,
             UsuariosProfesionalesPipe,
             DatePipe,
-            NavComponent,
             MatToolbarModule,
             MatIconModule],
   providers: [DatePipe],

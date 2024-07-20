@@ -25,7 +25,7 @@ import { NavComponent } from '../nav/nav/nav.component';
             GrillaHorariosComponent, 
             FormsModule, 
             ReactiveFormsModule,
-            NavComponent],
+          ],
   providers: [],
   schemas: []
 })
