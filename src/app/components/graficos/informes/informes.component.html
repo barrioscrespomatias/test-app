@@ -2,49 +2,111 @@
 <!-- <app-grilla-usuarios (messageEvent)="receiveMessage($event)"></app-grilla-usuarios> -->
 
 <div class="container">
-    <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
-        <div class="chart-1 col-4 col-xs-12">
-            <div class="card text-black bg-light bg-gradient">
-                <div class="card-body">
-                    <h5 class="card-title">{{title1}}</h5>
-                    <app-chart [data]="data1" [chartsLabels]="chartsLabels1" [title]="title1" [type]="type1"
-                        [chartSelector]="chartSelector1" [dateProperty]="datePropertyFalse">
-                    </app-chart>
+    <swiper-container>
+        <swiper-slide>
+            <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                <div class="chart-1 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title1}}</h5>
+                            <app-chart [data]="data1" [chartsLabels]="chartsLabels1" [title]="title1" [type]="type1"
+                                [chartSelector]="chartSelector1" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-2 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title2}}</h5>
+                            <app-chart [data]="data2" [chartsLabels]="chartsLabels2" [title]="title2" [type]="type2"
+                                [chartSelector]="chartSelector2" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-3 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title3}}</h5>
+                            <app-chart [data]="data3" [chartsLabels]="chartsLabels3" [title]="title3" [type]="type3"
+                                [chartSelector]="chartSelector3" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="chart-2 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
-            <div class="card text-black bg-light bg-gradient">
-                <div class="card-body">
-                    <h5 class="card-title">{{title2}}</h5>
-                    <app-chart [data]="data2" [chartsLabels]="chartsLabels2" [title]="title2" [type]="type2"
-                        [chartSelector]="chartSelector2" [dateProperty]="datePropertyFalse">
-                    </app-chart>
+        
+            <div class="row mb-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                <div class="chart-4 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title4}}</h5>
+                            <app-chart [data]="data4" [chartsLabels]="chartsLabels4" [title]="title4" [type]="type4"
+                                [chartSelector]="chartSelector4" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="chart-3 col-4 col-xs-12" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
-            <div class="card text-black bg-light bg-gradient">
-                <div class="card-body">
-                    <h5 class="card-title">{{title3}}</h5>
-                    <app-chart [data]="data3" [chartsLabels]="chartsLabels3" [title]="title3" [type]="type3"
-                        [chartSelector]="chartSelector3" [dateProperty]="datePropertyFalse">
-                    </app-chart>
+        
+                <div class="chart-5 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title5}}</h5>
+                            <app-chart [data]="data5" [chartsLabels]="chartsLabels5" [title]="title5" [type]="type5"
+                                [chartSelector]="chartSelector5" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row mb-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
-        <div class="chart-4 col-4 col-xs-12">
-            <div class="card text-black bg-light bg-gradient">
-                <div class="card-body">
-                    <h5 class="card-title">{{title4}}</h5>
-                    <app-chart [data]="data4" [chartsLabels]="chartsLabels4" [title]="title4" [type]="type4"
-                        [chartSelector]="chartSelector4" [dateProperty]="datePropertyFalse">
-                    </app-chart>
+                <div class="chart-6 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title6}}</h5>
+                            <app-chart [data]="data6" [chartsLabels]="chartsLabels6" [title]="title5" [type]="type6"
+                                [chartSelector]="chartSelector6" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div>            
+        </swiper-slide>
+        <swiper-slide>
+            <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
+                <div class="chart-7 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title7}}</h5>
+                            <app-chart [data]="data7" [chartsLabels]="chartsLabels7" [title]="title7" [type]="type7"
+                                [chartSelector]="chartSelector7" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-8 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title8}}</h5>
+                            <app-chart [data]="data8" [chartsLabels]="chartsLabels8" [title]="title8" [type]="type8"
+                                [chartSelector]="chartSelector8" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-9 col-4 col-xs-12">
+                    <div class="card text-black bg-light bg-gradient">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title9}}</h5>
+                            <app-chart [data]="data9" [chartsLabels]="chartsLabels9" [title]="title9" [type]="type9"
+                                [chartSelector]="chartSelector9" [dateProperty]="datePropertyFalse">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </swiper-slide>
+    </swiper-container>
 </div>

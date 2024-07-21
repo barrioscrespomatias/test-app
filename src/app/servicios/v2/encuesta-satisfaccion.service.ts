@@ -58,7 +58,8 @@ export class EncuestaSatisfaccionService {
       observacion : encuestaSatisfaccion.observacion,
       simplicidadTurnos : encuestaSatisfaccion.simplicidadTurnos,
       amabilidad : encuestaSatisfaccion.amabilidad,
-      fecha: encuestaSatisfaccion.fecha
+      fecha: encuestaSatisfaccion.fecha,
+      aspectosDestacar: encuestaSatisfaccion.aspectosDestacar
     });
   }
 

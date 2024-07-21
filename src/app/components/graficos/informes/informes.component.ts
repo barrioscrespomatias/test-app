@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { NgChartjsModule } from 'ng-chartjs';
 import { NavComponent } from '../../nav/nav/nav.component';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { EncuestaSatisfaccionService } from 'src/app/servicios/v2/encuesta-satisfaccion.service';
+import { EncuestaSatisfaccion } from 'src/app/interfaces/encuesta-satisfaccion';
 
 //Swipper
 import { register } from 'swiper/element/bundle';
@@ -33,7 +35,8 @@ export class InformesComponent implements OnInit{
   constructor(private usuarioService: UsuarioV2Service,
               private turnoService: TurnoV2Service,
               private firebaseService:FirebaseAuthService,
-              private changeDetector: ChangeDetectorRef 
+              private changeDetector: ChangeDetectorRef,
+              private encuestaService: EncuestaSatisfaccionService,
   ){
 
   }
@@ -45,6 +48,7 @@ export class InformesComponent implements OnInit{
   datePropertyFalse = false;
   isLogged: boolean = false;
   turnosRealizados: Turno[] = [];
+  encuestas: EncuestaSatisfaccion[] = [];
 
 
 
@@ -75,6 +79,44 @@ export class InformesComponent implements OnInit{
   title4 = 'Cantidad de visitas';
   type4 = 'bar';
   chartSelector4 = '.chart-4';
+
+  data5: number[] = [];
+  chartsLabels5: string[] = [];
+  title5 = 'Calificacion General';
+  type5 = 'bar';
+  chartSelector5 = '.chart-5';
+
+  data6: number[] = [];
+  chartsLabels6: string[] = [];
+  title6 = 'Recomendacion';
+  type6 = 'line';
+  chartSelector6 = '.chart-6';
+
+  data7: number[] = [];
+  chartsLabels7: string[] = [];
+  title7 = 'Amabilidad';
+  type7 = 'bar';
+  chartSelector7 = '.chart-7';
+
+  data8: number[] = [];
+  chartsLabels8: string[] = [];
+  title8 = 'Aspectos a Destacar';
+  type8 = 'line';
+  chartSelector8 = '.chart-8';
+
+  data9: number[] = [];
+  chartsLabels9: string[] = [];
+  title9 = 'Simplicidad de Turnos';
+  type9 = 'bar';
+  chartSelector9 = '.chart-9';
+
+  defaultChartLabel: string[] = [
+    '5',
+    '4',
+    '3',
+    '2',
+    '1',
+  ];
 
   //#endregion
 
@@ -109,10 +151,116 @@ export class InformesComponent implements OnInit{
         await this.calcularCantidadMedicosPorEspecialidad()
       }
     });
+
+    this.encuestaService.traerencuestaSatisfacciones().subscribe((a) => {
+      this.encuestas = a as EncuestaSatisfaccion[];
+      this.calcularDatos('calificacionGeneral');
+      this.calcularDatos('recomendacion');
+      this.calcularDatosAmabilidad();
+      this.calcularDatosAspectosDestacar();
+      this.calcularDatosSimplicidadTurnos();
+    });
   }
 
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
+  calcularDatosSimplicidadTurnos() {
+    const puntajes: { [key: string]: number } = {
+      'true': 0,
+      'false': 0
+    };
+  
+    this.encuestas.forEach((encuesta) => {
+      const valorCampo = encuesta.simplicidadTurnos;
+      if (typeof valorCampo === 'boolean') {
+        puntajes[valorCampo.toString()] += 1;
+      }
+    });
+  
+    this.data9 = [
+      puntajes['true'],
+      puntajes['false']
+    ];
+  
+    this.chartsLabels9 = ['Sí', 'No'];
+  }
+
+  calcularDatos(campo: keyof EncuestaSatisfaccion) {
+    const puntajes = Array(5).fill(0);
+    this.encuestas.forEach((encuesta) => {
+      const valorCampo = encuesta[campo];
+      if (
+        typeof valorCampo === 'number' &&
+        valorCampo >= 1 &&
+        valorCampo <= 5
+      ) {
+        puntajes[5 - valorCampo] += 1;
+      }
+    });
+
+    switch (campo) {
+      case 'calificacionGeneral':
+        this.data5 = puntajes;
+        this.chartsLabels5 = this.defaultChartLabel;
+        break;
+      case 'recomendacion':
+        this.data6 = puntajes;
+        this.chartsLabels6 = this.defaultChartLabel;
+        break;
+    }
+  }
+
+  calcularDatosAmabilidad() {
+    const puntajes = {
+      'Excelente': 0,
+      'Buena': 0,
+      'Regular': 0,
+      'Mala': 0
+    };
+  
+    this.encuestas.forEach((encuesta) => {
+      const valorCampo = encuesta.amabilidad;
+      if (valorCampo in puntajes) {
+        puntajes[valorCampo] += 1;
+      }
+    });
+  
+    this.data7 = [
+      puntajes['Excelente'],
+      puntajes['Buena'],
+      puntajes['Regular'],
+      puntajes['Mala']
+    ];
+  
+    this.chartsLabels7 = ['Excelente', 'Buena', 'Regular', 'Mala'];
+  }
+
+  calcularDatosAspectosDestacar() {
+    const puntajes = {
+      'Puntualidad': 0,
+      'Claridad Profesional': 0,
+      'Resolucion': 0,
+      'Instalaciones': 0
+    };
+  
+    this.encuestas.forEach((encuesta) => {
+      encuesta.aspectosDestacar.forEach((aspecto) => {
+        if (aspecto in puntajes) {
+          puntajes[aspecto] += 1;
+        }
+      });
+    });
+  
+    this.data8 = [
+      puntajes['Puntualidad'],
+      puntajes['Claridad Profesional'],
+      puntajes['Resolucion'],
+      puntajes['Instalaciones']
+    ];
+  
+    this.chartsLabels8 = ['Puntualidad', 'Claridad Profesional', 'Resolucion', 'Instalaciones'];
   }
 
   async calcularCantidadVisitas(){
