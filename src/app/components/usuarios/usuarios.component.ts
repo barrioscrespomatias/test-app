@@ -35,7 +35,9 @@ import { NavComponent } from '../nav/nav/nav.component';
             UsuariosProfesionalesPipe,
             DatePipe,
             MatToolbarModule,
-            MatIconModule],
+            MatIconModule,
+            NavComponent
+          ],
   providers: [DatePipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

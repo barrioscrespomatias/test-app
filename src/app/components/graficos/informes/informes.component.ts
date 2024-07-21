@@ -21,6 +21,7 @@ register();
             ChartComponent, 
             CommonModule, 
             NgChartjsModule,
+            NavComponent
           ],
   providers: [UsuarioService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

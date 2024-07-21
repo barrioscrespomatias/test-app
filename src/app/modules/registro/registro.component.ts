@@ -1,19 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { FormularioRegistroComponent } from 'src/app/components/formulario/formulario-registro/formulario-registro.component';
+import { ImageComponentComponent } from 'src/app/components/imageComponent/image-component/image-component.component';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
-import { ImagenService } from 'src/app/services/imagen/imagen.service';
-import { PacienteService } from 'src/app/services/paciente/paciente.service';
-import { ProfesionalService } from 'src/app/services/profesional/profesional.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
+import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule, 
+            ImageComponentComponent,
+            FormularioRegistroComponent],
+  providers: [UsuarioService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RegistroComponent {
@@ -25,7 +30,7 @@ export class RegistroComponent {
   @Input() emailRegistrado:any;
   attributeValue: string = '';
   emailRecibido: string = '';
-  usuario: any;
+  currentUser: any;
   mail: string = this.firebaseService.userName;
   
   //#endregion
@@ -33,7 +38,7 @@ export class RegistroComponent {
   //#region Constructor
   constructor(
     private firebaseService: FirebaseAuthService,
-    private usuarioService: UsuarioService,
+    private usuarioService: UsuarioV2Service,
   ) { this.checkLoggedIn();}
 
   //#endregion
@@ -47,15 +52,15 @@ export class RegistroComponent {
   }
   
   //#region Hooks
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    console.log('llega')
     this.form = new FormGroup({
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
 
-    this.usuarioService.getUsuario(this.mail).then((usuario: any) => {
-      this.usuario = usuario;
-    });
+    this.currentUser = await this.usuarioService.buscarUsuarioPorMail(this.mail);
+    console.log(this.currentUser)
   }
   //#endregion
 

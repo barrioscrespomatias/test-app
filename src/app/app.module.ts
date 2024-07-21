@@ -22,13 +22,15 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule} from '@angular/material/table';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { StorageModule } from '@angular/fire/storage';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { CustomTranslateLoader } from '../app/translation/translation.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     // HomeComponent,
-    NavComponent,
+    // NavComponent,
     PacientesComponent,
     MaterialTablePaginatorComponent,
     
@@ -48,14 +50,19 @@ import { StorageModule } from '@angular/fire/storage';
     FormsModule,
     ReactiveFormsModule,
     FirestoreModule,
-    StorageModule
+    StorageModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: CustomTranslateLoader
+      }
+    })
   ],
   providers: [FirebaseAuthService,
              { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, 
              AngularFirestore,
              provideFirebaseApp(() => initializeApp(environment.firebase))
             ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent],  
 })
 export class AppModule { }

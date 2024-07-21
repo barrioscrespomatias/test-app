@@ -1,19 +1,19 @@
 //#region Imports
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, VERSION } from '@angular/core';
-import { Firestore, collection, doc } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, Subscription, map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/especialidad.service';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { Especialidad } from 'src/app/interfaces/especialidad';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
-// import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { HorarioEspecialidad } from 'src/app/interfaces/horarioEspecialidad';
 import { FileService } from 'src/app/servicios/file/file.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NavComponent } from '../../nav/nav/nav.component';
 
 //#endregion
 @Component({
@@ -21,7 +21,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './formulario-registro.component.html',
   styleUrls: ['./formulario-registro.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule,
+            TranslateModule,
+            NavComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -50,6 +54,7 @@ export class FormularioRegistroComponent {
   });
   public log: string[] = [];
   public declarativeFormCaptchaValue: string = '';
+  onlyLanguage: boolean = true;
 
   //#endregion
 
@@ -69,13 +74,17 @@ export class FormularioRegistroComponent {
     private fileService: FileService,
     public router: Router, 
     private usuarioService: UsuarioService,
-    
-
+    private translate: TranslateService,
   ) {}
 
   //#endregion
 
   //#region NG Hooks
+
+  
+  receiveMessage(idioma: any) {
+    this.translate.setDefaultLang(idioma);
+  }
 
   async ngOnInit() {
     this.especialidades = (await this.especialidadService.TraerTodos()).pipe(

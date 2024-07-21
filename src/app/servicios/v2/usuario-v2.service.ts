@@ -81,16 +81,27 @@ export class UsuarioV2Service {
     return collectionData(usuarios) as Observable<any[]>;
   }
 
-  /**
-   * Trae todas las Turnos hechas por paciente
-   * @param paciente
-   * @returns
-   */
-  buscarPorMail(mail: string) {
-    const usuarios = query(
-      this.coleccionUsuarios,
-      where('mail', '==', mail)
-    );
-    return collectionData(usuarios) as Observable<any[]>;
+  // /**
+  //  * Trae todas las Turnos hechas por paciente
+  //  * @param paciente
+  //  * @returns
+  //  */
+  // buscarPorMail(mail: string) {
+  //   const usuarios = query(
+  //     this.coleccionUsuarios,
+  //     where('mail', '==', mail)
+  //   );
+  //   return collectionData(usuarios) as Observable<any[]>;
+  // }
+
+  buscarUsuarioPorMail(mail: string): Promise<any>
+  {
+    const resultados = query(this.coleccionUsuarios, where("mail","==",mail));
+    return new Promise((resolve)=>
+    {
+      collectionData(resultados).subscribe((a)=> {
+        resolve(a[0]);
+      });
+    })
   }
 }

@@ -27,6 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^17.0.0",
     "@ng-select/ng-select": "^13.4.1",
     "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@popperjs/core": "^2.11.8",
     "@types/file-saver": "^2.0.7",
     "angular-datatables": "^18.0.0",

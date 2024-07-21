@@ -1,69 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-color">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" href="home">Inicio</a>
+    <a class="navbar-brand text-white" href="home" *ngIf="!onlyLanguage">{{'nav.Inicio' | translate}}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Turnos
+          <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{'nav.Turnos' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="solicitar-turno">Solicitar Turno</a></li>
-            <li><a class="dropdown-item"href="grilla-turnos">Ver Turnos</a></li>
+            <li><a class="dropdown-item" href="solicitar-turno">{{'nav.SolicitarTurno' | translate}}</a></li>
+            <li><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnos' | translate}}</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Calendario
+          <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{'nav.Calendario' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="grilla-horarios">Ver Horarios</a></li>
+            <li><a class="dropdown-item" href="grilla-horarios">{{'nav.VerHorarios' | translate}}</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Perfil
+          <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{'nav.Usuarios' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="mi-perfil">Mis Datos</a></li>
+            <li><a class="dropdown-item" href="usuarios">{{'nav.VerUsuarios' | translate}}</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuarios
+          <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{'nav.HistoriasClinicas' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="usuarios">Ver Usuarios</a></li>
+            <li><a class="dropdown-item" href="historias-clinicas">{{'nav.VerHistoriasClinicas' | translate}}</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Historias Clinicas
+          <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{'nav.Estadisticas' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="historias-clinicas">Ver Historia Clinica</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Graficos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="graficos">Graficos</a></li>
-            <li><a class="dropdown-item" href="informes">Informes</a></li>
+            <li><a class="dropdown-item" href="graficos">{{'nav.Graficos' | translate}}</a></li>
+            <li><a class="dropdown-item" href="informes">{{'nav.Informes' | translate}}</a></li>
           </ul>
         </li>
       </ul>
 
-    <div class="d-flex" *ngIf="idioma">
+    <div class="d-flex" *ngIf="idioma && onlyLanguage">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           
@@ -71,21 +62,21 @@
               <img src="{{idioma_src}}" alt="Dropdown Image" class="rounded-circle" width="40" height="40">
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="imageDropdown2">
-            <li><a class="dropdown-item" (click)="cambiarIdioma('espanol')">Espanol</a></li>
-            <li><a class="dropdown-item" (click)="cambiarIdioma('ingles')">Ingles</a></li>
-            <li><a class="dropdown-item" (click)="cambiarIdioma('portugues')">Portuges</a></li>
+            <li><a class="dropdown-item" (click)="cambiarIdioma('es')">Espanol</a></li>
+            <li><a class="dropdown-item" (click)="cambiarIdioma('en')">Ingles</a></li>
+            <li><a class="dropdown-item" (click)="cambiarIdioma('pt')">Portuges</a></li>
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="!onlyLanguage">
         <li class="nav-item dropdown">
           <a href="#" id="imageDropdown1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="Dropdown Image" class="rounded-circle" width="40" height="40">
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="imageDropdown1">
-            <li><a class="dropdown-item" href="mi-perfil">Mi Perfil</a></li>
+            <li><a class="dropdown-item" href="mi-perfil">{{'nav.Perfil' | translate}}</a></li>
             <li class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="SignOut()">Cerrar sesion</a></li>
+            <li><a class="dropdown-item" (click)="SignOut()">{{'nav.CerrarSesion' | translate}}</a></li>
           </ul>
         </li>
       </ul>

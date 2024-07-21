@@ -14,46 +14,28 @@ import { AsignarHorarioComponent } from './components/profesional/asignar-horari
 import { GrillaHorariosComponent } from './components/profesional/grilla-horarios/grilla-horarios.component';
 import { TablaTurnosComponent } from './components/tabla-turnos/tabla-turnos.component';
 import { GraficosPageComponent } from './components/graficos-page/graficos-page.component';
+import { RegistroComponent } from './modules/registro/registro.component';
+import { LoginComponent } from './modules/login/login.component';
 
 const routes: Routes = [
-  //normal loading
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'perfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
   { path: 'historias-clinicas', component: TablaHistoriasClinicasComponent, canActivate: [AuthGuard] },
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'solicitar-turno', component: SolicitarTurnoComponent},
-  { path: 'asignar-horario', component: AsignarHorarioComponent },
-  { path: 'grilla-horarios', component: GrillaHorariosComponent },
-  { path: 'grilla-turnos', component: TablaTurnosComponent },
-  { path: 'mi-perfil', component: MiPerfilComponent },
-  { path: 'graficos', component: GraficosPageComponent },
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+  { path: 'solicitar-turno', component: SolicitarTurnoComponent, canActivate: [AuthGuard]},
+  { path: 'asignar-horario', component: AsignarHorarioComponent, canActivate: [AuthGuard] },
+  { path: 'grilla-horarios', component: GrillaHorariosComponent, canActivate: [AuthGuard] },
+  { path: 'grilla-turnos', component: TablaTurnosComponent, canActivate: [AuthGuard] },
+  { path: 'mi-perfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
+  { path: 'graficos', component: GraficosPageComponent, canActivate: [AuthGuard] },
+  { path: 'registro', component: RegistroComponent},
 
 
-  { path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent},
-  { path: 'usuario', component: UsuarioComponent},
-  { path: 'informes', component: InformesComponent},
-  { path: 'grilla-usuarios', component: GrillaUsuariosComponent},
-  // lazy loading
-  {
-    path: '',
-    loadChildren: () =>
-      import('./modules/login/login.module').then((m) => m.LoginModule),
-  },
-  {
-    path: 'registro',
-    loadChildren: () =>
-      import('./modules/registro/registro.module').then(
-        (m) => m.RegistroModule
-      ),
-  },
-  {
-    path: 'gestionUsuarios',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./modules/gestion-usuarios/gestion-usuarios.module').then(
-        (m) => m.GestionUsuariosModule
-      ),
-  },
+  { path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent, canActivate: [AuthGuard]},
+  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard]},
+  { path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
+  { path: 'grilla-usuarios', component: GrillaUsuariosComponent, canActivate: [AuthGuard]},
+  { path: '', component: LoginComponent},
 ];
 
 @NgModule({

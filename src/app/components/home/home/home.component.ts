@@ -3,6 +3,7 @@ import { FirebaseAuthService } from '../../../services/angularFire/angular-fire.
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from '../../nav/nav/nav.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ import { NavComponent } from '../../nav/nav/nav.component';
   imports: [CommonModule, 
             FormsModule, 
             ReactiveFormsModule, 
+            TranslateModule,
+            NavComponent
           ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -19,8 +22,10 @@ import { NavComponent } from '../../nav/nav/nav.component';
 })
 export class HomeComponent {
   
-  constructor(public firebaseService: FirebaseAuthService) {
+  constructor(public firebaseService: FirebaseAuthService, 
+              private translate: TranslateService) {
     this.checkLoggedIn();
+    this.translate.setDefaultLang('es');
   }
   public isLogged: boolean = false;
   async checkLoggedIn() {
@@ -28,5 +33,9 @@ export class HomeComponent {
   }
   SignOut() {
     this.firebaseService.SignOut();
+  }
+
+  receiveMessage(idioma: string) {
+    this.translate.setDefaultLang(idioma);
   }
 }

@@ -1,22 +1,40 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FirebaseAuthService } from '../../services/angularFire/angular-fire.service';
-// import { FirestoreService } from '../../services/firestore/firestore.service';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NavComponent } from 'src/app/components/nav/nav/nav.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 //TODO Revisar login. Es raro que loguee cuando no esta llamando al servicio adecuado.
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [CommonModule,            
+            FormsModule,
+            ReactiveFormsModule,
+            NavComponent,
+            TranslateModule,
+            RouterLink
+            ],
+  providers:[],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LoginComponent {
   form!: FormGroup;
-  public isLogged: boolean = false;
+  isLogged: boolean = false;
+  onlyLanguage: boolean = true;
 
   constructor(
     public firebaseService: FirebaseAuthService,
+    private translate: TranslateService,
     // public firestoreService: FirestoreService
-  ) {this.checkLoggedIn();}
+  ) {
+    this.checkLoggedIn();
+    console.log("constructor ok")
+  }
 
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
@@ -54,5 +72,9 @@ export class LoginComponent {
   AccesoRapido(mail: string, password: string) {
     this.email?.setValue(mail);
     this.password?.setValue(password);
+  }
+
+  receiveMessage(idioma: any) {
+    this.translate.setDefaultLang(idioma);
   }
 }

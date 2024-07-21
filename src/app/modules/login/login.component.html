@@ -1,3 +1,4 @@
+<app-nav (messageEvent)="receiveMessage($event)" [onlyLanguage]="onlyLanguage"></app-nav>
 <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">
         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
@@ -5,31 +6,28 @@
             <form [formGroup]="form">
                 <!-- <img class="mb-4" src="../../../assets/img/doctor.png" alt="" width="72" height="57"> -->
                 <h1 class="my-5 display-5 fw-bold ls-tight">
-                    Clinica MATCRES <br />
+                    {{'login.Titulo' | translate}}<br />
                 </h1>
-                <h1 class="h3 mb-3 fw-normal">Iniciar sesion</h1>
+                <h1 class="h3 mb-3 fw-normal">{{'login.IniciarSesion' | translate}}</h1>
                 <div class="form-floating">
                     <input type="email" class="form-control" id="email" formControlName="email"
                         placeholder="name@example.com">
-                    <label for="floatingInput">Email</label>
+                    <label for="floatingInput">{{'login.Email' | translate}}</label>
 
                 </div>
                 <div class="form-floating">
                     <input type="password" class="form-control" id="password" formControlName="password"
                         placeholder="Password">
-                    <label for="password">Password</label>
+                    <label for="password">{{'login.Contrasena' | translate}}</label>
                 </div>
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me"> {{'login.Recuerdame' | translate}}
                     </label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" (click)="SignIn()">Iniciar
-                    sesion</button>
-                <button type="button" class="w-100 btn btn-lg btn-primary mb-3" routerLink="/registro">Registrar
-                    cuenta
-                </button>
+                <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" (click)="SignIn()">{{'login.IniciarSesion' | translate}}</button>
+                <button type="button" class="w-100 btn btn-lg btn-primary mb-3" routerLink="/registro">{{'login.Registrarse' | translate}}</button>
             </form>
         </div>
 
@@ -39,7 +37,7 @@
             <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
             <div class="card bg-glass">
-                <div class="card-body px-4 py-5 px-md-5">
+                <div class="card-body px-4 py-5 px-md-5 mt-5">
                     <form [formGroup]="form">
                         <!-- <button type="button" class="w-100 btn btn-lg btn-secondary mb-3 button-with-bg-pr1 text-left" (click)="AccesoRapido('prof.musicoterapia@yopmail.com','asdasd')">Prof Musicoterapia</button>
                         <button type="button" class="w-100 btn btn-lg btn-secondary mb-3 button-with-bg-pr2 text-left" (click)="AccesoRapido('prof.kinesiologia@yopmail.com','asdasd')">Prof Kinesiologo</button> -->
@@ -55,33 +53,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <footer class="container ">
-            <div class="row">
-                <div class="col-6 col-md">
-                    <h5>Contacto</h5>
-                    <ul class=" text-small">
-                        <li>
-                            <div class="label">Teléfono: 4444-5555</div>
-                        </li>
-                        <li>
-                            <div class="label">Correo Electrónico: matcres&#64;clinica.com.ar</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Ubicacion</h5>
-                    <ul class="list-unstyled text-small">
-                        <li>
-                            <div class="label"> Republica del Libano 5 - Quilmes</div>
-                        </li>
-                        <li>
-                            <div class="label">CP: 1888</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
     </div>
 </div>

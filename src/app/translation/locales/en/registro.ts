@@ -1,0 +1,25 @@
+//ingles
+export const registro = {
+  "AltaProfesional": "Professional Register",
+  "AltaAdministrador": "Administrator Register",
+  "AltaPaciente": "Patient Register",
+  "Nombre": "Name",
+  "Apellido": "Last Name",
+  "Edad": "Age",
+  "DNI": "Official Identity Card",
+  "ObraSocial": "Social Security",
+  "Especialidad": "Specialty",
+  "AgregarEspecialidad": "Add Specialty",
+  "ImagenEspecialidad": "Specialty Image",
+  "Correo": "Email",
+  "Contrasena": "Password",
+  "ImagenPerfil": "Profile Image",
+  "ImagenPerfil1": "Profile Image 1",
+  "ImagenPerfil2": "Profile Image 2",
+
+  "CampoRequerido": "The field is required",
+  "ValidacionMinCaracteres": "The field must be at least",
+  "ValidacionMaxCaracteres": "The field must have a maximum of",
+  "ValidacionCaracteresEspeciales": "The field can only contain letters and special characters",
+  "Caracteres": "characters",
+};

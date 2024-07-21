@@ -1,88 +1,89 @@
+<app-nav (messageEvent)="receiveMessage($event)" [onlyLanguage]="onlyLanguage"></app-nav>
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
    <section class="get-in-touch">
-      <h1 class="title">Alta Paciente</h1>
+      <h1 class="title">{{'registro.AltaPaciente' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="nombre">Nombre</label>
+               <label for="nombre">{{'registro.Nombre' | translate}}.</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
                   <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('nombre')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
             <div class="form-field col-md-6">
-               <label for="apellido">Apellido</label>
+               <label for="apellido">{{'registro.Apellido' | translate}}.</label>
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
                   <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('apellido')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="edad">Edad</label>
+               <label for="edad">{{'registro.Edad' | translate}}</label>
                <input id="edad" formControlName="edad" type="number" class="input-text js-input" required>
                <span *ngIf="this.form.get('edad')?.errors?.['required']"> </span>
             </div>
             <div class="form-field col-md-6">
-               <label for="dni">DNI</label>
+               <label for="dni">{{'registro.DNI' | translate}}</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
                <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
                   <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
-                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('dni')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('dni')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>   
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="obra_social">Obra Social</label>
+               <label for="obra_social">{{'registro.ObraSocial' | translate}}</label>
                <input id="obra_social" formControlName="obra_social" type="text" class="input-text js-input">
                <div *ngIf="form.get('obra_social')?.invalid && (form.get('obra_social')?.dirty || form.get('obra_social')?.touched)">
                   
                   <div *ngIf="form.get('obra_social')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                 </div> 
             </div>
             <div class="form-field col-md-6">
-               <label for="mail">E-Mail</label>
+               <label for="mail">{{'registro.Correo' | translate}}</label>
                <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
                
                <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
                   <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('mail')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('mail')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                 </div>
 
@@ -90,44 +91,44 @@
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="contrasena">Contraseña</label>
+               <label for="contrasena">{{'registro.Contrasena' | translate}}</label>
                <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input" required>
 
                <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
                   <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
-                     El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                   </div>
                   <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                   </div>
-                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                </div>
 
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil 1</label>
+               <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">{{'registro.ImagenPerfil1' | translate}}</label>
                <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
                   class="form-control">
 
                   <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
                      <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
-                        El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                   </div>
             </div>
             <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagenPerfil2">Imagen de perfil 2</label>
+               <label class="form-label mb-4" for="imagenPerfil2">{{'registro.ImagenPerfil2' | translate}}</label>
                <input id="imagenPerfil2" type="file" (change)="SubirArchivo($event, 2)" formControlName="imagenPerfil2"
                   class="form-control">
 
                   <div *ngIf="form.get('imagenPerfil2')?.invalid && (form.get('imagenPerfil2')?.dirty || form.get('imagenPerfil2')?.touched)">
                      <div *ngIf="form.get('imagenPerfil2')?.errors?.['required']" class="error-message">
-                        El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                   </div>
             </div>
@@ -166,69 +167,69 @@
 
 <div class="row" *ngIf="perfilRecibido == 'Profesional' ">
    <section class="get-in-touch">
-      <h1 class="title">Alta Profesional</h1>
+      <h1 class="title">{{'registro.AltaProfesional' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
 
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="nombre">Nombre</label>
+               <label for="nombre">{{'registro.Nombre' | translate}}</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
                   <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('nombre')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">{{'ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
             <div class="form-field col-md-6">
-               <label for="apellido">Apellido</label>
+               <label for="apellido">{{'registro.Apellido' | translate}}</label>
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
                   <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('apellido')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="edad">Edad</label>
+               <label for="edad">{{'registro.Edad' | translate}}</label>
                <input id="edad" formControlName="edad" type="number" class="input-text js-input" required>
             </div>
             <div class="form-field col-md-6">
-               <label for="dni">DNI</label>
+               <label for="dni">{{'registro.DNI' | translate}}</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
 
                <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
                   <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
-                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('dni')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('dni')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>               
             </div>
          </div>
             <div class="row">
             <div class="form-field col-md-6">
-               <label class="col " for="inlineFormCustomSelectPref">Especialidad</label>
+               <label class="col " for="inlineFormCustomSelectPref">{{'registro.Especialidad' | translate}}</label>
                <div class="row mt-4">
                   <select class="custom-select col-mb-4" id="especialidad" formControlName="especialidad"
                      id="especialidad">
@@ -237,14 +238,14 @@
                   </select>
                   <div *ngIf="form.get('especialidad')?.invalid && (form.get('especialidad')?.dirty || form.get('especialidad')?.touched)">
                      <div *ngIf="form.get('especialidad')?.errors?.['required']" class="error-message">
-                       El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                    </div>
                </div>
             </div>
             <div class="form-field col-md-6 ">
                <button class="submit-btn" (click)="AgregarEspecialidad()" id="agregar-especialidad"
-                  value="Agregar especialidad">Agregar especialidad</button>
+                  value="Agregar especialidad">{{'registro.AgregarEspecialidad' | translate}}</button>
             </div>
          </div>
            <div class="row mb-2" *ngIf="especialidadHabilitada">
@@ -255,26 +256,26 @@
 
                <div *ngIf="form.get('especialidad_agregada')?.invalid && (form.get('especialidad_agregada')?.dirty || form.get('especialidad_agregada')?.touched)">
                   <div *ngIf="form.get('especialidad_agregada')?.errors?.['required']" class="error-message">
-                    El campo es requerida.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('especialidad_agregada')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('especialidad_agregada')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('especialidad_agregada')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('especialidad_agregada')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('especialidad_agregada')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('especialidad_agregada')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('especialidad_agregada')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('especialidad_agregada')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
 
             <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagen_especialidad" data-browse="cargar">Imagen especialidad</label>
+               <label class="form-label mb-4" for="imagen_especialidad" data-browse="cargar">{{'registro.ImagenEspecialidad' | translate}}</label>
                <input type="file" (change)="SubirArchivo($event, 3)" formControlName="imagen_especialidad"
                   class="form-control">
 
                   <div *ngIf="form.get('imagen_especialidad')?.invalid && (form.get('imagen_especialidad')?.dirty || form.get('imagen_especialidad')?.touched)">
                      <div *ngIf="form.get('imagen_especialidad')?.errors?.['required']" class="error-message">
-                        El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                   </div>
             </div>               
@@ -282,51 +283,51 @@
             </div>
             <div class="row">
                <div class="form-field col-md-6">
-                  <label for="mail">E-Mail</label>
+                  <label for="mail">{{'registro.Correo' | translate}}</label>
                   <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
 
                   <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
                      <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
-                       El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                      <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
-                        El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                        {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('mail')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                       </div>
                       <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
-                        El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                        {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('mail')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                       </div>
                    </div>
 
                </div>
                <div class="form-field col-md-6">
-                  <label for="contrasena">Contraseña</label>
+                  <label for="contrasena">{{'registro.Contrasena' | translate}}</label>
                   <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input"
                      required>
 
                   <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
                      <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
-                        El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                      <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
-                        El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                        {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                      </div>
                      <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
-                        El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                        {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                      </div>
-                     <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                     <span *ngIf="form.get('contrasena')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                   </div>
 
                </div>
             </div>
             <div class="row">
                <div class="form-field col-md-6">
-                  <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil</label>
+                  <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">{{'registro.ImagenPerfil' | translate}}</label>
                   <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
                      class="form-control" required>
 
                      <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
                         <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
-                           El campo es requerido.
+                           {{'registro.CampoRequerido' | translate}}
                         </div>
                      </div>
                </div>
@@ -353,24 +354,24 @@
 <div class="row" *ngIf="perfilRecibido == 'Administrador' ">
 <div class="row">
    <section class="get-in-touch">
-      <h1 class="title">Alta Administrador</h1>
+      <h1 class="title">{{'registro.AltaAdministrador' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
 
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="nombre">Nombre</label>
+               <label for="nombre">{{'registro.Nombre' | translate}}</label>
                <input id="nombre" formControlName="nombre" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('nombre')?.invalid && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
                   <div *ngIf="form.get('nombre')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('nombre')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('nombre')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('nombre')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('nombre')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('nombre')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
             <div class="form-field col-md-6">
@@ -378,88 +379,88 @@
                <input id="apellido" formControlName="apellido" type="text" class="input-text js-input" required>
                <div *ngIf="form.get('apellido')?.invalid && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
                   <div *ngIf="form.get('apellido')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('apellido')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('apellido')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('apellido')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('apellido')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('apellido')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('apellido')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="edad">Edad</label>
+               <label for="edad">{{'registro.Edad' | translate}}</label>
                <input id="edad" formControlName="edad" type="number" class="input-text js-input" required>
                <span *ngIf="this.form.get('edad')?.errors?.['required']"> </span>
             </div>
             <div class="form-field col-md-6">
-               <label for="dni">DNI</label>
+               <label for="dni">{{'registro.DNI' | translate}}</label>
                <input id="dni" formControlName="dni" type="number" min="0" class="input-text js-input" required>
                <div *ngIf="form.get('dni')?.invalid && (form.get('dni')?.dirty || form.get('dni')?.touched)">
                   <div *ngIf="form.get('dni')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('dni')?.errors?.['dni']" class="error-message">
-                     El campo debe tener al menos {{form.get('dni')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('dni')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('dni')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('dni')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('dni')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
-                   <span *ngIf="form.get('dni')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                   <span *ngIf="form.get('dni')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                 </div>   
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label for="mail">E-Mail</label>
+               <label for="mail">{{'registro.Correo' | translate}}</label>
                <input id="mail" formControlName="mail" type="email" class="input-text js-input" required>
 
                <div *ngIf="form.get('mail')?.invalid && (form.get('mail')?.dirty || form.get('mail')?.touched)">
                   <div *ngIf="form.get('mail')?.errors?.['required']" class="error-message">
-                    El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('mail')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('mail')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('mail')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                    <div *ngIf="form.get('mail')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('mail')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('mail')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                    </div>
                 </div>
 
             </div>
             <div class="form-field col-md-6">
-               <label for="contrasena">Contraseña</label>
+               <label for="contrasena">{{'registro.Contrasena' | translate}}</label>
                <input id="contrasena" formControlName="contrasena" type="password" class="input-text js-input"
                   required>
 
                <div *ngIf="form.get('contrasena')?.invalid && (form.get('contrasena')?.dirty || form.get('contrasena')?.touched)">
                   <div *ngIf="form.get('contrasena')?.errors?.['required']" class="error-message">
-                     El campo es requerido.
+                     {{'registro.CampoRequerido' | translate}}
                   </div>
                   <div *ngIf="form.get('contrasena')?.errors?.['minlength']" class="error-message">
-                     El campo debe tener al menos {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('contrasena')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                   </div>
                   <div *ngIf="form.get('contrasena')?.errors?.['maxlength']" class="error-message">
-                     El campo debe tener como maximo {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} caracteres.
+                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('contrasena')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
                   </div>
-                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">El campo solo puede contener letras y caracteres especiales.</span>
+                  <span *ngIf="form.get('contrasena')?.errors?.['pattern']">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
                </div>
 
             </div>
          </div>
          <div class="row">
             <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">Imagen de perfil</label>
+               <label class="form-label mb-4" for="imagenPerfil1" data-browse="cargar">{{'registro.ImagenPerfil' | translate}}</label>
                <input type="file" (change)="SubirArchivo($event, 1)" formControlName="imagenPerfil1"
                   class="form-control">
 
                   <div *ngIf="form.get('imagenPerfil1')?.invalid && (form.get('imagenPerfil1')?.dirty || form.get('imagenPerfil1')?.touched)">
                      <div *ngIf="form.get('imagenPerfil1')?.errors?.['required']" class="error-message">
-                        El campo es requerido.
+                        {{'registro.CampoRequerido' | translate}}
                      </div>
                   </div>
             </div>

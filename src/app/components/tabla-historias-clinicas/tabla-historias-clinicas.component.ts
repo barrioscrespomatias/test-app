@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomNg2SearchPipe } from 'src/app/pipes/customNg2Search/custom-ng2-search.pipe';
 import { FiltroTurnosHistoriaClinicaPipe } from 'src/app/pipes/filtroTurnosHistoriaClinica/filtro-turnos-historia-clinica.pipe';
 import { NavComponent } from '../nav/nav/nav.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tabla-historias-clinicas',
@@ -28,6 +29,7 @@ import { NavComponent } from '../nav/nav/nav.component';
             ReactiveFormsModule, 
             CustomNg2SearchPipe, 
             FiltroTurnosHistoriaClinicaPipe,
+            NavComponent
           ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -51,7 +53,8 @@ export class TablaHistoriasClinicasComponent {
     private especialidadService: EspecialidadService,
     private usuarioService: UsuarioService,
     private turnoService: TurnoService,
-    private firebaseService: FirebaseAuthService
+    private firebaseService: FirebaseAuthService,
+    private translate: TranslateService
   ) {}
 
   //#endregion
@@ -128,6 +131,10 @@ export class TablaHistoriasClinicasComponent {
   }
 
   //#region Metodos
+  receiveMessage(idioma: string) {
+    this.translate.setDefaultLang(idioma);
+  }
+
   ConvertirFecha(fecha:any){
     return new Date(fecha.seconds * 1000);
   }

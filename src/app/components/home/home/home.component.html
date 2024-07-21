@@ -1,19 +1,14 @@
-<app-nav *ngIf="isLogged" ></app-nav>
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)"></app-nav>
 <div class="bootstrap-home">
     <main>
-
-
-
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
             <div class="col-md-5 p-lg-5 mx-auto my-5">
 
                 <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
                 <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-                <h1 class="display-4 fw-normal">Bienvenido</h1>
-                <p class="lead fw-normal">La Clinica Matcres te ofrece tener la información de tus turnos e
-                    historia
-                    clinica disponible siempre.</p>
+                <h1 class="display-4 fw-normal"> {{'home.Titulo' | translate}}</h1>
+                <p class="lead fw-normal"> {{'home.Subtitulo' | translate}}.</p>
 
                 <div class="product-device shadow-5-strong d-md-block"></div>
                 <div class="product-device product-device-2 shadow-5-strong d-md-block"></div>
@@ -24,24 +19,24 @@
     <footer class="container py-5">
         <div class="row">
             <div class="col-6 col-md">
-                <h5>Contacto</h5>
+                <h5>{{'home.Contacto' | translate}}</h5>
                 <ul class=" text-small">
                     <li>
-                        <div class="label">Teléfono: 4444-5555</div>
+                        <div class="label">{{'home.Telefono' | translate}}: 4444-5555</div>
                     </li>
                     <li>
-                        <div class="label">Correo Electrónico: matcres&#64;clinica.com.ar</div>
+                        <div class="label">{{'home.Correo' | translate}}: matcres&#64;clinica.com.ar</div>
                     </li>
                 </ul>
             </div>
             <div class="col-6 col-md">
-                <h5>Ubicacion</h5>
+                <h5>{{'home.Ubicacion' | translate}}</h5>
                 <ul class="list-unstyled text-small">
                     <li>
                         <div class="label"> Republica del Libano 5 - Quilmes</div>
                     </li>
                     <li>
-                        <div class="label">CP: 1888</div>
+                        <div class="label">{{'home.CodigoPostal' | translate}}: 1888</div>
                     </li>
                 </ul>
             </div>

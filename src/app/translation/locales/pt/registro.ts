@@ -1,0 +1,25 @@
+//portugues
+export const registro = {
+  "AltaProfesional": "Registro De Profissional de Saúde",
+  "AltaAdministrador": "Registro Do Administrador",
+  "AltaPaciente": "Registro Do Paciente",
+  "Nombre": "Nome",
+  "Apellido": "Sobrenome",
+  "Edad": "Idade",
+  "DNI": "Bilhete De Identidade",
+  "ObraSocial": "Planos De Saúde",
+  "Especialidad": "Especialidade",
+  "AgregarEspecialidad": "Adicionar Especialidade",
+  "ImagenEspecialidad": "Imagem da Especialidade",
+  "Correo": "Correio Eletrônico",
+  "Contrasena": "Senha",
+  "ImagenPerfil": "Foto do Perfil",
+  "ImagenPerfil1": "Foto do Perfil 1",
+  "ImagenPerfil2": "Foto do Perfil 2",
+
+  "CampoRequerido": "O campo é obrigatório",
+  "ValidacionMinCaracteres": "O campo deve ter pelo menos",
+  "ValidacionMaxCaracteres": "O campo deve ter no máximo",
+  "ValidacionCaracteresEspeciales": "O campo só pode conter letras e caracteres especiais",
+  "Caracteres": "caracteres ",
+};

@@ -1,4 +1,4 @@
-<app-nav *ngIf="isLogged" ></app-nav>
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)"></app-nav>
 
 <div [@slideAnimation]="estadoActual">
 

@@ -3,7 +3,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-image-component',
   templateUrl: './image-component.component.html',
-  styleUrls: ['./image-component.component.css']
+  styleUrls: ['./image-component.component.css'],
+  standalone: true,
+  imports: [],
+  providers:[],
+  schemas:[],
 })
 export class ImageComponentComponent implements OnInit{
  @Input() imageValue : any;

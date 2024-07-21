@@ -22,6 +22,7 @@ import { NavComponent } from '../../nav/nav/nav.component';
   imports: [DiaSemanaPipe,
             CommonModule,
             FormsModule,
+            NavComponent
           ],
   providers: [],
   schemas: [],
