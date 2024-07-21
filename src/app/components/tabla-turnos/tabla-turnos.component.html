@@ -214,7 +214,7 @@
             </td>
             <td>
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                *ngIf="getEncuestaKeys(turno?.encuesta).length == 0 && turno.estado == 'Realizado' "
+                *ngIf="getEncuestaKeys(turno?.encuesta).length == 0 && turno.estado == 'Realizado'  && !turno.encuesta_completada"
                 (click)="AbrirModal('completar-encuesta', turno)">Completar encuesta
               </button>
               </td>
@@ -264,8 +264,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div> -->
       <div class="modal-body">
-        <app-completar-encuesta [turnoRecibido]="turno"
-          *ngIf="formularioSeleccionado == 'completar-encuesta'"></app-completar-encuesta>
+        <!-- <app-completar-encuesta [turnoRecibido]="turno"
+          *ngIf="formularioSeleccionado == 'completar-encuesta'"></app-completar-encuesta> -->
+          <app-encuesta-satisfaccion [turnoRecibido]="turno"
+          *ngIf="formularioSeleccionado == 'completar-encuesta'"></app-encuesta-satisfaccion>
         <app-calificar-atencion [turnoRecibido]="turno"
           *ngIf="formularioSeleccionado == 'calificar-atencion'"></app-calificar-atencion>
         <app-cancelar-turno [turnoRecibido]="turno"

@@ -44,8 +44,6 @@ export class NavComponent implements OnInit{
 
   ngOnInit(): void {
     let idioma = localStorage.getItem('language');
-    console.log('hay un idioma')
-    console.log(idioma)
     if(idioma)
       this.translate.setDefaultLang(idioma);
 
@@ -81,7 +79,6 @@ export class NavComponent implements OnInit{
 
     this.translate.setDefaultLang(idiomaRecibido);
     localStorage.setItem('language',idiomaRecibido);
-    console.log(idiomaRecibido)
     
     switch(idiomaRecibido)
     {

@@ -7,6 +7,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { EncuestaSatisfaccionService } from 'src/app/servicios/v2/encuesta-satisfaccion.service';
 import * as moment from 'moment';
+import { TurnoV2Service } from 'src/app/servicios/v2/turno-v2.service';
 
 @Component({
   selector: 'app-encuesta-satisfaccion',
@@ -24,7 +25,9 @@ export class EncuestaSatisfaccionComponent implements OnInit {
   constructor(private encuestaSatisfaccionService: EncuestaSatisfaccionService,
     private fb: FormBuilder,
     private usuarioService:UsuarioService,
-    private firebaseService: FirebaseAuthService,) {}
+    private firebaseService: FirebaseAuthService,
+    private turnoService: TurnoV2Service,
+  ) {}
 
 
   @Input() turnoRecibido: any;
@@ -51,8 +54,6 @@ export class EncuestaSatisfaccionComponent implements OnInit {
   },
 ];
 
-
-
   async ngOnInit() {
     this.checkboxGroup = this.fb.group({
       checkboxes: this.fb.array(this.checkboxes.map(x => false))      
@@ -70,7 +71,7 @@ export class EncuestaSatisfaccionComponent implements OnInit {
     this.currentUser = await this.usuarioService.getUsuario(this.mail);
   }
 
-  submit() {
+  async submit() {
 
     const aspectosDestacarSeleccionados = this.checkboxGroup.controls['checkboxes'].value
     .map((checked: boolean, index: number) => checked ? this.checkboxes[index].value : null)
@@ -88,7 +89,9 @@ export class EncuestaSatisfaccionComponent implements OnInit {
     };
 
 
-    this.encuestaSatisfaccionService.guardarencuestaSatisfaccion(encuestaSatisfaccion);
+    await this.encuestaSatisfaccionService.guardarencuestaSatisfaccion(encuestaSatisfaccion);
+    this.turnoRecibido.encuesta_completada = true;
+    await this.turnoService.modificar(this.turnoRecibido);
   }
 
   get amabilidad() {

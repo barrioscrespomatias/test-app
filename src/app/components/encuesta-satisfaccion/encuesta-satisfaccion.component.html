@@ -1,6 +1,6 @@
 <form [formGroup]="form" class="container">
     
-    <h1>Encuesta de Satisfacción de la Clínica Online</h1>
+    <h3>Encuesta de Satisfacción de la Clínica Online</h3>
   
     <div class="form-group mb-3 mt-3">
       <label for="resena" class="mb-2">¿Cómo calificaría la amabilidad de los profesionales que lo atendió?</label>
@@ -67,6 +67,9 @@
   <hr />
   
   <div class="d-grid gap-2">
-    <button type="button" class="btn btn-secondary" (click)="submit()">Enviar</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submit()">Calificar</button>
+    <button class="btn btn-secondary" data-bs-dismiss="modal" >Mas tarde</button>
   </div>
+
+  <!-- <td><button class="btn btn-primary" data-bs-dismiss="modal" (click)="CompletarEncuesta()">Calificar</button></td> -->
 </form>  

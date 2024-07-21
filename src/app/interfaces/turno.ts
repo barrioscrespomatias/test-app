@@ -21,4 +21,5 @@ export interface Turno {
   peso?: number;
   temperatura?: number;
   presion?: string;
+  encuesta_completada?: boolean;
 }

@@ -15,6 +15,7 @@ import { ObtenerFechasTurnosPipe } from 'src/app/pipes/obtenerFechasTurnos/obten
 import { FormsModule } from '@angular/forms';
 import { FiltroTurnosPacientePipe } from 'src/app/pipes/filtroTurnosPaciente/filtro-turnos-paciente.pipe';
 import { NavComponent } from '../nav/nav/nav.component';
+import { EncuestaSatisfaccionComponent } from "../encuesta-satisfaccion/encuesta-satisfaccion.component";
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -26,12 +27,12 @@ import { NavComponent } from '../nav/nav/nav.component';
   animations: [slideAnimation],
   standalone: true,
   imports: [CommonModule,
-            FormsModule, 
-            CustomNg2SearchPipe, 
-            ObtenerFechasTurnosPipe, 
-            FiltroTurnosPacientePipe,
-            NavComponent
-          ],
+    FormsModule,
+    CustomNg2SearchPipe,
+    ObtenerFechasTurnosPipe,
+    FiltroTurnosPacientePipe,
+    NavComponent, 
+    EncuestaSatisfaccionComponent],
   providers: [DatePipe],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -67,13 +68,6 @@ export class TablaTurnosComponent {
   turno:any;
   searchText: any;
 
-  // Disponible = 0,
-  // PendienteAprobacion = 1, //Falta aprobacion de profeisonal
-  // Rechazado = 2, //Estado final turno rechazado por el especialista.
-  // Aceptado = 3,//Turno que ya fue aprobado pero todavia no ha llegado la fecha.
-  // Realizado = 4, //Turno tomado, realizado y finalizado correctamente.
-  // Cancelado = 5, //Turno tomado, realizado y finalizado correctamente.
-
   estados =  [
        { clave: 'Pendiente aprobación', valor: 1 },
        { clave: 'Rechazado', valor: 2 },
@@ -81,12 +75,6 @@ export class TablaTurnosComponent {
        { clave: 'Realizado', valor: 4 },
        { clave: 'Cancelado', valor: 5 }
      ];
-
- 
-  // turnoSubscription:any;
-
-  //  turnosSubscription:any;
-
 
   formularioSeleccionado:string = '';
   pacienteSeleccionado:string = '';
