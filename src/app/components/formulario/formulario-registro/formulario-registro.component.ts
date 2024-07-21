@@ -55,6 +55,7 @@ export class FormularioRegistroComponent {
   public log: string[] = [];
   public declarativeFormCaptchaValue: string = '';
   onlyLanguage: boolean = true;
+  languageEnabled: boolean = true;
 
   //#endregion
 
@@ -211,19 +212,16 @@ export class FormularioRegistroComponent {
     try {
       url1 = await this.ObtenerArchivo(this.fotoUno);
     } catch (error) {
-      console.log('Error al obtener la URL de la imagen:', error);
     }
     
     try {
       url2 = await this.ObtenerArchivo(this.fotoDos);
     } catch (error) {
-      console.log('Error al obtener la URL de la imagen:', error);
     }    
     
     // try {
     //   url3 = await this.ObtenerArchivo(this.fotoTres);
     // } catch (error) {
-    //   console.log('Error al obtener la URL de la imagen:', error);
     // }
 
 
@@ -290,8 +288,6 @@ export class FormularioRegistroComponent {
 
   public FormularioConErrores(): boolean {
 
-    // console.log(this.form.controls);
-
     // Recorrer los controles del formulario
     for (const controlName in this.form.controls) {
       if (this.form.controls.hasOwnProperty(controlName)) {
@@ -299,7 +295,6 @@ export class FormularioRegistroComponent {
         
         // Verificar si el control tiene errores
         if (control.errors) {
-          // console.log(`Errores en ${controlName}:`, control.errors);
           // this.sweetAlertServicio.MensajeError("Se deben completar todos los campos")
         }
       }
@@ -339,7 +334,6 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
         resolve(url);
       })
       .catch((error) => {
-        console.log('Error al obtener la URL de la imagen:', error);
         reject(error);
       });
   });
@@ -362,10 +356,8 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
   onCaptchaVerified(captchaValue: any) {
     if (captchaValue) {
       // Avanzar en la pantalla o realizar alguna acción
-      console.log("avanzo")
     } else {
       // Manejar caso en que el captcha no es correcto
-      console.log("no avanzo")
     }
   }
 
@@ -380,7 +372,6 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
   //     },
   //     (error) => {
   //       this.log.push(`Recaptcha v3 error: see console`);
-  //       console.log(`Recaptcha v3 error:`, error);
   //     }
   //   );
   // }

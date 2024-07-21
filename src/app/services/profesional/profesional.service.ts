@@ -90,14 +90,10 @@ export class ProfesionalService {
   //   // Traer uno especifico
   //   const coleccion = collection(this.firestore, 'profesionales');
   //   const documento = doc(coleccion, usuarioId);
-  //   console.log("profeisonal en DB")
-  //   console.log(documento)
 
   //   // if (docSnap.exists()) {
-  //   //   console.log('Document data:', docSnap.data());
   //   // } else {
   //   //   // docSnap.data() will be undefined in this case
-  //   //   console.log('No such document!');
   //   // }
   // }
 

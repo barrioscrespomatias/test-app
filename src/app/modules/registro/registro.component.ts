@@ -53,14 +53,12 @@ export class RegistroComponent {
   
   //#region Hooks
   async ngOnInit(): Promise<void> {
-    console.log('llega')
     this.form = new FormGroup({
       email: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
       password: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
     });
 
     this.currentUser = await this.usuarioService.buscarUsuarioPorMail(this.mail);
-    console.log(this.currentUser)
   }
   //#endregion
 

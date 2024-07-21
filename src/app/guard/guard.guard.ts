@@ -35,8 +35,6 @@ export class AuthGuard implements CanActivate {
   
     try {
       this.usuario = await this.usuarioService.getUsuario(email);
-
-      // console.log(this.usuario)
     
       if (this.usuario && userLogueado.emailVerified) 
       {

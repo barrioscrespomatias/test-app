@@ -35,8 +35,6 @@ export class UsuarioPerfilService {
 
     // const suscripcion =  respuestaObservable.subscribe((informacion) => {
     //   this.listado = informacion;
-    //   console.log(this.listado)
-    //   console.log(informacion);
     // });
 
     // respuestaObservable.subscribe((informacion) => {
@@ -54,8 +52,6 @@ export class UsuarioPerfilService {
     );
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      console.log(doc.data());
     });
   }
 
@@ -65,10 +61,8 @@ export class UsuarioPerfilService {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
     } else {
       // docSnap.data() will be undefined in this case
-      console.log('No such document!');
     }
   }
 

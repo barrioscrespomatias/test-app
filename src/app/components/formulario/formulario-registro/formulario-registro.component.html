@@ -1,4 +1,4 @@
-<app-nav (messageEvent)="receiveMessage($event)" [onlyLanguage]="onlyLanguage"></app-nav>
+<app-nav (messageEvent)="receiveMessage($event)" [onlyLanguage]="onlyLanguage" [languageEnabled]="languageEnabled"></app-nav>
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
    <section class="get-in-touch">
       <h1 class="title">{{'registro.AltaPaciente' | translate}}</h1>

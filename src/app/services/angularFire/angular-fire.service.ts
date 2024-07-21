@@ -47,7 +47,6 @@ export class FirebaseAuthService {
         });
       })
       .catch((error) => {
-        console.log(error);
         // this.swal.SwalMensajeError('Error',error.message);
         SweetAlert.fire({
           icon: 'error',

@@ -53,7 +53,6 @@ export class TurnoRepositorioService implements Repository<Turno> {
     return '';
   }
   update(docRef: string, ...args: unknown[]): boolean {
-    console.log(args);
     try {
       const documentReference = doc(this.listadoTurnos, docRef);
       updateDoc(documentReference, {
@@ -75,9 +74,7 @@ export class TurnoRepositorioService implements Repository<Turno> {
         temperatura: (args[0] as any).temperatura,
         presion: (args[0] as any).presion,
       });
-      console.log(args);
     } catch (e) {
-      console.log(e);
     }
     return false;
   }
@@ -90,7 +87,6 @@ export class TurnoRepositorioService implements Repository<Turno> {
 
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }

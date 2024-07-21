@@ -27,7 +27,6 @@ export class TurnoService {
         valido: true,
       };
     } catch (err) {
-      console.log(err);
       let errorMensaje = 'Hubo un error al intentar generar los turnos';
       return { mensaje: errorMensaje, valido: false };
     }
@@ -63,7 +62,6 @@ export class TurnoService {
         valido: true,
       };
     } catch (err) {
-      console.log(err);
       let errorMensaje = 'Hubo un error al intentar modificar los turnos';
       return { mensaje: errorMensaje, valido: false };
     }

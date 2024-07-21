@@ -6,8 +6,6 @@ import { pt } from './locales/pt/global';
 
 export class CustomTranslateLoader implements TranslateLoader {
     getTranslation(lang: string): Observable<any> {
-      console.log('cambia')
-      console.log(lang)
       if (lang === 'en') {
         return of(en);
       } else if (lang === 'pt') {

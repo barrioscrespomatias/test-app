@@ -54,8 +54,7 @@ export class MiPerfilComponent {
     
 
     await this.usuarioService.getUsuario(this.email).then((usuario: any) => {
-      this.usuario = usuario;      
-      console.log(this.usuario)  
+      this.usuario = usuario;
     });
 
     if(this.usuario)

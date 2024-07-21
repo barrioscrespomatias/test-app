@@ -64,7 +64,6 @@ export class UsuarioService {
         valido: true,
       };
     } catch (err) {
-      console.log(err);
       let errorMensaje = 'Hubo un error al intentar registrarte';
       if (err instanceof FirebaseError) {
         if (err.code == 'auth/email-already-in-use') {
@@ -90,7 +89,6 @@ export class UsuarioService {
         valido: true,
       };
     } catch (err) {
-      console.log(err);
       let errorMensaje = 'Hubo un error al intentar modificar';
       if (err instanceof FirebaseError) {
         if (err.code == 'auth/email-already-in-use') {

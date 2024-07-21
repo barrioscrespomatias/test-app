@@ -65,21 +65,18 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
         pacientesAtendidos: (args[0] as any).pacientesAtendidos,
       });
     } catch (e) {
-      console.log("error:" + e)
     }    
     return false;
   }  
 
   delete(docRef: string): boolean {
     try {
-      console.log(docRef);
       const documentReference = doc(this.listadoUsuarios, docRef);
 
       deleteDoc(documentReference);
 
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
     // el guid que genera el doc
@@ -103,7 +100,6 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
 
       return usuario.docRef;
     } catch (error) {
-      console.log(error);
       return;
     }
   }

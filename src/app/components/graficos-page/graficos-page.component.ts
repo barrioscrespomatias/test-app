@@ -199,7 +199,6 @@ export class GraficosPageComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       // this.updateChart();
-      console.log(changes['data'])
     }
   }
   //#endregion
@@ -493,7 +492,6 @@ export class GraficosPageComponent {
     ).subscribe((turnosRangoFecha) => {
       this.turnosProfesional =
         this.AgruparTurnosPorProfesional(turnosRangoFecha);
-        console.log(turnosRangoFecha)
 
       // Convertir el Map a un array para usar en la plantilla
       this.turnosProfesionalArray = Array.from(this.turnosProfesional.values());

@@ -28,6 +28,7 @@ export class HomeComponent {
     this.translate.setDefaultLang('es');
   }
   public isLogged: boolean = false;
+  languageEnabled: boolean = true;
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
   }

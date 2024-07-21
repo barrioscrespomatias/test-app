@@ -119,7 +119,6 @@ export class SolicitarTurnoComponent {
   ngOnChanges(changes: SimpleChanges) {
     // if (changes['turnoRecibido'] && this.turnoRecibido) {
     // if (changes) {
-    console.log(changes)
       // this.ActualizarFormulario();
     // }
   }
@@ -223,7 +222,6 @@ export class SolicitarTurnoComponent {
 
   ReloadCurrentRoute() {
     let currentUrl = this.router.url;
-    console.log(currentUrl)
     this.router.navigateByUrl('/refreshPage', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
     });

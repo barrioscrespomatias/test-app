@@ -54,8 +54,8 @@
         </li>
       </ul>
 
-    <div class="d-flex" *ngIf="idioma && onlyLanguage">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    <div class="d-flex" *ngIf="idioma">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="languageEnabled">
         <li class="nav-item dropdown">
           
           <a href="#" id="imageDropdown2" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

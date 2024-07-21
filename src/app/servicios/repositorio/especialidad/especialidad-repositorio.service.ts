@@ -52,26 +52,22 @@ export class EspecialidadRepositorioService
     return "";
   }
   update(docRef: string, ...args: unknown[]): boolean {
-    console.log(docRef);
     try {
       const documentReference = doc(this.listadoEspecialidades, docRef);
 
       updateDoc(documentReference, { estado: 'nuevo_estado' });
     } catch (e) {
-      console.log(e);
     }
     return false;
   }
   delete(docRef: string): boolean {
     try {
-      console.log(docRef);
       const documentReference = doc(this.listadoEspecialidades, docRef);
 
       deleteDoc(documentReference);
 
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
   } 

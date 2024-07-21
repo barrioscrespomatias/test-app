@@ -13,7 +13,6 @@ export class UsuarioFirebaseService {
     
     const coleccion = collection(this.firestore, 'users');
     const consulta = query(coleccion, where('email', '==', mail));
-    console.log(consulta)
     return collectionData(consulta);
   }
 
@@ -21,8 +20,6 @@ export class UsuarioFirebaseService {
   //   // Traer uno especifico
   //   const coleccion = collection(this.firestore, 'profesionales');
   //   const documento = doc(coleccion, usuarioId);
-  //   console.log("profeisonal en DB")
-  //   console.log(documento)   
   // }
 
   // modificar(usuario: Profesional) {

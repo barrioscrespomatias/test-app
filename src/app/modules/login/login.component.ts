@@ -26,6 +26,7 @@ export class LoginComponent {
   form!: FormGroup;
   isLogged: boolean = false;
   onlyLanguage: boolean = true;
+  languageEnabled: boolean = true;
 
   constructor(
     public firebaseService: FirebaseAuthService,
@@ -33,7 +34,6 @@ export class LoginComponent {
     // public firestoreService: FirestoreService
   ) {
     this.checkLoggedIn();
-    console.log("constructor ok")
   }
 
   async checkLoggedIn() {

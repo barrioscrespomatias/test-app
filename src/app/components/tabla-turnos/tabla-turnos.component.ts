@@ -136,7 +136,6 @@ export class TablaTurnosComponent {
 
   //#region Metodos
   async checkLoggedIn() {
-    console.log('loguea??')
     this.isLogged = await this.firebaseService.isLoggedIn();
   }
   

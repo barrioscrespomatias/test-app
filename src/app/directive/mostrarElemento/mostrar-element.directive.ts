@@ -11,9 +11,6 @@ export class MostrarElementDirective {
 
   @HostListener('click') onClick() {
     const component = document.getElementById(this.componentId);
-    console.log(component)
-    console.log(this.componentId)
-    console.log('pasa por aca')
     if (component) {
       const components = document.querySelectorAll('[componentToggle]');
       components.forEach((comp) => {
@@ -21,7 +18,6 @@ export class MostrarElementDirective {
       });
       this.el.nativeElement.classList.add('active');
       const mainContainer = document.querySelector('.main-container');
-      console.log(mainContainer)
       if (mainContainer) {
         mainContainer.childNodes.forEach((node: any) => {
           if (node.nodeType === 1 && node.tagName.toLowerCase().startsWith('app-')) {

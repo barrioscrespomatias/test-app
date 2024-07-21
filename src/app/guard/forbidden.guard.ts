@@ -32,9 +32,6 @@ export class forbidden  implements CanActivate {
         this.usuario = usuario;
       });
       
-
-      // console.log(usuario);
-      // console.log(tipoUsurio);
       if(this.usuario?.perfil != 'profesional'){
         return true;
       }

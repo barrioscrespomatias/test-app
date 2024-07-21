@@ -8,7 +8,6 @@ export class ProfesionalDelTurnoPipe implements PipeTransform {
 
   transform(turnos: any, profesional: string): any[] {
     this.filtrados = [];
-    console.log(turnos)
     if (turnos != null) {
       for (let item of turnos) 
       {

@@ -107,7 +107,6 @@ export class UsuariosComponent {
   }
 
   PreparaParaDescargar(lista:any, name:string, nameData:string){
-    console.log(lista)
     return lista.pipe.map((dato: { name: any; data: any[]; })=>{
        return {[name]:dato.name,[nameData]:dato.data[0]}
      })
@@ -155,9 +154,6 @@ export class UsuariosComponent {
         
         return [fechaFormateada, turno.estado, turno.especialidad, turno.diagnostico, turno.paciente, turno.profesional];
       }); 
-      
-      console.log(data)
-      
       
       const headers: string[] = ['Fecha','Estado', 'Especialidad', 'Diagnostico', 'Paciente', 'Profesional'];
   

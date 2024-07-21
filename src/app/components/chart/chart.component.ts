@@ -106,7 +106,6 @@ export class ChartComponent {
 
   IniciarChart() {
     const ctx = (document.getElementById('chartCanvas') as HTMLCanvasElement)?.getContext('2d');
-    console.log(ctx)
     this.lineChartData = [
       {
         label: this.title,
