@@ -7,15 +7,19 @@ import { TablaHistoriasClinicasComponent } from './components/tabla-historias-cl
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccion/encuesta-satisfaccion.component';
-import { UsuarioComponent } from './shared/components/usuario/usuario.component';
+import { UsuarioComponent } from './shared/components/entidades/usuario/usuario.component';
 import { InformesComponent } from './components/graficos/informes/informes.component';
-import { GrillaUsuariosComponent } from './shared/components/grilla-usuarios/grilla-usuarios.component';
+import { GrillaUsuariosComponent } from './shared/components/grillas/grilla-usuarios/grilla-usuarios.component';
 import { AsignarHorarioComponent } from './components/profesional/asignar-horario/asignar-horario.component';
 import { GrillaHorariosComponent } from './components/profesional/grilla-horarios/grilla-horarios.component';
 import { TablaTurnosComponent } from './components/tabla-turnos/tabla-turnos.component';
 import { GraficosPageComponent } from './components/graficos-page/graficos-page.component';
 import { RegistroComponent } from './modules/registro/registro.component';
 import { LoginComponent } from './modules/login/login.component';
+import { GrillaEspecialidadesComponent } from './shared/components/grillas/grilla-especialidades/grilla-especialidades.component';
+import { GrillaProfesionalesComponent } from './shared/components/grillas/grilla-profesionales/grilla-profesionales.component';
+import { GrillaFechasComponent } from './shared/components/grillas/grilla-fechas/grilla-fechas.component';
+import { GrillaHorariosTurnosComponent } from './shared/components/grillas/grilla-horarios-turnos/grilla-horarios-turnos.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -31,10 +35,15 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
 
 
+
   { path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent, canActivate: [AuthGuard]},
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard]},
   { path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
   { path: 'grilla-usuarios', component: GrillaUsuariosComponent, canActivate: [AuthGuard]},
+  { path: 'grilla-especialidades', component: GrillaEspecialidadesComponent},
+  { path: 'grilla-profesionales', component: GrillaProfesionalesComponent},
+  { path: 'grilla-fechas', component: GrillaFechasComponent},
+  { path: 'grilla-horarios-turnos', component: GrillaHorariosTurnosComponent},
   { path: '', component: LoginComponent},
 ];
 

@@ -1,0 +1,14 @@
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
+<div class="container mt-5">
+    <div class="row">
+        <ng-container *ngFor="let especialidad of especialidades">
+            <div class="col-sm-4">
+                <app-especialidad [path]="especialidad.path!" 
+                                  [classSize]="medium" 
+                                  [especialidad]="especialidad.nombre!" 
+                                  (click)="navigateToGrillaProfesionales(especialidad.nombre)">
+                </app-especialidad>
+                </div>
+        </ng-container>
+    </div>
+</div>

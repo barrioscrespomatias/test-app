@@ -1,0 +1,14 @@
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
+<div class="container mt-5">
+    <div class="row">
+        <ng-container *ngFor="let turno of turnosFiltrados">
+            <div class="col-sm-4">
+                <app-fecha                         
+                        [classSize]="medium" 
+                        [fecha]="turno.fecha!" 
+                        (click)="navigateToGrillaHorarios(turno.fecha!)">
+                </app-fecha>
+                </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
+<div class="container mt-5">
+    <div class="row">
+        <ng-container *ngFor="let profesional of profesionales">
+            <div class="col-sm-4">
+                <app-profesional [path]="profesional.imagenPerfil1!" 
+                                  [classSize]="medium" 
+                                  [profesional]="profesional.nombre! +' '+ profesional.apellido"                                   
+                                  (click)="navigateToGrillaFechas(profesional.mail)">
+                </app-profesional>
+                </div>
+        </ng-container>
+    </div>
+</div>

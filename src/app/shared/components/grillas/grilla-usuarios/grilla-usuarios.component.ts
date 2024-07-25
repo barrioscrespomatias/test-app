@@ -1,5 +1,5 @@
 import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
-import { UsuarioComponent } from '../usuario/usuario.component';
+import { UsuarioComponent } from '../../entidades/usuario/usuario.component';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-grilla-usuarios',
   standalone: true,
-  imports: [UsuarioComponent, CommonModule],
+  imports: [UsuarioComponent, 
+            CommonModule],
   templateUrl: './grilla-usuarios.component.html',
   styleUrl: './grilla-usuarios.component.css',
   providers: [UsuarioV2Service],

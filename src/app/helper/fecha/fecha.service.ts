@@ -51,5 +51,18 @@ export class FechaService {
   FinMesActual(){
     return moment().endOf('month').toDate();
   }
+
+  /**
+ * Convierte un objeto Timestamp de Firestore a un objeto Date de JavaScript
+ * @param timestamp
+ * @returns {Date}
+ */
+ timestampToDate(timestamp: { seconds: number, nanoseconds: number }): Date {
+  // Convertir segundos a milisegundos y crear un objeto moment
+  const dateMoment = moment.unix(timestamp.seconds);
+  
+  // Convertir el objeto moment a un objeto Date de JavaScript
+  return dateMoment.toDate();
+}
   //#endregion
 }

@@ -1,0 +1,44 @@
+.round-image-medium {
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius: 150px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 150px;
+    -moz-background-clip: padding;
+    border-radius: 150px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.round-image-large {
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 200px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 200px;
+    -moz-background-clip: padding;
+    border-radius: 200px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+  }
+
+.round-image-small {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    -webkit-border-radius: 100px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 100px;
+    -moz-background-clip: padding;
+    border-radius: 100px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+  }

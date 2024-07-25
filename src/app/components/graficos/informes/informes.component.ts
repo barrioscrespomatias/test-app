@@ -3,7 +3,7 @@ import { Turno } from 'src/app/interfaces/turno';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { TurnoV2Service } from 'src/app/servicios/v2/turno-v2.service';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
-import { GrillaUsuariosComponent } from 'src/app/shared/components/grilla-usuarios/grilla-usuarios.component';
+import { GrillaUsuariosComponent } from 'src/app/shared/components/grillas/grilla-usuarios/grilla-usuarios.component';
 import { ChartComponent } from '../../chart/chart.component';
 import { CommonModule } from '@angular/common';
 import { NgChartjsModule } from 'ng-chartjs';

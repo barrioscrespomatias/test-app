@@ -17,6 +17,8 @@ import { ObtenerFechasTurnosPipe } from 'src/app/pipes/obtenerFechasTurnos/obten
 import { EspecialidadesDisponiblesPipe } from 'src/app/pipes/especialidadesDisponibles/especialidades-disponibles.pipe';
 import { ObtenerTodosLosPacientesPipe } from 'src/app/pipes/obtenerTodosLosPacientes/obtener-todos-los-pacientes.pipe';
 import { NavComponent } from '../nav/nav/nav.component';
+import { EspecialidadV2Service } from 'src/app/servicios/v2/especialidad-v2.service';
+import { Especialidad } from 'src/app/interfaces/especialidad';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -41,6 +43,7 @@ export class SolicitarTurnoComponent {
   //#region Constructor
   constructor(
     private especialidadService: EspecialidadService,
+    private especialidadServiceV2: EspecialidadV2Service,
     private usuarioService: UsuarioService,
     private turnoService: TurnoService,
     private firebaseService: FirebaseAuthService,
@@ -65,7 +68,7 @@ export class SolicitarTurnoComponent {
   form!: FormGroup;
   usuario: any;
   mail: string = this.firebaseService.userName;
-  especialidades: any;
+  especialidades: Especialidad[] = [];
   usuarios: any;
   especialidadSeleccionada: string = '';
   profesionalSeleccionado: string = '';
@@ -109,8 +112,8 @@ export class SolicitarTurnoComponent {
       this.turnos = turnos;
     });
 
-    this.especialidadService.TraerTodas().then((especialidades: any) => {
-      this.especialidades = especialidades;
+    this.especialidadServiceV2.traerEspecialidades().subscribe((t) => {
+      this.especialidades = t as Especialidad[];
     });
 
 

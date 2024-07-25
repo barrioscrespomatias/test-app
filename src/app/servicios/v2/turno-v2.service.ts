@@ -6,6 +6,7 @@ import {
   CollectionReference,
   DocumentData,
   Firestore,
+  Timestamp,
   collection,
   collectionData,
   doc,
@@ -20,6 +21,7 @@ import {
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { Turno } from '../../interfaces/turno';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +94,49 @@ export class TurnoV2Service {
       orderBy('fecha', 'desc')
     );
     return collectionData(usuarios) as Observable<any[]>;
+  }
+
+  /**
+   * Trae todos los turnos disponibles del profesional
+   * @param profesional
+   * @returns
+   */
+  buscarTurnosDisponibles(profesional: string): Observable<any[]> {
+    const nowTimestamp = Timestamp.fromDate(moment().toDate());
+
+    const usuarios = query(
+      this.coleccionTurnos,
+      where('profesional', '==', profesional),
+      where('estado', '==', 'Disponible'),
+      // where('fecha', '>', nowTimestamp),
+      orderBy('fecha', 'desc')
+    );
+
+    return collectionData(usuarios) as Observable<any[]>;
+  }
+
+  /**
+   * Trae todas las Turnos por fecha
+   * @param fecha
+   * @returns
+   */
+  traerTurnoPorFecha(fecha: Date) {
+  const startOfDay = new Date(fecha);
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const endOfDay = new Date(fecha);
+  endOfDay.setHours(23, 59, 59, 999);
+
+  const startTimestamp = Timestamp.fromDate(startOfDay);
+  const endTimestamp = Timestamp.fromDate(endOfDay);
+
+  const usuarios = query(
+    this.coleccionTurnos,
+    where('fecha', '>=', startTimestamp),
+    where('fecha', '<=', endTimestamp),
+    where('estado', '==', 'Disponible'),
+  );
+
+  return collectionData(usuarios) as Observable<any[]>;
   }
 }

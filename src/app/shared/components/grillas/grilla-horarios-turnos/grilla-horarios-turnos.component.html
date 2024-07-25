@@ -1,0 +1,15 @@
+<app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
+<div class="container mt-5">
+    <div class="row">
+        <ng-container *ngFor="let turno of turnos">
+            <div class="col-sm-4">
+                <app-horario-turno 
+                                  [fecha]="turno.fecha!" 
+                                  [classSize]="medium" 
+                                  [horario]="turno.fecha!"                                   
+                                  (click)="AsignarTurno(turno)">
+                </app-horario-turno>
+            </div>
+        </ng-container>
+    </div>
+</div>

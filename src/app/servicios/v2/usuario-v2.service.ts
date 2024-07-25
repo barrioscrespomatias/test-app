@@ -20,6 +20,7 @@ import {
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../interfaces/usuario';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,8 @@ export class UsuarioV2Service {
   constructor(
     private auth: Auth,
     private firestore: Firestore,
-    private storage: Storage
+    private storage: Storage,
+    private angularFirestore: AngularFirestore
   ) {}
 
   coleccionUsuarios: CollectionReference<DocumentData> = collection(
@@ -70,13 +72,22 @@ export class UsuarioV2Service {
 
   /**
    * Trae todas las Turnos por estado
-   * @param estado
+   * @param perfil
    * @returns
    */
-  traerTurnoPorPerfil(perfil: string) {
+  traerUsuarioPorPerfil(perfil: string) {
     const usuarios = query(
       this.coleccionUsuarios,
       where('perfil', '==', perfil)
+    );
+    return collectionData(usuarios) as Observable<any[]>;
+  }
+
+  traerUsuariosPorProfesion(especialidad: string) {
+    const usuarios = query(
+      this.coleccionUsuarios,
+      where('perfil', '==', 'profesional'),
+      where('especialidades','==', especialidad)
     );
     return collectionData(usuarios) as Observable<any[]>;
   }
@@ -104,4 +115,19 @@ export class UsuarioV2Service {
       });
     })
   }
+
+  async getUsuario(mail: string) {
+    return new Promise((resolve, reject) => {
+      this.angularFirestore
+        .collection('usuarios')
+        .doc(mail)
+        .valueChanges()
+        .subscribe(
+          (datos) => {
+            resolve(datos);
+          },
+          (error) => reject(error)
+        );
+    });
+  } 
 }
