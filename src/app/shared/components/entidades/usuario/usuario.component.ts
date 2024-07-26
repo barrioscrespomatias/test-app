@@ -15,7 +15,7 @@ export class UsuarioComponent implements OnInit{
   @Output() messageEvent = new EventEmitter<string>();
 
   constructor(){
-    
+ 
   }
 
   ngOnInit(): void {

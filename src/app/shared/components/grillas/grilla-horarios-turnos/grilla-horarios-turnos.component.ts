@@ -42,6 +42,7 @@ export class GrillaHorariosTurnosComponent {
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.timeStamp = navigation?.extras?.state?.['fecha'];
+    this.pacienteSeleccionado = navigation?.extras?.state?.['pacienteSeleccionado'];
   }
 
   medium: string = 'round-image-medium';
@@ -58,6 +59,8 @@ export class GrillaHorariosTurnosComponent {
 
   //#region Parametros de ruta
   timeStamp: any;
+  pacienteSeleccionado: string = '';
+  pacienteSeleccionadoUsuario!: Usuario;
   fecha!: Date;
   //#endregion
 
@@ -66,7 +69,8 @@ export class GrillaHorariosTurnosComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.currentUser = await this.usuarioService.getUsuario(this.mail);
+    this.checkLoggedIn();
+    this.currentUser = this.pacienteSeleccionado !==  '' ? await this.usuarioService.getUsuario(this.pacienteSeleccionado) : await this.usuarioService.getUsuario(this.mail);
     this.fecha = this.fechaService.timestampToDate(this.timeStamp);
     this.path = '../../assets/img/grillas/fecha.png';
     if (this.fecha) {
@@ -74,6 +78,10 @@ export class GrillaHorariosTurnosComponent {
         this.turnos = t as Turno[];
       });
     }
+  }
+
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
   }
 
   receiveMessage(idioma: string) {
@@ -85,9 +93,8 @@ export class GrillaHorariosTurnosComponent {
     var historia_clinica: { clave: string; valor: string }[] = [];
       
     turno = turno;
-    // turno.paciente = this.pacienteSeleccionado.length > 0 ? this.pacienteSeleccionado : this.mail;
     turno.paciente = this.currentUser.mail;
-    turno.pacienteImagen = this.currentUser.imagenPerfil1;
+    turno.pacienteImagen =  this.currentUser.imagenPerfil1;
     turno.pacienteNombre = this.currentUser.nombre;
     turno.pacienteApellido = this.currentUser.apellido;
     turno.estado = "Pendiente de aprobacion";

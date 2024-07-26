@@ -1,14 +1,44 @@
 <app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
 <div class="container mt-5">
-    <div class="row">
-        <ng-container *ngFor="let especialidad of especialidades">
-            <div class="col-sm-4">
-                <app-especialidad [path]="especialidad.path!" 
-                                  [classSize]="medium" 
-                                  [especialidad]="especialidad.nombre!" 
-                                  (click)="navigateToGrillaProfesionales(especialidad.nombre)">
-                </app-especialidad>
-                </div>
-        </ng-container>
+    
+    <!-- Vista de pacientes -->
+    <div class="" *ngIf="renderHtml && currentUser.perfil !== 'administrador'">
+        <div class="row">
+            <ng-container *ngFor="let especialidad of especialidades">
+                <div class="col-sm-4">
+                    <app-especialidad [path]="especialidad.path!" 
+                                      [classSize]="medium" 
+                                      [especialidad]="especialidad.nombre!" 
+                                      (click)="navigateToGrillaProfesionales(especialidad.nombre)">
+                    </app-especialidad>
+                    </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- Vista de admin -->
+    <div class="" *ngIf="renderHtml && currentUser.perfil === 'administrador'">
+        <div class="row" *ngIf="userSelected !== ''">
+            <ng-container *ngFor="let especialidad of especialidades">
+                <div class="col-sm-4">
+                    <app-especialidad [path]="especialidad.path!" 
+                                      [classSize]="medium" 
+                                      [especialidad]="especialidad.nombre!" 
+                                      (click)="navigateToGrillaProfesionales(especialidad.nombre)">
+                    </app-especialidad>
+                    </div>
+            </ng-container>
+        </div>
+        <div class="row" *ngIf="userSelected === ''">
+            <ng-container *ngFor="let paciente of pacientes">
+                <div class="col-sm-4">
+                    <app-usuario 
+                                [path]="paciente.imagenPerfil1!" 
+                                [classSize]="medium" 
+                                [user]="paciente.mail!"
+                                (click)="seleccionarPaciente(paciente.mail)">
+                    </app-usuario>
+                    </div>
+            </ng-container>
+        </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 import { ProfesionalComponent } from '../../entidades/profesional/profesional.component';
 import { NavComponent } from 'src/app/components/nav/nav/nav.component';
+import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 
 @Component({
   selector: 'app-grilla-profesionales',
@@ -25,10 +26,12 @@ export class GrillaProfesionalesComponent {
 
   constructor(private usuarioService: UsuarioV2Service,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private firebaseService:FirebaseAuthService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.profesion = navigation?.extras?.state?.['profesion'];
+    this.pacienteSeleccionado = navigation?.extras?.state?.['pacienteSeleccionado'];
   }
 
   medium: string = 'round-image-medium';
@@ -39,13 +42,14 @@ export class GrillaProfesionalesComponent {
   isLogged: boolean = false;
   languageEnabled: boolean = false;
   profesion: string;
+  pacienteSeleccionado: string = '';
 
   sendMessage(mensaje: string) {
     this.messageEvent.emit(mensaje);
   }
 
   ngOnInit(): void {
-
+    this.checkLoggedIn();
     if (this.profesion) {
       this.usuarioService.traerUsuariosPorProfesion(this.profesion).subscribe((t) => {
         this.profesionales = t as Usuario[];
@@ -53,11 +57,15 @@ export class GrillaProfesionalesComponent {
     }
   }
 
+  async checkLoggedIn() {
+    this.isLogged = await this.firebaseService.isLoggedIn();
+  }
+
   receiveMessage(idioma: string) {
     this.translate.setDefaultLang(idioma);
   }
 
   navigateToGrillaFechas(profesional: string) {
-    this.router.navigate(['/grilla-fechas'], { state: { profesional } });
+    this.router.navigate(['/grilla-fechas'], { state: { profesional: profesional, pacienteSeleccionado: this.pacienteSeleccionado } });
   }
 }
