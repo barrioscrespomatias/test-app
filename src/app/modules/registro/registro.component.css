@@ -1,4 +1,4 @@
-.row {
+/* .row {
     padding-left: calc(var(--bs-gutter-x) * 6);
   }
 
@@ -41,4 +41,4 @@
   .bg-glass {
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
-  }
+  } */

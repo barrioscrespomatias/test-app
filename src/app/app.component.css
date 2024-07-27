@@ -1,0 +1,16 @@
+/* styles.css o en el archivo de estilos global */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+footer {
+  height: 50px; /* Ajusta esta altura según sea necesario */
+}
+
+.content {
+  min-height: calc(100% - 60px); /* Ajusta esta altura para que coincida con la altura del footer */
+  padding-bottom: 60px; /* Ajusta este padding para que coincida con la altura del footer */
+  box-sizing: border-box;
+}

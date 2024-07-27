@@ -1,11 +1,27 @@
 
-<div *ngIf="visible == true" class="captcha-container" style="background-image: url('./assets/img/captcha.png');">
-    <div class="captcha-letters d-flex justify-content-center align-items-center">
+<div *ngIf="visible == true" class="captcha-container p-4" style="background-image: url('./assets/img/captcha.png');">
+    <div class="captcha-letters text-center">
         <span *ngFor="let captcha of captchaText" class="captcha-letter">{{captcha}}</span>
     </div>
 
-    <input type="text" [(ngModel)]="this.captchaEntered" maxlength="5">
-    
-    <button type="button" class="btn btn-lg btn-secondary m-2 w-100" (click)="ValidateCaptcha()">Validar</button>
-    <button type="button" class="btn btn-lg btn-secondary m-2 w-100" (click)="GenerateCaptcha()">Refrescar</button>
+    <div class="form-group">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <input class="form-control" type="text" [(ngModel)]="this.captchaEntered" maxlength="5" class="">
+            </div>
+        </div>    
+    </div> 
+    <div class="form-group">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-primary m-2 w-50" (click)="ValidateCaptcha()">Validar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-primary m-2 w-50" (click)="GenerateCaptcha()">Refrescar</button>
+            </div>
+        </div>
+
+    </div>
 </div>

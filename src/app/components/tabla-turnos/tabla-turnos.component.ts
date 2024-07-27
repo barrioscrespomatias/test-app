@@ -21,6 +21,7 @@ import { AceptarTurnoComponent } from '../aceptar-turno/aceptar-turno.component'
 import { RechazarTurnoComponent } from '../rechazar-turno/rechazar-turno.component';
 import { VerResenaComponent } from '../ver-resena/ver-resena.component';
 import { FinalizarTurnoComponent } from '../finalizar-turno/finalizar-turno.component';
+import { CalificarAtencionComponent } from '../calificar-atencion/calificar-atencion.component';
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -42,7 +43,8 @@ import { FinalizarTurnoComponent } from '../finalizar-turno/finalizar-turno.comp
     AceptarTurnoComponent,
     RechazarTurnoComponent,
     VerResenaComponent,
-    FinalizarTurnoComponent],
+    FinalizarTurnoComponent,
+    CalificarAtencionComponent],
   providers: [DatePipe],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

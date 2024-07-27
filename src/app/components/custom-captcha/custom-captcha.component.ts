@@ -11,7 +11,7 @@ import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.ser
   templateUrl: './custom-captcha.component.html',
   styleUrls: ['./custom-captcha.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, BrowserModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

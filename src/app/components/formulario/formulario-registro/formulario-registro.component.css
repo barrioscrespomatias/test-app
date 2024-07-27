@@ -1,6 +1,6 @@
 
 .get-in-touch {
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: 50px auto;
     position: relative;
   
@@ -13,12 +13,12 @@
     line-height: 48px;
     padding-bottom: 48px;
        color: #11187c;
-      /* background: #5543ca; */
-      /* background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important; */
-      /* background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important; */
-      /* background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;  */
-      /* -webkit-background-clip: text !important; */
-      /* -webkit-text-fill-color: transparent !important; */
+      /* background: #5543ca;
+      background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+      background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+      background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important; 
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important; */
   }
   
   .contact-form .form-field {
@@ -99,5 +99,9 @@
     white-space: nowrap;
     margin-top: 8px;
     margin-left: 8px;
+  }
+
+  .error-message{
+    color: red;
   }
   

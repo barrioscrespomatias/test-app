@@ -21,5 +21,9 @@ export const registro = {
   "ValidacionMinCaracteres": "El campo debe tener al menos",
   "ValidacionMaxCaracteres": "El campo debe tener como maximo",
   "ValidacionCaracteresEspeciales": "El campo solo puede contener letras y caracteres especiales",
+  "ValidacionContrasena": "El campo debe tener al menos 4 caracteres. Una mayuscula, una minuscula, un numero y un caracter especial",
+  "ValidacionCorreo": "El campo no es un correo electronico valido",
+  "ValidacionLetras": "El campo solo puede contener letras",
+  "ValidacionNumeros": "El campo solo puede contener números",
   "Caracteres": "caracteres",
 };

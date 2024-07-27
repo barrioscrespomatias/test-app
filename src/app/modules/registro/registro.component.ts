@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormularioRegistroComponent } from 'src/app/components/formulario/formulario-registro/formulario-registro.component';
 import { ImageComponentComponent } from 'src/app/components/imageComponent/image-component/image-component.component';
+import { NavComponent } from 'src/app/components/nav/nav/nav.component';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
@@ -17,7 +19,8 @@ import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
             FormsModule, 
             ReactiveFormsModule, 
             ImageComponentComponent,
-            FormularioRegistroComponent],
+            FormularioRegistroComponent,
+            NavComponent],
   providers: [UsuarioService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -32,6 +35,8 @@ export class RegistroComponent {
   emailRecibido: string = '';
   currentUser: any;
   mail: string = this.firebaseService.userName;
+  onlyLanguage: boolean = true;
+  languageEnabled: boolean = true;
   
   //#endregion
 
@@ -39,6 +44,7 @@ export class RegistroComponent {
   constructor(
     private firebaseService: FirebaseAuthService,
     private usuarioService: UsuarioV2Service,
+    private translate: TranslateService,
   ) { this.checkLoggedIn();}
 
   //#endregion
@@ -84,6 +90,10 @@ export class RegistroComponent {
 
   recibirItemDeHijo(email : any){
     this.emailRecibido = email;
+  }
+
+  receiveMessage(idioma: any) {
+    this.translate.setDefaultLang(idioma);
   }
   //#endregion
 }

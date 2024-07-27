@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavComponent } from '../../nav/nav/nav.component';
+import { CustomCaptchaComponent } from '../../custom-captcha/custom-captcha.component';
 
 //#endregion
 @Component({
@@ -25,7 +26,8 @@ import { NavComponent } from '../../nav/nav/nav.component';
             FormsModule, 
             ReactiveFormsModule,
             TranslateModule,
-            NavComponent],
+            NavComponent,
+            CustomCaptchaComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -121,12 +123,22 @@ export class FormularioRegistroComponent {
         Validators.min(1000), 
         Validators.max(100000000), 
         Validators.pattern('\\d+')]),
-      mail: new FormControl('', [Validators.required, Validators.email]),
-      contrasena: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+        mail: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$')
+        ]),
+      contrasena: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>_])[a-zA-Z\\d!@#$%^&*(),.?":{}|<>]{4,}$')
+      ]),
       imagenPerfil1: new FormControl('', Validators.required),
       imagenPerfil2: new FormControl(''),
       imagen_especialidad: new FormControl(''),
-      obra_social: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
+      obra_social: new FormControl('', [
+        Validators.required, 
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern('[a-zA-Z ]*')]),
       // especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       especialidad: new FormControl('',),
       // perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -201,6 +213,7 @@ export class FormularioRegistroComponent {
 
   //#region Métodos
   async CrearUsuario() {
+    alert("pasa por aca")
     const horarioEspecialidad: HorarioEspecialidad[] = [];
     const profesionalesVisitados: string[] = [];
     const pacientesAtendidos: string[] = [];
@@ -257,7 +270,7 @@ export class FormularioRegistroComponent {
       pacientesAtendidos: pacientesAtendidos,
     };
 
-    // debugger
+    debugger
     // if (especialidad) {
     //   this.especialidadService.Crear(especialidad);
     // }
@@ -268,12 +281,9 @@ export class FormularioRegistroComponent {
     respuesta.then((response) => {
       if (response.valido) {
         this.sweetAlertServicio.MensajeExitoso("Usuario creado exitosamente")
-        // this.alertaMensajeSucces(response.mensaje);
-        // this._usuarioService.setUserToLocalStorage(user);
         this.router.navigate(['']);
       } else {
         this.sweetAlertServicio.MensajeError("Verifique los campos ingresados")
-        // this.alertaMensajeError(response.mensaje);
       }      
     });
 
@@ -287,6 +297,8 @@ export class FormularioRegistroComponent {
   }
 
   public FormularioConErrores(): boolean {
+    let formIsInvalid = false;
+    let errorMessage = 'Se encontraron errores en los siguientes campos:\n';
 
     // Recorrer los controles del formulario
     for (const controlName in this.form.controls) {
@@ -295,12 +307,37 @@ export class FormularioRegistroComponent {
         
         // Verificar si el control tiene errores
         if (control.errors) {
-          // this.sweetAlertServicio.MensajeError("Se deben completar todos los campos")
+          formIsInvalid = true;
+          errorMessage += `${controlName}: ${this.getErrorMessage(control.errors)}\n`;
+
+          // Imprimir los errores en la consola
+          console.log(`Control: ${controlName}`, control.errors);
         }
       }
     }
 
+    console.log("formulario invalido:")
+    console.log(this.form.invalid)
+    console.log("captcha verificado:")
+    console.log(this.captchaVerificado)
+
     return this.form.invalid;
+  }
+
+  private getErrorMessage(errors: any): string {
+    if (errors.required) {
+      return 'Este campo es obligatorio.';
+    } else if (errors.minlength) {
+      return `El valor es demasiado corto. Longitud mínima: ${errors.minlength.requiredLength}.`;
+    } else if (errors.maxlength) {
+      return `El valor es demasiado largo. Longitud máxima: ${errors.maxlength.requiredLength}.`;
+    } else if (errors.pattern) {
+      return 'El valor no coincide con el patrón requerido.';
+    } else if (errors.email) {
+      return 'El formato del correo electrónico no es válido.';
+    } else {
+      return 'Error desconocido.';
+    }
   }
 
   //#region  foto
@@ -317,7 +354,6 @@ export class FormularioRegistroComponent {
     {
       this.fotoTres = `${this.getFecha()}_${3}`;
     }
-    debugger
 
     const storage = getStorage();
     const storageRef = ref(storage, imgNum == 1 ? this.fotoUno : imgNum == 2 ? this.fotoDos : this.fotoTres);
@@ -353,51 +389,11 @@ ObtenerArchivo(nombreArchivo: string): Promise<string> {
     return y + '-' + m + '-' + d + '_' + h + '-' + min + '-' + s + '-' + mls;
   }
 
-  onCaptchaVerified(captchaValue: any) {
-    if (captchaValue) {
-      // Avanzar en la pantalla o realizar alguna acción
-    } else {
-      // Manejar caso en que el captcha no es correcto
-    }
+  onCaptchaVerified(captchaValue: boolean) {
+    this.captchaVerificado = captchaValue;
   }
 
   //#endregion
-
-  // //#region Metodos captcha
-  // public executeRecaptchaV3() {
-  //   this.log.push(`Recaptcha v3 execution requested...`);
-  //   this.recaptchaV3Service.execute('myAction').subscribe(
-  //     (token) => {
-  //       this.addTokenLog('Recaptcha v3 token', token);
-  //     },
-  //     (error) => {
-  //       this.log.push(`Recaptcha v3 error: see console`);
-  //     }
-  //   );
-  // }
-
-  // public addTokenLog(message: string, token: string | null) {
-  //   this.captchaVerificado = true;
-  //   this.log.push(`${message}: ${this.formatToken(token)}`);
-  // }
-
-  // public onError() {
-  //   this.log.push(`reCAHPTCHA errored;`);
-  // }
-
-  // public formatToken(token: string | null) {
-  //   return token !== null
-  //     ? `${token.substring(0, 7)}...${token.substring(token.length - 7)}`
-  //     : 'null';
-  // }
-
-  // public printLog() {
-  //   return this.log
-  //     .map((logEntry, index) => `${index + 1}. ${logEntry}`)
-  //     .join('\n');
-  // }
-
-  // //#endregion
 
 }
   //#endregion

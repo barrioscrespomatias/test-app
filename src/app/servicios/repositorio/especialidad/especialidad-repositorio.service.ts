@@ -37,7 +37,6 @@ export class EspecialidadRepositorioService
   }
 
   create(entity: Especialidad): string {
-    debugger
 
     if (this.listadoEspecialidades) {
       let docRef: DocumentReference<DocumentData> = doc(this.listadoEspecialidades);

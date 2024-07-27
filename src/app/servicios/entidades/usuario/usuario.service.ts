@@ -43,6 +43,7 @@ export class UsuarioService {
   async Crear(
     usuarioRegistro: Usuario
   ): Promise<{ mensaje: string; valido: boolean }> {
+    console.log(usuarioRegistro)
     debugger
     try {
       const userCredential = await createUserWithEmailAndPassword(

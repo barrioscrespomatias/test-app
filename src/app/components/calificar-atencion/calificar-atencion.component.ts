@@ -5,6 +5,10 @@ import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
   selector: 'app-calificar-atencion',
   templateUrl: './calificar-atencion.component.html',
   styleUrls: ['./calificar-atencion.component.css'],
+  standalone: true,
+  imports:[],
+  providers:[],
+  schemas:[],
 })
 export class CalificarAtencionComponent {
   //#region Propiedades
