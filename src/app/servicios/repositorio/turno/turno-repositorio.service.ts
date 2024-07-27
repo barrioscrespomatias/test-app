@@ -21,6 +21,8 @@ import {
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { Turno } from 'src/app/interfaces/turno';
+import * as moment from 'moment';
+import 'moment-timezone';
 
 @Injectable({
   providedIn: 'root',
@@ -146,11 +148,11 @@ export class TurnoRepositorioService implements Repository<Turno> {
    * @returns
    */
   TurnosSolicitadosRangoFechas(desde: any, hasta: any): Observable<Turno[]> {
-    const desdeInicioDia = startOfDay(desde); // Desde las 00:00:00
-    const hastaFinDia = endOfDay(hasta); // Hasta las 23:59:59
+    const desdeInicioDia = moment.tz(desde, 'YYYY-MM-DD', 'America/Argentina/Buenos_Aires').startOf('day');
+    const hastaFinDia = moment.tz(hasta, 'YYYY-MM-DD', 'America/Argentina/Buenos_Aires').endOf('day');
   
-    const desdeTimestamp = Timestamp.fromDate(desdeInicioDia);
-    const hastaTimestamp = Timestamp.fromDate(hastaFinDia);
+    const desdeTimestamp = Timestamp.fromDate(desdeInicioDia.toDate());
+    const hastaTimestamp = Timestamp.fromDate(hastaFinDia.toDate());
 
     const coleccion = collection(this._firestore, 'turnos');
     const consulta = query(

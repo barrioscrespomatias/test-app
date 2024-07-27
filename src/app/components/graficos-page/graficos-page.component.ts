@@ -86,14 +86,14 @@ export class GraficosPageComponent {
   data1: number[] = [];
   chartsLabels1: Array<any> = [];
   title1 = 'Cantidad Turnos Por Especialidad';
-  type1 = 'bar';
+  type1 = 'line';
   chartSelector1 = '.chart-1';
   
   // Cantidad de turnos solicitado por médico en un lapso de tiempo
   data2: number[] = [];
   chartsLabels2: Array<any> = [];
   title2 = 'Turnos solicitados por Médico en un lapso de tiempo';
-  type2 = 'line';
+  type2 = 'bar';
   chartSelector2 = '.chart-2';
 
   // Cantidad de turnos finalizado por médico en un lapso de tiempo
@@ -254,6 +254,7 @@ export class GraficosPageComponent {
     for (const turnos of turnosAgrupados) {
       data.push(turnos.length);
     }
+    
 
     switch (chart) {
       case 'chart-2':
@@ -484,7 +485,7 @@ export class GraficosPageComponent {
 
   //#region Actualizar Grafico
   async ActualizarGrafico2(event: { desde: any; hasta: any }) {
-    (
+    (      
       await this.turnoService.TurnosSolicitadosRangoFechas(
         event.desde,
         event.hasta

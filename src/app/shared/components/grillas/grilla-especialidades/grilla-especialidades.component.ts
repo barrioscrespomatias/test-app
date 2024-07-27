@@ -52,7 +52,6 @@ export class GrillaEspecialidadesComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log(this.userSelected)
     this.checkLoggedIn();
     this.currentUser = await this.usuarioService.getUsuario(this.mail);
     if(this.currentUser){

@@ -196,8 +196,7 @@ export class ChartComponent {
 
   onDateChange() {
     var desde = this.desde?.value;
-    var hasta = this.hasta?.value;
-
+    var hasta = this.hasta?.value;    
     this.dateRangeSelected.emit({ desde, hasta });
   }
 }

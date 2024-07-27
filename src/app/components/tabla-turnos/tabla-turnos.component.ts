@@ -16,6 +16,11 @@ import { FormsModule } from '@angular/forms';
 import { FiltroTurnosPacientePipe } from 'src/app/pipes/filtroTurnosPaciente/filtro-turnos-paciente.pipe';
 import { NavComponent } from '../nav/nav/nav.component';
 import { EncuestaSatisfaccionComponent } from "../encuesta-satisfaccion/encuesta-satisfaccion.component";
+import { CancelarTurnoComponent } from '../cancelar-turno/cancelar-turno.component';
+import { AceptarTurnoComponent } from '../aceptar-turno/aceptar-turno.component';
+import { RechazarTurnoComponent } from '../rechazar-turno/rechazar-turno.component';
+import { VerResenaComponent } from '../ver-resena/ver-resena.component';
+import { FinalizarTurnoComponent } from '../finalizar-turno/finalizar-turno.component';
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -32,7 +37,12 @@ import { EncuestaSatisfaccionComponent } from "../encuesta-satisfaccion/encuesta
     ObtenerFechasTurnosPipe,
     FiltroTurnosPacientePipe,
     NavComponent, 
-    EncuestaSatisfaccionComponent],
+    EncuestaSatisfaccionComponent,
+    CancelarTurnoComponent,
+    AceptarTurnoComponent,
+    RechazarTurnoComponent,
+    VerResenaComponent,
+    FinalizarTurnoComponent],
   providers: [DatePipe],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

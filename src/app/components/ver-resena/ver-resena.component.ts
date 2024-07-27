@@ -1,10 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 
 @Component({
   selector: 'app-ver-resena',
   templateUrl: './ver-resena.component.html',
-  styleUrls: ['./ver-resena.component.css']
+  styleUrls: ['./ver-resena.component.css'],
+  standalone: true,
+  providers: [],
+  imports: [CommonModule],
+  schemas:[],
 })
 export class VerResenaComponent {
 //#region Propiedades
