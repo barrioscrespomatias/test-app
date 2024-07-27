@@ -7,13 +7,30 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import {ThemePalette} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatIcon } from '@angular/material/icon';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatCardContent } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-finalizar-turno',
   templateUrl: './finalizar-turno.component.html',
   styleUrls: ['./finalizar-turno.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSliderModule],
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule,
+            MatFormField, 
+            MatSliderModule, 
+            MatIcon, 
+            MatRadioButton, 
+            MatCardContent, 
+            MatLabel, 
+            MatInput, 
+            MatRadioGroup, 
+            MatSlideToggleModule],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
