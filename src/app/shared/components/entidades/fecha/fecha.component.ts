@@ -18,6 +18,10 @@ export class FechaComponent implements OnInit{
 
   path:string='';
 
+  constructor(){
+    moment.locale('es');
+  }
+
   ngOnInit(): void {
     this.path = '../../assets/img/grillas/fecha.png';
   }
@@ -26,7 +30,9 @@ export class FechaComponent implements OnInit{
     this.messageEvent.emit(mensaje);
   }
 
-  ConvertirFecha(fecha:any){
-    return new Date(fecha.seconds * 1000);
+  GetFormattedDate(fecha: any): string {
+    const date = fecha ? new Date(fecha.seconds * 1000) : null;
+
+    return moment(date).format('D [de] MMMM');
   }
 }

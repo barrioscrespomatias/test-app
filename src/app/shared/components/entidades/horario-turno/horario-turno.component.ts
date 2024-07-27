@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-horario-turno',
@@ -15,6 +16,10 @@ export class HorarioTurnoComponent {
 
   // path:string='';
 
+  constructor(){
+    moment.locale('es');
+  }
+
   ngOnInit(): void {
     this.path = '../../assets/img/grillas/horario-turno.png';
   }
@@ -23,7 +28,13 @@ export class HorarioTurnoComponent {
     this.messageEvent.emit(mensaje);
   }
 
-  ConvertirFecha(fecha:any){
-    return new Date(fecha.seconds * 1000);
+  GetFormattedDate(fecha: any): string {
+    const date = fecha ? new Date(fecha.seconds * 1000) : null;
+
+    const momentDate = moment(date);
+    if (momentDate.isValid()) {
+      return momentDate.format('h:mm A');
+    }
+    return 'Hora inválida';
   }
 }
