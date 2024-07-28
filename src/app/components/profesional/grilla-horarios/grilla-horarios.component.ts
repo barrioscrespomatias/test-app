@@ -144,57 +144,61 @@ export class GrillaHorariosComponent {
               this.fechaHelper.ConvertirFechaFirestore(tp.fecha)));
     }); 
 
-
-
-    this.horariosParaTurnosEspecialidad?.forEach(
-      (horarioTurnoEspecialidad: any) => {
-        const turno: Turno = {
-          fecha: horarioTurnoEspecialidad.fecha,
-          especialidad: horarioTurnoEspecialidad.especialidad,
-          paciente: '',
-          profesional: this.mail,
-          estado: "Disponible",
-          encuesta: encuesta,
-          rating: 0,
-          resena: '',
-          diagnostico:'',
-          historia_clinica: historia_clinica,
-          altura: 0,
-          peso: 0,
-          temperatura: 0,
-          presion: '',
-        };
-
-        turnosDisponibles?.push(turno);
-      }
-    );
-
-    let generacionSinErrores = true;
-
-    turnosDisponibles.forEach(turno => {
-      let respuestaTurno = this.turnoService.Crear(turno);
-      // respuestaTurno.then((response) => {
-      //   if (response.valido) {
-      //     this.alertaMensajeSucces(response.mensaje);
-      //     this._usuarioService.setUserToLocalStorage(user);
-      //     this.router.navigate(['usuario/login']);
-      //   } else {
-      //     this.alertaMensajeError(response.mensaje);
-      //   }
-      //   alert(response.valido);
-      // });
-
-      respuestaTurno.then((response) => {
-        if (!response.valido) {          
-          generacionSinErrores = false;
-        }       
+    if(this.horariosParaTurnosEspecialidad.length > 0){
+      this.horariosParaTurnosEspecialidad?.forEach(
+        (horarioTurnoEspecialidad: any) => {
+          const turno: Turno = {
+            fecha: horarioTurnoEspecialidad.fecha,
+            especialidad: horarioTurnoEspecialidad.especialidad,
+            paciente: '',
+            profesional: this.mail,
+            estado: "Disponible",
+            encuesta: encuesta,
+            rating: 0,
+            resena: '',
+            diagnostico:'',
+            historia_clinica: historia_clinica,
+            altura: 0,
+            peso: 0,
+            temperatura: 0,
+            presion: '',
+          };
+  
+          turnosDisponibles?.push(turno);
+        }
+      );
+  
+      let generacionSinErrores = true;
+  
+      turnosDisponibles.forEach(turno => {
+        let respuestaTurno = this.turnoService.Crear(turno);
+        // respuestaTurno.then((response) => {
+        //   if (response.valido) {
+        //     this.alertaMensajeSucces(response.mensaje);
+        //     this._usuarioService.setUserToLocalStorage(user);
+        //     this.router.navigate(['usuario/login']);
+        //   } else {
+        //     this.alertaMensajeError(response.mensaje);
+        //   }
+        //   alert(response.valido);
+        // });
+  
+        respuestaTurno.then((response) => {
+          if (!response.valido) {          
+            generacionSinErrores = false;
+          }       
+        });
       });
-    });
-
-    if(generacionSinErrores)
-      this.sweetAlert.MensajeExitoso('Turnos generados correctamente!');
+  
+      if(generacionSinErrores)
+        this.sweetAlert.MensajeExitoso('Turnos generados correctamente!');
+      else
+        this.sweetAlert.MensajeError('Ha ocurrido un error, intente nuevamente!');
+    }
     else
-      this.sweetAlert.MensajeError('Ha ocurrido un error, intente nuevamente!');
+      this.sweetAlert.MensajeError('No existen horarios disponibles para confirmar');
+
+
   }
 
   /**

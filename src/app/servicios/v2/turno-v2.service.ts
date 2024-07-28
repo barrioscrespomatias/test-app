@@ -9,6 +9,7 @@ import {
   Timestamp,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   orderBy,
   query,
@@ -138,5 +139,17 @@ export class TurnoV2Service {
   );
 
   return collectionData(usuarios) as Observable<any[]>;
+  }
+
+  async borrar(docRef: string): Promise<boolean> {
+    try {
+      const documentReference = doc(this.coleccionTurnos, docRef);
+
+      deleteDoc(documentReference);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }
