@@ -57,7 +57,7 @@ export class InformesComponent implements OnInit{
   data1: number[] = [];
   chartsLabels1: Array<string> = [];
   title1 = 'Turnos por paciente';
-  type1 = 'line';
+  type1 = 'bar';
   chartSelector1 = '.chart-1';
 
   // Cantidad de pacientes por especialidad

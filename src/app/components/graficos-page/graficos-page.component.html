@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row mb-2 mt-2">
     <!-- <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0"> -->
-        <div class="chart-1 col-4">
+        <div class="chart-1 col-4" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title1}}</h5>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="chart-2 col-4">
+        <div class="chart-2 col-4" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title2}}</h5>
@@ -25,7 +25,7 @@
             </div>
         </div>
     
-        <div class="chart-3 col-4">
+        <div class="chart-3 col-4"  *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title3}}</h5>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row mb-2 mt-2">    
-        <div class="chart-4 col-4">
+        <div class="chart-4 col-4" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title4}}</h5>
@@ -49,7 +49,7 @@
             </div>
         </div>
     
-        <div class="chart-5 col-4">
+        <div class="chart-5 col-4" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title5}}</h5>
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="chart-6 col-4">
+        <div class="chart-6 col-4"  *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">
             <div class="card text-black bg-light bg-gradient">
                 <div class="card-body">
                     <h5 class="card-title">{{title6}}</h5>

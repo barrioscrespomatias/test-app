@@ -123,7 +123,7 @@ export class GraficosPageComponent {
   data6: number[] = [];
   chartsLabels6: Array<string> = [];
   title6 = 'Cantidad de visitas que tuvo la clinica';
-  type6 = 'line';
+  type6 = 'bar';
   chartSelector6 = '.chart-6';
 
   // Cantidad de pacientes por especialidad
@@ -152,9 +152,11 @@ export class GraficosPageComponent {
       this.usuario = usuario;
     });
 
-    this.turnoV2Service.traerTurnoPorEstado('Realizado').subscribe((t) => {
+    this.turnoV2Service.traerTurnoPorEstado('Realizado').subscribe(async (t) => {
       this.turnosRealizadosV2 = t as Turno[];
-      this.inicializarCharts();
+      if(this.turnosRealizadosV2){
+        this.inicializarCharts();
+      }
     });
 
 
@@ -218,6 +220,8 @@ export class GraficosPageComponent {
   calcularCantidadVisitas(){
     this.data6.push(this.turnosRealizadosV2.length);
     this.chartsLabels6.push('Cantidad de visitas')
+    console.log("cantidad de visistas clinicas")
+    console.log(this.data6)
   };
 
   calcularCantidadPacientesPorEspecialidad() {
