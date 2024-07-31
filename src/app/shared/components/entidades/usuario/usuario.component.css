@@ -42,3 +42,18 @@
     background-size: cover;
     background-position: center center;
   }
+
+  .small{
+    width: 10rem;
+    font-size: 5px !important;
+  }
+
+  .medium{
+    width: 18rem;
+    font-size: 10px;
+  }
+
+  .large{
+    width: 22rem;
+    font-size: 10px;
+  }

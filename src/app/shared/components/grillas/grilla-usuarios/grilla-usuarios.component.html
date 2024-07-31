@@ -1,7 +1,13 @@
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center align-items-center mt-4">
         <ng-container *ngFor="let usuario of usuarios">
-            <div class="col-sm-4">
+            <div class="col-sm-4" *ngIf="medidaImagen === 'round-image-medium'">
+                <app-usuario [path]="usuario.imagenPerfil1!" [classSize]="medium" [user]="usuario.mail!" (click)="sendMessage(usuario.mail!)"></app-usuario>
+            </div>
+            <div class="col-sm-3" *ngIf="medidaImagen === 'round-image-medium'">
+                <app-usuario [path]="usuario.imagenPerfil1!" [classSize]="medium" [user]="usuario.mail!" (click)="sendMessage(usuario.mail!)"></app-usuario>
+            </div>
+            <div class="col-sm-2" *ngIf="medidaImagen === 'round-image-small'">
                 <app-usuario [path]="usuario.imagenPerfil1!" [classSize]="medium" [user]="usuario.mail!" (click)="sendMessage(usuario.mail!)"></app-usuario>
             </div>
         </ng-container>

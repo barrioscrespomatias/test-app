@@ -11,13 +11,13 @@
             {{'nav.Turnos' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li *ngIf="isLogged && currentUser.perfil !== 'profesional'"><a class="dropdown-item" href="grilla-especialidades">{{'nav.SolicitarTurno' | translate}}</a></li>
-            <li *ngIf="isLogged && currentUser.perfil !== 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnos' | translate}}</a></li>
-            <li *ngIf="isLogged && currentUser.perfil === 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnosAdmin' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'profesional'"><a class="dropdown-item" href="grilla-especialidades">{{'nav.SolicitarTurno' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnos' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil === 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnosAdmin' | translate}}</a></li>
           </ul>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="isLogged && currentUser.perfil === 'administrador' ">
+        <li class="nav-item dropdown" *ngIf="isLogged && currentUser && currentUser.perfil === 'administrador' ">
           <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{'nav.Usuarios' | translate}}
           </a>
@@ -26,7 +26,7 @@
           </ul>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="isLogged && currentUser.perfil === 'profesional'">
+        <li class="nav-item dropdown" *ngIf="isLogged && currentUser && currentUser.perfil === 'profesional'">
           <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{'nav.Pacientes' | translate}}
           </a>
@@ -35,7 +35,7 @@
           </ul>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="isLogged && currentUser.perfil === 'administrador'">
+        <li class="nav-item dropdown" *ngIf="isLogged && currentUser && currentUser.perfil === 'administrador'">
           <a class="nav-link dropdown-toggle text-white" *ngIf="!onlyLanguage" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{'nav.Estadisticas' | translate}}
           </a>

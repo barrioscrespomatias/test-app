@@ -1,8 +1,20 @@
-<div class="text-center d-flex justify-content-center align-items-center" data-toggle="tooltip" data-placement="left" title="{{user}}">
-    <div class="card d-flex justify-content-center align-items-center mb-2" style="width: 18rem;">
+<div class="text-center d-flex justify-content-center align-items-center" data-toggle="tooltip" data-placement="left"
+    title="{{user}}">
+    <div class="card d-flex justify-content-center align-items-center mb-2 {{width}}">
         <img src="{{path}}" class="{{classSize}}">
-        <div class="card-body">
-            <h5 class="card-title">{{user}}</h5>
+
+        <div class="card-body pt-0" data-toggle="tooltip" data-placement="left" title="{{user}}">
+            <ng-container *ngIf="width === 'small'">
+                <p class="card-title" style="font-size: 10px;">{{user}}</p>
+            </ng-container>
+            <ng-container *ngIf="width === 'medium'">
+                <h6 class="card-title">{{user}}</h6>
+            </ng-container>
+
+            <ng-container *ngIf="width === 'large'">
+                <h4 class="card-title">{{user}}</h4>
+            </ng-container>
+
         </div>
     </div>
 </div>

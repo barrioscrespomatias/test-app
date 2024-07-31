@@ -49,6 +49,7 @@ export class InformesComponent implements OnInit{
   isLogged: boolean = false;
   turnosRealizados: Turno[] = [];
   encuestas: EncuestaSatisfaccion[] = [];
+  medidaImagen = 'round-image-small';
 
 
 
