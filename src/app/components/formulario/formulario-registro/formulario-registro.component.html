@@ -261,43 +261,10 @@
                </div>
             </div>
             <div class="form-field col-md-6 ">
-               <button class="submit-btn" (click)="AgregarEspecialidad()" id="agregar-especialidad"
+               <button class="submit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
                   value="Agregar especialidad">{{'registro.AgregarEspecialidad' | translate}}</button>
             </div>
          </div>
-           <div class="row mb-2" *ngIf="especialidadHabilitada">
-            <div class="form-field col-md-6">
-               <input id="especialidad_agregada" formControlName="especialidad_agregada"
-                  class="input-text js-input mt-4" type="text">
-               <label for="agregar-especialidad"></label>
-
-               <div *ngIf="form.get('especialidad_agregada')?.invalid && (form.get('especialidad_agregada')?.dirty || form.get('especialidad_agregada')?.touched)">
-                  <div *ngIf="form.get('especialidad_agregada')?.errors?.['required']" class="error-message">
-                     {{'registro.CampoRequerido' | translate}}
-                  </div>
-                  <div *ngIf="form.get('especialidad_agregada')?.errors?.['minlength']" class="error-message">
-                     {{'registro.ValidacionMinCaracteres' | translate}} {{form.get('especialidad_agregada')?.errors?.['minlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
-                   </div>
-                   <div *ngIf="form.get('especialidad_agregada')?.errors?.['maxlength']" class="error-message">
-                     {{'registro.ValidacionMaxCaracteres' | translate}} {{form.get('especialidad_agregada')?.errors?.['maxlength'].requiredLength}} {{'registro.Caracteres' | translate}}.
-                   </div>
-                   <span *ngIf="form.get('especialidad_agregada')?.errors?.['pattern']" class="error-message">{{'registro.ValidacionCaracteresEspeciales' | translate}}</span>
-                </div>
-            </div>
-
-            <div class="form-field col-md-6">
-               <label class="form-label mb-4" for="imagen_especialidad" data-browse="cargar">{{'registro.ImagenEspecialidad' | translate}}</label>
-               <input type="file" (change)="SubirArchivo($event, 3)" formControlName="imagen_especialidad"
-                  class="form-control">
-
-                  <div *ngIf="form.get('imagen_especialidad')?.invalid && (form.get('imagen_especialidad')?.dirty || form.get('imagen_especialidad')?.touched)">
-                     <div *ngIf="form.get('imagen_especialidad')?.errors?.['required']" class="error-message">
-                        {{'registro.CampoRequerido' | translate}}
-                     </div>
-                  </div>
-            </div>               
-
-            </div>
             <div class="row">
                <div class="form-field col-md-6">
                   <label for="mail">{{'registro.Correo' | translate}}</label>
@@ -366,6 +333,16 @@
   
          </form>
    </section>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+              <app-agregar-especialidad></app-agregar-especialidad>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 

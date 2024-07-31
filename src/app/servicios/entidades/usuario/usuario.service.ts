@@ -43,9 +43,9 @@ export class UsuarioService {
   async Crear(
     usuarioRegistro: Usuario
   ): Promise<{ mensaje: string; valido: boolean }> {
-    console.log(usuarioRegistro)
-    debugger
     try {
+      console.log(usuarioRegistro)
+      debugger
       const userCredential = await createUserWithEmailAndPassword(
         this.afAuth,
         usuarioRegistro.mail,

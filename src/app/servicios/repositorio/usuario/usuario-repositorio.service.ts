@@ -36,6 +36,10 @@ export class UsuarioRepositorioService implements Repository<Usuario> {
 
   // create(entity: Usuario, userFirebaseAuthId: string): string {
   create(entity: Usuario, mail: string): string {
+    console.log('repo')
+    console.log(entity)
+    console.log(mail)
+    debugger
     if (this.listadoUsuarios) {
       // obtengo referencia al id del doucmento para asignarlo a un campo del usuario.
       let docRef: DocumentReference<DocumentData> = doc(this.listadoUsuarios,mail);

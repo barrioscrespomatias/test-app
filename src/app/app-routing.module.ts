@@ -20,6 +20,7 @@ import { GrillaEspecialidadesComponent } from './shared/components/grillas/grill
 import { GrillaProfesionalesComponent } from './shared/components/grillas/grilla-profesionales/grilla-profesionales.component';
 import { GrillaFechasComponent } from './shared/components/grillas/grilla-fechas/grilla-fechas.component';
 import { GrillaHorariosTurnosComponent } from './shared/components/grillas/grilla-horarios-turnos/grilla-horarios-turnos.component';
+import { AgregarEspecialidadComponent } from './components/agregar-especialidad/agregar-especialidad.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'grilla-profesionales', component: GrillaProfesionalesComponent},
   { path: 'grilla-fechas', component: GrillaFechasComponent},
   { path: 'grilla-horarios-turnos', component: GrillaHorariosTurnosComponent},
+  { path: 'agregar-especialidad', component: AgregarEspecialidadComponent},
   { path: '', component: LoginComponent},
 ];
 

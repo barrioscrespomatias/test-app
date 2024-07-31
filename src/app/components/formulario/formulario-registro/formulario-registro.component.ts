@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavComponent } from '../../nav/nav/nav.component';
 import { CustomCaptchaComponent } from '../../custom-captcha/custom-captcha.component';
+import { AgregarEspecialidadComponent } from "../../agregar-especialidad/agregar-especialidad.component";
+import { Especialidad } from 'src/app/interfaces/especialidad';
 
 //#endregion
 @Component({
@@ -22,12 +24,12 @@ import { CustomCaptchaComponent } from '../../custom-captcha/custom-captcha.comp
   templateUrl: './formulario-registro.component.html',
   styleUrls: ['./formulario-registro.component.css'],
   standalone: true,
-  imports: [CommonModule, 
-            FormsModule, 
-            ReactiveFormsModule,
-            TranslateModule,
-            NavComponent,
-            CustomCaptchaComponent],
+  imports: [CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    NavComponent,
+    CustomCaptchaComponent, AgregarEspecialidadComponent],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -134,11 +136,12 @@ export class FormularioRegistroComponent {
       imagenPerfil1: new FormControl('', Validators.required),
       imagenPerfil2: new FormControl(''),
       imagen_especialidad: new FormControl(''),
-      obra_social: new FormControl('', [
-        Validators.required, 
-        Validators.minLength(2),
-        Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z ]*')]),
+      // obra_social: new FormControl('', [
+      //   Validators.required, 
+      //   Validators.minLength(2),
+      //   Validators.maxLength(30),
+      //   Validators.pattern('[a-zA-Z ]*')]),
+        obra_social: new FormControl('', []),
       // especialidad: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       especialidad: new FormControl('',),
       // perfil: new FormControl('', [Validators.pattern('^[a-zA-Z]+$')]),
@@ -189,9 +192,9 @@ export class FormularioRegistroComponent {
     return this.form.get('imagenPerfil2');
   }
 
-  get imagen_especialidad() {
-    return this.form.get('imagen_especialidad');
-  }
+  // get imagen_especialidad() {
+  //   return this.form.get('imagen_especialidad');
+  // }
 
   get obra_social() {
     return this.form.get('obra_social');
@@ -213,14 +216,12 @@ export class FormularioRegistroComponent {
 
   //#region Métodos
   async CrearUsuario() {
-    alert("pasa por aca")
     const horarioEspecialidad: HorarioEspecialidad[] = [];
     const profesionalesVisitados: string[] = [];
     const pacientesAtendidos: string[] = [];
 
     let url1: string = '';
     let url2: string = '';
-    // let url3: string = '';
     
     try {
       url1 = await this.ObtenerArchivo(this.fotoUno);
@@ -231,23 +232,6 @@ export class FormularioRegistroComponent {
       url2 = await this.ObtenerArchivo(this.fotoDos);
     } catch (error) {
     }    
-    
-    // try {
-    //   url3 = await this.ObtenerArchivo(this.fotoTres);
-    // } catch (error) {
-    // }
-
-
-
-    // const especialidad: Especialidad = {
-    //   nombre: this.especialidad_agregada?.value,
-    //   path: url3,
-    // };
-
-    // var esp: string[] = [];
-
-    // if(especialidad.nombre.length > 0)
-    //   esp.push(especialidad.nombre);
 
     const usuario: Usuario = {
       nombre: this.nombre?.value,
@@ -256,12 +240,11 @@ export class FormularioRegistroComponent {
       dni: this.dni?.value,
       mail: this.mail?.value,
       contrasena: this.contrasena?.value,
-      imagenPerfil1: url1 ,
+      imagenPerfil1: url1,
       imagenPerfil2: url2,
       habilitado: (this.perfilRecibido == 'Paciente' || this.perfilRecibido == 'Administrador') ? true : false,
       perfil: this.perfilRecibido == 'Profesional' ? 'profesional' : this.perfilRecibido == 'Paciente' ? 'paciente' : 'administrador',
       obraSocial: this.obra_social?.value,
-      // especialidades: especialidad.nombre.length > 0 ? esp : this.especialidad?.value,
       especialidades: this.especialidad?.value,
       peso: 0,
       altura: 0,
@@ -270,13 +253,8 @@ export class FormularioRegistroComponent {
       pacientesAtendidos: pacientesAtendidos,
     };
 
+    console.log(usuario)
     debugger
-    // if (especialidad) {
-    //   this.especialidadService.Crear(especialidad);
-    // }
-
-
-
     let respuesta = this.usuarioServicio.Crear(usuario);
     respuesta.then((response) => {
       if (response.valido) {
@@ -287,13 +265,6 @@ export class FormularioRegistroComponent {
       }      
     });
 
-  }
-
-
-
-  async AgregarEspecialidad() {
-    this.especialidadHabilitada = !this.especialidadHabilitada;
-    
   }
 
   public FormularioConErrores(): boolean {
