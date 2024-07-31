@@ -8,11 +8,14 @@ import {ThemePalette} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIcon } from '@angular/material/icon';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatCardContent } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material/radio';
+import { MatCardContent, MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-finalizar-turno',
@@ -22,7 +25,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   imports: [CommonModule, 
             FormsModule, 
             ReactiveFormsModule,
-            MatFormField, 
             MatSliderModule, 
             MatIcon, 
             MatRadioButton, 
@@ -30,7 +32,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
             MatLabel, 
             MatInput, 
             MatRadioGroup, 
-            MatSlideToggleModule],
+            MatSlideToggleModule,
+            MatButtonModule, 
+            MatCardModule, 
+            MatRadioModule, 
+            MatCheckboxModule, 
+            MatFormFieldModule, 
+            MatDivider],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -70,7 +78,7 @@ export class FinalizarTurnoComponent {
 
   //SliderComponent
   disabledSlider = false;
-  max = 100;
+  max = 10;
   min = 0;
   showTicks = false;
   step = 1;

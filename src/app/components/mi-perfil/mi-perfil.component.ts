@@ -13,6 +13,7 @@ import { TablaHistoriasClinicasComponent } from '../tabla-historias-clinicas/tab
 import { GrillaHorariosComponent } from '../profesional/grilla-horarios/grilla-horarios.component';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from '../nav/nav/nav.component';
+import { AsignarHorarioComponent } from "../profesional/asignar-horario/asignar-horario.component";
 
 @Component({
   selector: 'app-mi-perfil',
@@ -21,12 +22,12 @@ import { NavComponent } from '../nav/nav/nav.component';
   animations: [slideAnimation],
   standalone: true,
   imports: [CommonModule,
-            TablaHistoriasClinicasComponent, 
-            GrillaHorariosComponent, 
-            FormsModule, 
-            ReactiveFormsModule,
-            NavComponent
-          ],
+    TablaHistoriasClinicasComponent,
+    GrillaHorariosComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NavComponent, 
+    AsignarHorarioComponent],
   providers: [],
   schemas: []
 })

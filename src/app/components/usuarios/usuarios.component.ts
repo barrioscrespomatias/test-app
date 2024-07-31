@@ -14,11 +14,17 @@ import { FechaService } from 'src/app/helper/fecha/fecha.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormularioRegistroComponent } from '../formulario/formulario-registro/formulario-registro.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbarModule, MatToolbarRow } from '@angular/material/toolbar';
 import { FiltroUsuariosPacientesPipe } from 'src/app/pipes/filtroUsuariosPacientes/filtro-usuarios-pacientes.pipe';
 import { UsuariosProfesionalesPipe } from 'src/app/pipes/filtroUsuariosProfesionales/usuarios-profesionales.pipe';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { NavComponent } from '../nav/nav/nav.component';
+import { TablaHistoriasClinicasComponent } from '../tabla-historias-clinicas/tabla-historias-clinicas.component';
+import { MatDivider } from '@angular/material/divider';
+import { GrillaUsuariosComponent } from "../../shared/components/grillas/grilla-usuarios/grilla-usuarios.component";
+import { TranslateService } from '@ngx-translate/core';
+import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-usuarios',
@@ -26,17 +32,20 @@ import { NavComponent } from '../nav/nav/nav.component';
   styleUrls: ['./usuarios.component.css'],
   animations: [slideAnimation],
   standalone: true,
-  imports: [CommonModule, 
-            MatIconModule, 
-            FormularioRegistroComponent, 
-            MatToolbarModule, 
+  imports: [CommonModule,
+            MatIconModule,
+            FormularioRegistroComponent,
             FormularioRegistroComponent,
             FiltroUsuariosPacientesPipe,
             UsuariosProfesionalesPipe,
             DatePipe,
             MatToolbarModule,
-            MatIconModule,
-            NavComponent
+            NavComponent,
+            TablaHistoriasClinicasComponent,
+            MatDivider, 
+            GrillaUsuariosComponent,
+            MatToolbarRow, 
+            MatButtonModule
           ],
   providers: [DatePipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -49,7 +58,9 @@ export class UsuariosComponent {
               private fileService : FileService,
               private fechaHelper: FechaService,
               private datePipe: DatePipe,
-              private firebaseService:FirebaseAuthService
+              private firebaseService:FirebaseAuthService,
+              private translate: TranslateService,
+              private userService: UsuarioV2Service,
               ) {
   }  
 
@@ -63,6 +74,7 @@ export class UsuariosComponent {
 
   estadoActual: string = 'estadoInicial';
   isLogged: boolean = false;
+  selectedUser: any;
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';
@@ -93,6 +105,11 @@ export class UsuariosComponent {
     if (this.turnosSubscription) {
       this.turnosSubscription.unsubscribe();
     }
+  }
+
+  receiveMessage(user: any) {
+    // this.translate.setDefaultLang(idioma);
+    this.DescargarExcelTurnos(user);
   }
 
   async checkLoggedIn() {
@@ -141,11 +158,15 @@ export class UsuariosComponent {
     }   
   }
 
-  DescargarExcelTurnos(usuarioFiltrado: Usuario) {
+  async DescargarExcelTurnos(usuarioSeleccionado: string) {
+    await this.userService.getUsuario(usuarioSeleccionado).then((usuario: any) => {
+      this.selectedUser = usuario;
+    });
+
     if(this.turnos.length > 0){
       const data: Turno[][] =       
       this.turnos     
-      .filter((turno: { paciente: string, estado: string }) => turno.paciente == usuarioFiltrado.docRef && turno.estado == 'Realizado') 
+      .filter((turno: { paciente: string, estado: string }) => turno.paciente == this.selectedUser.docRef && turno.estado == 'Realizado') 
       .map((turno: { especialidad: string; estado: string; paciente: string; profesional:string, diagnostico:string, fecha: Date }) => {
         let fecha:Date = this.fechaHelper.ConvertirFechaFirestore(turno.fecha); 
         

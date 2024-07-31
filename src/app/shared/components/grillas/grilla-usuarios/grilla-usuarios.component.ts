@@ -3,12 +3,16 @@ import { UsuarioComponent } from '../../entidades/usuario/usuario.component';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { CommonModule } from '@angular/common';
+import { TablaHistoriasClinicasComponent } from 'src/app/components/tabla-historias-clinicas/tabla-historias-clinicas.component';
+import { NavComponent } from 'src/app/components/nav/nav/nav.component';
 
 @Component({
   selector: 'app-grilla-usuarios',
   standalone: true,
   imports: [UsuarioComponent, 
-            CommonModule],
+            CommonModule,
+            TablaHistoriasClinicasComponent,
+          NavComponent],
   templateUrl: './grilla-usuarios.component.html',
   styleUrl: './grilla-usuarios.component.css',
   providers: [UsuarioV2Service],
@@ -31,7 +35,7 @@ export class GrillaUsuariosComponent {
   }
 
   ngOnInit(): void {
-    this.usuarioService.traerUsuarios().subscribe((t) => {
+    this.usuarioService.traerUsuarioPorPerfil('paciente').subscribe((t) => {
       this.usuarios = t as Usuario[];
     });
   }

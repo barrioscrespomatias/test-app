@@ -1,4 +1,4 @@
-.example-h2 {
+/* .example-h2 {
     margin-left: 10px;
     margin-right: 10px;
   }
@@ -12,7 +12,7 @@
   
   .example-margin {
     margin: 8px;
-  }
+  } */
   
   .example-width {
     max-width: 180px;
@@ -43,3 +43,27 @@
     font-weight: 600;
   }
   
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 10px;
+  }
+
+  .form-switch.form-switch-lg .form-check-input {
+    height: 2rem;
+    width: calc(3rem + 0.75rem);
+    border-radius: 4rem;
+  }
+  
+  .form-switch.form-switch-lg {
+    margin-bottom: 1.5rem;
+  }

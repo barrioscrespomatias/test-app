@@ -2,6 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, input, OnInit, 
 import { FirebaseAuthService } from '../../../services/angularFire/angular-fire.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,8 @@ export class NavComponent implements OnInit{
   @Input() languageEnabled:boolean;
 
   constructor(public firebaseService: FirebaseAuthService,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private userSerivce: UsuarioV2Service,
   ) {
     this.onlyLanguage = false;
     this.languageEnabled = false;
@@ -38,32 +40,39 @@ export class NavComponent implements OnInit{
   idioma:string = 'espanol';
   idioma_src:string = '../../../../assets/img/idioma/'+ 'espanol' +'.png';
 
+  currentUser:any;
+  mail: string = this.firebaseService.userName;
+
   async checkLoggedIn() {    
     this.isLogged = await this.firebaseService.isLoggedIn();
   }
 
-  ngOnInit(): void {
-    let idioma = localStorage.getItem('language');
-    if(idioma)
-      this.translate.setDefaultLang(idioma);
+  async ngOnInit(): Promise<void> {
+    this.currentUser = await this.userSerivce.getUsuario(this.mail);
+    if(this.currentUser){
+        let idioma = localStorage.getItem('language');
+        if(idioma)
+          this.translate.setDefaultLang(idioma);
+    
+        switch(idioma)
+        {
+          case 'es':
+            this.idioma = 'espanol';
+            break;
+          case 'en':
+            this.idioma = 'ingles';
+            break;
+          case 'pt':
+            this.idioma = 'portugues';
+            break
+          default:
+            this.idioma = 'espanol'
+            break;
+        }
+    
+        this.idioma_src = '../../../../assets/img/idioma/'+ this.idioma +'.png';
 
-    switch(idioma)
-    {
-      case 'es':
-        this.idioma = 'espanol';
-        break;
-      case 'en':
-        this.idioma = 'ingles';
-        break;
-      case 'pt':
-        this.idioma = 'portugues';
-        break
-      default:
-        this.idioma = 'espanol'
-        break;
     }
-
-    this.idioma_src = '../../../../assets/img/idioma/'+ this.idioma +'.png';
   }
 
   SignOut() {
