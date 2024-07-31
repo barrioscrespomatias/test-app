@@ -17,6 +17,8 @@ import { CustomNg2SearchPipe } from 'src/app/pipes/customNg2Search/custom-ng2-se
 import { FiltroTurnosHistoriaClinicaPipe } from 'src/app/pipes/filtroTurnosHistoriaClinica/filtro-turnos-historia-clinica.pipe';
 import { NavComponent } from '../nav/nav/nav.component';
 import { TranslateService } from '@ngx-translate/core';
+import { MatIcon } from '@angular/material/icon';
+import { HistoriaClinicaComponent } from '../historia-clinica/historia-clinica.component';
 
 @Component({
   selector: 'app-tabla-historias-clinicas',
@@ -29,7 +31,9 @@ import { TranslateService } from '@ngx-translate/core';
             ReactiveFormsModule, 
             CustomNg2SearchPipe, 
             FiltroTurnosHistoriaClinicaPipe,
-            NavComponent
+            NavComponent,
+            MatIcon,
+            HistoriaClinicaComponent
           ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
