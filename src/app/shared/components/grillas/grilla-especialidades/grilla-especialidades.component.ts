@@ -10,6 +10,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioComponent } from "../../entidades/usuario/usuario.component";
+import { slideLeftRightAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-grilla-especialidades',
@@ -19,6 +20,7 @@ import { UsuarioComponent } from "../../entidades/usuario/usuario.component";
     NavComponent,
     RouterLink, UsuarioComponent],
   providers: [],
+  animations:[slideLeftRightAnimation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './grilla-especialidades.component.html',
   styleUrl: './grilla-especialidades.component.css'
@@ -46,6 +48,7 @@ export class GrillaEspecialidadesComponent {
   currentUser!:any;
   renderHtml:boolean = false;
   mail: string = this.firebaseService.userName;
+  estadoActual: string = 'estadoInicial';
 
   sendMessage(profesion: string) {
     this.messageEvent.emit(profesion);

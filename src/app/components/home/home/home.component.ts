@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from '../../nav/nav/nav.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { fadeInOutAnimation, slideAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             TranslateModule,
             NavComponent
           ],
+  animations: [fadeInOutAnimation],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
@@ -29,6 +31,7 @@ export class HomeComponent {
   }
   public isLogged: boolean = false;
   languageEnabled: boolean = true;
+  estadoActual: string = 'estadoInicial';
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
   }

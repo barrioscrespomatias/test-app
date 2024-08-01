@@ -7,6 +7,7 @@ import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
 import { ProfesionalComponent } from '../../entidades/profesional/profesional.component';
 import { NavComponent } from 'src/app/components/nav/nav/nav.component';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { slideLeftRightAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-grilla-profesionales',
@@ -17,6 +18,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
     NavComponent
   ],
   providers: [],
+  animations:[slideLeftRightAnimation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './grilla-profesionales.component.html',
   styleUrl: './grilla-profesionales.component.css'
@@ -43,6 +45,7 @@ export class GrillaProfesionalesComponent {
   languageEnabled: boolean = false;
   profesion: string;
   pacienteSeleccionado: string = '';
+  estadoActual: string = 'estadoInicial';
 
   sendMessage(mensaje: string) {
     this.messageEvent.emit(mensaje);

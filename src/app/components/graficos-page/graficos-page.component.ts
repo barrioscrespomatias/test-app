@@ -17,6 +17,7 @@ import { NavComponent } from '../nav/nav/nav.component';
 
 //Swipper
 import { register } from 'swiper/element/bundle';
+import { flipAnimation } from 'src/app/animation';
 register();
 
 @Component({
@@ -30,6 +31,7 @@ register();
             NavComponent
           ],
   providers:[],
+  animations:[flipAnimation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GraficosPageComponent {
@@ -68,17 +70,13 @@ export class GraficosPageComponent {
   turnosPorDiaArray: any;
   today = new Date();
   lastWeek = new Date();
-
   logins: any;
   loginsTable: any;
-
   datePropertyTrue: boolean = true;
   datePropertyFalse: boolean = false;
-
   turnosRealizadosV2: Turno[] = [];
-
   isLogged: boolean = false;
-  
+  estadoActual: string = 'estadoInicial';  
 
   //#region Propiedades Graficos 1 - 5
 

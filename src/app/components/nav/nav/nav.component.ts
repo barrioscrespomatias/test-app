@@ -44,6 +44,7 @@ export class NavComponent implements OnInit{
 
   currentUser:any;
   mail: string = this.firebaseService.userName;
+  imagenPerfil:string = 'https://mdbcdn.b-cdn.net/img/new/avatars/2.webp';
 
   async checkLoggedIn() {    
     this.isLogged = await this.firebaseService.isLoggedIn();
@@ -53,6 +54,8 @@ export class NavComponent implements OnInit{
     this.currentUser = await this.userSerivce.getUsuario(this.mail);
     if(this.currentUser){
         let idioma = localStorage.getItem('language');
+        this.imagenPerfil = this.currentUser.imagenPerfil1;
+        console.log(this.imagenPerfil)
         if(idioma)
           this.translate.setDefaultLang(idioma);
     

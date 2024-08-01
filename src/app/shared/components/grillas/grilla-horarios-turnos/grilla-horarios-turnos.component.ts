@@ -13,6 +13,7 @@ import { Encuesta } from 'src/app/interfaces/encuesta';
 import { SweetAlertService } from 'src/app/servicios/sweet-alert/sweet-alert.service';
 import SweetAlert from 'sweetalert2';
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
+import { expandCollapseAnimation, slideLeftRightAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-grilla-horarios-turnos',
@@ -25,6 +26,7 @@ import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.s
   ],
   providers:[FechaService],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  animations:[expandCollapseAnimation],
   templateUrl: './grilla-horarios-turnos.component.html',
   styleUrl: './grilla-horarios-turnos.component.css'
 })
@@ -62,6 +64,7 @@ export class GrillaHorariosTurnosComponent {
   pacienteSeleccionado: string = '';
   pacienteSeleccionadoUsuario!: Usuario;
   fecha!: Date;
+  estadoActual: string = 'estadoInicial';
   //#endregion
 
   sendMessage(mensaje: string) {

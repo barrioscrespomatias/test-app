@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ObtenerFechasTurnosPipe } from "../../../../pipes/obtenerFechasTurnos/obtener-fechas-turnos.pipe";
 import { FirebaseAuthService } from 'src/app/services/angularFire/angular-fire.service';
 import { NavComponent } from 'src/app/components/nav/nav/nav.component';
+import { slideLeftRightAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-grilla-fechas',
@@ -16,6 +17,7 @@ import { NavComponent } from 'src/app/components/nav/nav/nav.component';
             CommonModule, 
             ObtenerFechasTurnosPipe, 
             NavComponent],
+  animations:[slideLeftRightAnimation],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './grilla-fechas.component.html',
   styleUrl: './grilla-fechas.component.css'
@@ -42,6 +44,7 @@ export class GrillaFechasComponent {
   languageEnabled: boolean = false;
   profesional: string = '';
   pacienteSeleccionado: string = '';
+  estadoActual: string = 'estadoInicial';
 
   turnosFiltrados: any[] = [];
 

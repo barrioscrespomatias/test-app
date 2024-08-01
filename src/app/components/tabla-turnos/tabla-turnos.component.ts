@@ -8,7 +8,7 @@ import { EspecialidadService } from 'src/app/servicios/entidades/especialidad/es
 import { TurnoService } from 'src/app/servicios/entidades/turno/turno.service';
 import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { slideAnimation } from '../../animation';
+import { expandCollapseAnimation, flipAnimation, slideAnimation } from '../../animation';
 import { TurnoRepositorioService } from 'src/app/servicios/repositorio/turno/turno-repositorio.service';
 import { CustomNg2SearchPipe } from 'src/app/pipes/customNg2Search/custom-ng2-search.pipe';
 import { ObtenerFechasTurnosPipe } from 'src/app/pipes/obtenerFechasTurnos/obtener-fechas-turnos.pipe';
@@ -31,7 +31,7 @@ import { MatMiniFabButton } from '@angular/material/button';
   selector: 'app-tabla-turnos',
   templateUrl: './tabla-turnos.component.html',
   styleUrls: ['./tabla-turnos.component.css'],
-  animations: [slideAnimation],
+  animations: [flipAnimation],
   standalone: true,
   imports: [CommonModule,
     FormsModule,

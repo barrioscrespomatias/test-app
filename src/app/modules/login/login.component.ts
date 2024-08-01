@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavComponent } from 'src/app/components/nav/nav/nav.component';
 import { RouterLink, RouterModule } from '@angular/router';
+import { zoomInOutAnimation } from 'src/app/animation';
 
 //TODO Revisar login. Es raro que loguee cuando no esta llamando al servicio adecuado.
 @Component({
@@ -20,6 +21,7 @@ import { RouterLink, RouterModule } from '@angular/router';
             RouterLink
             ],
   providers:[],
+  animations:[zoomInOutAnimation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LoginComponent {
@@ -27,6 +29,7 @@ export class LoginComponent {
   isLogged: boolean = false;
   onlyLanguage: boolean = true;
   languageEnabled: boolean = true;
+  estadoActual: string = 'estadoInicial';
 
   constructor(
     public firebaseService: FirebaseAuthService,

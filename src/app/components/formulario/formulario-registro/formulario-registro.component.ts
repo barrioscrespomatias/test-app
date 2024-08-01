@@ -17,6 +17,7 @@ import { NavComponent } from '../../nav/nav/nav.component';
 import { CustomCaptchaComponent } from '../../custom-captcha/custom-captcha.component';
 import { AgregarEspecialidadComponent } from "../../agregar-especialidad/agregar-especialidad.component";
 import { Especialidad } from 'src/app/interfaces/especialidad';
+import { zoomInOutAnimation } from 'src/app/animation';
 
 //#endregion
 @Component({
@@ -31,6 +32,7 @@ import { Especialidad } from 'src/app/interfaces/especialidad';
     NavComponent,
     CustomCaptchaComponent, AgregarEspecialidadComponent],
   providers: [],
+  animations:[zoomInOutAnimation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FormularioRegistroComponent {
@@ -60,6 +62,7 @@ export class FormularioRegistroComponent {
   public declarativeFormCaptchaValue: string = '';
   onlyLanguage: boolean = true;
   languageEnabled: boolean = true;
+  estadoActual: string = 'estadoInicial';
 
   //#endregion
 

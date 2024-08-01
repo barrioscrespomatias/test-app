@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Turno } from 'src/app/interfaces/turno';
-import { slideAnimation } from '../../animation';
+import { bounceAnimation, slideAnimation } from '../../animation';
 import { TablaHistoriasClinicasComponent } from '../tabla-historias-clinicas/tabla-historias-clinicas.component';
 import { GrillaHorariosComponent } from '../profesional/grilla-horarios/grilla-horarios.component';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ import { AsignarHorarioComponent } from "../profesional/asignar-horario/asignar-
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css'],
-  animations: [slideAnimation],
+  animations: [bounceAnimation],
   standalone: true,
   imports: [CommonModule,
     TablaHistoriasClinicasComponent,

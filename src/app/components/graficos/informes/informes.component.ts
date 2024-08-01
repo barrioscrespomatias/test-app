@@ -14,6 +14,7 @@ import { EncuestaSatisfaccion } from 'src/app/interfaces/encuesta-satisfaccion';
 
 //Swipper
 import { register } from 'swiper/element/bundle';
+import { flipAnimation } from 'src/app/animation';
 register();
 
 @Component({
@@ -27,6 +28,7 @@ register();
           ],
   providers: [UsuarioService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  animations:[flipAnimation],
   templateUrl: './informes.component.html',
   styleUrl: './informes.component.css',
 })
@@ -50,6 +52,7 @@ export class InformesComponent implements OnInit{
   turnosRealizados: Turno[] = [];
   encuestas: EncuestaSatisfaccion[] = [];
   medidaImagen = 'round-image-small';
+  estadoActual: string = 'estadoInicial';
 
 
 
