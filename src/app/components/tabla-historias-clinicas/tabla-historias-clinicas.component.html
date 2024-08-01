@@ -7,15 +7,19 @@
     </div>
     <div class="example-button-row d-flex justify-content-center">
         <ng-container *ngFor="let turno of turnosProfesionalArray">
-          <div class="example-button-container">
-            <button mat-fab color="primary" class="my-fab"                      
+          <div class="example-button-container m-4">
+            <!-- <button mat-fab color="primary" class="my-fab"                      
                 (click)="ObtenerPacienteSeleccionado(turno?.paciente)">                    
                   <div class="mb-1">{{turno?.pacienteNombre}}</div>
                   <img class="rounded-circle" width="175px" height="175px" src={{turno?.pacienteImagen}}>
                   <div class="mt-1">{{turno?.pacienteApellido}}</div>                    
-            </button>
+            </button> -->
+            <app-usuario [path]="turno?.pacienteImagen" [classSize]="medium" [user]="turno.paciente!" (click)="ObtenerPacienteSeleccionado(turno?.paciente)"></app-usuario>
           </div>
         </ng-container>
+
+
+        <!-- <app-grilla-usuarios [medidaImagen] = "medidaImagen" (messageEvent)="receiveMessage($event)"></app-grilla-usuarios> -->
             
       </div>
   </section>

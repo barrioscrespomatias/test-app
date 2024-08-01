@@ -6,16 +6,16 @@
     <h1 class="title">Gestionar horarios</h1>
     <form class="contact-form row" [formGroup]="form">
         <label class="form-label select-label">Seleccione su especialidad</label>
-        <select class="select" formControlName="especialidad" id="especialidad">
+        <select class="select form-select" formControlName="especialidad" id="especialidad">
             <option *ngFor="let item of especialidades | async" value={{item?.nombre}}>{{item?.nombre}}</option>
         </select>
 
-        <label class="form-label select-label">Seleccione dia</label>
+        <label class="form-label select-label mt-2">Seleccione dia</label>
         <select class="select" formControlName="dias" id="dias" multiple size="3">
             <option *ngFor="let item of valorDias" value={{item?.valor}}>{{item?.clave}}</option>
         </select>
 
-        <label class="form-label select-label">Inicio</label>
+        <label class="form-label select-label mt-2">Inicio</label>
         <select class="form-select" formControlName="hora_inicio" id="hora_inicio">
             <option value="8">08:00</option>
             <option value="9">09:00</option>
@@ -31,7 +31,7 @@
             <option value="19">19:00</option>
         </select>
 
-        <label class="form-label select-label">Fin</label>
+        <label class="form-label select-label mt-2">Fin</label>
         <select class="form-select" formControlName="hora_fin" id="hora_fin">
             <option value="8">08:00</option>
             <option value="9">09:00</option>
@@ -47,7 +47,7 @@
             <option value="19">19:00</option>
         </select>
 
-        <label class="form-label select-label">Duracion minutos</label>
+        <label class="form-label select-label mt-2">Duracion minutos</label>
         <select class="form-select" formControlName="duracion" id="duracion">
             <option value="30">30 min</option>
             <option value="60">60 min</option>

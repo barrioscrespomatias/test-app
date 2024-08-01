@@ -19,6 +19,8 @@ import { NavComponent } from '../nav/nav/nav.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
 import { HistoriaClinicaComponent } from '../historia-clinica/historia-clinica.component';
+import { GrillaUsuariosComponent } from 'src/app/shared/components/grillas/grilla-usuarios/grilla-usuarios.component';
+import { UsuarioComponent } from 'src/app/shared/components/entidades/usuario/usuario.component';
 
 @Component({
   selector: 'app-tabla-historias-clinicas',
@@ -33,7 +35,9 @@ import { HistoriaClinicaComponent } from '../historia-clinica/historia-clinica.c
             FiltroTurnosHistoriaClinicaPipe,
             NavComponent,
             MatIcon,
-            HistoriaClinicaComponent
+            HistoriaClinicaComponent,
+            GrillaUsuariosComponent,
+            UsuarioComponent
           ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -90,6 +94,7 @@ export class TablaHistoriasClinicasComponent {
   turnosProfesional: any;
   turnosProfesionalArray:any;
   showDivTurno:boolean = false;
+  medium = "round-image-small"
 
   //#endregion
 
@@ -130,14 +135,19 @@ export class TablaHistoriasClinicasComponent {
 
   //#endregion
 
+  receiveMessage(user: any) {
+    // this.translate.setDefaultLang(idioma);
+    this.ObtenerPacienteSeleccionado(user);
+  }
+
   async checkLoggedIn() {
     this.isLogged = await this.firebaseService.isLoggedIn();
   }
 
   //#region Metodos
-  receiveMessage(idioma: string) {
-    this.translate.setDefaultLang(idioma);
-  }
+  // receiveMessage(idioma: string) {
+  //   this.translate.setDefaultLang(idioma);
+  // }
 
   ConvertirFecha(fecha:any){
     return new Date(fecha.seconds * 1000);

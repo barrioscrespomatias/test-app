@@ -1,7 +1,7 @@
 
 
 .container {
-    padding-top: 50px;
+    /* padding-top: 50px; */
     padding-bottom: 10px;
     color: #405065;
   }
@@ -23,6 +23,7 @@
 .example-button-row {
   display: flex;
   flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente fila cuando no hay suficiente espacio */
+  margin: 20px;
 
 }
 

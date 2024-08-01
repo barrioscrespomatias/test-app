@@ -1,71 +1,128 @@
 
 <app-nav *ngIf="isLogged"></app-nav>
-<div [@slideAnimation]="estadoActual">
-<form [formGroup]="form" class="container">
-    <div class="row">
-        <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
-            <div class="">
-                <ng-container *ngIf="usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 == ''">
-                    <img class="rounded-circle mt-5 m-3 ml-4" width="150px"
-                    src={{usuario?.imagenPerfil1}}>
-                </ng-container>
-                <ng-container *ngIf="usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 != ''">
-                    <img class="rounded-circle mt-5 m-3" width="100px"
-                    src={{usuario?.imagenPerfil1}}>
-                <img class="rounded-circle mt-5 m-3" width="100px"
-                    src={{usuario?.imagenPerfil2}}>
+<div [@slideAnimation]="estadoActual" class="container">
+
+    <div class="accordion mt-5" id="accordionExample">
+        <div class="accordion-item">
+        <form [formGroup]="form">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Mi Perfil
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
+                        <div class="">
+                            <ng-container *ngIf="usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 == ''">
+                                <img class="rounded-circle mt-5 m-3 ml-4" width="150px"
+                                src={{usuario?.imagenPerfil1}}>
+                            </ng-container>
+                            <ng-container *ngIf="usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 != ''">
+                                <img class="rounded-circle mt-5 m-3" width="100px"
+                                src={{usuario?.imagenPerfil1}}>
+                            <img class="rounded-circle mt-5 m-3" width="100px"
+                                src={{usuario?.imagenPerfil2}}>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="p-3 py-5">
+                            <div class="mb-3">
+                                <h1 class="text-right title">Mi perfil</h1>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" value="{{usuario?.nombre}}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">Apellido</label>
+                                    <input type="text" class="form-control" value="{{usuario?.apellido}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label class="labels">Email</label>
+                                    <input type="text" class="form-control" value="{{usuario?.mail}}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">Dni</label>
+                                    <input type="text" class="form-control" value="{{usuario?.dni}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label class="labels">Edad</label>
+                                    <input type="text" class="form-control" value="{{usuario?.edad}}" readonly>
+                                </div>
+                                <div class="col-md-6" *ngIf="usuario?.perfil == 'paciente'">
+                                    <label class="labels">Obra social</label>
+                                    <input type="text" class="form-control" value="{{usuario?.obraSocial}}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </form>
+        </div>
+        <div class="accordion-item" *ngIf="usuario?.perfil === 'paciente'">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Historias Clinicas
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ng-container *ngIf="usuario?.perfil === 'paciente'">
+                    <app-tabla-historias-clinicas></app-tabla-historias-clinicas>
                 </ng-container>
             </div>
+          </div>
         </div>
-        <div class="col-md-9">
-            <div class="p-3 py-5">
-                <div class="mb-3">
-                    <h1 class="text-right title">Mi perfil</h1>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <label class="labels">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" value="{{usuario?.nombre}}" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Apellido</label>
-                        <input type="text" class="form-control" value="{{usuario?.apellido}}" readonly>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" class="form-control" value="{{usuario?.mail}}" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Dni</label>
-                        <input type="text" class="form-control" value="{{usuario?.dni}}" readonly>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Edad</label>
-                        <input type="text" class="form-control" value="{{usuario?.edad}}" readonly>
-                    </div>
-                    <div class="col-md-6" *ngIf="usuario?.perfil == 'paciente'">
-                        <label class="labels">Obra social</label>
-                        <input type="text" class="form-control" value="{{usuario?.obraSocial}}" readonly>
-                    </div>
-                </div>
+        <div class="accordion-item" *ngIf="usuario?.perfil === 'profesional'">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Mis Horarios
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ng-container *ngIf="usuario?.perfil === 'profesional'">
+                    <app-asignar-horario></app-asignar-horario>
+                    <!-- <app-grilla-horarios></app-grilla-horarios> -->
+                </ng-container>
             </div>
+          </div>
         </div>
-    </div>
-</form>
+
+        <div class="accordion-item" *ngIf="usuario?.perfil === 'profesional'">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Generar Turnos
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <ng-container *ngIf="usuario?.perfil === 'profesional'">
+                      <!-- <app-asignar-horario></app-asignar-horario> -->
+                      <app-grilla-horarios></app-grilla-horarios>
+                  </ng-container>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+
 
 <!-- mis horarios PROFESIONAL: Marca su disponibilidad horaria -->
 
 <!-- historia clinica PACIENTES: ve su historia clinica -->
-<ng-container *ngIf="usuario?.perfil === 'paciente'">
-    <app-tabla-historias-clinicas></app-tabla-historias-clinicas>
-</ng-container>
 
-<ng-container *ngIf="usuario?.perfil === 'profesional'">
-    <app-asignar-horario></app-asignar-horario>
-    <!-- <app-grilla-horarios></app-grilla-horarios> -->
-</ng-container>
+
+
 </div>
