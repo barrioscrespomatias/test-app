@@ -41,11 +41,11 @@ const routes: Routes = [
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard]},
   { path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
   { path: 'grilla-usuarios', component: GrillaUsuariosComponent, canActivate: [AuthGuard]},
-  { path: 'grilla-especialidades', component: GrillaEspecialidadesComponent},
-  { path: 'grilla-profesionales', component: GrillaProfesionalesComponent},
-  { path: 'grilla-fechas', component: GrillaFechasComponent},
-  { path: 'grilla-horarios-turnos', component: GrillaHorariosTurnosComponent},
-  { path: 'agregar-especialidad', component: AgregarEspecialidadComponent},
+  { path: 'grilla-especialidades', component: GrillaEspecialidadesComponent, canActivate: [AuthGuard]},
+  { path: 'grilla-profesionales', component: GrillaProfesionalesComponent, canActivate: [AuthGuard]},
+  { path: 'grilla-fechas', component: GrillaFechasComponent, canActivate: [AuthGuard]},
+  { path: 'grilla-horarios-turnos', component: GrillaHorariosTurnosComponent, canActivate: [AuthGuard]},
+  { path: 'agregar-especialidad', component: AgregarEspecialidadComponent, canActivate: [AuthGuard]},
   { path: '', component: LoginComponent},
 ];
 

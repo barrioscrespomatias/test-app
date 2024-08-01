@@ -59,6 +59,8 @@ export class AuthGuard implements CanActivate {
         this.sweetAlert.MensajeError('Debe validar su correo electronico.');
         return false;
       }
+      else
+        this.router.navigate(['']);
 
       return false;
     } finally {
