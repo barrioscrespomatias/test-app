@@ -42,7 +42,8 @@ export class CustomCaptchaComponent{
   }
 
   GenerateCaptcha() {
-    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz';
+    // let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz';
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     const lengthOfCode = 1;
 
     for (let i = 0; i < 5; i++) {

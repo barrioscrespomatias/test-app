@@ -1,86 +1,97 @@
 <app-nav *ngIf="isLogged" ></app-nav>  
 
 <div [@slideAnimation]="estadoActual" class="container">
-    <section id="toolbar">
-        <mat-toolbar>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-                <mat-icon>menu</mat-icon>
+
+    <div class="accordion mt-5" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Profesionales registrados
             </button>
-            <span>Seccion administrador</span>
-            <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="RegistrarUsuarioAdministrador()">
-                <mat-icon>person_add</mat-icon>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <section id='profesionales-registrados'>
+                    <div class="container text-center">
+                        <h1 class="title">Profesionales registrados</h1>
+                    </div>
+                    <div class="container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Dni</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Mail</th>
+                                    <th scope="col">Perfil</th>
+                                    <th scope="col">Habilitado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios | usuariosProfesionales">
+                                    <td>{{usuario.dni}}</td>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td>{{usuario.apellido}}</td>
+                                    <td>{{usuario.mail}}</td>
+                                    <td>{{usuario.perfil}}</td>
+                                    <td>{{usuario.habilitado ? 'Si' : 'No'}}</td>
+                                    <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}"
+                                            (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" :
+                                            "Activar"}}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Registrar Profesional
+              </button>            
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <section id='registrar-administrador' class="container">
+                    <app-formulario-registro [perfilRecibido]="'Administrador'" class="mt-2">
+                    </app-formulario-registro>
+                </section>
+              </div>
+            </div>
+          </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Pacientes Registrados
+            </button>            
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <section id='pacientes-registrados'>
+                    <div class="container text-center">
+                        <h1 class="title">Pacientes registrados</h1>
+                    </div>
+                <app-grilla-usuarios [medidaImagen] = "medidaImagen" (messageEvent)="receiveMessage($event)"></app-grilla-usuarios>
+                </section>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Historias Clinicas
             </button>
-        </mat-toolbar>
-    </section>
-
-    <mat-divider></mat-divider>
-
-    <section id='registrar-administrador'>
-        <app-formulario-registro *ngIf="formularioRegistrarUsuarioVisible" [perfilRecibido]="'Administrador'" class="mt-2">
-        </app-formulario-registro>
-    </section>
-
-    <mat-divider></mat-divider>
-
-    <section id='profesionales-registrados'>
-        <div class="container text-center">
-            <h1>Profesionales registrados</h1>
-        </div>
-        <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Dni</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Mail</th>
-                        <th scope="col">Perfil</th>
-                        <th scope="col">Habilitado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let usuario of usuarios | usuariosProfesionales">
-                        <td>{{usuario.dni}}</td>
-                        <td>{{usuario.nombre}}</td>
-                        <td>{{usuario.apellido}}</td>
-                        <td>{{usuario.mail}}</td>
-                        <td>{{usuario.perfil}}</td>
-                        <td>{{usuario.habilitado ? 'Si' : 'No'}}</td>
-                        <td><button class="btn {{usuario.habilitado == true ? 'btn-danger' : 'btn-primary'}}"
-                                (click)="CambiarEstado(usuario)">{{usuario.habilitado ? "Desactivar" :
-                                "Activar"}}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <mat-divider></mat-divider>
-
-    <section id='pacientes-registrados'>
-        <div class="container text-center">
-            <h1>Pacientes registrados</h1>
-        </div>
-        <!-- <div class="example-button-row d-flex justify-content-center">
-                <div class="example-button-container">
-
-                    <button mat-fab color="primary" class="my-fab"
-                        *ngFor="let usuario of usuarios | filtroUsuariosPacientes"
-                        (click)="DescargarExcelTurnos(usuario)">
-                        <div class="mb-1">{{usuario.nombre}}</div>
-                        <img class="rounded-circle" width="175px" height="175px" src={{usuario?.imagenPerfil1}}>
-                        <div lass="mt-1">{{usuario.apellido}}</div>
-                    </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="row">
+                    <app-tabla-historias-clinicas></app-tabla-historias-clinicas>
                 </div>
-        </div> -->
-    <app-grilla-usuarios (messageEvent)="receiveMessage($event)"></app-grilla-usuarios>
-    </section>
-
-    <mat-divider></mat-divider>
-
-    <div class="row">
-        <app-tabla-historias-clinicas></app-tabla-historias-clinicas>
-    </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>

@@ -14,3 +14,22 @@ footer {
   padding-bottom: 60px; /* Ajusta este padding para que coincida con la altura del footer */
   box-sizing: border-box;
 }
+
+.title {
+  font-family: 'Arial', sans-serif; /* Cambia a la fuente que prefieras */
+  font-size: 2.5rem; /* Ajusta el tamaño de la fuente según tu preferencia */
+  color: #333; /* Cambia el color del texto */
+  text-align: center; /* Centra el texto */
+  background: linear-gradient(90deg, #63b6e5, #0d6efd); /* Fondo degradado */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Hace que el texto tome el color del fondo */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 0.1rem; /* Espaciado entre letras */
+  padding: 0.5rem; /* Espaciado interno */
+  margin: 1rem 0; /* Espaciado externo */
+  transition: transform 0.3s ease-in-out; /* Efecto de transición */
+}
+
+.title:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+}

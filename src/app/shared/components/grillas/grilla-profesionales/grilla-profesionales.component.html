@@ -1,5 +1,6 @@
 <app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
 <div class="container mt-5">
+    <h1 class="title">Seleccionar profesional</h1>
     <div class="row">
         <ng-container *ngFor="let profesional of profesionales">
             <div class="col-sm-4">

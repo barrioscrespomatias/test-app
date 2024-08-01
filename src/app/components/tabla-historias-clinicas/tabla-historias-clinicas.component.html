@@ -21,7 +21,7 @@
   </section>
 
 <div class="container text-center">
-    <h1>Historias clinicas</h1>
+    <h1 class="title">Historias clinicas</h1>
 </div>
 <div class="container">
     <div class="row">
@@ -75,7 +75,7 @@
             </tr>
         </ng-container>
 
-        <ng-container *ngIf="usuario?.perfil == 'administrador' && pacienteSeleccionado!= '' ">
+        <!-- <ng-container *ngIf="usuario?.perfil == 'administrador' && pacienteSeleccionado!= '' ">
             <tr *ngFor="let turno of turnos | filtroTurnosHistoriaClinica: 
                 pacienteSeleccionado :
                 '' :
@@ -89,7 +89,23 @@
                 <td>{{turno.estado}}</td>
                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 'Realizado'" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
             </tr>
-        </ng-container>
+        </ng-container> -->
+
+        <ng-container *ngIf="usuario?.perfil == 'administrador'">
+          <tr *ngFor="let turno of turnos | filtroTurnosHistoriaClinica: 
+              '' :
+              '' :
+              'Realizado' :
+              true | customNg2Search:searchText, let i = index" [ngClass]="{'table-info': i < 2}">
+              <td>{{ i + 1}}</td>
+              <td>{{ ConvertirFecha(turno.fecha) | date:'medium' }}</td>
+              <td>{{turno.especialidad}}</td>
+              <td>{{turno.profesional}}</td>
+              <td>{{turno.paciente}}</td>
+              <td>{{turno.estado}}</td>
+              <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="turno.estado == 'Realizado'" (click)="AbrirModal('historia-clinica', turno)">Historia clinica</button></td>
+          </tr>
+      </ng-container>
         </tbody>
       </table>
     </div>

@@ -1,5 +1,7 @@
 <app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
 <div class="container mt-5">
+
+    <h1 class="title">Seleccionar especialidad</h1>
     
     <!-- Vista de pacientes -->
     <div class="" *ngIf="renderHtml && currentUser.perfil !== 'administrador'">

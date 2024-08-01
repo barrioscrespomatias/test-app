@@ -45,7 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
             MatDivider, 
             GrillaUsuariosComponent,
             MatToolbarRow, 
-            MatButtonModule
+            MatButtonModule,
           ],
   providers: [DatePipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -75,6 +75,7 @@ export class UsuariosComponent {
   estadoActual: string = 'estadoInicial';
   isLogged: boolean = false;
   selectedUser: any;
+  medidaImagen = "round-image-small"
 
   cambiarEstado() {
     this.estadoActual = 'estadoFinal';

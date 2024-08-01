@@ -1,5 +1,6 @@
 <app-nav *ngIf="isLogged" (messageEvent)="receiveMessage($event)" [languageEnabled]="languageEnabled"></app-nav>
 <div class="container mt-5">
+    <h1 class="title">Seleccionar fecha</h1>
     <div class="row">
         <ng-container *ngFor="let turno of turnosFiltrados ">
             <div class="col-sm-4">

@@ -127,7 +127,7 @@ export class FormularioRegistroComponent {
         Validators.pattern('\\d+')]),
         mail: new FormControl('', [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$')
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
         ]),
       contrasena: new FormControl('', [
       Validators.required,
@@ -253,7 +253,6 @@ export class FormularioRegistroComponent {
       pacientesAtendidos: pacientesAtendidos,
     };
 
-    console.log(usuario)
     debugger
     let respuesta = this.usuarioServicio.Crear(usuario);
     respuesta.then((response) => {

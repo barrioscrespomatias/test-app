@@ -220,8 +220,6 @@ export class GraficosPageComponent {
   calcularCantidadVisitas(){
     this.data6.push(this.turnosRealizadosV2.length);
     this.chartsLabels6.push('Cantidad de visitas')
-    console.log("cantidad de visistas clinicas")
-    console.log(this.data6)
   };
 
   calcularCantidadPacientesPorEspecialidad() {

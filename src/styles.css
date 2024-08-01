@@ -1,4 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family:  'Bebas Neue', sans-serif; }
+div {font-family:  'Bebas Neue', sans-serif;}
+
+/* styles.scss */
+
+.title {
+    font-family: 'Bebas Neue', sans-serif; /* Fuente de Google */
+    font-size: 2.5rem; /* Ajusta el tamaño de la fuente según tu preferencia */
+    color: #333; /* Cambia el color del texto */
+    text-align: center; /* Centra el texto */
+    background: linear-gradient(90deg, #63b6e5, #0d6efd); /* Fondo degradado */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Hace que el texto tome el color del fondo */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 0.1rem; /* Espaciado entre letras */
+    padding: 0.5rem; /* Espaciado interno */
+    margin: 1rem 0; /* Espaciado externo */
+    transition: transform 0.3s ease-in-out; /* Efecto de transición */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra de texto */
+  }
+  
+  .title:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+  }
+  .card:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+  }
+
+  img:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+  }
+
+  .card {
+    border: none; /* Elimina el borde predeterminado */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    overflow: hidden; /* Oculta el contenido desbordado */
+  }
+  
+  .card:hover {
+    transform: translateY(-10px); /* Efecto de elevar la tarjeta */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el ratón */
+  }
+  
+  .card img {
+    border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+    transition: transform 0.3s; /* Transición suave para la imagen */
+  }
+  
+  .card img:hover {
+    transform: scale(1.05); /* Agranda ligeramente la imagen al pasar el ratón */
+  }
+  
+  .card-body {
+    padding: 1rem; /* Añade un poco de espacio alrededor del contenido */
+  }
+  
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif; /* Aplica la fuente de Google */
+    margin: 0; /* Elimina el margen predeterminado */
+  }
+  

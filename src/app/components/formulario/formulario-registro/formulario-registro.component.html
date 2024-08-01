@@ -1,6 +1,6 @@
 
 <div class="row" *ngIf="perfilRecibido == 'Paciente' ">
-   <section class="get-in-touch">
+   <section class="get-in-touch container">
       <h1 class="title">{{'registro.AltaPaciente' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
          <div class="row">
@@ -151,9 +151,9 @@
          </div>
 
 
-         <div *ngIf="!FormularioConErrores()">
+         <!-- <div *ngIf="!FormularioConErrores()"> -->
             <app-custom-captcha (captchaVerified)="onCaptchaVerified($event)" [visible]="true"></app-custom-captcha>
-         </div>
+         <!-- </div> -->
          
          <div class="form-field col-sm-12">
             <div *ngIf="!FormularioConErrores() && captchaVerificado">
@@ -171,7 +171,7 @@
 
 
 <div class="row" *ngIf="perfilRecibido == 'Profesional' ">
-   <section class="get-in-touch">
+   <section class="get-in-touch container">
       <h1 class="title">{{'registro.AltaProfesional' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
 
@@ -248,7 +248,7 @@
             <div class="form-field col-md-6">
                <label class="col " for="inlineFormCustomSelectPref">{{'registro.Especialidad' | translate}}</label>
                <div class="row mt-4">
-                  <select class="custom-select col-mb-4" id="especialidad" formControlName="especialidad"
+                  <select class="form-select col-mb-4" id="especialidad" formControlName="especialidad"
                      id="especialidad">
                      <option *ngFor="let item of especialidades | async" value={{item?.nombre}}>{{item?.nombre}}
                      </option>
@@ -260,8 +260,8 @@
                    </div>
                </div>
             </div>
-            <div class="form-field col-md-6 ">
-               <button class="submit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            <div class="form-field col-md-6 pt-5">
+               <button class="submit-btn w-100" data-bs-toggle="modal" data-bs-target="#exampleModal"
                   value="Agregar especialidad">{{'registro.AgregarEspecialidad' | translate}}</button>
             </div>
          </div>
@@ -348,7 +348,7 @@
 
 <div class="row" *ngIf="perfilRecibido == 'Administrador' ">
 <div class="row">
-   <section class="get-in-touch">
+   <section class="get-in-touch container">
       <h1 class="title">{{'registro.AltaAdministrador' | translate}}</h1>
       <form class="contact-form row" [formGroup]="form">
 
