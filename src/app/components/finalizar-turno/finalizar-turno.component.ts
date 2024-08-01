@@ -7,7 +7,6 @@ import { UsuarioService } from 'src/app/servicios/entidades/usuario/usuario.serv
 import {ThemePalette} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatIcon } from '@angular/material/icon';
 import { MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material/radio';
 import { MatCardContent, MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -26,7 +25,6 @@ import { MatDivider } from '@angular/material/divider';
             FormsModule, 
             ReactiveFormsModule,
             MatSliderModule, 
-            MatIcon, 
             MatRadioButton, 
             MatCardContent, 
             MatLabel, 

@@ -14,6 +14,8 @@ export class UsuarioComponent implements OnInit{
   @Input() path!:string;
   @Input() classSize!:string;
   @Input() user!:string;
+  @Input() name!:string;
+  @Input() surname!:string;
   @Output() messageEvent = new EventEmitter<string>();
   width:string = '';
 

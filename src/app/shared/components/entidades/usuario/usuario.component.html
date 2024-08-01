@@ -5,14 +5,17 @@
 
         <div class="card-body pt-0" data-toggle="tooltip" data-placement="left" title="{{user}}">
             <ng-container *ngIf="width === 'small'">
-                <p class="card-title" style="font-size: 10px;">{{user}}</p>
+                <p class="card-title" style="font-size: 12px;">{{user}}</p>
+                <p class="card-title" style="font-size: 12px;">{{name}}, {{surname}}</p>
             </ng-container>
             <ng-container *ngIf="width === 'medium'">
                 <h6 class="card-title">{{user}}</h6>
+                <h6 class="card-title">{{name}}, {{surname}}</h6>
             </ng-container>
 
             <ng-container *ngIf="width === 'large'">
                 <h4 class="card-title">{{user}}</h4>
+                <h4 class="card-title">{{name}}, {{surname}}</h4>
             </ng-container>
 
         </div>

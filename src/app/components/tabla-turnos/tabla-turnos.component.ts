@@ -22,6 +22,7 @@ import { RechazarTurnoComponent } from '../rechazar-turno/rechazar-turno.compone
 import { VerResenaComponent } from '../ver-resena/ver-resena.component';
 import { FinalizarTurnoComponent } from '../finalizar-turno/finalizar-turno.component';
 import { CalificarAtencionComponent } from '../calificar-atencion/calificar-atencion.component';
+import { MatMiniFabButton } from '@angular/material/button';
 
 //animations
 // import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -44,7 +45,9 @@ import { CalificarAtencionComponent } from '../calificar-atencion/calificar-aten
     RechazarTurnoComponent,
     VerResenaComponent,
     FinalizarTurnoComponent,
-    CalificarAtencionComponent],
+    CalificarAtencionComponent,
+    MatMiniFabButton
+  ],
   providers: [DatePipe],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

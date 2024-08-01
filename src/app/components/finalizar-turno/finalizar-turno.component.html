@@ -43,7 +43,7 @@
             <div class="example-flex-container">
                 <div class="example-button-container">                    
                     <button mat-mini-fab color="primary" (click)="AgregarParametro()">
-                        <mat-icon>filter_3</mat-icon>
+                        <i class="fa-solid fa-list-ol"></i>
                       </button>
                       <label class="m-1">Parametros numericos</label>
                 </div>
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="row mb-2" *ngIf="mostrarParametroUno">
+    <div class="row m-2" *ngIf="mostrarParametroUno">
         <div class="col-6">
             <label for="">Parametro</label>
             <input type="text" class="form-control" formControlName="clave_parametro_dinamico_1">
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="row mb-2" *ngIf="mostrarParametroDos">
+    <div class="row m-2" *ngIf="mostrarParametroDos">
         <div class="col-6">
             <label for="">Parametro</label>
             <input type="text" class="form-control" formControlName="clave_parametro_dinamico_2">
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <div class="row mb-2" *ngIf="mostrarParametroTres">
+    <div class="row m-2" *ngIf="mostrarParametroTres">
         <div class="col-6">
             <label for="">Parametro</label>
             <input type="text" class="form-control" formControlName="clave_parametro_dinamico_3">
@@ -89,7 +89,7 @@
             <div class="example-flex-container">
                 <div class="example-button-container">
                     <button mat-mini-fab color="primary" (click)="ConfigurarParametrosDinamicos()">
-                        <mat-icon>add_circle</mat-icon>
+                        <i class="fa-solid fa-notes-medical"></i>
                       </button>
                       <label class="m-1">Parametros dinamicos</label>
                 </div>
@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <div class="row mb-2" *ngIf="mostrarOpcionesDinamicas">
+    <div class="row m-2" *ngIf="mostrarOpcionesDinamicas">
 
 
         <section class="example-section">

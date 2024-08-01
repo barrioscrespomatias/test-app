@@ -30,13 +30,15 @@
                     </div>
             </ng-container>
         </div>
-        <div class="row" *ngIf="userSelected === ''">
+        <div class="row d-flex justify-content-center align-items-center" *ngIf="userSelected === ''">
             <ng-container *ngFor="let paciente of pacientes">
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <app-usuario 
                                 [path]="paciente.imagenPerfil1!" 
-                                [classSize]="medium" 
+                                [classSize]="small" 
                                 [user]="paciente.mail!"
+                                [name]="paciente.nombre!"
+                                [surname]="paciente.apellido!"
                                 (click)="seleccionarPaciente(paciente.mail)">
                     </app-usuario>
                     </div>
