@@ -21,7 +21,7 @@ export const registro = {
   "ValidacionMinCaracteres": "The field must be at least",
   "ValidacionMaxCaracteres": "The field must have a maximum of",
   "ValidacionCaracteresEspeciales": "The field can only contain letters and special characters",
-  "ValidacionContrasena": "The field must be at least 4 characters. An uppercase letter, a lowercase letter, a number and a special character.",
+  "ValidacionContrasena": "The field must be at least 6 characters. An uppercase letter, a lowercase letter, a number and a special character.",
   "ValidacionCorreo": "The field is not a valid email",
   "ValidacionLetras": "The field can only contain letters",
   "ValidacionNumeros": "The field can only contain numbers",

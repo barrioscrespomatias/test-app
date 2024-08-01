@@ -151,9 +151,9 @@
          </div>
 
 
-         <!-- <div *ngIf="!FormularioConErrores()"> -->
+         <div *ngIf="!FormularioConErrores()">
             <app-custom-captcha (captchaVerified)="onCaptchaVerified($event)" [visible]="true"></app-custom-captcha>
-         <!-- </div> -->
+         </div>
          
          <div class="form-field col-sm-12">
             <div *ngIf="!FormularioConErrores() && captchaVerificado">

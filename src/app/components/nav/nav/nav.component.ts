@@ -3,6 +3,7 @@ import { FirebaseAuthService } from '../../../services/angularFire/angular-fire.
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UsuarioV2Service } from 'src/app/servicios/v2/usuario-v2.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -22,6 +23,7 @@ export class NavComponent implements OnInit{
   constructor(public firebaseService: FirebaseAuthService,
               private translate: TranslateService,
               private userSerivce: UsuarioV2Service,
+              private router: Router, 
   ) {
     this.onlyLanguage = false;
     this.languageEnabled = false;
@@ -106,6 +108,11 @@ export class NavComponent implements OnInit{
     }
 
     this.idioma_src = '../../../../assets/img/idioma/'+ this.idioma +'.png';
+  }
+
+  navigate(path:string) {
+    console.log(path)
+    this.router.navigate([path]);
   }
 
   sendMessage(mensaje:string) {

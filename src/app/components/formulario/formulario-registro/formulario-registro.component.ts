@@ -131,7 +131,7 @@ export class FormularioRegistroComponent {
         ]),
       contrasena: new FormControl('', [
       Validators.required,
-      Validators.pattern('^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>_])[a-zA-Z\\d!@#$%^&*(),.?":{}|<>]{4,}$')
+      Validators.pattern('^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>_])[a-zA-Z\\d!@#$%^&*(),.?":{}|<>]{6,}$')
       ]),
       imagenPerfil1: new FormControl('', Validators.required),
       imagenPerfil2: new FormControl(''),

@@ -52,25 +52,27 @@ export class MiPerfilComponent {
   //#region Hooks
   async ngOnInit() {
 
-    
+    await this.checkLoggedIn();
 
     await this.usuarioService.getUsuario(this.email).then((usuario: any) => {
       this.usuario = usuario;
+
+      if(this.usuario)
+        {
+          this.form = new FormGroup({  
+            nombre: new FormControl(this.usuario.nombre),
+            apellido: new FormControl(this.usuario.apellido),         
+            mail: new FormControl(this.usuario.mail),
+            dni: new FormControl(this.usuario.dni),
+            edad: new FormControl(this.usuario.edad),      
+            obra_social: new FormControl(this.usuario.obraSocial),      
+             
+          });
+        }
     });
 
-    if(this.usuario)
-    {
-      this.form = new FormGroup({  
-        nombre: new FormControl(this.usuario?.nombre),
-        apellido: new FormControl(this.usuario?.apellido),         
-        mail: new FormControl(this.usuario?.mail),
-        dni: new FormControl(this.usuario?.dni),
-        edad: new FormControl(this.usuario?.edad),      
-        obra_social: new FormControl(this.usuario?.obraSocial),      
-         
-      });
-    }
-    await this.checkLoggedIn();
+
+    
   }   
 
 

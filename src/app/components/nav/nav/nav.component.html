@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-color">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" href="home" *ngIf="!onlyLanguage">{{'nav.Inicio' | translate}}</a>
+    <a class="navbar-brand text-white" (click)="navigate('/home')" *ngIf="!onlyLanguage">{{'nav.Inicio' | translate}}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,9 +11,9 @@
             {{'nav.Turnos' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'profesional'"><a class="dropdown-item" href="grilla-especialidades">{{'nav.SolicitarTurno' | translate}}</a></li>
-            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnos' | translate}}</a></li>
-            <li *ngIf="isLogged && currentUser && currentUser.perfil === 'administrador'"><a class="dropdown-item"href="grilla-turnos">{{'nav.VerTurnosAdmin' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'profesional'"><a class="dropdown-item" (click)="navigate('/grilla-especialidades')" >{{'nav.SolicitarTurno' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil !== 'administrador'"><a class="dropdown-item" (click)="navigate('/grilla-turnos')">{{'nav.VerTurnos' | translate}}</a></li>
+            <li *ngIf="isLogged && currentUser && currentUser.perfil === 'administrador'"><a class="dropdown-item" (click)="navigate('/grilla-turnos')">{{'nav.VerTurnosAdmin' | translate}}</a></li>
           </ul>
         </li>
 
@@ -22,7 +22,7 @@
             {{'nav.Usuarios' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="usuarios">{{'nav.VerUsuarios' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="navigate('/usuarios')">{{'nav.VerUsuarios' | translate}}</a></li>
           </ul>
         </li>
 
@@ -31,7 +31,7 @@
             {{'nav.Pacientes' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="historias-clinicas">{{'nav.VerHistoriasClinicas' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="navigate('/historias-clinicas')">{{'nav.VerHistoriasClinicas' | translate}}</a></li>
           </ul>
         </li>
 
@@ -40,8 +40,8 @@
             {{'nav.Estadisticas' | translate}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="graficos">{{'nav.Graficos' | translate}}</a></li>
-            <li><a class="dropdown-item" href="informes">{{'nav.Informes' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="navigate('/graficos')">{{'nav.Graficos' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="navigate('/informes')">{{'nav.Informes' | translate}}</a></li>
           </ul>
         </li>
       </ul>
@@ -66,7 +66,7 @@
             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="Dropdown Image" class="rounded-circle" width="40" height="40">
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="imageDropdown1">
-            <li><a class="dropdown-item" href="mi-perfil">{{'nav.Perfil' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="navigate('/mi-perfil')">{{'nav.Perfil' | translate}}</a></li>
             <li class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="SignOut()">{{'nav.CerrarSesion' | translate}}</a></li>
           </ul>

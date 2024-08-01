@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
                         <div class="">
-                            <ng-container *ngIf="usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 == ''">
+                            <ng-container *ngIf="usuario && usuario?.imagenPerfil1 != '' && usuario?.imagenPerfil2 == ''">
                                 <img class="rounded-circle mt-5 m-3 ml-4" width="150px"
                                 src={{usuario?.imagenPerfil1}}>
                             </ng-container>
