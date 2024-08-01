@@ -48,12 +48,14 @@ export class FirebaseAuthService {
       })
       .catch((error) => {
         // this.swal.SwalMensajeError('Error',error.message);
-        SweetAlert.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.message,
+        if(error.message == 'Firebase: The email address is badly formatted. (auth/invalid-email).')
+          // this.swal.SwalMensajeError('Error',error.message);
+          SweetAlert.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se han ingresado credenciales validas.',
+          });
         });
-      });
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
@@ -72,7 +74,7 @@ export class FirebaseAuthService {
         SweetAlert.fire({
           icon: 'error',
           title: 'Error',
-          text: 'El dirección de email ya se encuentra registrada.',
+          text: 'La dirección de email ya se encuentra registrada.',
         });
       });
   }

@@ -1,7 +1,7 @@
 <app-nav *ngIf="isLogged"></app-nav>
 <app-grilla-usuarios (messageEvent)="receiveMessage($event)" [medidaImagen]="medidaImagen"></app-grilla-usuarios>
 
-<div class="container" [@flipAnimation]="estadoActual">
+<div class="container mb-5" [@flipAnimation]="estadoActual">
     <swiper-container>
         <swiper-slide>
             <div class="row mb-2 mt-2" *ngIf="data4.length > 0 && data3.length > 0 && data2.length > 0">

@@ -1,6 +1,6 @@
 <app-nav *ngIf="isLogged && usuario && usuario.perfil === 'profesional'" (messageEvent)="receiveMessage($event)"></app-nav>
 
-<div [@slideAnimation]="estadoActual">
+<div [@slideAnimation]="estadoActual" class="mb-5">
 
   <section id='pacientes-registrados'>
     <div class="container text-center">
