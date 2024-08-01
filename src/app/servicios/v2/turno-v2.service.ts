@@ -109,7 +109,7 @@ export class TurnoV2Service {
       this.coleccionTurnos,
       where('profesional', '==', profesional),
       where('estado', '==', 'Disponible'),
-      // where('fecha', '>', nowTimestamp),
+      where('fecha', '>=', nowTimestamp),
       orderBy('fecha', 'desc')
     );
 
